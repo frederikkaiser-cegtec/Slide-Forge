@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --color-primary: #6366f1;
+  --color-primary-hover: #4f46e5;
+  --color-surface: #1e1e2e;
+  --color-surface-hover: #2a2a3e;
+  --color-bg: #13131d;
+  --color-border: #2e2e42;
+  --color-text: #e2e2f0;
+  --color-text-muted: #8888a0;
+  --color-danger: #ef4444;
+  --color-success: #22c55e;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.tiptap {
+  outline: none;
+  width: 100%;
+  height: 100%;
+}
+
+.tiptap p {
+  margin: 0;
+}
+
+.tiptap h1 { font-size: 2.5em; font-weight: 700; margin: 0; }
+.tiptap h2 { font-size: 2em; font-weight: 600; margin: 0; }
+.tiptap h3 { font-size: 1.5em; font-weight: 600; margin: 0; }
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted);
+}

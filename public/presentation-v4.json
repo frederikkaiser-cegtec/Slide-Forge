@@ -1,0 +1,450 @@
+{
+  "id": "cegtec-jomavis-roi-v2",
+  "title": "CegTec - Jomavis Solar ROI",
+  "slides": [
+    {
+      "id": "slide-roi-main",
+      "elements": [
+        {
+          "id": "el-top-label",
+          "type": "text",
+          "x": 3,
+          "y": 2.5,
+          "width": 25,
+          "height": 3.5,
+          "rotation": 0,
+          "content": "<p>CASE STUDY · JOMAVIS SOLAR</p>",
+          "style": { "fontSize": 12, "fontWeight": 600, "color": "rgba(255,255,255,0.3)", "textAlign": "left" }
+        },
+        {
+          "id": "el-headline",
+          "type": "text",
+          "x": 3,
+          "y": 7,
+          "width": 50,
+          "height": 8,
+          "rotation": 0,
+          "content": "<p>Von 112 Leads zu €100.000 Marge</p>",
+          "style": { "fontSize": 38, "fontWeight": 700, "color": "#FFFFFF", "textAlign": "left" }
+        },
+
+        {
+          "id": "el-funnel-label",
+          "type": "text",
+          "x": 3,
+          "y": 18,
+          "width": 20,
+          "height": 2.5,
+          "rotation": 0,
+          "content": "<p>OUTREACH FUNNEL</p>",
+          "style": { "fontSize": 10, "fontWeight": 700, "color": "rgba(255,255,255,0.25)", "textAlign": "left" }
+        },
+
+        {
+          "id": "el-bar1",
+          "type": "shape",
+          "x": 3,
+          "y": 22,
+          "width": 44,
+          "height": 9,
+          "rotation": 0,
+          "content": "",
+          "style": { "backgroundColor": "#2962FF", "borderRadius": 6, "opacity": 0.85 }
+        },
+        {
+          "id": "el-bar1-num",
+          "type": "text",
+          "x": 5,
+          "y": 23,
+          "width": 8,
+          "height": 7,
+          "rotation": 0,
+          "content": "<p><strong>112</strong></p>",
+          "style": { "fontSize": 28, "fontWeight": 800, "color": "#FFFFFF", "textAlign": "left" }
+        },
+        {
+          "id": "el-bar1-label",
+          "type": "text",
+          "x": 14,
+          "y": 24,
+          "width": 20,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p>Leads identified</p>",
+          "style": { "fontSize": 16, "fontWeight": 400, "color": "rgba(255,255,255,0.8)", "textAlign": "left" }
+        },
+
+        {
+          "id": "el-rate1",
+          "type": "text",
+          "x": 3,
+          "y": 31.5,
+          "width": 12,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p>↓ 16% reply rate</p>",
+          "style": { "fontSize": 11, "fontWeight": 500, "color": "rgba(41,98,255,0.6)", "textAlign": "left" }
+        },
+
+        {
+          "id": "el-bar2",
+          "type": "shape",
+          "x": 3,
+          "y": 35,
+          "width": 32,
+          "height": 9,
+          "rotation": 0,
+          "content": "",
+          "style": { "backgroundColor": "#2962FF", "borderRadius": 6, "opacity": 0.6 }
+        },
+        {
+          "id": "el-bar2-num",
+          "type": "text",
+          "x": 5,
+          "y": 36,
+          "width": 6,
+          "height": 7,
+          "rotation": 0,
+          "content": "<p><strong>18</strong></p>",
+          "style": { "fontSize": 28, "fontWeight": 800, "color": "#FFFFFF", "textAlign": "left" }
+        },
+        {
+          "id": "el-bar2-label",
+          "type": "text",
+          "x": 12,
+          "y": 37,
+          "width": 20,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p>Qualified replies</p>",
+          "style": { "fontSize": 16, "fontWeight": 400, "color": "rgba(255,255,255,0.8)", "textAlign": "left" }
+        },
+
+        {
+          "id": "el-rate2",
+          "type": "text",
+          "x": 3,
+          "y": 44.5,
+          "width": 14,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p>↓ 39% booking rate</p>",
+          "style": { "fontSize": 11, "fontWeight": 500, "color": "rgba(41,98,255,0.6)", "textAlign": "left" }
+        },
+
+        {
+          "id": "el-bar3",
+          "type": "shape",
+          "x": 3,
+          "y": 48,
+          "width": 22,
+          "height": 9,
+          "rotation": 0,
+          "content": "",
+          "style": { "backgroundColor": "#2962FF", "borderRadius": 6, "opacity": 0.4 }
+        },
+        {
+          "id": "el-bar3-num",
+          "type": "text",
+          "x": 5,
+          "y": 49,
+          "width": 4,
+          "height": 7,
+          "rotation": 0,
+          "content": "<p><strong>7</strong></p>",
+          "style": { "fontSize": 28, "fontWeight": 800, "color": "#FFFFFF", "textAlign": "left" }
+        },
+        {
+          "id": "el-bar3-label",
+          "type": "text",
+          "x": 10,
+          "y": 50,
+          "width": 20,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p>Meetings booked</p>",
+          "style": { "fontSize": 16, "fontWeight": 400, "color": "rgba(255,255,255,0.8)", "textAlign": "left" }
+        },
+
+        {
+          "id": "el-rate3",
+          "type": "text",
+          "x": 3,
+          "y": 57.5,
+          "width": 12,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p>↓ 14% close rate</p>",
+          "style": { "fontSize": 11, "fontWeight": 500, "color": "rgba(41,98,255,0.6)", "textAlign": "left" }
+        },
+
+        {
+          "id": "el-bar4",
+          "type": "shape",
+          "x": 3,
+          "y": 61,
+          "width": 14,
+          "height": 9,
+          "rotation": 0,
+          "content": "",
+          "style": { "backgroundColor": "#FF31FD", "borderRadius": 6, "opacity": 0.9 }
+        },
+        {
+          "id": "el-bar4-num",
+          "type": "text",
+          "x": 5,
+          "y": 62,
+          "width": 3,
+          "height": 7,
+          "rotation": 0,
+          "content": "<p><strong>1</strong></p>",
+          "style": { "fontSize": 28, "fontWeight": 800, "color": "#FFFFFF", "textAlign": "left" }
+        },
+        {
+          "id": "el-bar4-label",
+          "type": "text",
+          "x": 9,
+          "y": 63,
+          "width": 15,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p>Deal closed</p>",
+          "style": { "fontSize": 16, "fontWeight": 500, "color": "rgba(255,255,255,0.9)", "textAlign": "left" }
+        },
+
+        {
+          "id": "el-divider",
+          "type": "shape",
+          "x": 50,
+          "y": 18,
+          "width": 0.1,
+          "height": 55,
+          "rotation": 0,
+          "content": "",
+          "style": { "backgroundColor": "rgba(255,255,255,0.06)" }
+        },
+
+        {
+          "id": "el-hero-revenue",
+          "type": "text",
+          "x": 53,
+          "y": 20,
+          "width": 44,
+          "height": 18,
+          "rotation": 0,
+          "content": "<p>€100.000</p>",
+          "style": { "fontSize": 80, "fontWeight": 800, "color": "#FFFFFF", "textAlign": "center" }
+        },
+        {
+          "id": "el-hero-sublabel",
+          "type": "text",
+          "x": 53,
+          "y": 37,
+          "width": 44,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>REVENUE GENERATED</p>",
+          "style": { "fontSize": 14, "fontWeight": 600, "color": "rgba(255,255,255,0.3)", "textAlign": "center" }
+        },
+
+        {
+          "id": "el-roi-badge-bg",
+          "type": "shape",
+          "x": 66,
+          "y": 43,
+          "width": 18,
+          "height": 7,
+          "rotation": 0,
+          "content": "",
+          "style": { "backgroundColor": "#2962FF", "borderRadius": 40, "opacity": 0.15 }
+        },
+        {
+          "id": "el-roi-badge-txt",
+          "type": "text",
+          "x": 66,
+          "y": 43.5,
+          "width": 18,
+          "height": 6,
+          "rotation": 0,
+          "content": "<p><strong>22x ROI</strong></p>",
+          "style": { "fontSize": 24, "fontWeight": 700, "color": "#2962FF", "textAlign": "center" }
+        },
+
+        {
+          "id": "el-comparison-bg",
+          "type": "shape",
+          "x": 55,
+          "y": 54,
+          "width": 40,
+          "height": 18,
+          "rotation": 0,
+          "content": "",
+          "style": { "backgroundColor": "#0D1629", "borderRadius": 14 }
+        },
+        {
+          "id": "el-comp-invested-num",
+          "type": "text",
+          "x": 57,
+          "y": 55.5,
+          "width": 15,
+          "height": 8,
+          "rotation": 0,
+          "content": "<p><strong>€4.500</strong></p>",
+          "style": { "fontSize": 26, "fontWeight": 700, "color": "rgba(255,255,255,0.6)", "textAlign": "center" }
+        },
+        {
+          "id": "el-comp-invested-label",
+          "type": "text",
+          "x": 57,
+          "y": 63,
+          "width": 15,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>Invested</p>",
+          "style": { "fontSize": 12, "fontWeight": 500, "color": "rgba(255,255,255,0.25)", "textAlign": "center" }
+        },
+        {
+          "id": "el-comp-arrow",
+          "type": "text",
+          "x": 72,
+          "y": 56,
+          "width": 6,
+          "height": 7,
+          "rotation": 0,
+          "content": "<p>→</p>",
+          "style": { "fontSize": 28, "fontWeight": 400, "color": "#2962FF", "textAlign": "center" }
+        },
+        {
+          "id": "el-comp-return-num",
+          "type": "text",
+          "x": 78,
+          "y": 55.5,
+          "width": 15,
+          "height": 8,
+          "rotation": 0,
+          "content": "<p><strong>€100K</strong></p>",
+          "style": { "fontSize": 26, "fontWeight": 700, "color": "#FF31FD", "textAlign": "center" }
+        },
+        {
+          "id": "el-comp-return-label",
+          "type": "text",
+          "x": 78,
+          "y": 63,
+          "width": 15,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>Return</p>",
+          "style": { "fontSize": 12, "fontWeight": 500, "color": "rgba(255,255,255,0.25)", "textAlign": "center" }
+        },
+
+        {
+          "id": "el-timeline-icon",
+          "type": "text",
+          "x": 66,
+          "y": 74,
+          "width": 18,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p>⏱ in 90 Tagen</p>",
+          "style": { "fontSize": 16, "fontWeight": 500, "color": "rgba(255,255,255,0.35)", "textAlign": "center" }
+        },
+
+        {
+          "id": "el-bottom-bar",
+          "type": "shape",
+          "x": 0,
+          "y": 86,
+          "width": 100,
+          "height": 14,
+          "rotation": 0,
+          "content": "",
+          "style": { "backgroundColor": "#060A16" }
+        },
+        {
+          "id": "el-bottom-accent",
+          "type": "shape",
+          "x": 0,
+          "y": 86,
+          "width": 100,
+          "height": 0.25,
+          "rotation": 0,
+          "content": "",
+          "style": { "backgroundColor": "#2962FF", "opacity": 0.3 }
+        },
+        {
+          "id": "el-techstack-label",
+          "type": "text",
+          "x": 3,
+          "y": 88,
+          "width": 12,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p>TECH STACK</p>",
+          "style": { "fontSize": 10, "fontWeight": 700, "color": "rgba(255,255,255,0.2)", "textAlign": "left" }
+        },
+        {
+          "id": "el-techstack",
+          "type": "text",
+          "x": 3,
+          "y": 92,
+          "width": 50,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p><strong>Clay</strong>&nbsp;&nbsp;·&nbsp;&nbsp;<strong>Instantly</strong>&nbsp;&nbsp;·&nbsp;&nbsp;<strong>HubSpot</strong>&nbsp;&nbsp;·&nbsp;&nbsp;<strong>n8n</strong></p>",
+          "style": { "fontSize": 15, "fontWeight": 400, "color": "rgba(255,255,255,0.45)", "textAlign": "left" }
+        },
+
+        {
+          "id": "el-cegtec-brand",
+          "type": "text",
+          "x": 82,
+          "y": 89,
+          "width": 16,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p><strong>CegTec</strong></p>",
+          "style": { "fontSize": 22, "fontWeight": 700, "color": "#2962FF", "textAlign": "right" }
+        },
+        {
+          "id": "el-cegtec-sub",
+          "type": "text",
+          "x": 76,
+          "y": 94,
+          "width": 22,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p>AI-Powered Sales Automation</p>",
+          "style": { "fontSize": 11, "fontWeight": 400, "color": "rgba(255,255,255,0.25)", "textAlign": "right" }
+        },
+
+        {
+          "id": "el-glow-blue",
+          "type": "shape",
+          "x": 58,
+          "y": 12,
+          "width": 34,
+          "height": 30,
+          "rotation": 0,
+          "content": "",
+          "style": { "backgroundColor": "rgba(41,98,255,0.03)", "borderRadius": 200 }
+        },
+        {
+          "id": "el-glow-magenta",
+          "type": "shape",
+          "x": 60,
+          "y": 48,
+          "width": 28,
+          "height": 28,
+          "rotation": 0,
+          "content": "",
+          "style": { "backgroundColor": "rgba(255,49,253,0.02)", "borderRadius": 200 }
+        }
+      ],
+      "background": "#0B1120"
+    }
+  ],
+  "themeId": "midnight",
+  "formatId": "16:9",
+  "createdAt": 1740998400000,
+  "updatedAt": 1740998400002
+}

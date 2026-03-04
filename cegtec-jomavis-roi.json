@@ -1,0 +1,372 @@
+{
+  "id": "cegtec-jomavis-roi",
+  "title": "CegTec - Jomavis Solar ROI",
+  "slides": [
+    {
+      "id": "slide-roi-main",
+      "elements": [
+        {
+          "id": "el-top-label",
+          "type": "text",
+          "x": 3,
+          "y": 2.5,
+          "width": 25,
+          "height": 3.5,
+          "rotation": 0,
+          "content": "<p>CASE STUDY · JOMAVIS SOLAR</p>",
+          "style": { "fontSize": 13, "fontWeight": 500, "color": "rgba(255,255,255,0.35)", "textAlign": "left" }
+        },
+        {
+          "id": "el-headline",
+          "type": "text",
+          "x": 3,
+          "y": 7,
+          "width": 55,
+          "height": 8,
+          "rotation": 0,
+          "content": "<p>Von 112 Leads zu €100.000 Marge</p>",
+          "style": { "fontSize": 40, "fontWeight": 700, "color": "#FFFFFF", "textAlign": "left" }
+        },
+        {
+          "id": "el-funnel-label",
+          "type": "text",
+          "x": 3,
+          "y": 17,
+          "width": 15,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p>LEAD FUNNEL</p>",
+          "style": { "fontSize": 11, "fontWeight": 600, "color": "rgba(255,255,255,0.3)", "textAlign": "left" }
+        },
+
+        {
+          "id": "el-funnel-bg1",
+          "type": "shape",
+          "x": 3,
+          "y": 21,
+          "width": 43,
+          "height": 12.5,
+          "rotation": 0,
+          "content": "",
+          "style": { "backgroundColor": "#131E36", "borderRadius": 12 }
+        },
+        {
+          "id": "el-funnel-txt1",
+          "type": "text",
+          "x": 5.5,
+          "y": 23,
+          "width": 38,
+          "height": 9,
+          "rotation": 0,
+          "content": "<p><strong>112</strong> Leads identified</p>",
+          "style": { "fontSize": 22, "fontWeight": 500, "color": "#E2E8F0", "textAlign": "left" }
+        },
+        {
+          "id": "el-funnel-icon1",
+          "type": "text",
+          "x": 39,
+          "y": 23.5,
+          "width": 5,
+          "height": 7,
+          "rotation": 0,
+          "content": "<p>🎯</p>",
+          "style": { "fontSize": 24, "textAlign": "center" }
+        },
+
+        {
+          "id": "el-funnel-connector1",
+          "type": "shape",
+          "x": 22,
+          "y": 33.5,
+          "width": 0.25,
+          "height": 2.5,
+          "rotation": 0,
+          "content": "",
+          "style": { "backgroundColor": "rgba(59,130,246,0.3)" }
+        },
+
+        {
+          "id": "el-funnel-bg2",
+          "type": "shape",
+          "x": 5,
+          "y": 36,
+          "width": 39,
+          "height": 12.5,
+          "rotation": 0,
+          "content": "",
+          "style": { "backgroundColor": "#131E36", "borderRadius": 12 }
+        },
+        {
+          "id": "el-funnel-txt2",
+          "type": "text",
+          "x": 7.5,
+          "y": 37.5,
+          "width": 34,
+          "height": 10,
+          "rotation": 0,
+          "content": "<p><strong>18</strong> Qualified Replies</p><p style='opacity:0.5; font-size:0.75em'>16% Reply Rate</p>",
+          "style": { "fontSize": 22, "fontWeight": 500, "color": "#E2E8F0", "textAlign": "left" }
+        },
+
+        {
+          "id": "el-funnel-connector2",
+          "type": "shape",
+          "x": 22,
+          "y": 48.5,
+          "width": 0.25,
+          "height": 2.5,
+          "rotation": 0,
+          "content": "",
+          "style": { "backgroundColor": "rgba(59,130,246,0.3)" }
+        },
+
+        {
+          "id": "el-funnel-bg3",
+          "type": "shape",
+          "x": 7,
+          "y": 51,
+          "width": 35,
+          "height": 12.5,
+          "rotation": 0,
+          "content": "",
+          "style": { "backgroundColor": "#131E36", "borderRadius": 12 }
+        },
+        {
+          "id": "el-funnel-txt3",
+          "type": "text",
+          "x": 9.5,
+          "y": 53,
+          "width": 30,
+          "height": 9,
+          "rotation": 0,
+          "content": "<p><strong>7</strong> Meetings booked</p>",
+          "style": { "fontSize": 22, "fontWeight": 500, "color": "#E2E8F0", "textAlign": "left" }
+        },
+
+        {
+          "id": "el-funnel-connector3",
+          "type": "shape",
+          "x": 22,
+          "y": 63.5,
+          "width": 0.25,
+          "height": 2.5,
+          "rotation": 0,
+          "content": "",
+          "style": { "backgroundColor": "rgba(59,130,246,0.3)" }
+        },
+
+        {
+          "id": "el-funnel-bg4",
+          "type": "shape",
+          "x": 9,
+          "y": 66,
+          "width": 31,
+          "height": 12.5,
+          "rotation": 0,
+          "content": "",
+          "style": { "backgroundColor": "#152A4A", "borderRadius": 12 }
+        },
+        {
+          "id": "el-funnel-txt4",
+          "type": "text",
+          "x": 11.5,
+          "y": 68,
+          "width": 26,
+          "height": 9,
+          "rotation": 0,
+          "content": "<p><strong>1</strong> Deal closed</p>",
+          "style": { "fontSize": 22, "fontWeight": 600, "color": "#3B82F6", "textAlign": "left" }
+        },
+        {
+          "id": "el-funnel-check",
+          "type": "text",
+          "x": 33,
+          "y": 68,
+          "width": 5,
+          "height": 7,
+          "rotation": 0,
+          "content": "<p>✅</p>",
+          "style": { "fontSize": 22, "textAlign": "center" }
+        },
+
+        {
+          "id": "el-roi-hero",
+          "type": "text",
+          "x": 52,
+          "y": 19,
+          "width": 45,
+          "height": 24,
+          "rotation": 0,
+          "content": "<p>22x ROI</p>",
+          "style": { "fontSize": 96, "fontWeight": 800, "color": "#3B82F6", "textAlign": "center" }
+        },
+        {
+          "id": "el-roi-sublabel",
+          "type": "text",
+          "x": 52,
+          "y": 42,
+          "width": 45,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>Return on Investment</p>",
+          "style": { "fontSize": 16, "fontWeight": 400, "color": "rgba(255,255,255,0.35)", "textAlign": "center" }
+        },
+
+        {
+          "id": "el-metric-bg1",
+          "type": "shape",
+          "x": 52,
+          "y": 50,
+          "width": 14,
+          "height": 20,
+          "rotation": 0,
+          "content": "",
+          "style": { "backgroundColor": "#131E36", "borderRadius": 12 }
+        },
+        {
+          "id": "el-metric-txt1",
+          "type": "text",
+          "x": 52,
+          "y": 52,
+          "width": 14,
+          "height": 16,
+          "rotation": 0,
+          "content": "<p><strong style='font-size:1.3em'>€100K</strong></p><p style='opacity:0.5; font-size:0.8em'>Revenue</p>",
+          "style": { "fontSize": 18, "fontWeight": 600, "color": "#E2E8F0", "textAlign": "center" }
+        },
+
+        {
+          "id": "el-metric-bg2",
+          "type": "shape",
+          "x": 68,
+          "y": 50,
+          "width": 14,
+          "height": 20,
+          "rotation": 0,
+          "content": "",
+          "style": { "backgroundColor": "#131E36", "borderRadius": 12 }
+        },
+        {
+          "id": "el-metric-txt2",
+          "type": "text",
+          "x": 68,
+          "y": 52,
+          "width": 14,
+          "height": 16,
+          "rotation": 0,
+          "content": "<p><strong style='font-size:1.3em'>90 Days</strong></p><p style='opacity:0.5; font-size:0.8em'>Timeline</p>",
+          "style": { "fontSize": 18, "fontWeight": 600, "color": "#E2E8F0", "textAlign": "center" }
+        },
+
+        {
+          "id": "el-metric-bg3",
+          "type": "shape",
+          "x": 84,
+          "y": 50,
+          "width": 14,
+          "height": 20,
+          "rotation": 0,
+          "content": "",
+          "style": { "backgroundColor": "#131E36", "borderRadius": 12 }
+        },
+        {
+          "id": "el-metric-txt3",
+          "type": "text",
+          "x": 84,
+          "y": 52,
+          "width": 14,
+          "height": 16,
+          "rotation": 0,
+          "content": "<p><strong style='font-size:1.3em'>~€4.500</strong></p><p style='opacity:0.5; font-size:0.8em'>Investment</p>",
+          "style": { "fontSize": 18, "fontWeight": 600, "color": "#E2E8F0", "textAlign": "center" }
+        },
+
+        {
+          "id": "el-divider-line",
+          "type": "shape",
+          "x": 50,
+          "y": 20,
+          "width": 0.1,
+          "height": 58,
+          "rotation": 0,
+          "content": "",
+          "style": { "backgroundColor": "rgba(255,255,255,0.06)" }
+        },
+
+        {
+          "id": "el-bottom-bar",
+          "type": "shape",
+          "x": 0,
+          "y": 87,
+          "width": 100,
+          "height": 13,
+          "rotation": 0,
+          "content": "",
+          "style": { "backgroundColor": "#080D1A" }
+        },
+        {
+          "id": "el-techstack-label",
+          "type": "text",
+          "x": 3,
+          "y": 88.5,
+          "width": 12,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p>TECH STACK</p>",
+          "style": { "fontSize": 10, "fontWeight": 600, "color": "rgba(255,255,255,0.25)", "textAlign": "left" }
+        },
+        {
+          "id": "el-techstack",
+          "type": "text",
+          "x": 3,
+          "y": 92,
+          "width": 50,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p><strong>Clay</strong>&nbsp;&nbsp;·&nbsp;&nbsp;<strong>Instantly</strong>&nbsp;&nbsp;·&nbsp;&nbsp;<strong>HubSpot</strong>&nbsp;&nbsp;·&nbsp;&nbsp;<strong>n8n</strong></p>",
+          "style": { "fontSize": 16, "fontWeight": 400, "color": "rgba(255,255,255,0.5)", "textAlign": "left" }
+        },
+
+        {
+          "id": "el-cegtec-brand",
+          "type": "text",
+          "x": 82,
+          "y": 91,
+          "width": 16,
+          "height": 6,
+          "rotation": 0,
+          "content": "<p><strong>CegTec</strong></p>",
+          "style": { "fontSize": 20, "fontWeight": 700, "color": "#3B82F6", "textAlign": "right" }
+        },
+        {
+          "id": "el-cegtec-sub",
+          "type": "text",
+          "x": 82,
+          "y": 96,
+          "width": 16,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p>AI-Powered Lead Generation</p>",
+          "style": { "fontSize": 10, "fontWeight": 400, "color": "rgba(255,255,255,0.3)", "textAlign": "right" }
+        },
+
+        {
+          "id": "el-accent-glow",
+          "type": "shape",
+          "x": 60,
+          "y": 15,
+          "width": 30,
+          "height": 28,
+          "rotation": 0,
+          "content": "",
+          "style": { "backgroundColor": "rgba(59,130,246,0.04)", "borderRadius": 200 }
+        }
+      ],
+      "background": "#0B1120"
+    }
+  ],
+  "themeId": "midnight",
+  "formatId": "16:9",
+  "createdAt": 1740998400000,
+  "updatedAt": 1740998400000
+}

@@ -1,0 +1,3465 @@
+{
+  "id": "better-energy-v2-dark",
+  "title": "BetterEnergy — Dark Premium",
+  "themeId": "corporate",
+  "createdAt": 1740900000000,
+  "updatedAt": 1772467432834,
+  "slides": [
+    {
+      "id": "s01",
+      "background": "#0f1419",
+      "elements": [
+        {
+          "id": "s01-topbar",
+          "type": "shape",
+          "x": 0,
+          "y": 0,
+          "width": 100,
+          "height": 0.8,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f"
+          }
+        },
+        {
+          "id": "s01-deco-circle-tr",
+          "type": "shape",
+          "x": 82,
+          "y": -8,
+          "width": 26,
+          "height": 46,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f",
+            "opacity": 0.05,
+            "borderRadius": 9999
+          }
+        },
+        {
+          "id": "s01-deco-circle-bl",
+          "type": "shape",
+          "x": -8,
+          "y": 65,
+          "width": 22,
+          "height": 39,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#00d4aa",
+            "opacity": 0.04,
+            "borderRadius": 9999
+          }
+        },
+        {
+          "id": "s01-img",
+          "type": "image",
+          "x": 0,
+          "y": 0,
+          "width": 100,
+          "height": 100,
+          "rotation": 0,
+          "content": "/images/hero-gewerbedach.jpg",
+          "style": {
+            "objectFit": "cover",
+            "opacity": 0.25,
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s01-line",
+          "type": "shape",
+          "x": 36,
+          "y": 23,
+          "width": 28,
+          "height": 0.4,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f"
+          }
+        },
+        {
+          "id": "s01-title",
+          "type": "text",
+          "x": 8,
+          "y": 27,
+          "width": 84,
+          "height": 22,
+          "rotation": 0,
+          "content": "<h1>Ihre Dachfläche wird zur Einnahmequelle.</h1>",
+          "style": {
+            "fontSize": 76,
+            "fontWeight": 800,
+            "color": "#f0f2f5",
+            "textAlign": "center"
+          }
+        },
+        {
+          "id": "s01-sub",
+          "type": "text",
+          "x": 14,
+          "y": 54,
+          "width": 72,
+          "height": 10,
+          "rotation": 0,
+          "content": "<p>Das Dachpacht-Modell von Better Energy</p>",
+          "style": {
+            "fontSize": 38,
+            "fontWeight": 400,
+            "color": "#b8c8d8",
+            "textAlign": "center"
+          }
+        },
+        {
+          "id": "s01-pills",
+          "type": "text",
+          "x": 12,
+          "y": 70,
+          "width": 76,
+          "height": 6,
+          "rotation": 0,
+          "content": "<p><strong>Null Investition</strong> &nbsp;&bull;&nbsp; <strong>Sichere Einnahmen</strong> &nbsp;&bull;&nbsp; <strong>Nachhaltige Zukunft</strong></p>",
+          "style": {
+            "fontSize": 26,
+            "fontWeight": 600,
+            "color": "#c7f80f",
+            "textAlign": "center"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "background": "#0f1419",
+      "elements": [
+        {
+          "id": "s02-topbar",
+          "type": "shape",
+          "x": 0,
+          "y": 0,
+          "width": 100,
+          "height": 0.8,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f"
+          }
+        },
+        {
+          "id": "s02-sidebar-accent",
+          "type": "shape",
+          "x": 0,
+          "y": 0.8,
+          "width": 0.4,
+          "height": 99.2,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f",
+            "opacity": 0.15
+          }
+        },
+        {
+          "id": "s02-deco-circle-tr",
+          "type": "shape",
+          "x": 82,
+          "y": -8,
+          "width": 26,
+          "height": 46,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f",
+            "opacity": 0.05,
+            "borderRadius": 9999
+          }
+        },
+        {
+          "id": "s02-deco-circle-bl",
+          "type": "shape",
+          "x": -8,
+          "y": 65,
+          "width": 22,
+          "height": 39,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#00d4aa",
+            "opacity": 0.04,
+            "borderRadius": 9999
+          }
+        },
+        {
+          "id": "s02-bg",
+          "type": "image",
+          "x": 0,
+          "y": 0,
+          "width": 100,
+          "height": 100,
+          "rotation": 0,
+          "content": "/images/aerial-gewerbedach.jpg",
+          "style": {
+            "objectFit": "cover",
+            "opacity": 0.2,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "s02-label",
+          "type": "text",
+          "x": 8,
+          "y": 8,
+          "width": 30,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p>DAS POTENZIAL</p>",
+          "style": {
+            "fontSize": 22,
+            "fontWeight": 700,
+            "color": "#c7f80f"
+          }
+        },
+        {
+          "id": "s02-title",
+          "type": "text",
+          "x": 8,
+          "y": 14,
+          "width": 48,
+          "height": 18,
+          "rotation": 0,
+          "content": "<h2>Ihre Dachfläche hat ungenutztes Potenzial</h2>",
+          "style": {
+            "fontSize": 56,
+            "fontWeight": 700,
+            "color": "#f0f2f5"
+          }
+        },
+        {
+          "id": "s02-title-accent",
+          "type": "shape",
+          "x": 8,
+          "y": 32.5,
+          "width": 8,
+          "height": 0.5,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f"
+          }
+        },
+        {
+          "id": "s02-body",
+          "type": "text",
+          "x": 8,
+          "y": 36,
+          "width": 46,
+          "height": 36,
+          "rotation": 0,
+          "content": "<p>Ungenutzte Dachflächen sind verpasste Chancen für passive Einnahmen . Große Dachflächen bleiben oft ungenutzt, während Energiekosten steigen und Nachhaltigkeit immer wichtiger wird.</p><p><br></p><p><strong style=\"color: #f0f2f5\">Das Dachpacht-Modell</strong> verwandelt Ihre Dachfläche in eine Einnahmequelle — ohne Investition, ohne Risiko, ohne Aufwand.</p>",
+          "style": {
+            "fontSize": 24,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s02-box",
+          "type": "shape",
+          "x": 60,
+          "y": 16,
+          "width": 34,
+          "height": 58,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s02-box-title",
+          "type": "text",
+          "x": 63,
+          "y": 20,
+          "width": 28,
+          "height": 6,
+          "rotation": 0,
+          "content": "<p><strong>Leistungsumfang</strong></p>",
+          "style": {
+            "fontSize": 32,
+            "fontWeight": 700,
+            "color": "#f0f2f5"
+          }
+        },
+        {
+          "id": "s02-box-body",
+          "type": "text",
+          "x": 63,
+          "y": 28,
+          "width": 28,
+          "height": 14,
+          "rotation": 0,
+          "content": "<p>Better Energy übernimmt die vollständige Planung, Finanzierung, den Bau und den Betrieb der Photovoltaikanlage auf eigene Kosten.</p>",
+          "style": {
+            "fontSize": 22,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s02-box-list",
+          "type": "text",
+          "x": 63,
+          "y": 44,
+          "width": 28,
+          "height": 26,
+          "rotation": 0,
+          "content": "<p style=\"color: #c7f80f\">&#10003;</p><p>Sichere Pachteinnahmen oder hochwertige Dachsanierung</p><p><br></p><p style=\"color: #c7f80f\">&#10003;</p><p>Aktiver Beitrag zur Energiewende</p>",
+          "style": {
+            "fontSize": 24,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s02-req",
+          "type": "text",
+          "x": 8,
+          "y": 82,
+          "width": 84,
+          "height": 6,
+          "rotation": 0,
+          "content": "<p>Voraussetzung: Dachfläche von mindestens 450 m²</p>",
+          "style": {
+            "fontSize": 24,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s02-footer-line",
+          "type": "shape",
+          "x": 5,
+          "y": 93,
+          "width": 90,
+          "height": 0.15,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#2a3a4a"
+          }
+        },
+        {
+          "id": "s02-footer-left",
+          "type": "text",
+          "x": 10,
+          "y": 94,
+          "width": 40,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>Better Energy  |  Dachpacht-Modell</p>",
+          "style": {
+            "fontSize": 12,
+            "color": "#6a7a8a",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02-footer-right",
+          "type": "text",
+          "x": 70,
+          "y": 94,
+          "width": 25,
+          "height": 4,
+          "rotation": 0,
+          "content": "2",
+          "style": {
+            "fontSize": 12,
+            "color": "#6a7a8a",
+            "textAlign": "right"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "background": "#0f1419",
+      "elements": [
+        {
+          "id": "s03-topbar",
+          "type": "shape",
+          "x": 0,
+          "y": 0,
+          "width": 100,
+          "height": 0.8,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f"
+          }
+        },
+        {
+          "id": "s03-sidebar-accent",
+          "type": "shape",
+          "x": 0,
+          "y": 0.8,
+          "width": 0.4,
+          "height": 99.2,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f",
+            "opacity": 0.15
+          }
+        },
+        {
+          "id": "s03-deco-circle-tr",
+          "type": "shape",
+          "x": 82,
+          "y": -8,
+          "width": 26,
+          "height": 46,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f",
+            "opacity": 0.05,
+            "borderRadius": 9999
+          }
+        },
+        {
+          "id": "s03-deco-circle-bl",
+          "type": "shape",
+          "x": -8,
+          "y": 65,
+          "width": 22,
+          "height": 39,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#00d4aa",
+            "opacity": 0.04,
+            "borderRadius": 9999
+          }
+        },
+        {
+          "id": "s03-img",
+          "type": "image",
+          "x": 0,
+          "y": 0,
+          "width": 100,
+          "height": 100,
+          "rotation": 0,
+          "content": "/images/sunset-gewerbedach.jpg",
+          "style": {
+            "objectFit": "cover",
+            "opacity": 0.2,
+            "borderRadius": 16
+          }
+        },
+        {
+          "id": "s03-label",
+          "type": "text",
+          "x": 8,
+          "y": 8,
+          "width": 30,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p>ÜBER UNS</p>",
+          "style": {
+            "fontSize": 22,
+            "fontWeight": 700,
+            "color": "#c7f80f"
+          }
+        },
+        {
+          "id": "s03-title",
+          "type": "text",
+          "x": 8,
+          "y": 14,
+          "width": 62,
+          "height": 18,
+          "rotation": 0,
+          "content": "<h2>Better Energy — Erfahrung und Kompetenz seit 2022</h2>",
+          "style": {
+            "fontSize": 56,
+            "fontWeight": 700,
+            "color": "#f0f2f5"
+          }
+        },
+        {
+          "id": "s03-title-accent",
+          "type": "shape",
+          "x": 8,
+          "y": 32.5,
+          "width": 8,
+          "height": 0.5,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f"
+          }
+        },
+        {
+          "id": "s03-body",
+          "type": "text",
+          "x": 8,
+          "y": 34,
+          "width": 62,
+          "height": 14,
+          "rotation": 0,
+          "content": "<p>Ein junges, dynamisches Unternehmen mit bewährter Expertise und beeindruckendem Wachstum. Better Energy wurde 2022 gegründet und basiert auf über 10 Jahren Fachkompetenz im Solarbereich.</p>",
+          "style": {
+            "fontSize": 24,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s03-m1-box",
+          "type": "shape",
+          "x": 5,
+          "y": 52,
+          "width": 21,
+          "height": 30,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s03-m1-num",
+          "type": "text",
+          "x": 7,
+          "y": 56,
+          "width": 17,
+          "height": 10,
+          "rotation": 0,
+          "content": "<h1>2022</h1>",
+          "style": {
+            "fontSize": 60,
+            "fontWeight": 800,
+            "color": "#c7f80f",
+            "textAlign": "center"
+          }
+        },
+        {
+          "id": "s03-m1-lbl",
+          "type": "text",
+          "x": 7,
+          "y": 68,
+          "width": 17,
+          "height": 8,
+          "rotation": 0,
+          "content": "<p>Gründung</p>",
+          "style": {
+            "fontSize": 26,
+            "color": "#b8c8d8",
+            "textAlign": "center"
+          }
+        },
+        {
+          "id": "s03-m2-box",
+          "type": "shape",
+          "x": 28,
+          "y": 52,
+          "width": 21,
+          "height": 30,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s03-m2-num",
+          "type": "text",
+          "x": 30,
+          "y": 56,
+          "width": 17,
+          "height": 10,
+          "rotation": 0,
+          "content": "<h1>800+</h1>",
+          "style": {
+            "fontSize": 60,
+            "fontWeight": 800,
+            "color": "#c7f80f",
+            "textAlign": "center"
+          }
+        },
+        {
+          "id": "s03-m2-lbl",
+          "type": "text",
+          "x": 30,
+          "y": 68,
+          "width": 17,
+          "height": 8,
+          "rotation": 0,
+          "content": "<p>Installierte Anlagen</p>",
+          "style": {
+            "fontSize": 26,
+            "color": "#b8c8d8",
+            "textAlign": "center"
+          }
+        },
+        {
+          "id": "s03-m3-box",
+          "type": "shape",
+          "x": 51,
+          "y": 52,
+          "width": 21,
+          "height": 30,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s03-m3-num",
+          "type": "text",
+          "x": 53,
+          "y": 56,
+          "width": 17,
+          "height": 10,
+          "rotation": 0,
+          "content": "<h1>10+ MW</h1>",
+          "style": {
+            "fontSize": 60,
+            "fontWeight": 800,
+            "color": "#c7f80f",
+            "textAlign": "center"
+          }
+        },
+        {
+          "id": "s03-m3-lbl",
+          "type": "text",
+          "x": 53,
+          "y": 68,
+          "width": 17,
+          "height": 8,
+          "rotation": 0,
+          "content": "<p>Gesamtleistung</p>",
+          "style": {
+            "fontSize": 26,
+            "color": "#b8c8d8",
+            "textAlign": "center"
+          }
+        },
+        {
+          "id": "s03-m4-box",
+          "type": "shape",
+          "x": 74,
+          "y": 52,
+          "width": 21,
+          "height": 30,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s03-m4-num",
+          "type": "text",
+          "x": 76,
+          "y": 56,
+          "width": 17,
+          "height": 10,
+          "rotation": 0,
+          "content": "<h1>200%</h1>",
+          "style": {
+            "fontSize": 60,
+            "fontWeight": 800,
+            "color": "#c7f80f",
+            "textAlign": "center"
+          }
+        },
+        {
+          "id": "s03-m4-lbl",
+          "type": "text",
+          "x": 76,
+          "y": 68,
+          "width": 17,
+          "height": 8,
+          "rotation": 0,
+          "content": "<p>Wachstum / Jahr</p>",
+          "style": {
+            "fontSize": 26,
+            "color": "#b8c8d8",
+            "textAlign": "center"
+          }
+        },
+        {
+          "id": "s03-footer-line",
+          "type": "shape",
+          "x": 5,
+          "y": 93,
+          "width": 90,
+          "height": 0.15,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#2a3a4a"
+          }
+        },
+        {
+          "id": "s03-footer-left",
+          "type": "text",
+          "x": 10,
+          "y": 94,
+          "width": 40,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>Better Energy  |  Dachpacht-Modell</p>",
+          "style": {
+            "fontSize": 12,
+            "color": "#6a7a8a",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s03-footer-right",
+          "type": "text",
+          "x": 70,
+          "y": 94,
+          "width": 25,
+          "height": 4,
+          "rotation": 0,
+          "content": "3",
+          "style": {
+            "fontSize": 12,
+            "color": "#6a7a8a",
+            "textAlign": "right"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s04",
+      "background": "#0f1419",
+      "elements": [
+        {
+          "id": "s04-topbar",
+          "type": "shape",
+          "x": 0,
+          "y": 0,
+          "width": 100,
+          "height": 0.8,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f"
+          }
+        },
+        {
+          "id": "s04-sidebar-accent",
+          "type": "shape",
+          "x": 0,
+          "y": 0.8,
+          "width": 0.4,
+          "height": 99.2,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f",
+            "opacity": 0.15
+          }
+        },
+        {
+          "id": "s04-deco-circle-tr",
+          "type": "shape",
+          "x": 82,
+          "y": -8,
+          "width": 26,
+          "height": 46,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f",
+            "opacity": 0.05,
+            "borderRadius": 9999
+          }
+        },
+        {
+          "id": "s04-deco-circle-bl",
+          "type": "shape",
+          "x": -8,
+          "y": 65,
+          "width": 22,
+          "height": 39,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#00d4aa",
+            "opacity": 0.04,
+            "borderRadius": 9999
+          }
+        },
+        {
+          "id": "s04-bg",
+          "type": "image",
+          "x": 0,
+          "y": 0,
+          "width": 100,
+          "height": 100,
+          "rotation": 0,
+          "content": "/images/lagerhalle-solar.jpg",
+          "style": {
+            "objectFit": "cover",
+            "opacity": 0.18,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "s04-label",
+          "type": "text",
+          "x": 8,
+          "y": 6,
+          "width": 30,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p>DREI PACHTVARIANTEN</p>",
+          "style": {
+            "fontSize": 22,
+            "fontWeight": 700,
+            "color": "#c7f80f"
+          }
+        },
+        {
+          "id": "s04-title",
+          "type": "text",
+          "x": 8,
+          "y": 12,
+          "width": 84,
+          "height": 10,
+          "rotation": 0,
+          "content": "<h2>Drei flexible Pachtvarianten für Ihre Situation</h2>",
+          "style": {
+            "fontSize": 56,
+            "fontWeight": 700,
+            "color": "#f0f2f5"
+          }
+        },
+        {
+          "id": "s04-title-accent",
+          "type": "shape",
+          "x": 8,
+          "y": 22.5,
+          "width": 8,
+          "height": 0.5,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f"
+          }
+        },
+        {
+          "id": "s04-c1-box",
+          "type": "shape",
+          "x": 8,
+          "y": 27,
+          "width": 26,
+          "height": 65,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s04-c1-box-topaccent",
+          "type": "shape",
+          "x": 11,
+          "y": 27,
+          "width": 20,
+          "height": 0.6,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f",
+            "borderRadius": 4
+          }
+        },
+        {
+          "id": "s04-c1-num",
+          "type": "text",
+          "x": 11,
+          "y": 30,
+          "width": 20,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p>VARIANTE 1</p>",
+          "style": {
+            "fontSize": 22,
+            "fontWeight": 700,
+            "color": "#c7f80f",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s04-c1-title",
+          "type": "text",
+          "x": 11,
+          "y": 36,
+          "width": 20,
+          "height": 10,
+          "rotation": 0,
+          "content": "<p><strong>Laufende Dachpacht</strong></p>",
+          "style": {
+            "fontSize": 30,
+            "fontWeight": 700,
+            "color": "#f0f2f5"
+          }
+        },
+        {
+          "id": "s04-c1-desc",
+          "type": "text",
+          "x": 11,
+          "y": 48,
+          "width": 20,
+          "height": 22,
+          "rotation": 0,
+          "content": "<p>Bei intakten Dächern zahlen wir Ihnen zwischen 2,50 € und 4,00 € pro Quadratmeter und Jahr. Die genaue Höhe richtet sich nach Dachzustand, Ausrichtung und statischen Gegebenheiten.</p>",
+          "style": {
+            "fontSize": 20,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s04-c1-price",
+          "type": "text",
+          "x": 11,
+          "y": 72,
+          "width": 20,
+          "height": 10,
+          "rotation": 0,
+          "content": "<h2>2,50–4,00 €</h2>",
+          "style": {
+            "fontSize": 48,
+            "fontWeight": 800,
+            "color": "#c7f80f"
+          }
+        },
+        {
+          "id": "s04-c1-unit",
+          "type": "text",
+          "x": 11,
+          "y": 83,
+          "width": 20,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p>pro m² / Jahr</p>",
+          "style": {
+            "fontSize": 22,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s04-c2-box",
+          "type": "shape",
+          "x": 37,
+          "y": 27,
+          "width": 26,
+          "height": 65,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s04-c2-box-topaccent",
+          "type": "shape",
+          "x": 40,
+          "y": 27,
+          "width": 20,
+          "height": 0.6,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f",
+            "borderRadius": 4
+          }
+        },
+        {
+          "id": "s04-c2-num",
+          "type": "text",
+          "x": 40,
+          "y": 30,
+          "width": 20,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p>VARIANTE 2</p>",
+          "style": {
+            "fontSize": 22,
+            "fontWeight": 700,
+            "color": "#c7f80f",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s04-c2-title",
+          "type": "text",
+          "x": 40,
+          "y": 36,
+          "width": 20,
+          "height": 10,
+          "rotation": 0,
+          "content": "<p><strong>Dachsanierung als Vergütung</strong></p>",
+          "style": {
+            "fontSize": 30,
+            "fontWeight": 700,
+            "color": "#f0f2f5"
+          }
+        },
+        {
+          "id": "s04-c2-desc",
+          "type": "text",
+          "x": 40,
+          "y": 48,
+          "width": 20,
+          "height": 22,
+          "rotation": 0,
+          "content": "<p>Ist Ihr Dach sanierungsbedürftig oder asbesthaltig? Wir übernehmen die vollständige Dachsanierung inklusive fachgerechter Asbestentsorgung und kompletter Neueindeckung.</p>",
+          "style": {
+            "fontSize": 20,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s04-c2-price",
+          "type": "text",
+          "x": 40,
+          "y": 72,
+          "width": 20,
+          "height": 10,
+          "rotation": 0,
+          "content": "<h2>80–120T €</h2>",
+          "style": {
+            "fontSize": 48,
+            "fontWeight": 800,
+            "color": "#c7f80f"
+          }
+        },
+        {
+          "id": "s04-c2-unit",
+          "type": "text",
+          "x": 40,
+          "y": 83,
+          "width": 20,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p>Sanierungswert</p>",
+          "style": {
+            "fontSize": 22,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s04-c3-box",
+          "type": "shape",
+          "x": 66,
+          "y": 27,
+          "width": 26,
+          "height": 65,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s04-c3-box-topaccent",
+          "type": "shape",
+          "x": 69,
+          "y": 27,
+          "width": 20,
+          "height": 0.6,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f",
+            "borderRadius": 4
+          }
+        },
+        {
+          "id": "s04-c3-num",
+          "type": "text",
+          "x": 69,
+          "y": 30,
+          "width": 20,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p>VARIANTE 3</p>",
+          "style": {
+            "fontSize": 22,
+            "fontWeight": 700,
+            "color": "#c7f80f",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s04-c3-title",
+          "type": "text",
+          "x": 69,
+          "y": 36,
+          "width": 20,
+          "height": 10,
+          "rotation": 0,
+          "content": "<p><strong>Einmalvergütung</strong></p>",
+          "style": {
+            "fontSize": 30,
+            "fontWeight": 700,
+            "color": "#f0f2f5"
+          }
+        },
+        {
+          "id": "s04-c3-desc",
+          "type": "text",
+          "x": 69,
+          "y": 48,
+          "width": 20,
+          "height": 22,
+          "rotation": 0,
+          "content": "<p>Einmalige Zahlung zwischen 185 € und 220 € pro installiertem Kilowattpeak. Sofortige Liquidität statt laufender Zahlungen – ideal für Investitionsprojekte.</p>",
+          "style": {
+            "fontSize": 20,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s04-c3-price",
+          "type": "text",
+          "x": 69,
+          "y": 72,
+          "width": 20,
+          "height": 10,
+          "rotation": 0,
+          "content": "<h2>185–220 €</h2>",
+          "style": {
+            "fontSize": 48,
+            "fontWeight": 800,
+            "color": "#c7f80f"
+          }
+        },
+        {
+          "id": "s04-c3-unit",
+          "type": "text",
+          "x": 69,
+          "y": 83,
+          "width": 20,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p>pro installiertem kWp</p>",
+          "style": {
+            "fontSize": 22,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s04-footer-line",
+          "type": "shape",
+          "x": 5,
+          "y": 93,
+          "width": 90,
+          "height": 0.15,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#2a3a4a"
+          }
+        },
+        {
+          "id": "s04-footer-left",
+          "type": "text",
+          "x": 10,
+          "y": 94,
+          "width": 40,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>Better Energy  |  Dachpacht-Modell</p>",
+          "style": {
+            "fontSize": 12,
+            "color": "#6a7a8a",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s04-footer-right",
+          "type": "text",
+          "x": 70,
+          "y": 94,
+          "width": 25,
+          "height": 4,
+          "rotation": 0,
+          "content": "4",
+          "style": {
+            "fontSize": 12,
+            "color": "#6a7a8a",
+            "textAlign": "right"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s05",
+      "background": "#0f1419",
+      "elements": [
+        {
+          "id": "s05-topbar",
+          "type": "shape",
+          "x": 0,
+          "y": 0,
+          "width": 100,
+          "height": 0.8,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f"
+          }
+        },
+        {
+          "id": "s05-sidebar-accent",
+          "type": "shape",
+          "x": 0,
+          "y": 0.8,
+          "width": 0.4,
+          "height": 99.2,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f",
+            "opacity": 0.15
+          }
+        },
+        {
+          "id": "s05-deco-circle-tr",
+          "type": "shape",
+          "x": 82,
+          "y": -8,
+          "width": 26,
+          "height": 46,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f",
+            "opacity": 0.05,
+            "borderRadius": 9999
+          }
+        },
+        {
+          "id": "s05-deco-circle-bl",
+          "type": "shape",
+          "x": -8,
+          "y": 65,
+          "width": 22,
+          "height": 39,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#00d4aa",
+            "opacity": 0.04,
+            "borderRadius": 9999
+          }
+        },
+        {
+          "id": "s05-bg",
+          "type": "image",
+          "x": 0,
+          "y": 0,
+          "width": 100,
+          "height": 100,
+          "rotation": 0,
+          "content": "/images/gewerbedach-cityview.jpg",
+          "style": {
+            "objectFit": "cover",
+            "opacity": 0.18,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "s05-label",
+          "type": "text",
+          "x": 8,
+          "y": 8,
+          "width": 30,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p>EINNAHMEBEISPIELE</p>",
+          "style": {
+            "fontSize": 22,
+            "fontWeight": 700,
+            "color": "#c7f80f"
+          }
+        },
+        {
+          "id": "s05-title",
+          "type": "text",
+          "x": 8,
+          "y": 14,
+          "width": 84,
+          "height": 10,
+          "rotation": 0,
+          "content": "<h2>Konkrete Zahlen für Ihre Dachfläche</h2>",
+          "style": {
+            "fontSize": 56,
+            "fontWeight": 700,
+            "color": "#f0f2f5"
+          }
+        },
+        {
+          "id": "s05-title-accent",
+          "type": "shape",
+          "x": 8,
+          "y": 24.5,
+          "width": 8,
+          "height": 0.5,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f"
+          }
+        },
+        {
+          "id": "s05-sub",
+          "type": "text",
+          "x": 8,
+          "y": 26,
+          "width": 84,
+          "height": 6,
+          "rotation": 0,
+          "content": "<p>Realistische Zahlen zeigen das finanzielle Potenzial Ihrer Dachfläche</p>",
+          "style": {
+            "fontSize": 30,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s05-b1",
+          "type": "shape",
+          "x": 8,
+          "y": 36,
+          "width": 40,
+          "height": 32,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s05-b1-label",
+          "type": "text",
+          "x": 11,
+          "y": 39,
+          "width": 34,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p>Beispiel: 1.000 m² Dachfläche</p>",
+          "style": {
+            "fontSize": 24,
+            "fontWeight": 600,
+            "color": "#c7f80f"
+          }
+        },
+        {
+          "id": "s05-b1-num",
+          "type": "text",
+          "x": 11,
+          "y": 46,
+          "width": 34,
+          "height": 10,
+          "rotation": 0,
+          "content": "<h1>4.000 € / Jahr</h1>",
+          "style": {
+            "fontSize": 56,
+            "fontWeight": 800,
+            "color": "#c7f80f"
+          }
+        },
+        {
+          "id": "s05-b1-sub",
+          "type": "text",
+          "x": 11,
+          "y": 57,
+          "width": 34,
+          "height": 6,
+          "rotation": 0,
+          "content": "<p>= <strong style=\"color: #f0f2f5\">80.000 €</strong> über 25 Jahre Laufzeit</p>",
+          "style": {
+            "fontSize": 32,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s05-b2",
+          "type": "shape",
+          "x": 52,
+          "y": 36,
+          "width": 40,
+          "height": 32,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s05-b2-label",
+          "type": "text",
+          "x": 55,
+          "y": 39,
+          "width": 34,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p>Oder als Einmalvergütung</p>",
+          "style": {
+            "fontSize": 24,
+            "fontWeight": 600,
+            "color": "#c7f80f"
+          }
+        },
+        {
+          "id": "s05-b2-num",
+          "type": "text",
+          "x": 55,
+          "y": 46,
+          "width": 34,
+          "height": 10,
+          "rotation": 0,
+          "content": "<h1>bis 55.000 €</h1>",
+          "style": {
+            "fontSize": 56,
+            "fontWeight": 800,
+            "color": "#c7f80f"
+          }
+        },
+        {
+          "id": "s05-b2-sub",
+          "type": "text",
+          "x": 55,
+          "y": 57,
+          "width": 34,
+          "height": 6,
+          "rotation": 0,
+          "content": "<p>sofort bei Vertragsabschluss</p>",
+          "style": {
+            "fontSize": 32,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s05-note",
+          "type": "text",
+          "x": 8,
+          "y": 74,
+          "width": 84,
+          "height": 10,
+          "rotation": 0,
+          "content": "<p>Basierend auf 4,00 €/m²/Jahr bzw. 220 €/kWp bei ca. 250 kWp. Konditionen abhängig von Dachzustand, Statik und Ausrichtung.</p>",
+          "style": {
+            "fontSize": 24,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s05-footer-line",
+          "type": "shape",
+          "x": 5,
+          "y": 93,
+          "width": 90,
+          "height": 0.15,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#2a3a4a"
+          }
+        },
+        {
+          "id": "s05-footer-left",
+          "type": "text",
+          "x": 10,
+          "y": 94,
+          "width": 40,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>Better Energy  |  Dachpacht-Modell</p>",
+          "style": {
+            "fontSize": 12,
+            "color": "#6a7a8a",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s05-footer-right",
+          "type": "text",
+          "x": 70,
+          "y": 94,
+          "width": 25,
+          "height": 4,
+          "rotation": 0,
+          "content": "5",
+          "style": {
+            "fontSize": 12,
+            "color": "#6a7a8a",
+            "textAlign": "right"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s06",
+      "background": "#0f1419",
+      "elements": [
+        {
+          "id": "s06-topbar",
+          "type": "shape",
+          "x": 0,
+          "y": 0,
+          "width": 100,
+          "height": 0.8,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f"
+          }
+        },
+        {
+          "id": "s06-sidebar-accent",
+          "type": "shape",
+          "x": 0,
+          "y": 0.8,
+          "width": 0.4,
+          "height": 99.2,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f",
+            "opacity": 0.15
+          }
+        },
+        {
+          "id": "s06-deco-circle-tr",
+          "type": "shape",
+          "x": 82,
+          "y": -8,
+          "width": 26,
+          "height": 46,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f",
+            "opacity": 0.05,
+            "borderRadius": 9999
+          }
+        },
+        {
+          "id": "s06-deco-circle-bl",
+          "type": "shape",
+          "x": -8,
+          "y": 65,
+          "width": 22,
+          "height": 39,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#00d4aa",
+            "opacity": 0.04,
+            "borderRadius": 9999
+          }
+        },
+        {
+          "id": "s06-bg",
+          "type": "image",
+          "x": 0,
+          "y": 0,
+          "width": 100,
+          "height": 100,
+          "rotation": 0,
+          "content": "/images/montageschienen.jpg",
+          "style": {
+            "objectFit": "cover",
+            "opacity": 0.2,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "s06-label",
+          "type": "text",
+          "x": 8,
+          "y": 8,
+          "width": 30,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p>RAHMENBEDINGUNGEN</p>",
+          "style": {
+            "fontSize": 22,
+            "fontWeight": 700,
+            "color": "#c7f80f"
+          }
+        },
+        {
+          "id": "s06-title",
+          "type": "text",
+          "x": 8,
+          "y": 14,
+          "width": 84,
+          "height": 10,
+          "rotation": 0,
+          "content": "<h2>Transparent und fair</h2>",
+          "style": {
+            "fontSize": 56,
+            "fontWeight": 700,
+            "color": "#f0f2f5"
+          }
+        },
+        {
+          "id": "s06-title-accent",
+          "type": "shape",
+          "x": 8,
+          "y": 24.5,
+          "width": 8,
+          "height": 0.5,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f"
+          }
+        },
+        {
+          "id": "s06-card-duration",
+          "type": "shape",
+          "x": 8,
+          "y": 28,
+          "width": 26,
+          "height": 30,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s06-card-duration-badge",
+          "type": "text",
+          "x": 11,
+          "y": 31,
+          "width": 20,
+          "height": 6,
+          "rotation": 0,
+          "content": "<p><strong>25+</strong></p>",
+          "style": {
+            "fontSize": 38,
+            "fontWeight": 800,
+            "color": "#c7f80f",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s06-card-duration-text",
+          "type": "text",
+          "x": 11,
+          "y": 38,
+          "width": 20,
+          "height": 17,
+          "rotation": 0,
+          "content": "<p><strong style=\"color: #f0f2f5\">Laufzeit</strong></p><p>25 Jahre mit Option auf Verlängerung um weitere 10 Jahre. Langfristige Planungssicherheit für beide Vertragspartner.</p>",
+          "style": {
+            "fontSize": 20,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s06-card-grundbuch",
+          "type": "shape",
+          "x": 37,
+          "y": 28,
+          "width": 26,
+          "height": 30,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s06-card-grundbuch-badge",
+          "type": "text",
+          "x": 40,
+          "y": 31,
+          "width": 20,
+          "height": 6,
+          "rotation": 0,
+          "content": "<p><strong>GB</strong></p>",
+          "style": {
+            "fontSize": 38,
+            "fontWeight": 800,
+            "color": "#c7f80f",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s06-card-grundbuch-text",
+          "type": "text",
+          "x": 40,
+          "y": 38,
+          "width": 20,
+          "height": 17,
+          "rotation": 0,
+          "content": "<p><strong style=\"color: #f0f2f5\">Grundbucheintrag</strong></p><p>Dingliche Dienstbarkeit, bezieht sich ausschließlich auf die Dachfläche.</p>",
+          "style": {
+            "fontSize": 20,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s06-card-kosten",
+          "type": "shape",
+          "x": 66,
+          "y": 28,
+          "width": 26,
+          "height": 30,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s06-card-kosten-badge",
+          "type": "text",
+          "x": 69,
+          "y": 31,
+          "width": 20,
+          "height": 6,
+          "rotation": 0,
+          "content": "<p><strong>0 €</strong></p>",
+          "style": {
+            "fontSize": 38,
+            "fontWeight": 800,
+            "color": "#c7f80f",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s06-card-kosten-text",
+          "type": "text",
+          "x": 69,
+          "y": 38,
+          "width": 20,
+          "height": 17,
+          "rotation": 0,
+          "content": "<p><strong style=\"color: #f0f2f5\">Kosten & Zugang</strong></p><p>Better Energy trägt alle Notar- und Grundbuchkosten. Zutrittsrecht für Montage und Wartung nach Absprache.</p>",
+          "style": {
+            "fontSize": 20,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s06-card-ende",
+          "type": "shape",
+          "x": 8,
+          "y": 61,
+          "width": 26,
+          "height": 30,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s06-card-ende-badge",
+          "type": "text",
+          "x": 11,
+          "y": 64,
+          "width": 20,
+          "height": 6,
+          "rotation": 0,
+          "content": "<p><strong>↺</strong></p>",
+          "style": {
+            "fontSize": 38,
+            "fontWeight": 800,
+            "color": "#c7f80f",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s06-card-ende-text",
+          "type": "text",
+          "x": 11,
+          "y": 71,
+          "width": 20,
+          "height": 17,
+          "rotation": 0,
+          "content": "<p><strong style=\"color: #f0f2f5\">Vertragsende</strong></p><p>Kostenfreier Rückbau der Anlage und Wiederherstellung des ursprünglichen Dachzustands.</p>",
+          "style": {
+            "fontSize": 20,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s06-card-eigentum",
+          "type": "shape",
+          "x": 37,
+          "y": 61,
+          "width": 26,
+          "height": 30,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s06-card-eigentum-badge",
+          "type": "text",
+          "x": 40,
+          "y": 64,
+          "width": 20,
+          "height": 6,
+          "rotation": 0,
+          "content": "<p><strong>✓</strong></p>",
+          "style": {
+            "fontSize": 38,
+            "fontWeight": 800,
+            "color": "#c7f80f",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s06-card-eigentum-text",
+          "type": "text",
+          "x": 40,
+          "y": 71,
+          "width": 20,
+          "height": 17,
+          "rotation": 0,
+          "content": "<p><strong style=\"color: #f0f2f5\">Eigentum</strong></p><p>Sie behalten das volle Eigentum an der Immobilie. Nur die Dachnutzung wird geregelt.</p>",
+          "style": {
+            "fontSize": 20,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s06-footer-line",
+          "type": "shape",
+          "x": 5,
+          "y": 93,
+          "width": 90,
+          "height": 0.15,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#2a3a4a"
+          }
+        },
+        {
+          "id": "s06-footer-left",
+          "type": "text",
+          "x": 10,
+          "y": 94,
+          "width": 40,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>Better Energy  |  Dachpacht-Modell</p>",
+          "style": {
+            "fontSize": 12,
+            "color": "#6a7a8a",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s06-footer-right",
+          "type": "text",
+          "x": 70,
+          "y": 94,
+          "width": 25,
+          "height": 4,
+          "rotation": 0,
+          "content": "6",
+          "style": {
+            "fontSize": 12,
+            "color": "#6a7a8a",
+            "textAlign": "right"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s07",
+      "background": "#0f1419",
+      "elements": [
+        {
+          "id": "s07-topbar",
+          "type": "shape",
+          "x": 0,
+          "y": 0,
+          "width": 100,
+          "height": 0.8,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f"
+          }
+        },
+        {
+          "id": "s07-sidebar-accent",
+          "type": "shape",
+          "x": 0,
+          "y": 0.8,
+          "width": 0.4,
+          "height": 99.2,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f",
+            "opacity": 0.15
+          }
+        },
+        {
+          "id": "s07-deco-circle-tr",
+          "type": "shape",
+          "x": 82,
+          "y": -8,
+          "width": 26,
+          "height": 46,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f",
+            "opacity": 0.05,
+            "borderRadius": 9999
+          }
+        },
+        {
+          "id": "s07-deco-circle-bl",
+          "type": "shape",
+          "x": -8,
+          "y": 65,
+          "width": 22,
+          "height": 39,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#00d4aa",
+            "opacity": 0.04,
+            "borderRadius": 9999
+          }
+        },
+        {
+          "id": "s07-label",
+          "type": "text",
+          "x": 8,
+          "y": 8,
+          "width": 30,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p>IHRE VORTEILE</p>",
+          "style": {
+            "fontSize": 22,
+            "fontWeight": 700,
+            "color": "#c7f80f"
+          }
+        },
+        {
+          "id": "s07-title",
+          "type": "text",
+          "x": 8,
+          "y": 14,
+          "width": 84,
+          "height": 10,
+          "rotation": 0,
+          "content": "<h2>Ihre Vorteile auf einen Blick</h2>",
+          "style": {
+            "fontSize": 56,
+            "fontWeight": 700,
+            "color": "#f0f2f5"
+          }
+        },
+        {
+          "id": "s07-title-accent",
+          "type": "shape",
+          "x": 8,
+          "y": 24.5,
+          "width": 8,
+          "height": 0.5,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f"
+          }
+        },
+        {
+          "id": "s07-card-invest",
+          "type": "shape",
+          "x": 8,
+          "y": 28,
+          "width": 26,
+          "height": 30,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s07-card-invest-icon",
+          "type": "text",
+          "x": 11,
+          "y": 31,
+          "width": 20,
+          "height": 7,
+          "rotation": 0,
+          "content": "<p><strong>0€</strong></p>",
+          "style": {
+            "fontSize": 38,
+            "fontWeight": 800,
+            "color": "#c7f80f",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s07-card-invest-text",
+          "type": "text",
+          "x": 11,
+          "y": 39,
+          "width": 20,
+          "height": 16,
+          "rotation": 0,
+          "content": "<p><strong style=\"color: #f0f2f5\">Null Investitionsrisiko</strong></p><p>Better Energy trägt sämtliche Kosten für Planung, Bau, Betrieb und Wartung.</p>",
+          "style": {
+            "fontSize": 20,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s07-card-income",
+          "type": "shape",
+          "x": 37,
+          "y": 28,
+          "width": 26,
+          "height": 30,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s07-card-income-icon",
+          "type": "text",
+          "x": 40,
+          "y": 31,
+          "width": 20,
+          "height": 7,
+          "rotation": 0,
+          "content": "<p><strong>€€</strong></p>",
+          "style": {
+            "fontSize": 38,
+            "fontWeight": 800,
+            "color": "#c7f80f",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s07-card-income-text",
+          "type": "text",
+          "x": 40,
+          "y": 39,
+          "width": 20,
+          "height": 16,
+          "rotation": 0,
+          "content": "<p><strong style=\"color: #f0f2f5\">Sichere Einnahmen</strong></p><p>Planbare Pachteinnahmen über 25 Jahre oder hochwertige Dachsanierung.</p>",
+          "style": {
+            "fontSize": 20,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s07-card-cost",
+          "type": "shape",
+          "x": 8,
+          "y": 61,
+          "width": 42,
+          "height": 30,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s07-card-cost-icon",
+          "type": "text",
+          "x": 11,
+          "y": 64,
+          "width": 36,
+          "height": 7,
+          "rotation": 0,
+          "content": "<p><strong>✓</strong></p>",
+          "style": {
+            "fontSize": 38,
+            "fontWeight": 800,
+            "color": "#c7f80f",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s07-card-cost-text",
+          "type": "text",
+          "x": 11,
+          "y": 72,
+          "width": 36,
+          "height": 16,
+          "rotation": 0,
+          "content": "<p><strong style=\"color: #f0f2f5\">Keine Betriebskosten</strong></p><p>Wartung, Reparaturen und Versicherungen übernimmt Better Energy vollständig.</p>",
+          "style": {
+            "fontSize": 20,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s07-card-sustain",
+          "type": "shape",
+          "x": 53,
+          "y": 61,
+          "width": 42,
+          "height": 30,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s07-card-sustain-icon",
+          "type": "text",
+          "x": 56,
+          "y": 64,
+          "width": 36,
+          "height": 7,
+          "rotation": 0,
+          "content": "<p><strong>CO₂</strong></p>",
+          "style": {
+            "fontSize": 38,
+            "fontWeight": 800,
+            "color": "#c7f80f",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s07-card-sustain-text",
+          "type": "text",
+          "x": 56,
+          "y": 72,
+          "width": 36,
+          "height": 16,
+          "rotation": 0,
+          "content": "<p><strong style=\"color: #f0f2f5\">Nachhaltigkeit</strong></p><p>Verbesserung der CO₂-Bilanz und aktiver Beitrag zur Energiewende.</p>",
+          "style": {
+            "fontSize": 20,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s07-img",
+          "type": "image",
+          "x": 0,
+          "y": 0,
+          "width": 100,
+          "height": 100,
+          "rotation": 0,
+          "content": "/images/flachdach-fertig.jpg",
+          "style": {
+            "objectFit": "cover",
+            "opacity": 0.18,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "s07-footer-line",
+          "type": "shape",
+          "x": 5,
+          "y": 93,
+          "width": 90,
+          "height": 0.15,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#2a3a4a"
+          }
+        },
+        {
+          "id": "s07-footer-left",
+          "type": "text",
+          "x": 10,
+          "y": 94,
+          "width": 40,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>Better Energy  |  Dachpacht-Modell</p>",
+          "style": {
+            "fontSize": 12,
+            "color": "#6a7a8a",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s07-footer-right",
+          "type": "text",
+          "x": 70,
+          "y": 94,
+          "width": 25,
+          "height": 4,
+          "rotation": 0,
+          "content": "7",
+          "style": {
+            "fontSize": 12,
+            "color": "#6a7a8a",
+            "textAlign": "right"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "background": "#0f1419",
+      "elements": [
+        {
+          "id": "s11-topbar",
+          "type": "shape",
+          "x": 0,
+          "y": 0,
+          "width": 100,
+          "height": 0.8,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f"
+          }
+        },
+        {
+          "id": "s11-sidebar-accent",
+          "type": "shape",
+          "x": 0,
+          "y": 0.8,
+          "width": 0.4,
+          "height": 99.2,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f",
+            "opacity": 0.15
+          }
+        },
+        {
+          "id": "s11-deco-circle-tr",
+          "type": "shape",
+          "x": 82,
+          "y": -8,
+          "width": 26,
+          "height": 46,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f",
+            "opacity": 0.05,
+            "borderRadius": 9999
+          }
+        },
+        {
+          "id": "s11-deco-circle-bl",
+          "type": "shape",
+          "x": -8,
+          "y": 65,
+          "width": 22,
+          "height": 39,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#00d4aa",
+            "opacity": 0.04,
+            "borderRadius": 9999
+          }
+        },
+        {
+          "id": "s11-img",
+          "type": "image",
+          "x": 0,
+          "y": 0,
+          "width": 100,
+          "height": 100,
+          "rotation": 0,
+          "content": "/images/referenz-gewerbe-aerial.jpg",
+          "style": {
+            "objectFit": "cover",
+            "opacity": 0.18,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "s11-label",
+          "type": "text",
+          "x": 8,
+          "y": 8,
+          "width": 30,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p>REFERENZKUNDEN</p>",
+          "style": {
+            "fontSize": 22,
+            "fontWeight": 700,
+            "color": "#c7f80f"
+          }
+        },
+        {
+          "id": "s11-title",
+          "type": "text",
+          "x": 8,
+          "y": 14,
+          "width": 84,
+          "height": 10,
+          "rotation": 0,
+          "content": "<h2>Vertrauen durch namhafte Referenzkunden</h2>",
+          "style": {
+            "fontSize": 56,
+            "fontWeight": 700,
+            "color": "#f0f2f5"
+          }
+        },
+        {
+          "id": "s11-title-accent",
+          "type": "shape",
+          "x": 8,
+          "y": 24.5,
+          "width": 8,
+          "height": 0.5,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f"
+          }
+        },
+        {
+          "id": "s11-sub",
+          "type": "text",
+          "x": 8,
+          "y": 26,
+          "width": 84,
+          "height": 10,
+          "rotation": 0,
+          "content": "<p>Führende Unternehmen und Institutionen setzen auf Better Energy. Wir liefern Qualität und Zuverlässigkeit — pünktlich, im Budget und mit höchsten Standards.</p>",
+          "style": {
+            "fontSize": 30,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s11-card-vonovia",
+          "type": "shape",
+          "x": 8,
+          "y": 38,
+          "width": 26,
+          "height": 24,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s11-card-vonovia-text",
+          "type": "text",
+          "x": 11,
+          "y": 42,
+          "width": 20,
+          "height": 17,
+          "rotation": 0,
+          "content": "<p><strong style=\"color: #f0f2f5; font-size: 1.1em\">Vonovia</strong></p><p>Deutschlands größter Wohnungskonzern</p>",
+          "style": {
+            "fontSize": 26,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s11-card-dqs",
+          "type": "shape",
+          "x": 37,
+          "y": 38,
+          "width": 26,
+          "height": 24,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s11-card-dqs-text",
+          "type": "text",
+          "x": 40,
+          "y": 42,
+          "width": 20,
+          "height": 17,
+          "rotation": 0,
+          "content": "<p><strong style=\"color: #f0f2f5; font-size: 1.1em\">DQS</strong></p><p>TÜV-Zertifizierungsunternehmen, Frankfurt</p>",
+          "style": {
+            "fontSize": 26,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s11-card-bag",
+          "type": "shape",
+          "x": 66,
+          "y": 38,
+          "width": 26,
+          "height": 24,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s11-card-bag-text",
+          "type": "text",
+          "x": 69,
+          "y": 42,
+          "width": 20,
+          "height": 17,
+          "rotation": 0,
+          "content": "<p><strong style=\"color: #f0f2f5; font-size: 1.1em\">BAG Bauartikel</strong></p><p>Baustoffhersteller aus Sprendlingen</p>",
+          "style": {
+            "fontSize": 26,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s11-card-radeberger",
+          "type": "shape",
+          "x": 8,
+          "y": 64,
+          "width": 20,
+          "height": 24,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s11-card-radeberger-text",
+          "type": "text",
+          "x": 10,
+          "y": 68,
+          "width": 16,
+          "height": 17,
+          "rotation": 0,
+          "content": "<p><strong style=\"color: #f0f2f5; font-size: 1.1em\">Radeberger Gruppe</strong></p><p>Logistik- und Produktionsunternehmen</p>",
+          "style": {
+            "fontSize": 22,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s11-card-bender",
+          "type": "shape",
+          "x": 31,
+          "y": 64,
+          "width": 20,
+          "height": 24,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s11-card-bender-text",
+          "type": "text",
+          "x": 33,
+          "y": 68,
+          "width": 16,
+          "height": 17,
+          "rotation": 0,
+          "content": "<p><strong style=\"color: #f0f2f5; font-size: 1.1em\">Bender-Gruppe</strong></p><p>Industrieunternehmen aus Grünberg</p>",
+          "style": {
+            "fontSize": 22,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s11-card-gewo",
+          "type": "shape",
+          "x": 54,
+          "y": 64,
+          "width": 20,
+          "height": 24,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s11-card-gewo-text",
+          "type": "text",
+          "x": 56,
+          "y": 68,
+          "width": 16,
+          "height": 17,
+          "rotation": 0,
+          "content": "<p><strong style=\"color: #f0f2f5; font-size: 1.1em\">GEWO-Bau</strong></p><p>Bauunternehmen und Projektentwickler</p>",
+          "style": {
+            "fontSize": 22,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s11-card-greenmonkey",
+          "type": "shape",
+          "x": 74,
+          "y": 64,
+          "width": 20,
+          "height": 24,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s11-card-greenmonkey-text",
+          "type": "text",
+          "x": 76,
+          "y": 68,
+          "width": 16,
+          "height": 17,
+          "rotation": 0,
+          "content": "<p><strong style=\"color: #f0f2f5; font-size: 1.1em\">Green Monkey Energy</strong></p><p>Energiepartner und Elektro-Fachplaner</p>",
+          "style": {
+            "fontSize": 22,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s11-tagline",
+          "type": "text",
+          "x": 8,
+          "y": 90,
+          "width": 84,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p><strong style=\"color: #c7f80f\">Ihre Sicherheit:</strong> Bewährte Kompetenz und langjährige Partnerschaften</p>",
+          "style": {
+            "fontSize": 18,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s11-footer-line",
+          "type": "shape",
+          "x": 5,
+          "y": 93,
+          "width": 90,
+          "height": 0.15,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#2a3a4a"
+          }
+        },
+        {
+          "id": "s11-footer-left",
+          "type": "text",
+          "x": 10,
+          "y": 94,
+          "width": 40,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>Better Energy  |  Dachpacht-Modell</p>",
+          "style": {
+            "fontSize": 12,
+            "color": "#6a7a8a",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s11-footer-right",
+          "type": "text",
+          "x": 70,
+          "y": 94,
+          "width": 25,
+          "height": 4,
+          "rotation": 0,
+          "content": "9",
+          "style": {
+            "fontSize": 12,
+            "color": "#6a7a8a",
+            "textAlign": "right"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s12",
+      "background": "#0f1419",
+      "elements": [
+        {
+          "id": "s12-topbar",
+          "type": "shape",
+          "x": 0,
+          "y": 0,
+          "width": 100,
+          "height": 0.8,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f"
+          }
+        },
+        {
+          "id": "s12-sidebar-accent",
+          "type": "shape",
+          "x": 0,
+          "y": 0.8,
+          "width": 0.4,
+          "height": 99.2,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f",
+            "opacity": 0.15
+          }
+        },
+        {
+          "id": "s12-deco-circle-tr",
+          "type": "shape",
+          "x": 82,
+          "y": -8,
+          "width": 26,
+          "height": 46,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f",
+            "opacity": 0.05,
+            "borderRadius": 9999
+          }
+        },
+        {
+          "id": "s12-deco-circle-bl",
+          "type": "shape",
+          "x": -8,
+          "y": 65,
+          "width": 22,
+          "height": 39,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#00d4aa",
+            "opacity": 0.04,
+            "borderRadius": 9999
+          }
+        },
+        {
+          "id": "s12-bg",
+          "type": "image",
+          "x": 0,
+          "y": 0,
+          "width": 100,
+          "height": 100,
+          "rotation": 0,
+          "content": "/images/installation-montage.jpg",
+          "style": {
+            "objectFit": "cover",
+            "opacity": 0.2,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "s12-label",
+          "type": "text",
+          "x": 8,
+          "y": 8,
+          "width": 40,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p>ALLES AUS EINER HAND</p>",
+          "style": {
+            "fontSize": 22,
+            "fontWeight": 700,
+            "color": "#c7f80f"
+          }
+        },
+        {
+          "id": "s12-title",
+          "type": "text",
+          "x": 8,
+          "y": 14,
+          "width": 84,
+          "height": 10,
+          "rotation": 0,
+          "content": "<h2>Alles aus einer Hand – Ihr Komfort</h2>",
+          "style": {
+            "fontSize": 56,
+            "fontWeight": 700,
+            "color": "#f0f2f5"
+          }
+        },
+        {
+          "id": "s12-title-accent",
+          "type": "shape",
+          "x": 8,
+          "y": 24.5,
+          "width": 8,
+          "height": 0.5,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f"
+          }
+        },
+        {
+          "id": "s12-card-plan",
+          "type": "shape",
+          "x": 8,
+          "y": 28,
+          "width": 26,
+          "height": 26,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s12-card-plan-text",
+          "type": "text",
+          "x": 11,
+          "y": 32,
+          "width": 20,
+          "height": 20,
+          "rotation": 0,
+          "content": "<p style=\"font-size: 1.6em\">📐</p><p><strong style=\"color: #f0f2f5\">Individuelle Planung</strong></p><p>Maßgeschneiderte Konzepte für Ihre Dachgegebenheiten.</p>",
+          "style": {
+            "fontSize": 20,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s12-card-permit",
+          "type": "shape",
+          "x": 37,
+          "y": 28,
+          "width": 26,
+          "height": 26,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s12-card-permit-text",
+          "type": "text",
+          "x": 40,
+          "y": 32,
+          "width": 20,
+          "height": 20,
+          "rotation": 0,
+          "content": "<p style=\"font-size: 1.6em\">📋</p><p><strong style=\"color: #f0f2f5\">Bauanträge & Genehmigungen</strong></p><p>Alle Anträge und behördliche Genehmigungen.</p>",
+          "style": {
+            "fontSize": 20,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s12-card-statik",
+          "type": "shape",
+          "x": 66,
+          "y": 28,
+          "width": 26,
+          "height": 26,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s12-card-statik-text",
+          "type": "text",
+          "x": 69,
+          "y": 32,
+          "width": 20,
+          "height": 20,
+          "rotation": 0,
+          "content": "<p style=\"font-size: 1.6em\">🔧</p><p><strong style=\"color: #f0f2f5\">Statikprüfungen</strong></p><p>Statische Berechnung und Prüfung durch Fachingenieure.</p>",
+          "style": {
+            "fontSize": 20,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s12-card-elektro",
+          "type": "shape",
+          "x": 8,
+          "y": 55,
+          "width": 26,
+          "height": 26,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s12-card-elektro-text",
+          "type": "text",
+          "x": 11,
+          "y": 59,
+          "width": 20,
+          "height": 20,
+          "rotation": 0,
+          "content": "<p style=\"font-size: 1.6em\">⚡</p><p><strong style=\"color: #f0f2f5\">Elektroinstallation</strong></p><p>Zertifizierte Elektromeister mit 10+ Jahren Erfahrung.</p>",
+          "style": {
+            "fontSize": 20,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s12-card-dach",
+          "type": "shape",
+          "x": 37,
+          "y": 55,
+          "width": 26,
+          "height": 26,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s12-card-dach-text",
+          "type": "text",
+          "x": 40,
+          "y": 59,
+          "width": 20,
+          "height": 20,
+          "rotation": 0,
+          "content": "<p style=\"font-size: 1.6em\">🏗️</p><p><strong style=\"color: #f0f2f5\">Dachmontage</strong></p><p>Professionelle Montage durch erfahrene Dachdecker – sicher und qualitätsgeprüft.</p>",
+          "style": {
+            "fontSize": 20,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s12-card-foerder",
+          "type": "shape",
+          "x": 66,
+          "y": 55,
+          "width": 26,
+          "height": 26,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s12-card-foerder-text",
+          "type": "text",
+          "x": 69,
+          "y": 59,
+          "width": 20,
+          "height": 20,
+          "rotation": 0,
+          "content": "<p style=\"font-size: 1.6em\">💰</p><p><strong style=\"color: #f0f2f5\">Förderungen</strong></p><p>Begleitung bei KfW-Förderungen und Zuschüssen.</p>",
+          "style": {
+            "fontSize": 20,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s12-tagline",
+          "type": "text",
+          "x": 8,
+          "y": 83,
+          "width": 84,
+          "height": 7,
+          "rotation": 0,
+          "content": "<p><strong style=\"color: #c7f80f\">Ihr Vorteil:</strong> Ein Ansprechpartner von der ersten Beratung bis zur Inbetriebnahme und darüber hinaus</p>",
+          "style": {
+            "fontSize": 24,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s12-footer-line",
+          "type": "shape",
+          "x": 5,
+          "y": 93,
+          "width": 90,
+          "height": 0.15,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#2a3a4a"
+          }
+        },
+        {
+          "id": "s12-footer-left",
+          "type": "text",
+          "x": 10,
+          "y": 94,
+          "width": 40,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>Better Energy  |  Dachpacht-Modell</p>",
+          "style": {
+            "fontSize": 12,
+            "color": "#6a7a8a",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s12-footer-right",
+          "type": "text",
+          "x": 70,
+          "y": 94,
+          "width": 25,
+          "height": 4,
+          "rotation": 0,
+          "content": "10",
+          "style": {
+            "fontSize": 12,
+            "color": "#6a7a8a",
+            "textAlign": "right"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s13",
+      "background": "#0f1419",
+      "elements": [
+        {
+          "id": "s13-topbar",
+          "type": "shape",
+          "x": 0,
+          "y": 0,
+          "width": 100,
+          "height": 0.8,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f"
+          }
+        },
+        {
+          "id": "s13-sidebar-accent",
+          "type": "shape",
+          "x": 0,
+          "y": 0.8,
+          "width": 0.4,
+          "height": 99.2,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f",
+            "opacity": 0.15
+          }
+        },
+        {
+          "id": "s13-deco-circle-tr",
+          "type": "shape",
+          "x": 82,
+          "y": -8,
+          "width": 26,
+          "height": 46,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f",
+            "opacity": 0.05,
+            "borderRadius": 9999
+          }
+        },
+        {
+          "id": "s13-deco-circle-bl",
+          "type": "shape",
+          "x": -8,
+          "y": 65,
+          "width": 22,
+          "height": 39,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#00d4aa",
+            "opacity": 0.04,
+            "borderRadius": 9999
+          }
+        },
+        {
+          "id": "s13-bg",
+          "type": "image",
+          "x": 0,
+          "y": 0,
+          "width": 100,
+          "height": 100,
+          "rotation": 0,
+          "content": "/images/installation-sunset.jpg",
+          "style": {
+            "objectFit": "cover",
+            "opacity": 0.18,
+            "borderRadius": 0
+          }
+        },
+        {
+          "id": "s13-label",
+          "type": "text",
+          "x": 8,
+          "y": 6,
+          "width": 40,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p>DER WEG ZUR DACHPACHT</p>",
+          "style": {
+            "fontSize": 22,
+            "fontWeight": 700,
+            "color": "#c7f80f"
+          }
+        },
+        {
+          "id": "s13-title",
+          "type": "text",
+          "x": 8,
+          "y": 12,
+          "width": 84,
+          "height": 10,
+          "rotation": 0,
+          "content": "<h2>Der Weg zu Ihrer Dachpacht in vier Schritten</h2>",
+          "style": {
+            "fontSize": 56,
+            "fontWeight": 700,
+            "color": "#f0f2f5"
+          }
+        },
+        {
+          "id": "s13-title-accent",
+          "type": "shape",
+          "x": 8,
+          "y": 22.5,
+          "width": 8,
+          "height": 0.5,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f"
+          }
+        },
+        {
+          "id": "s13-s1-box",
+          "type": "shape",
+          "x": 8,
+          "y": 27,
+          "width": 20,
+          "height": 64,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s13-s1-num",
+          "type": "text",
+          "x": 10,
+          "y": 30,
+          "width": 16,
+          "height": 10,
+          "rotation": 0,
+          "content": "<h1>01</h1>",
+          "style": {
+            "fontSize": 56,
+            "fontWeight": 800,
+            "color": "#c7f80f"
+          }
+        },
+        {
+          "id": "s13-s1-t",
+          "type": "text",
+          "x": 10,
+          "y": 43,
+          "width": 16,
+          "height": 44,
+          "rotation": 0,
+          "content": "<p><strong style=\"color: #f0f2f5\">Kostenlose Analyse und Beratung</strong></p><p><br></p><p>Vor-Ort-Analyse Ihrer Dachfläche und individuelles Konzept mit konkreten Zahlen zu Pachteinnahmen oder Sanierungsumfang.</p>",
+          "style": {
+            "fontSize": 19,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s13-s2-box",
+          "type": "shape",
+          "x": 31,
+          "y": 27,
+          "width": 20,
+          "height": 64,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s13-s2-num",
+          "type": "text",
+          "x": 33,
+          "y": 30,
+          "width": 16,
+          "height": 10,
+          "rotation": 0,
+          "content": "<h1>02</h1>",
+          "style": {
+            "fontSize": 56,
+            "fontWeight": 800,
+            "color": "#c7f80f"
+          }
+        },
+        {
+          "id": "s13-s2-t",
+          "type": "text",
+          "x": 33,
+          "y": 43,
+          "width": 16,
+          "height": 44,
+          "rotation": 0,
+          "content": "<p><strong style=\"color: #f0f2f5\">Planung und Genehmigung</strong></p><p><br></p><p>Wir kümmern uns um alle Formalitäten, Bauanträge, Statikprüfungen und die detaillierte technische Planung. Sie müssen nichts tun.</p>",
+          "style": {
+            "fontSize": 19,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s13-s3-box",
+          "type": "shape",
+          "x": 54,
+          "y": 27,
+          "width": 20,
+          "height": 64,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s13-s3-num",
+          "type": "text",
+          "x": 56,
+          "y": 30,
+          "width": 16,
+          "height": 10,
+          "rotation": 0,
+          "content": "<h1>03</h1>",
+          "style": {
+            "fontSize": 56,
+            "fontWeight": 800,
+            "color": "#c7f80f"
+          }
+        },
+        {
+          "id": "s13-s3-t",
+          "type": "text",
+          "x": 56,
+          "y": 43,
+          "width": 16,
+          "height": 44,
+          "rotation": 0,
+          "content": "<p><strong style=\"color: #f0f2f5\">Installation und Montage</strong></p><p><br></p><p>Unser Fachpersonal installiert die Anlage professionell — ohne Beeinträchtigung Ihres laufenden Betriebs.</p>",
+          "style": {
+            "fontSize": 19,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s13-s4-box",
+          "type": "shape",
+          "x": 77,
+          "y": 27,
+          "width": 20,
+          "height": 64,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s13-s4-num",
+          "type": "text",
+          "x": 79,
+          "y": 30,
+          "width": 16,
+          "height": 10,
+          "rotation": 0,
+          "content": "<h1>04</h1>",
+          "style": {
+            "fontSize": 56,
+            "fontWeight": 800,
+            "color": "#c7f80f"
+          }
+        },
+        {
+          "id": "s13-s4-t",
+          "type": "text",
+          "x": 79,
+          "y": 43,
+          "width": 16,
+          "height": 44,
+          "rotation": 0,
+          "content": "<p><strong style=\"color: #f0f2f5\">Inbetriebnahme und langfristige Betreuung</strong></p><p><br></p><p>Nach Funktionsprüfung und Netzanmeldung läuft die Anlage – wir übernehmen Wartung, Monitoring und Service für die gesamte Laufzeit.</p>",
+          "style": {
+            "fontSize": 19,
+            "color": "#b8c8d8"
+          }
+        },
+        {
+          "id": "s13-footer-line",
+          "type": "shape",
+          "x": 5,
+          "y": 93,
+          "width": 90,
+          "height": 0.15,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#2a3a4a"
+          }
+        },
+        {
+          "id": "s13-footer-left",
+          "type": "text",
+          "x": 10,
+          "y": 94,
+          "width": 40,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>Better Energy  |  Dachpacht-Modell</p>",
+          "style": {
+            "fontSize": 12,
+            "color": "#6a7a8a",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s13-footer-right",
+          "type": "text",
+          "x": 70,
+          "y": 94,
+          "width": 25,
+          "height": 4,
+          "rotation": 0,
+          "content": "11",
+          "style": {
+            "fontSize": 12,
+            "color": "#6a7a8a",
+            "textAlign": "right"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s14",
+      "background": "#0f1419",
+      "elements": [
+        {
+          "id": "s14-topbar",
+          "type": "shape",
+          "x": 0,
+          "y": 0,
+          "width": 100,
+          "height": 0.8,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f"
+          }
+        },
+        {
+          "id": "s14-deco-circle-tr",
+          "type": "shape",
+          "x": 82,
+          "y": -8,
+          "width": 26,
+          "height": 46,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f",
+            "opacity": 0.05,
+            "borderRadius": 9999
+          }
+        },
+        {
+          "id": "s14-deco-circle-bl",
+          "type": "shape",
+          "x": -8,
+          "y": 65,
+          "width": 22,
+          "height": 39,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#00d4aa",
+            "opacity": 0.04,
+            "borderRadius": 9999
+          }
+        },
+        {
+          "id": "s14-img",
+          "type": "image",
+          "x": 0,
+          "y": 0,
+          "width": 100,
+          "height": 100,
+          "rotation": 0,
+          "content": "/images/closing-gewerbe-aerial.jpg",
+          "style": {
+            "objectFit": "cover",
+            "opacity": 0.25,
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s14-line",
+          "type": "shape",
+          "x": 36,
+          "y": 25,
+          "width": 28,
+          "height": 0.4,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#c7f80f"
+          }
+        },
+        {
+          "id": "s14-title",
+          "type": "text",
+          "x": 8,
+          "y": 29,
+          "width": 84,
+          "height": 18,
+          "rotation": 0,
+          "content": "<h1>Jetzt starten — Ihre Dachfläche wartet.</h1>",
+          "style": {
+            "fontSize": 64,
+            "fontWeight": 800,
+            "color": "#f0f2f5",
+            "textAlign": "center"
+          }
+        },
+        {
+          "id": "s14-sub",
+          "type": "text",
+          "x": 12,
+          "y": 50,
+          "width": 76,
+          "height": 12,
+          "rotation": 0,
+          "content": "<p style=\"color: #b8c8d8\"><strong>In 30 Minuten wissen Sie, was Ihr Dach einbringt.</strong><br/>Kostenlos. Unverbindlich. Konkrete Zahlen für Ihre Dachfläche.</p>",
+          "style": {
+            "fontSize": 32,
+            "color": "#b8c8d8",
+            "textAlign": "center"
+          }
+        },
+        {
+          "id": "s14-box",
+          "type": "shape",
+          "x": 25,
+          "y": 68,
+          "width": 50,
+          "height": 28,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1e2a3a",
+            "borderRadius": 12
+          }
+        },
+        {
+          "id": "s14-contact",
+          "type": "text",
+          "x": 28,
+          "y": 71,
+          "width": 44,
+          "height": 22,
+          "rotation": 0,
+          "content": "<p><strong style=\"color: #c7f80f; font-size: 1.1em\">Jetzt Beratungstermin sichern</strong></p><p>Vereinbaren Sie jetzt Ihr kostenloses Erstgespräch — wir analysieren Ihr Dach und rechnen Ihnen konkret vor, was Sie verdienen können.</p><p><br></p><p><strong style=\"color: #f0f2f5\">Better Energy GmbH</strong></p><p>Im Euler 11, 55129 Mainz</p><p style=\"color: #c7f80f\">info@better-energy-solar.de</p><p style=\"color: #c7f80f\">www.better-energy-solar.de</p>",
+          "style": {
+            "fontSize": 22,
+            "color": "#b8c8d8",
+            "textAlign": "center"
+          }
+        },
+        {
+          "id": "s14-legal",
+          "type": "text",
+          "x": 8,
+          "y": 94,
+          "width": 84,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>Better Energy GmbH | Amtsgericht Mainz | HR-Nr.: B 51475 | USt-ID: DE355478729 | Geschäftsführung: Eric Matuszak</p>",
+          "style": {
+            "fontSize": 12,
+            "color": "#5a6a7a",
+            "textAlign": "center"
+          }
+        }
+      ]
+    }
+  ]
+}
