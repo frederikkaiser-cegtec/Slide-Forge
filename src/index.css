@@ -26,6 +26,11 @@ html, body, #root {
   overflow: hidden;
 }
 
+select option {
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   background: var(--color-bg);

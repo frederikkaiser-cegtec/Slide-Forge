@@ -29,19 +29,82 @@ interface PresentationState {
   resetPresentation: () => void;
 }
 
+function cegtecEl(partial: Partial<SlideElement> & Pick<SlideElement, 'type' | 'x' | 'y' | 'width' | 'height' | 'content'>): SlideElement {
+  return { id: generateId(), rotation: 0, style: {}, ...partial };
+}
+
 function createDefaultPresentation(): Presentation {
   const theme = getTheme('cegtec');
+  const c = theme.colors;
+
   return {
     id: generateId(),
-    title: 'CegTec Präsentation',
+    title: 'CegTec Grafik',
     slides: [
-      templates[0].create(theme), // title slide
-      templates[1].create(theme), // content slide
-      templates[6].create(theme), // metrics slide
-      templates[8].create(theme), // closing slide
+      {
+        id: generateId(),
+        elements: [
+          // Logo top-right
+          cegtecEl({
+            type: 'image', x: 72, y: 4, width: 24, height: 12,
+            content: '/cegtec-logo.png',
+            style: { objectFit: 'contain' },
+          }),
+          // Headline
+          cegtecEl({
+            type: 'text', x: 6, y: 18, width: 88, height: 18,
+            content: '<h1>3x mehr qualifizierte Leads</h1>',
+            style: { fontSize: 52, fontWeight: 800, color: c.text, textAlign: 'left' },
+          }),
+          // Subline
+          cegtecEl({
+            type: 'text', x: 6, y: 38, width: 60, height: 12,
+            content: '<p>Mit KI-gestützter Sales Automation für B2B-Unternehmen</p>',
+            style: { fontSize: 24, color: c.textMuted, textAlign: 'left' },
+          }),
+          // Accent line
+          cegtecEl({
+            type: 'shape', x: 6, y: 54, width: 20, height: 0.6,
+            content: '',
+            style: { backgroundColor: c.secondary },
+          }),
+          // Metric cards row
+          cegtecEl({
+            type: 'shape', x: 6, y: 60, width: 26, height: 30,
+            content: '',
+            style: { backgroundColor: c.surface, borderRadius: 16 },
+          }),
+          cegtecEl({
+            type: 'text', x: 6, y: 63, width: 26, height: 24,
+            content: '<h2 style="color: #3B4BF9">67%</h2><p>weniger manuelle Arbeit</p>',
+            style: { fontSize: 16, color: c.textMuted, textAlign: 'center' },
+          }),
+          cegtecEl({
+            type: 'shape', x: 37, y: 60, width: 26, height: 30,
+            content: '',
+            style: { backgroundColor: c.surface, borderRadius: 16 },
+          }),
+          cegtecEl({
+            type: 'text', x: 37, y: 63, width: 26, height: 24,
+            content: '<h2 style="color: #E93BCD">14 Tage</h2><p>bis zum ersten Meeting</p>',
+            style: { fontSize: 16, color: c.textMuted, textAlign: 'center' },
+          }),
+          cegtecEl({
+            type: 'shape', x: 68, y: 60, width: 26, height: 30,
+            content: '',
+            style: { backgroundColor: c.surface, borderRadius: 16 },
+          }),
+          cegtecEl({
+            type: 'text', x: 68, y: 63, width: 26, height: 24,
+            content: '<h2 style="color: #3B4BF9">98%</h2><p>Zustellrate</p>',
+            style: { fontSize: 16, color: c.textMuted, textAlign: 'center' },
+          }),
+        ],
+        background: c.background,
+      },
     ],
     themeId: 'cegtec',
-    formatId: '16:9',
+    formatId: 'linkedin',
     createdAt: Date.now(),
     updatedAt: Date.now(),
   };
@@ -250,7 +313,7 @@ export const usePresentationStore = create<PresentationState>()(
       },
     }),
     {
-      name: 'slide-forge-v2',
+      name: 'slide-forge-v5',
       partialize: (state) => ({ presentation: state.presentation }),
     }
   )
