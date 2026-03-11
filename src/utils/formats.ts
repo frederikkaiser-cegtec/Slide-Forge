@@ -11,6 +11,7 @@ export const FORMAT_PRESETS: FormatPreset[] = [
   { id: '9:16', label: '9:16 (1080×1920)', width: 1080, height: 1920 },
   { id: '4:5', label: '4:5 (1080×1350)', width: 1080, height: 1350 },
   { id: 'linkedin', label: 'LinkedIn (1200×627)', width: 1200, height: 627 },
+  { id: 'og', label: 'OG Image (1200×630)', width: 1200, height: 630 },
   { id: 'banner', label: 'Banner (1200×400)', width: 1200, height: 400 },
   { id: 'banner-wide', label: 'Banner breit (1600×400)', width: 1600, height: 400 },
 ];

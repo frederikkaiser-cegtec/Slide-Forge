@@ -2,12 +2,27 @@ import type { RoiData } from '../../App';
 import { BrandedChart } from './BrandedChart';
 import { LOGO_URL } from '../../utils/assets';
 
-const BLUE = '#3B4BF9';
-const PINK = '#E93BCD';
-const BLUE_L = '#6875FF';
-const PINK_L = '#FF6BE6';
+function lighten(hex: string): string {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  const mix = (c: number) => Math.min(255, c + Math.round((255 - c) * 0.35));
+  return `#${mix(r).toString(16).padStart(2, '0')}${mix(g).toString(16).padStart(2, '0')}${mix(b).toString(16).padStart(2, '0')}`;
+}
 
 export function RoiGraphic({ data, width, height }: { data: RoiData; width: number; height: number }) {
+  const BLUE = data.accentColor || '#3B4BF9';
+  const PINK = data.accentColor2 || '#E93BCD';
+  const BLUE_L = lighten(BLUE);
+  const PINK_L = lighten(PINK);
+  const bg = data.backgroundColor || '#070718';
+  const textCol = data.textColor || '#ffffff';
+  const labelCol = data.labelColor || '#8888a0';
+  const tagline = data.tagline || 'ROI Report';
+  const footerL = data.footerLeft || 'cegtec.net';
+  const footerR = data.footerRight || 'AI Sales Automation';
+  const cardCol = data.cardColor || 'rgba(255,255,255,0.02)';
+  const cardBorder = data.cardBorderColor || 'rgba(255,255,255,0.04)';
   const s = Math.min(width / 1200, height / 627);
   const isTall = height > width * 1.2;
   const hasChart = data.chart.type !== 'none' && data.chart.data.length > 0;
@@ -16,7 +31,7 @@ export function RoiGraphic({ data, width, height }: { data: RoiData; width: numb
     <div style={{
       width, height, position: 'relative', overflow: 'hidden',
       fontFamily: "'Inter', system-ui, sans-serif",
-      background: '#070718',
+      background: bg,
     }}>
       {/* SVG Background */}
       <svg viewBox={`0 0 ${width} ${height}`} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
@@ -37,7 +52,7 @@ export function RoiGraphic({ data, width, height }: { data: RoiData; width: numb
           </linearGradient>
         </defs>
 
-        <rect width={width} height={height} fill="#070718" />
+        <rect width={width} height={height} fill={bg} />
 
         {/* Atmospheric */}
         <ellipse cx={width * 0.3} cy={height * 0.3} rx={400 * s} ry={300 * s} fill={BLUE} opacity="0.04" filter="url(#roi-soft)" />
@@ -80,21 +95,21 @@ export function RoiGraphic({ data, width, height }: { data: RoiData; width: numb
             fontSize: 10 * s, fontWeight: 700, color: BLUE,
             letterSpacing: 3 * s, textTransform: 'uppercase', opacity: 0.7,
           }}>
-            ROI Report
+            {tagline}
           </div>
-          <img src={LOGO_URL} alt="CegTec" style={{ height: 18 * s, opacity: 0.5 }} />
+          <img src={LOGO_URL} alt="CegTec" style={{ height: 18 * s }} />
         </div>
 
         {/* Title */}
         <div style={{
-          fontSize: 36 * s, fontWeight: 800, color: '#ffffff',
+          fontSize: 36 * s, fontWeight: 800, color: textCol,
           lineHeight: 1.05, letterSpacing: -1.5 * s,
         }}>
           {data.title}
         </div>
         {data.subtitle && (
           <div style={{
-            fontSize: 13 * s, color: 'rgba(255,255,255,0.3)',
+            fontSize: 13 * s, color: labelCol,
             marginTop: 6 * s, marginBottom: 20 * s, fontWeight: 500,
           }}>
             {data.subtitle}
@@ -123,8 +138,8 @@ export function RoiGraphic({ data, width, height }: { data: RoiData; width: numb
               return (
                 <div key={i} style={{
                   flex: 1, position: 'relative',
-                  background: 'rgba(255,255,255,0.02)',
-                  border: '1px solid rgba(255,255,255,0.04)',
+                  background: cardCol,
+                  border: `1px solid ${cardBorder}`,
                   borderRadius: 16 * s,
                   padding: `${18 * s}px ${16 * s}px`,
                   display: 'flex', flexDirection: hasChart ? 'row' : 'column',
@@ -143,7 +158,7 @@ export function RoiGraphic({ data, width, height }: { data: RoiData; width: numb
                     {m.value}
                   </div>
                   <div style={{
-                    fontSize: 10 * s, color: 'rgba(255,255,255,0.3)',
+                    fontSize: 10 * s, color: labelCol,
                     fontWeight: 500, lineHeight: 1.3, letterSpacing: 0.3 * s,
                   }}>
                     {m.label}
@@ -157,8 +172,8 @@ export function RoiGraphic({ data, width, height }: { data: RoiData; width: numb
           {hasChart && (
             <div style={{
               flex: 1,
-              background: 'rgba(255,255,255,0.02)',
-              border: '1px solid rgba(255,255,255,0.04)',
+              background: cardCol,
+              border: `1px solid ${cardBorder}`,
               borderRadius: 16 * s,
               padding: `${20 * s}px`,
               backdropFilter: `blur(${10 * s}px)`,
@@ -180,8 +195,8 @@ export function RoiGraphic({ data, width, height }: { data: RoiData; width: numb
           display: 'flex', justifyContent: 'space-between', alignItems: 'center',
           paddingTop: 12 * s,
         }}>
-          <span style={{ fontSize: 9 * s, color: 'rgba(255,255,255,0.15)', letterSpacing: 1.5 * s }}>cegtec.net</span>
-          <span style={{ fontSize: 9 * s, color: 'rgba(255,255,255,0.15)', letterSpacing: 1.5 * s }}>AI Sales Automation</span>
+          <span style={{ fontSize: 9 * s, color: labelCol, opacity: 0.5, letterSpacing: 1.5 * s }}>{footerL}</span>
+          <span style={{ fontSize: 9 * s, color: labelCol, opacity: 0.5, letterSpacing: 1.5 * s }}>{footerR}</span>
         </div>
       </div>
     </div>

@@ -2,12 +2,27 @@ import type { CaseStudyData } from '../../App';
 import { BrandedChart } from './BrandedChart';
 import { LOGO_URL } from '../../utils/assets';
 
-const BLUE = '#3B4BF9';
-const PINK = '#E93BCD';
-const BLUE_L = '#6875FF';
-const PINK_L = '#FF6BE6';
+function lighten(hex: string): string {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  const mix = (c: number) => Math.min(255, c + Math.round((255 - c) * 0.35));
+  return `#${mix(r).toString(16).padStart(2, '0')}${mix(g).toString(16).padStart(2, '0')}${mix(b).toString(16).padStart(2, '0')}`;
+}
 
 export function CaseStudyGraphic({ data, width, height }: { data: CaseStudyData; width: number; height: number }) {
+  const BLUE = data.accentColor || '#3B4BF9';
+  const PINK = data.accentColor2 || '#E93BCD';
+  const BLUE_L = lighten(BLUE);
+  const PINK_L = lighten(PINK);
+  const bg = data.backgroundColor || '#080820';
+  const textCol = data.textColor || '#ffffff';
+  const labelCol = data.labelColor || '#8888a0';
+  const tagline = data.tagline || 'Case Study';
+  const footerL = data.footerLeft || 'cegtec.net';
+  const footerR = data.footerRight || 'AI Sales Automation';
+  const cardCol = data.cardColor || 'rgba(255,255,255,0.02)';
+  const cardBorder = data.cardBorderColor || 'rgba(255,255,255,0.04)';
   const s = Math.min(width / 1200, height / 627);
   const isTall = height > width * 1.2;
   const hasChart = data.chart.type !== 'none' && data.chart.data.length > 0;
@@ -16,7 +31,7 @@ export function CaseStudyGraphic({ data, width, height }: { data: CaseStudyData;
     <div style={{
       width, height, position: 'relative', overflow: 'hidden',
       fontFamily: "'Inter', system-ui, sans-serif",
-      background: '#080820',
+      background: bg,
     }}>
       {/* SVG Background */}
       <svg viewBox={`0 0 ${width} ${height}`} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
@@ -41,7 +56,7 @@ export function CaseStudyGraphic({ data, width, height }: { data: CaseStudyData;
           </linearGradient>
         </defs>
 
-        <rect width={width} height={height} fill="#080820" />
+        <rect width={width} height={height} fill={bg} />
 
         {/* Atmospheric orbs */}
         <ellipse cx={width * 0.7} cy={height * 0.2} rx={350 * s} ry={250 * s} fill={BLUE} opacity="0.06" filter="url(#cs-soft)" />
@@ -82,9 +97,9 @@ export function CaseStudyGraphic({ data, width, height }: { data: CaseStudyData;
             letterSpacing: 3 * s, textTransform: 'uppercase',
             opacity: 0.8,
           }}>
-            Case Study — {data.industry}
+            {tagline} — {data.industry}
           </div>
-          <img src={LOGO_URL} alt="CegTec" style={{ height: 18 * s, opacity: 0.5 }} />
+          <img src={LOGO_URL} alt="CegTec" style={{ height: 18 * s }} />
         </div>
 
         {/* Main */}
@@ -102,7 +117,7 @@ export function CaseStudyGraphic({ data, width, height }: { data: CaseStudyData;
               {data.companyName}
             </div>
             <div style={{
-              fontSize: (hasChart ? 30 : 36) * s, fontWeight: 800, color: '#ffffff',
+              fontSize: (hasChart ? 30 : 36) * s, fontWeight: 800, color: textCol,
               lineHeight: 1.08, letterSpacing: -1 * s, marginBottom: 24 * s,
             }}>
               {data.headline}
@@ -119,7 +134,7 @@ export function CaseStudyGraphic({ data, width, height }: { data: CaseStudyData;
               } as React.CSSProperties}>
                 {data.metricValue}
               </span>
-              <span style={{ fontSize: 13 * s, color: 'rgba(255,255,255,0.35)', fontWeight: 500, maxWidth: 120 * s, lineHeight: 1.3 }}>
+              <span style={{ fontSize: 13 * s, color: labelCol, fontWeight: 500, maxWidth: 120 * s, lineHeight: 1.3 }}>
                 {data.metricLabel}
               </span>
             </div>
@@ -140,7 +155,7 @@ export function CaseStudyGraphic({ data, width, height }: { data: CaseStudyData;
                   } as React.CSSProperties}>
                     {m.value}
                   </div>
-                  <div style={{ fontSize: 9.5 * s, color: 'rgba(255,255,255,0.3)', marginTop: 4 * s, fontWeight: 500, letterSpacing: 0.3 * s }}>
+                  <div style={{ fontSize: 9.5 * s, color: labelCol, marginTop: 4 * s, fontWeight: 500, letterSpacing: 0.3 * s }}>
                     {m.label}
                   </div>
                 </div>
@@ -149,7 +164,7 @@ export function CaseStudyGraphic({ data, width, height }: { data: CaseStudyData;
 
             {data.quote && !hasChart && (
               <div style={{
-                fontSize: 11.5 * s, color: 'rgba(255,255,255,0.25)', fontStyle: 'italic',
+                fontSize: 11.5 * s, color: labelCol, fontStyle: 'italic',
                 marginTop: 20 * s, lineHeight: 1.5, maxWidth: 380 * s,
                 borderLeft: `2px solid ${PINK}33`, paddingLeft: 14 * s,
               }}>
@@ -163,8 +178,8 @@ export function CaseStudyGraphic({ data, width, height }: { data: CaseStudyData;
             <div style={{
               flex: isTall ? 'none' : 0.9,
               width: isTall ? '100%' : undefined,
-              background: 'rgba(255,255,255,0.02)',
-              border: '1px solid rgba(255,255,255,0.04)',
+              background: cardCol,
+              border: `1px solid ${cardBorder}`,
               borderRadius: 20 * s,
               padding: `${20 * s}px`,
               backdropFilter: `blur(${10 * s}px)`,
@@ -184,13 +199,13 @@ export function CaseStudyGraphic({ data, width, height }: { data: CaseStudyData;
           display: 'flex', justifyContent: 'space-between', alignItems: 'center',
           paddingTop: 12 * s,
         }}>
-          <span style={{ fontSize: 9 * s, color: 'rgba(255,255,255,0.15)', letterSpacing: 1.5 * s }}>cegtec.net</span>
+          <span style={{ fontSize: 9 * s, color: labelCol, opacity: 0.5, letterSpacing: 1.5 * s }}>{footerL}</span>
           {data.quote && hasChart && (
-            <span style={{ fontSize: 9 * s, color: 'rgba(255,255,255,0.15)', fontStyle: 'italic', maxWidth: '55%', textAlign: 'right' }}>
+            <span style={{ fontSize: 9 * s, color: labelCol, opacity: 0.5, fontStyle: 'italic', maxWidth: '55%', textAlign: 'right' }}>
               {data.quote}
             </span>
           )}
-          {!hasChart && <span style={{ fontSize: 9 * s, color: 'rgba(255,255,255,0.15)', letterSpacing: 1.5 * s }}>AI Sales Automation</span>}
+          {!hasChart && <span style={{ fontSize: 9 * s, color: labelCol, opacity: 0.5, letterSpacing: 1.5 * s }}>{footerR}</span>}
         </div>
       </div>
     </div>

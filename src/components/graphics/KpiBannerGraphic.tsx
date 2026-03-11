@@ -2,24 +2,39 @@ import { LOGO_URL } from '../../utils/assets';
 
 export interface KpiBannerData {
   title: string;
+  backgroundColor?: string;
+  accentColor?: string;
+  accentColor2?: string;
+  textColor?: string;
+  labelColor?: string;
   kpis: { icon: string; value: string; label: string; color: 'blue' | 'green' }[];
 }
 
-const BLUE = '#3B82F6';
-const GREEN = '#10B981';
-const BLUE_LIGHT = '#60A5FA';
-const GREEN_LIGHT = '#34D399';
+function lighten(hex: string): string {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  const mix = (c: number) => Math.min(255, c + Math.round((255 - c) * 0.35));
+  return `#${mix(r).toString(16).padStart(2, '0')}${mix(g).toString(16).padStart(2, '0')}${mix(b).toString(16).padStart(2, '0')}`;
+}
 
 export function KpiBannerGraphic({ data, width, height }: { data: KpiBannerData; width: number; height: number }) {
+  const BLUE = data.accentColor || '#3B82F6';
+  const GREEN = data.accentColor2 || '#10B981';
+  const BLUE_LIGHT = lighten(BLUE);
+  const GREEN_LIGHT = lighten(GREEN);
   const s = Math.min(width / 1200, height / 400);
   const kpiCount = data.kpis.length;
   const colW = width / kpiCount;
+  const bg = data.backgroundColor || '#0A1628';
+  const titleCol = data.textColor || '#b0b0c0';
+  const labelCol = data.labelColor || '#808090';
 
   return (
     <div style={{
       width, height, position: 'relative', overflow: 'hidden',
       fontFamily: "'Inter', system-ui, sans-serif",
-      background: '#0A1628',
+      background: bg,
     }}>
       {/* === SVG Background Layer === */}
       <svg
@@ -70,7 +85,7 @@ export function KpiBannerGraphic({ data, width, height }: { data: KpiBannerData;
         </defs>
 
         {/* Deep background gradient */}
-        <rect width={width} height={height} fill="#0A1628" />
+        <rect width={width} height={height} fill={bg} />
         <rect x={-width * 0.1} y={-height * 0.3} width={width * 0.6} height={height * 1.6} fill="url(#orbBlue)" rx={300} />
         <rect x={width * 0.6} y={-height * 0.2} width={width * 0.5} height={height * 1.4} fill="url(#orbGreen)" rx={250} />
 
@@ -131,12 +146,12 @@ export function KpiBannerGraphic({ data, width, height }: { data: KpiBannerData;
           padding: `${22 * s}px ${36 * s}px ${0}px`,
         }}>
           <div style={{
-            fontSize: 13 * s, fontWeight: 600, color: 'rgba(255,255,255,0.5)',
+            fontSize: 13 * s, fontWeight: 600, color: titleCol,
             letterSpacing: 3 * s, textTransform: 'uppercase',
           }}>
             {data.title}
           </div>
-          <img src={LOGO_URL} alt="CegTec" style={{ height: 16 * s, opacity: 0.5 }} />
+          <img src={LOGO_URL} alt="CegTec" style={{ height: 16 * s }} />
         </div>
 
         {/* KPIs */}
@@ -175,7 +190,7 @@ export function KpiBannerGraphic({ data, width, height }: { data: KpiBannerData;
 
                 {/* Label */}
                 <div style={{
-                  fontSize: 10.5 * s, color: 'rgba(255,255,255,0.35)',
+                  fontSize: 10.5 * s, color: labelCol,
                   fontWeight: 500, textAlign: 'center',
                   letterSpacing: 0.5 * s,
                   lineHeight: 1.3,
