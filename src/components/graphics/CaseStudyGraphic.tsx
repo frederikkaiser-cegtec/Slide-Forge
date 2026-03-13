@@ -189,6 +189,9 @@ export function CaseStudyGraphic({ data, width, height }: { data: CaseStudyData;
                 width={isTall ? (width - 120 * s) : (width * 0.38)}
                 height={isTall ? height * 0.28 : height * 0.58}
                 scale={s}
+                bgColor={bg}
+                accentColor={BLUE}
+                accentColor2={PINK}
               />
             </div>
           )}

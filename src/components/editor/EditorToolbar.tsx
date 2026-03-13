@@ -16,7 +16,7 @@ import { usePresentationStore } from '../../stores/presentationStore';
 import { useEditorStore } from '../../stores/editorStore';
 import { FORMAT_PRESETS, getFormat } from '../../utils/formats';
 import { exportSlideAsImage, exportAllSlidesAsZip } from '../../utils/exportImage';
-import html2canvas from 'html2canvas';
+import { toPng } from 'html-to-image';
 import { jsPDF } from 'jspdf';
 
 export function EditorToolbar() {
@@ -78,16 +78,15 @@ export function EditorToolbar() {
       const slideEl = document.getElementById(`slide-export-${i}`);
       if (!slideEl) continue;
 
-      const canvas = await html2canvas(slideEl, {
+      const dataUrl = await toPng(slideEl, {
         width: format.width,
         height: format.height,
-        scale: 1.5,
-        useCORS: true,
-        backgroundColor: null,
+        pixelRatio: 1.5,
+        style: { transform: 'none', transformOrigin: '0 0' },
       });
 
       if (i > 0) pdf.addPage([format.width, format.height], isLandscape ? 'landscape' : 'portrait');
-      pdf.addImage(canvas.toDataURL('image/jpeg', 0.85), 'JPEG', 0, 0, format.width, format.height);
+      pdf.addImage(dataUrl, 'PNG', 0, 0, format.width, format.height);
     }
 
     pdf.save(`${safeFilename}.pdf`);

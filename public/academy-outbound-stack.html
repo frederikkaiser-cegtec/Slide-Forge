@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080, initial-scale=1">
+<title>CegTec Academy – Der 500€ Outbound Stack</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #080E27;
+    --navy-mid: #0C1433;
+    --navy-light: #111B42;
+    --blue: #2563EB;
+    --blue-bright: #3B82F6;
+    --blue-glow: rgba(37,99,235,0.15);
+    --cyan: #06B6D4;
+    --green: #10B981;
+    --amber: #F59E0B;
+    --coral: #F43F5E;
+    --pink: #EC4899;
+    --text: #E8ECF4;
+    --text-mid: #8B95B0;
+    --text-dim: #4A5578;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1920px;
+    overflow: hidden;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--navy);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+  }
+
+  .canvas {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  /* ═══ FULL-PAGE SVG BACKGROUND ═══ */
+  .bg-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  /* ═══ CONTENT LAYER ═══ */
+  .content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 52px 64px 44px;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    margin-bottom: 40px;
+  }
+
+  .top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 36px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo svg { width: 36px; height: 36px; }
+
+  .logo-text {
+    font-weight: 800;
+    font-size: 20px;
+    color: #fff;
+    letter-spacing: -0.5px;
+  }
+
+  .badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    border: 1px solid rgba(6,182,212,0.3);
+    padding: 7px 18px;
+    border-radius: 100px;
+  }
+
+  h1 {
+    font-size: 52px;
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    margin-bottom: 12px;
+  }
+
+  h1 .amt {
+    color: var(--cyan);
+    position: relative;
+  }
+
+  .subtitle {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 15px;
+    color: var(--text-mid);
+  }
+
+  .subtitle strong { color: #fff; }
+
+  /* ── KPI RINGS ── */
+  .kpis {
+    display: flex;
+    gap: 28px;
+    margin-bottom: 44px;
+    justify-content: center;
+  }
+
+  .kpi {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 170px;
+  }
+
+  .kpi-ring {
+    position: relative;
+    width: 130px;
+    height: 130px;
+    margin-bottom: 12px;
+  }
+
+  .kpi-ring svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+  }
+
+  .kpi-ring .track {
+    fill: none;
+    stroke: rgba(255,255,255,0.04);
+    stroke-width: 8;
+  }
+
+  .kpi-ring .fill {
+    fill: none;
+    stroke-width: 8;
+    stroke-linecap: round;
+  }
+
+  .kpi-val {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -1px;
+  }
+
+  .kpi-label {
+    font-size: 12px;
+    color: var(--text-mid);
+    text-align: center;
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  /* ── PIPELINE SECTION ── */
+  .pipeline-section {
+    flex: 1;
+    display: flex;
+    gap: 32px;
+    margin-bottom: 36px;
+    min-height: 0;
+  }
+
+  /* Left: Funnel visualization */
+  .funnel-col {
+    width: 340px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .section-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+  }
+
+  .funnel-svg {
+    flex: 1;
+    width: 100%;
+  }
+
+  /* Right: Pipeline steps */
+  .steps-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .steps {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  .step {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .step-num {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+    border: 2px solid var(--text-dim);
+    color: var(--text-mid);
+  }
+
+  .step:last-child .step-num {
+    border-color: var(--blue);
+    background: var(--blue);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(37,99,235,0.4);
+  }
+
+  .step-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .step-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .step-action {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+    margin-bottom: 1px;
+  }
+
+  .step-tool {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.3px;
+    margin-bottom: 1px;
+  }
+
+  .step-desc {
+    font-size: 11.5px;
+    color: var(--text-mid);
+    line-height: 1.3;
+  }
+
+  .step-cost {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--green);
+    flex-shrink: 0;
+    text-align: right;
+  }
+
+  /* ── BOTTOM ROW: Comparison + Result ── */
+  .bottom-row {
+    display: flex;
+    gap: 20px;
+  }
+
+  /* Comparison */
+  .comparison {
+    width: 380px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .comp-item {
+    border-radius: 16px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .comp-item.ours {
+    background: rgba(16,185,129,0.08);
+    border: 1px solid rgba(16,185,129,0.2);
+  }
+
+  .comp-item.theirs {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .comp-price {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    line-height: 1;
+  }
+
+  .comp-item.ours .comp-price { color: var(--green); }
+
+  .comp-item.theirs .comp-price {
+    color: var(--text-dim);
+    text-decoration: line-through;
+    text-decoration-color: var(--coral);
+    text-decoration-thickness: 2px;
+  }
+
+  .comp-meta {
+    flex: 1;
+  }
+
+  .comp-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+
+  .comp-item.ours .comp-tag { color: var(--green); }
+  .comp-item.theirs .comp-tag { color: var(--text-dim); }
+
+  .comp-note {
+    font-size: 11px;
+    color: var(--text-mid);
+  }
+
+  /* Pictogram savings */
+  .pictogram {
+    display: flex;
+    gap: 3px;
+    flex-wrap: wrap;
+    width: 84px;
+    flex-shrink: 0;
+  }
+
+  .picto-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+  }
+
+  .picto-dot.saved { background: var(--green); }
+  .picto-dot.wasted { background: rgba(255,255,255,0.06); }
+
+  /* Result */
+  .result {
+    flex: 1;
+    background: linear-gradient(135deg, var(--navy-light), var(--navy-mid));
+    border-radius: 20px;
+    padding: 28px 32px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .result::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--blue), var(--cyan));
+  }
+
+  .result-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 10px;
+  }
+
+  .result-roi {
+    font-size: 64px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -3px;
+    line-height: 0.85;
+    margin-bottom: 10px;
+  }
+
+  .result-roi span {
+    font-size: 32px;
+    color: var(--text-mid);
+    letter-spacing: -1px;
+  }
+
+  .result-flow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--text-mid);
+    line-height: 1.5;
+  }
+
+  .result-flow b { color: #fff; }
+
+  .result-source {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    color: var(--text-dim);
+    margin-top: 10px;
+  }
+
+  /* CTA */
+  .cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .cta-text {
+    font-size: 14px;
+    color: var(--text-mid);
+    max-width: 480px;
+    line-height: 1.4;
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--blue);
+    color: #fff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 16px 36px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 8px 32px rgba(37,99,235,0.35);
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+
+<!-- ═══ FULL-PAGE SVG BACKGROUND ═══ -->
+<svg class="bg-svg" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="60" />
+    </filter>
+    <filter id="noise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch" />
+      <feColorMatrix type="saturate" values="0" />
+      <feBlend in="SourceGraphic" mode="overlay" />
+    </filter>
+    <linearGradient id="circuitGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2563EB" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#06B6D4" stop-opacity="0.04"/>
+    </linearGradient>
+    <linearGradient id="funnelFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2563EB" stop-opacity="0.6"/>
+      <stop offset="50%" stop-color="#06B6D4" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#10B981" stop-opacity="0.3"/>
+    </linearGradient>
+    <linearGradient id="funnelStroke" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#10B981"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Base -->
+  <rect width="1080" height="1920" fill="#080E27"/>
+
+  <!-- Atmospheric orbs -->
+  <ellipse cx="200" cy="350" rx="350" ry="250" fill="#2563EB" opacity="0.04" filter="url(#glow)"/>
+  <ellipse cx="880" cy="900" rx="300" ry="400" fill="#06B6D4" opacity="0.03" filter="url(#glow)"/>
+  <ellipse cx="540" cy="1600" rx="400" ry="200" fill="#10B981" opacity="0.025" filter="url(#glow)"/>
+
+  <!-- Circuit-board pattern (automation metaphor) -->
+  <!-- Horizontal tracks -->
+  <line x1="0" y1="480" x2="1080" y2="480" stroke="url(#circuitGrad)" stroke-width="1" opacity="0.3"/>
+  <line x1="0" y1="860" x2="1080" y2="860" stroke="url(#circuitGrad)" stroke-width="1" opacity="0.2"/>
+  <line x1="0" y1="1380" x2="1080" y2="1380" stroke="url(#circuitGrad)" stroke-width="1" opacity="0.2"/>
+
+  <!-- Vertical tracks -->
+  <line x1="64" y1="0" x2="64" y2="1920" stroke="url(#circuitGrad)" stroke-width="1" opacity="0.15"/>
+  <line x1="420" y1="480" x2="420" y2="1380" stroke="url(#circuitGrad)" stroke-width="1" opacity="0.2"/>
+  <line x1="1016" y1="0" x2="1016" y2="1920" stroke="url(#circuitGrad)" stroke-width="1" opacity="0.15"/>
+
+  <!-- Circuit nodes (small dots at intersections) -->
+  <circle cx="64" cy="480" r="3" fill="#2563EB" opacity="0.4"/>
+  <circle cx="420" cy="480" r="3" fill="#2563EB" opacity="0.4"/>
+  <circle cx="1016" cy="480" r="3" fill="#2563EB" opacity="0.4"/>
+  <circle cx="420" cy="860" r="3" fill="#06B6D4" opacity="0.3"/>
+  <circle cx="64" cy="860" r="3" fill="#06B6D4" opacity="0.3"/>
+  <circle cx="1016" cy="860" r="3" fill="#06B6D4" opacity="0.3"/>
+  <circle cx="64" cy="1380" r="3" fill="#10B981" opacity="0.3"/>
+  <circle cx="420" cy="1380" r="3" fill="#10B981" opacity="0.3"/>
+  <circle cx="1016" cy="1380" r="3" fill="#10B981" opacity="0.3"/>
+
+  <!-- Right-angle circuit paths -->
+  <path d="M 64 480 L 64 520 L 200 520" stroke="#2563EB" stroke-width="1" fill="none" opacity="0.15"/>
+  <path d="M 1016 480 L 1016 540 L 880 540" stroke="#2563EB" stroke-width="1" fill="none" opacity="0.12"/>
+  <path d="M 420 860 L 420 900 L 540 900 L 540 940" stroke="#06B6D4" stroke-width="1" fill="none" opacity="0.12"/>
+  <path d="M 64 1380 L 200 1380 L 200 1420" stroke="#10B981" stroke-width="1" fill="none" opacity="0.12"/>
+
+  <!-- Noise grain -->
+  <rect width="1080" height="1920" opacity="0.03" filter="url(#noise)"/>
+
+  <!-- Top accent line -->
+  <rect y="0" width="1080" height="3" fill="url(#funnelStroke)" opacity="0.8"/>
+</svg>
+
+<!-- ═══ CONTENT ═══ -->
+<div class="content">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="top-row">
+      <div class="logo">
+        <img src="cegtec-logo.png" alt="CegTec" style="height: 36px;">
+      </div>
+      <span class="badge">Academy</span>
+    </div>
+    <h1>Personalisierter Outbound<br>für unter <span class="amt">500€/Monat</span></h1>
+    <p class="subtitle">Ohne Clay. Ohne Sales Navigator. Mit <strong>Claude Code.</strong></p>
+  </header>
+
+  <!-- KPI RINGS — data encoded as visual form -->
+  <section class="kpis">
+    <!-- Ring 1: 5 Tools (5/10 = 50%) -->
+    <div class="kpi">
+      <div class="kpi-ring">
+        <svg viewBox="0 0 120 120">
+          <circle class="track" cx="60" cy="60" r="50"/>
+          <circle class="fill" cx="60" cy="60" r="50"
+            stroke="#2563EB"
+            stroke-dasharray="157 314"
+            style="filter: drop-shadow(0 0 8px rgba(37,99,235,0.4))"/>
+        </svg>
+        <div class="kpi-val" style="color:#2563EB">5</div>
+      </div>
+      <div class="kpi-label">Tools im Stack</div>
+    </div>
+
+    <!-- Ring 2: $158 budget (158/400 = ~40%) -->
+    <div class="kpi">
+      <div class="kpi-ring">
+        <svg viewBox="0 0 120 120">
+          <circle class="track" cx="60" cy="60" r="50"/>
+          <circle class="fill" cx="60" cy="60" r="50"
+            stroke="#10B981"
+            stroke-dasharray="124 314"
+            style="filter: drop-shadow(0 0 8px rgba(16,185,129,0.4))"/>
+        </svg>
+        <div class="kpi-val" style="color:#10B981">$158</div>
+      </div>
+      <div class="kpi-label">Monatliche Kosten</div>
+    </div>
+
+    <!-- Ring 3: 22x ROI (capped visual at 80%) -->
+    <div class="kpi">
+      <div class="kpi-ring">
+        <svg viewBox="0 0 120 120">
+          <circle class="track" cx="60" cy="60" r="50"/>
+          <circle class="fill" cx="60" cy="60" r="50"
+            stroke="#06B6D4"
+            stroke-dasharray="251 314"
+            style="filter: drop-shadow(0 0 8px rgba(6,182,212,0.4))"/>
+        </svg>
+        <div class="kpi-val" style="color:#06B6D4">22x</div>
+      </div>
+      <div class="kpi-label">Return on Investment</div>
+    </div>
+
+    <!-- Ring 4: 90 Tage (90/365 = ~25%) -->
+    <div class="kpi">
+      <div class="kpi-ring">
+        <svg viewBox="0 0 120 120">
+          <circle class="track" cx="60" cy="60" r="50"/>
+          <circle class="fill" cx="60" cy="60" r="50"
+            stroke="#F59E0B"
+            stroke-dasharray="78 314"
+            style="filter: drop-shadow(0 0 8px rgba(245,158,11,0.4))"/>
+        </svg>
+        <div class="kpi-val" style="color:#F59E0B">90d</div>
+      </div>
+      <div class="kpi-label">Time to Results</div>
+    </div>
+  </section>
+
+  <!-- PIPELINE + FUNNEL -->
+  <section class="pipeline-section">
+
+    <!-- LEFT: Actual funnel shape visualization -->
+    <div class="funnel-col">
+      <div class="section-tag">Sales Funnel — 90 Tage</div>
+      <svg class="funnel-svg" viewBox="0 0 300 540" preserveAspectRatio="xMidYMid meet">
+        <!-- Funnel trapezoid shapes — each stage narrower -->
+        <!-- Stage 1: Kontaktiert — 1.976 -->
+        <polygon points="10,10 290,10 270,100 30,100" fill="#2563EB" opacity="0.25" stroke="#3B82F6" stroke-width="1"/>
+        <text x="150" y="48" text-anchor="middle" font-family="'Plus Jakarta Sans'" font-size="28" font-weight="800" fill="white">1.976</text>
+        <text x="150" y="72" text-anchor="middle" font-family="'IBM Plex Mono'" font-size="11" fill="#8B95B0" letter-spacing="1.5">KONTAKTIERT</text>
+
+        <!-- Arrow connector -->
+        <path d="M150,100 L150,118" stroke="#3B82F6" stroke-width="1.5" opacity="0.3"/>
+        <polygon points="145,116 150,124 155,116" fill="#3B82F6" opacity="0.4"/>
+
+        <!-- Stage 2: Geöffnet — 1.284 -->
+        <polygon points="40,128 260,128 242,218 58,218" fill="#2563EB" opacity="0.2" stroke="#3B82F6" stroke-width="1" opacity="0.6"/>
+        <text x="150" y="166" text-anchor="middle" font-family="'Plus Jakarta Sans'" font-size="26" font-weight="800" fill="white">1.284</text>
+        <text x="150" y="190" text-anchor="middle" font-family="'IBM Plex Mono'" font-size="11" fill="#8B95B0" letter-spacing="1.5">GEÖFFNET</text>
+        <!-- Drop-off line going right -->
+        <line x1="260" y1="145" x2="295" y2="145" stroke="#F43F5E" stroke-width="1" opacity="0.25" stroke-dasharray="4 3"/>
+        <text x="298" y="149" font-family="'IBM Plex Mono'" font-size="9" fill="#F43F5E" opacity="0.5">-35%</text>
+
+        <!-- Arrow -->
+        <path d="M150,218 L150,236" stroke="#06B6D4" stroke-width="1.5" opacity="0.3"/>
+        <polygon points="145,234 150,242 155,234" fill="#06B6D4" opacity="0.4"/>
+
+        <!-- Stage 3: Replies — 118 -->
+        <polygon points="72,246 228,246 214,336 86,336" fill="#06B6D4" opacity="0.18" stroke="#06B6D4" stroke-width="1" opacity="0.5"/>
+        <text x="150" y="284" text-anchor="middle" font-family="'Plus Jakarta Sans'" font-size="26" font-weight="800" fill="white">118</text>
+        <text x="150" y="308" text-anchor="middle" font-family="'IBM Plex Mono'" font-size="11" fill="#8B95B0" letter-spacing="1.5">REPLIES</text>
+        <line x1="228" y1="270" x2="295" y2="270" stroke="#F43F5E" stroke-width="1" opacity="0.25" stroke-dasharray="4 3"/>
+        <text x="298" y="274" font-family="'IBM Plex Mono'" font-size="9" fill="#F43F5E" opacity="0.5">-91%</text>
+
+        <!-- Arrow -->
+        <path d="M150,336 L150,354" stroke="#10B981" stroke-width="1.5" opacity="0.3"/>
+        <polygon points="145,352 150,360 155,352" fill="#10B981" opacity="0.4"/>
+
+        <!-- Stage 4: Meetings — 7 (pictogram: 7 filled dots) -->
+        <polygon points="98,364 202,364 192,434 108,434" fill="#10B981" opacity="0.15" stroke="#10B981" stroke-width="1" opacity="0.5"/>
+        <text x="150" y="396" text-anchor="middle" font-family="'Plus Jakarta Sans'" font-size="28" font-weight="800" fill="white">7</text>
+        <text x="150" y="418" text-anchor="middle" font-family="'IBM Plex Mono'" font-size="11" fill="#8B95B0" letter-spacing="1.5">MEETINGS</text>
+
+        <!-- Arrow -->
+        <path d="M150,434 L150,452" stroke="#10B981" stroke-width="1.5" opacity="0.3"/>
+        <polygon points="145,450 150,458 155,450" fill="#10B981" opacity="0.4"/>
+
+        <!-- Stage 5: Deal — 1 (the prize) -->
+        <polygon points="120,462 180,462 174,530 126,530" fill="#10B981" opacity="0.3" stroke="#10B981" stroke-width="1.5"/>
+        <!-- Glow around deal -->
+        <ellipse cx="150" cy="496" rx="40" ry="30" fill="#10B981" opacity="0.08" filter="url(#glow)"/>
+        <text x="150" y="494" text-anchor="middle" font-family="'Plus Jakarta Sans'" font-size="30" font-weight="800" fill="#10B981">1 Deal</text>
+        <text x="150" y="518" text-anchor="middle" font-family="'IBM Plex Mono'" font-size="12" font-weight="600" fill="#F59E0B">100K€ Marge</text>
+      </svg>
+    </div>
+
+    <!-- RIGHT: Pipeline steps -->
+    <div class="steps-col">
+      <div class="section-tag">Die Pipeline — 5 Schritte</div>
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-icon" style="background:rgba(37,99,235,0.1)">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="#3B82F6" stroke-width="2"/><circle cx="12" cy="10" r="3" stroke="#3B82F6" stroke-width="2"/></svg>
+          </div>
+          <div class="step-body">
+            <div class="step-action">Leads Scrapen</div>
+            <div class="step-tool">Apify GMaps Scraper</div>
+            <div class="step-desc">1.000 Leads aus Google Maps, Branche & Region gefiltert</div>
+          </div>
+          <div class="step-cost">~$10</div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-icon" style="background:rgba(6,182,212,0.1)">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#06B6D4" stroke-width="2"/><path d="M21 21l-4.35-4.35" stroke="#06B6D4" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <div class="step-body">
+            <div class="step-action">Research</div>
+            <div class="step-tool">CegTec Enrichment Agent</div>
+            <div class="step-desc">Deep Research — Website, News, Tech-Stack, DACH</div>
+          </div>
+          <div class="step-cost" style="color:var(--cyan)">custom</div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-icon" style="background:rgba(245,158,11,0.1)">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <div class="step-body">
+            <div class="step-action">Anreichern</div>
+            <div class="step-tool">FullEnrich API</div>
+            <div class="step-desc">E-Mail + Telefon, Waterfall Enrichment, 60-75%</div>
+          </div>
+          <div class="step-cost" style="color:var(--amber)">~$48</div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">04</div>
+          <div class="step-icon" style="background:rgba(236,72,153,0.1)">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="#EC4899" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg>
+          </div>
+          <div class="step-body">
+            <div class="step-action">Outreach</div>
+            <div class="step-tool">Instantly</div>
+            <div class="step-desc">Personalisierte 4-Step E-Mail-Sequenz</div>
+          </div>
+          <div class="step-cost">$30</div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">05</div>
+          <div class="step-icon" style="background:rgba(99,102,241,0.1)">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#6366F1" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg>
+          </div>
+          <div class="step-body">
+            <div class="step-action">Orchestrieren</div>
+            <div class="step-tool">Claude Code</div>
+            <div class="step-desc">Ein Prompt steuert alles</div>
+          </div>
+          <div class="step-cost">$20</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM: Comparison + Result -->
+  <section class="bottom-row">
+
+    <div class="comparison">
+      <div class="comp-item ours">
+        <div class="comp-price">$158</div>
+        <div class="comp-meta">
+          <div class="comp-tag">Unser Stack</div>
+          <div class="comp-note">5 Tools, alles inklusive</div>
+        </div>
+        <!-- Pictogram: 4/10 dots filled = 40% of Clay cost -->
+        <div class="pictogram">
+          <div class="picto-dot saved"></div>
+          <div class="picto-dot saved"></div>
+          <div class="picto-dot saved"></div>
+          <div class="picto-dot saved"></div>
+          <div class="picto-dot wasted"></div>
+          <div class="picto-dot wasted"></div>
+          <div class="picto-dot wasted"></div>
+          <div class="picto-dot wasted"></div>
+          <div class="picto-dot wasted"></div>
+          <div class="picto-dot wasted"></div>
+        </div>
+      </div>
+      <div class="comp-item theirs">
+        <div class="comp-price">$400+</div>
+        <div class="comp-meta">
+          <div class="comp-tag">Clay + Tools</div>
+          <div class="comp-note">Credits limitiert, kein Support</div>
+        </div>
+        <div class="pictogram">
+          <div class="picto-dot wasted"></div>
+          <div class="picto-dot wasted"></div>
+          <div class="picto-dot wasted"></div>
+          <div class="picto-dot wasted"></div>
+          <div class="picto-dot wasted"></div>
+          <div class="picto-dot wasted"></div>
+          <div class="picto-dot wasted"></div>
+          <div class="picto-dot wasted"></div>
+          <div class="picto-dot wasted"></div>
+          <div class="picto-dot wasted"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="result">
+      <div class="result-eyebrow">Proof Point — Jomavis Solar</div>
+      <div class="result-roi">22x <span>ROI</span></div>
+      <div class="result-flow">
+        <b>112</b> Leads &rarr; <b>18</b> Antworten &rarr; <b>7</b> Meetings<br>
+        &rarr; <b>1</b> Deal &rarr; <b>100K€</b> Marge
+      </div>
+      <div class="result-source">90 Tage &middot; Energie/Solar &middot; Dachpacht-Modell</div>
+    </div>
+
+  </section>
+
+  <!-- CTA -->
+  <footer class="cta">
+    <p class="cta-text">Kompletter Guide mit Templates, Prompts &amp; Video-Walkthrough in der CegTec Academy.</p>
+    <button class="cta-btn">
+      Jetzt Zugang sichern
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M10 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </footer>
+
+</div>
+</div>
+</body>
+</html>

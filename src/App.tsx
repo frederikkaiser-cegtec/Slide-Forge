@@ -1,6 +1,6 @@
 import { useState, useRef, useCallback } from 'react';
-import { Download, Image, BarChart3, Trophy, Boxes, GitBranch, Palette, LayoutDashboard, Save, FolderOpen } from 'lucide-react';
-import html2canvas from 'html2canvas';
+import { Download, Image, BarChart3, Trophy, Boxes, GitBranch, Palette, LayoutDashboard, Save, FolderOpen, GraduationCap, Database, DatabaseZap, ScanSearch, Mail, Radio, Layers, Bot } from 'lucide-react';
+import { toPng, toJpeg } from 'html-to-image';
 import { CaseStudyGraphic } from './components/graphics/CaseStudyGraphic';
 import { RoiGraphic } from './components/graphics/RoiGraphic';
 import { KpiBannerGraphic } from './components/graphics/KpiBannerGraphic';
@@ -9,6 +9,22 @@ import { RevenueSystemsGraphic, defaultRevenueSystemsData } from './components/g
 import type { RevenueSystemsData } from './components/graphics/RevenueSystemsGraphic';
 import { InfographicGraphic, defaultInfographicData } from './components/graphics/InfographicGraphic';
 import type { InfographicData } from './components/graphics/InfographicGraphic';
+import { AcademyGraphic, defaultAcademyData } from './components/graphics/AcademyGraphic';
+import type { AcademyData } from './components/graphics/AcademyGraphic';
+import { RawDataGraphic, defaultRawDataData } from './components/graphics/RawDataGraphic';
+import type { RawDataData } from './components/graphics/RawDataGraphic';
+import { EnrichedDataGraphic, defaultEnrichedDataData } from './components/graphics/EnrichedDataGraphic';
+import type { EnrichedDataData } from './components/graphics/EnrichedDataGraphic';
+import { QualifiedDataGraphic, defaultQualifiedDataData } from './components/graphics/QualifiedDataGraphic';
+import type { QualifiedDataData } from './components/graphics/QualifiedDataGraphic';
+import { PersonalizedOutreachGraphic, defaultPersonalizedOutreachData } from './components/graphics/PersonalizedOutreachGraphic';
+import type { PersonalizedOutreachData } from './components/graphics/PersonalizedOutreachGraphic';
+import { MultichannelOutreachGraphic, defaultMultichannelOutreachData } from './components/graphics/MultichannelOutreachGraphic';
+import type { MultichannelOutreachData } from './components/graphics/MultichannelOutreachGraphic';
+import { OutboundStackGraphic, defaultOutboundStackData } from './components/graphics/OutboundStackGraphic';
+import type { OutboundStackData } from './components/graphics/OutboundStackGraphic';
+import { AgentFriendlyGraphic, defaultAgentFriendlyData } from './components/graphics/AgentFriendlyGraphic';
+import type { AgentFriendlyData } from './components/graphics/AgentFriendlyGraphic';
 import { DiagramEditor } from './components/diagram/DiagramEditor';
 import { useEditorStore } from './stores/editorStore';
 import { FORMAT_PRESETS } from './utils/formats';
@@ -18,7 +34,7 @@ import { useSavedGraphicsStore, type SavedGraphic } from './stores/savedGraphics
 import { SavedGraphicsModal } from './components/graphics/SavedGraphicsModal';
 import { syncToCaseStudy, syncToRoi, syncToKpiBanner, syncToInfographic } from './utils/graphicSync';
 
-type GraphicType = 'case-study' | 'roi' | 'kpi-banner' | 'revenue-systems' | 'infographic';
+type GraphicType = 'case-study' | 'roi' | 'kpi-banner' | 'revenue-systems' | 'infographic' | 'academy' | 'raw-data' | 'enriched-data' | 'qualified-data' | 'personalized-outreach' | 'multichannel-outreach' | 'outbound-stack' | 'agent-friendly';
 
 export interface CaseStudyData {
   companyName: string;
@@ -128,6 +144,14 @@ function App() {
   const [kpiBanner, setKpiBanner] = useState<KpiBannerData>(defaultKpiBanner);
   const [revenueSystems, setRevenueSystems] = useState<RevenueSystemsData>(defaultRevenueSystemsData);
   const [infographic, setInfographic] = useState<InfographicData>(defaultInfographicData);
+  const [academy, setAcademy] = useState<AcademyData>(defaultAcademyData);
+  const [rawData, setRawData] = useState<RawDataData>(defaultRawDataData);
+  const [enrichedData, setEnrichedData] = useState<EnrichedDataData>(defaultEnrichedDataData);
+  const [qualifiedData, setQualifiedData] = useState<QualifiedDataData>(defaultQualifiedDataData);
+  const [personalizedOutreach, setPersonalizedOutreach] = useState<PersonalizedOutreachData>(defaultPersonalizedOutreachData);
+  const [multichannelOutreach, setMultichannelOutreach] = useState<MultichannelOutreachData>(defaultMultichannelOutreachData);
+  const [outboundStack, setOutboundStack] = useState<OutboundStackData>(defaultOutboundStackData);
+  const [agentFriendly, setAgentFriendly] = useState<AgentFriendlyData>(defaultAgentFriendlyData);
   const graphicRef = useRef<HTMLDivElement>(null);
   const [showSavedGraphics, setShowSavedGraphics] = useState(false);
   const [saveFlash, setSaveFlash] = useState(false);
@@ -141,14 +165,30 @@ function App() {
       case 'kpi-banner': return kpiBanner;
       case 'revenue-systems': return revenueSystems;
       case 'infographic': return infographic;
+      case 'academy': return academy;
+      case 'raw-data': return rawData;
+      case 'enriched-data': return enrichedData;
+      case 'qualified-data': return qualifiedData;
+      case 'personalized-outreach': return personalizedOutreach;
+      case 'multichannel-outreach': return multichannelOutreach;
+      case 'outbound-stack': return outboundStack;
+      case 'agent-friendly': return agentFriendly;
     }
-  }, [graphicType, caseStudy, roi, kpiBanner, revenueSystems, infographic]);
+  }, [graphicType, caseStudy, roi, kpiBanner, revenueSystems, infographic, academy, rawData, enrichedData, qualifiedData, personalizedOutreach, multichannelOutreach, outboundStack, agentFriendly]);
 
   const handleSaveGraphic = useCallback(() => {
     const name = graphicType === 'case-study' ? caseStudy.companyName
       : graphicType === 'infographic' ? infographic.companyName
       : graphicType === 'roi' ? roi.title
       : graphicType === 'kpi-banner' ? kpiBanner.title
+      : graphicType === 'academy' ? academy.title
+      : graphicType === 'raw-data' ? rawData.title
+      : graphicType === 'enriched-data' ? enrichedData.title
+      : graphicType === 'qualified-data' ? qualifiedData.title
+      : graphicType === 'personalized-outreach' ? personalizedOutreach.title
+      : graphicType === 'multichannel-outreach' ? multichannelOutreach.title
+      : graphicType === 'outbound-stack' ? outboundStack.title
+      : graphicType === 'agent-friendly' ? agentFriendly.title
       : 'Grafik';
     useSavedGraphicsStore.getState().save(name || 'Unbenannt', graphicType, getCurrentData(), formatId);
     setSaveFlash(true);
@@ -164,12 +204,20 @@ function App() {
       case 'kpi-banner': setKpiBanner(g.data as KpiBannerData); break;
       case 'revenue-systems': setRevenueSystems(g.data as RevenueSystemsData); break;
       case 'infographic': setInfographic(g.data as InfographicData); break;
+      case 'academy': setAcademy(g.data as AcademyData); break;
+      case 'raw-data': setRawData(g.data as RawDataData); break;
+      case 'enriched-data': setEnrichedData(g.data as EnrichedDataData); break;
+      case 'qualified-data': setQualifiedData(g.data as QualifiedDataData); break;
+      case 'personalized-outreach': setPersonalizedOutreach(g.data as PersonalizedOutreachData); break;
+      case 'multichannel-outreach': setMultichannelOutreach(g.data as MultichannelOutreachData); break;
+      case 'outbound-stack': setOutboundStack(g.data as OutboundStackData); break;
+      case 'agent-friendly': setAgentFriendly(g.data as AgentFriendlyData); break;
     }
   }, []);
 
   const handleSwitchType = useCallback((newType: GraphicType) => {
     // Auto-sync data from current type to new type
-    if (newType !== graphicType && graphicType !== 'revenue-systems' && newType !== 'revenue-systems') {
+    if (newType !== graphicType && graphicType !== 'revenue-systems' && newType !== 'revenue-systems' && graphicType !== 'academy' && newType !== 'academy' && graphicType !== 'raw-data' && newType !== 'raw-data' && graphicType !== 'enriched-data' && newType !== 'enriched-data' && graphicType !== 'qualified-data' && newType !== 'qualified-data' && graphicType !== 'personalized-outreach' && newType !== 'personalized-outreach' && graphicType !== 'multichannel-outreach' && newType !== 'multichannel-outreach' && graphicType !== 'outbound-stack' && newType !== 'outbound-stack' && graphicType !== 'agent-friendly' && newType !== 'agent-friendly') {
       const data = getCurrentData();
       switch (newType) {
         case 'case-study': setCaseStudy((prev) => syncToCaseStudy(graphicType, data, prev)); break;
@@ -181,23 +229,31 @@ function App() {
 
     setGraphicType(newType);
     if (newType === 'kpi-banner') setFormatId('banner');
+    else if (newType === 'academy' || newType === 'outbound-stack' || newType === 'agent-friendly') setFormatId('9:16');
+    else if (newType === 'raw-data' || newType === 'enriched-data' || newType === 'qualified-data' || newType === 'personalized-outreach' || newType === 'multichannel-outreach') setFormatId('16:9');
     else if (newType === 'revenue-systems' || newType === 'infographic') setFormatId('og');
     else if (formatId === 'banner' || formatId === 'banner-wide') setFormatId('linkedin');
   }, [graphicType, getCurrentData, formatId]);
 
   const handleExport = async (type: 'png' | 'jpeg') => {
     if (!graphicRef.current) return;
-    const canvas = await html2canvas(graphicRef.current, {
+    const el = graphicRef.current;
+    const prevTransform = el.style.transform;
+    el.style.transform = 'none';
+    const opts = {
       width: format.width,
       height: format.height,
-      scale: 2,
-      useCORS: true,
-      backgroundColor: null,
-    });
+      pixelRatio: 2,
+      style: { transform: 'none', transformOrigin: '0 0' },
+    };
+    const dataUrl = type === 'jpeg'
+      ? await toJpeg(el, { ...opts, quality: 0.95 })
+      : await toPng(el, opts);
+    el.style.transform = prevTransform;
     const link = document.createElement('a');
-    const filename = graphicType === 'revenue-systems' ? 'cegtec-revenue-systems' : graphicType === 'infographic' ? 'cegtec-infographic' : `cegtec-${graphicType}-${format.id}`;
+    const filename = graphicType === 'revenue-systems' ? 'cegtec-revenue-systems' : graphicType === 'infographic' ? 'cegtec-infographic' : graphicType === 'academy' ? 'cegtec-academy' : graphicType === 'raw-data' ? 'cegtec-raw-data' : graphicType === 'enriched-data' ? 'cegtec-enriched-data' : graphicType === 'qualified-data' ? 'cegtec-qualified-data' : graphicType === 'personalized-outreach' ? 'cegtec-personalized-outreach' : graphicType === 'multichannel-outreach' ? 'cegtec-multichannel-outreach' : graphicType === 'outbound-stack' ? 'cegtec-outbound-stack' : `cegtec-${graphicType}-${format.id}`;
     link.download = `${filename}.${type === 'jpeg' ? 'jpg' : 'png'}`;
-    link.href = canvas.toDataURL(`image/${type}`, 0.95);
+    link.href = dataUrl;
     link.click();
   };
 
@@ -253,6 +309,14 @@ function App() {
               { id: 'kpi-banner' as const, label: 'KPI Banner', icon: Trophy },
               { id: 'revenue-systems' as const, label: 'Systems', icon: Boxes },
               { id: 'infographic' as const, label: 'Infografik', icon: LayoutDashboard },
+              { id: 'academy' as const, label: 'Academy', icon: GraduationCap },
+              { id: 'raw-data' as const, label: 'Raw Data', icon: Database },
+              { id: 'enriched-data' as const, label: 'Enriched', icon: DatabaseZap },
+              { id: 'qualified-data' as const, label: 'Qualified', icon: ScanSearch },
+              { id: 'personalized-outreach' as const, label: 'Outreach', icon: Mail },
+              { id: 'multichannel-outreach' as const, label: 'Multichannel', icon: Radio },
+              { id: 'outbound-stack' as const, label: 'Stack', icon: Layers },
+              { id: 'agent-friendly' as const, label: 'AI-Ready', icon: Bot },
             ]).map(({ id, label, icon: Icon }) => (
               <button
                 key={id}
@@ -287,6 +351,22 @@ function App() {
             <RevenueSystemsForm data={revenueSystems} onChange={setRevenueSystems} />
           ) : graphicType === 'infographic' ? (
             <InfographicForm data={infographic} onChange={setInfographic} />
+          ) : graphicType === 'academy' ? (
+            <AcademyForm data={academy} onChange={setAcademy} />
+          ) : graphicType === 'raw-data' ? (
+            <RawDataForm data={rawData} onChange={setRawData} />
+          ) : graphicType === 'enriched-data' ? (
+            <EnrichedDataForm data={enrichedData} onChange={setEnrichedData} />
+          ) : graphicType === 'qualified-data' ? (
+            <QualifiedDataForm data={qualifiedData} onChange={setQualifiedData} />
+          ) : graphicType === 'personalized-outreach' ? (
+            <PersonalizedOutreachForm data={personalizedOutreach} onChange={setPersonalizedOutreach} />
+          ) : graphicType === 'multichannel-outreach' ? (
+            <MultichannelOutreachForm data={multichannelOutreach} onChange={setMultichannelOutreach} />
+          ) : graphicType === 'outbound-stack' ? (
+            <OutboundStackForm data={outboundStack} onChange={setOutboundStack} />
+          ) : graphicType === 'agent-friendly' ? (
+            <AgentFriendlyForm data={agentFriendly} onChange={setAgentFriendly} />
           ) : (
             <KpiBannerForm data={kpiBanner} onChange={setKpiBanner} />
           )}
@@ -346,6 +426,22 @@ function App() {
             <RevenueSystemsGraphic data={revenueSystems} width={format.width} height={format.height} />
           ) : graphicType === 'infographic' ? (
             <InfographicGraphic data={infographic} width={format.width} height={format.height} />
+          ) : graphicType === 'academy' ? (
+            <AcademyGraphic data={academy} width={format.width} height={format.height} />
+          ) : graphicType === 'raw-data' ? (
+            <RawDataGraphic data={rawData} width={format.width} height={format.height} />
+          ) : graphicType === 'enriched-data' ? (
+            <EnrichedDataGraphic data={enrichedData} width={format.width} height={format.height} />
+          ) : graphicType === 'qualified-data' ? (
+            <QualifiedDataGraphic data={qualifiedData} width={format.width} height={format.height} />
+          ) : graphicType === 'personalized-outreach' ? (
+            <PersonalizedOutreachGraphic data={personalizedOutreach} width={format.width} height={format.height} />
+          ) : graphicType === 'multichannel-outreach' ? (
+            <MultichannelOutreachGraphic data={multichannelOutreach} width={format.width} height={format.height} />
+          ) : graphicType === 'outbound-stack' ? (
+            <OutboundStackGraphic data={outboundStack} width={format.width} height={format.height} />
+          ) : graphicType === 'agent-friendly' ? (
+            <AgentFriendlyGraphic data={agentFriendly} width={format.width} height={format.height} />
           ) : (
             <KpiBannerGraphic data={kpiBanner} width={format.width} height={format.height} />
           )}
@@ -729,6 +825,737 @@ function InfographicForm({ data, onChange }: { data: InfographicData; onChange: 
 
       <Field label="Zitat" value={data.quote} onChange={(v) => onChange({ ...data, quote: v })} textarea />
       <Field label="CTA-Text" value={data.ctaText} onChange={(v) => onChange({ ...data, ctaText: v })} />
+    </div>
+  );
+}
+
+/* ---- Academy Form ---- */
+
+function AcademyForm({ data, onChange }: { data: AcademyData; onChange: (d: AcademyData) => void }) {
+  const updateStep = (i: number, key: string, val: string) => {
+    const steps = [...data.steps];
+    steps[i] = { ...steps[i], [key]: val };
+    onChange({ ...data, steps });
+  };
+
+  return (
+    <div className="space-y-3">
+      <Field label="Titel" value={data.title} onChange={(v) => onChange({ ...data, title: v })} textarea />
+      <Field label="Untertitel" value={data.subtitle} onChange={(v) => onChange({ ...data, subtitle: v })} />
+      <Field label="Badge" value={data.badge} onChange={(v) => onChange({ ...data, badge: v })} />
+
+      <div className="border-t border-border pt-3 mt-3">
+        <span className="text-xs text-text-muted font-medium">Farben & Theme</span>
+      </div>
+      <div className="flex gap-2">
+        <button
+          onClick={() => onChange({ ...data, theme: 'light', backgroundColor: '#F5F5F0', textColor: '#1A1A2E' })}
+          className={`flex-1 py-1.5 text-xs rounded-lg font-medium ${data.theme === 'light' ? 'bg-primary text-white' : 'bg-surface-hover text-text-muted'}`}
+        >Light</button>
+        <button
+          onClick={() => onChange({ ...data, theme: 'dark', backgroundColor: '#0A0E27', textColor: '#FFFFFF' })}
+          className={`flex-1 py-1.5 text-xs rounded-lg font-medium ${data.theme === 'dark' ? 'bg-primary text-white' : 'bg-surface-hover text-text-muted'}`}
+        >Dark</button>
+      </div>
+      <ColorRow label="Hintergrund" value={data.backgroundColor} defaultValue="#F5F5F0" onChange={(v) => onChange({ ...data, backgroundColor: v })} />
+      <ColorRow label="Akzent" value={data.accentColor} defaultValue="#2563EB" onChange={(v) => onChange({ ...data, accentColor: v })} />
+      <ColorRow label="Akzent 2" value={data.accentColor2} defaultValue="#1A3FD4" onChange={(v) => onChange({ ...data, accentColor2: v })} />
+      <ColorRow label="Textfarbe" value={data.textColor} defaultValue="#1A1A2E" onChange={(v) => onChange({ ...data, textColor: v })} />
+      <ColorRow label="Label-Farbe" value={data.labelColor} defaultValue="#7A7A8E" onChange={(v) => onChange({ ...data, labelColor: v })} />
+
+      <div className="border-t border-border pt-3 mt-3">
+        <span className="text-xs text-text-muted font-medium">Pipeline Steps</span>
+      </div>
+      {data.steps.map((step, i) => (
+        <div key={i} className="bg-surface-hover rounded-lg p-3 space-y-2">
+          <div className="flex gap-2">
+            <div className="flex-1"><Field label="Aktion" value={step.action} onChange={(v) => updateStep(i, 'action', v)} /></div>
+            <div className="w-20"><Field label="Kosten" value={step.cost} onChange={(v) => updateStep(i, 'cost', v)} /></div>
+          </div>
+          <Field label="Tool" value={step.tool} onChange={(v) => updateStep(i, 'tool', v)} />
+          <Field label="Beschreibung" value={step.desc} onChange={(v) => updateStep(i, 'desc', v)} />
+        </div>
+      ))}
+
+      <div className="border-t border-border pt-3 mt-3">
+        <span className="text-xs text-text-muted font-medium">Kosten-Vergleich</span>
+      </div>
+      <div className="flex gap-2">
+        <div className="flex-1"><Field label="Unser Preis" value={data.ourPrice} onChange={(v) => onChange({ ...data, ourPrice: v })} /></div>
+        <div className="flex-1"><Field label="Deren Preis" value={data.theirPrice} onChange={(v) => onChange({ ...data, theirPrice: v })} /></div>
+      </div>
+      <div className="flex gap-2">
+        <div className="flex-1"><Field label="Unser Label" value={data.ourLabel} onChange={(v) => onChange({ ...data, ourLabel: v })} /></div>
+        <div className="flex-1"><Field label="Deren Label" value={data.theirLabel} onChange={(v) => onChange({ ...data, theirLabel: v })} /></div>
+      </div>
+
+      <div className="border-t border-border pt-3 mt-3">
+        <span className="text-xs text-text-muted font-medium">Ergebnis-Banner</span>
+      </div>
+      <Field label="Metriken" value={data.resultBanner} onChange={(v) => onChange({ ...data, resultBanner: v })} textarea />
+      <Field label="Quelle" value={data.resultSource} onChange={(v) => onChange({ ...data, resultSource: v })} />
+
+      <div className="border-t border-border pt-3 mt-3">
+        <span className="text-xs text-text-muted font-medium">CTA</span>
+      </div>
+      <Field label="CTA Text" value={data.ctaText} onChange={(v) => onChange({ ...data, ctaText: v })} textarea />
+      <Field label="Button" value={data.ctaButton} onChange={(v) => onChange({ ...data, ctaButton: v })} />
+      <Field label="URL" value={data.ctaUrl} onChange={(v) => onChange({ ...data, ctaUrl: v })} />
+    </div>
+  );
+}
+
+/* ---- Enriched Data Form ---- */
+
+function EnrichedDataForm({ data, onChange }: { data: EnrichedDataData; onChange: (d: EnrichedDataData) => void }) {
+  const updateEntry = (i: number, key: string, val: string) => {
+    const entries = [...data.entries];
+    entries[i] = { ...entries[i], [key]: val };
+    onChange({ ...data, entries });
+  };
+
+  const addEntry = () => {
+    onChange({ ...data, entries: [...data.entries, { company: 'Neue Firma GmbH', domain: 'example.de', country: 'DE', phone: '+49 ...', email: 'info@example.de', revenue: '\u20AC5\u201310M', employees: '50', industry: 'SaaS' }] });
+  };
+
+  const removeEntry = (i: number) => {
+    onChange({ ...data, entries: data.entries.filter((_, idx) => idx !== i) });
+  };
+
+  const updateStat = (i: number, key: string, val: string) => {
+    const completionStats = [...data.completionStats];
+    completionStats[i] = { ...completionStats[i], [key]: key === 'pct' ? Number(val) || 0 : val };
+    onChange({ ...data, completionStats });
+  };
+
+  return (
+    <div className="space-y-3">
+      <Field label="Titel" value={data.title} onChange={(v) => onChange({ ...data, title: v })} />
+      <Field label="Untertitel" value={data.subtitle} onChange={(v) => onChange({ ...data, subtitle: v })} />
+      <Field label="Gesamt-Anzahl" value={data.totalCount} onChange={(v) => onChange({ ...data, totalCount: v })} />
+      <Field label="Quelle" value={data.sourceLabel} onChange={(v) => onChange({ ...data, sourceLabel: v })} />
+      <Field label="Completion Label" value={data.completionLabel} onChange={(v) => onChange({ ...data, completionLabel: v })} />
+
+      <div className="border-t border-border pt-3 mt-3">
+        <span className="text-xs text-text-muted font-medium">Farben</span>
+      </div>
+      <ColorRow label="Hintergrund" value={data.backgroundColor} defaultValue="#F8F7F4" onChange={(v) => onChange({ ...data, backgroundColor: v })} />
+      <ColorRow label="Titelfarbe" value={data.textColor} defaultValue="#1A1A2E" onChange={(v) => onChange({ ...data, textColor: v })} />
+      <ColorRow label="Label-Farbe" value={data.labelColor} defaultValue="#8A8A9A" onChange={(v) => onChange({ ...data, labelColor: v })} />
+      <ColorRow label="Gef\u00fcllte Felder" value={data.filledColor} defaultValue="#2563EB" onChange={(v) => onChange({ ...data, filledColor: v })} />
+      <ColorRow label="Leere Felder" value={data.emptyColor} defaultValue="#D4D4D8" onChange={(v) => onChange({ ...data, emptyColor: v })} />
+      <ColorRow label="Rahmen" value={data.borderColor} defaultValue="#E5E5EA" onChange={(v) => onChange({ ...data, borderColor: v })} />
+      <ColorRow label="Warning-Akzent" value={data.warningColor} defaultValue="#10B981" onChange={(v) => onChange({ ...data, warningColor: v })} />
+
+      <div className="border-t border-border pt-3 mt-3">
+        <span className="text-xs text-text-muted font-medium">Completion Stats</span>
+      </div>
+      {data.completionStats.map((stat, i) => (
+        <div key={i} className="flex gap-2 items-end">
+          <div className="flex-1"><Field label="Label" value={stat.label} onChange={(v) => updateStat(i, 'label', v)} /></div>
+          <div className="w-16"><Field label="%" value={String(stat.pct)} onChange={(v) => updateStat(i, 'pct', v)} /></div>
+        </div>
+      ))}
+
+      <div className="border-t border-border pt-3 mt-3 flex items-center justify-between">
+        <span className="text-xs text-text-muted font-medium">Eintr\u00e4ge</span>
+        <button onClick={addEntry} className="text-xs text-primary hover:text-primary-hover">+ Hinzuf\u00fcgen</button>
+      </div>
+
+      {data.entries.map((entry, i) => (
+        <div key={i} className="bg-surface-hover rounded-lg p-3 space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] text-text-muted font-medium uppercase tracking-wider">#{String(i + 1).padStart(3, '0')}</span>
+            {data.entries.length > 1 && (
+              <button onClick={() => removeEntry(i)} className="text-danger text-xs">&times;</button>
+            )}
+          </div>
+          <div className="flex gap-2">
+            <div className="flex-[2]"><Field label="Firma" value={entry.company} onChange={(v) => updateEntry(i, 'company', v)} /></div>
+            <div className="flex-1"><Field label="Land" value={entry.country} onChange={(v) => updateEntry(i, 'country', v)} /></div>
+          </div>
+          <Field label="Domain" value={entry.domain} onChange={(v) => updateEntry(i, 'domain', v)} />
+          <div className="flex gap-2">
+            <div className="flex-1"><Field label="Phone" value={entry.phone} onChange={(v) => updateEntry(i, 'phone', v)} /></div>
+            <div className="flex-1"><Field label="Email" value={entry.email} onChange={(v) => updateEntry(i, 'email', v)} /></div>
+          </div>
+          <div className="flex gap-2">
+            <div className="flex-1"><Field label="Revenue" value={entry.revenue} onChange={(v) => updateEntry(i, 'revenue', v)} /></div>
+            <div className="flex-1"><Field label="Employees" value={entry.employees} onChange={(v) => updateEntry(i, 'employees', v)} /></div>
+          </div>
+          <Field label="Industry" value={entry.industry} onChange={(v) => updateEntry(i, 'industry', v)} />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* ---- Raw Data Form ---- */
+
+function RawDataForm({ data, onChange }: { data: RawDataData; onChange: (d: RawDataData) => void }) {
+  const updateEntry = (i: number, key: string, val: string) => {
+    const entries = [...data.entries];
+    entries[i] = { ...entries[i], [key]: val };
+    onChange({ ...data, entries });
+  };
+
+  const addEntry = () => {
+    onChange({ ...data, entries: [...data.entries, { company: 'Neue Firma GmbH', domain: 'example.de', country: 'DE', phone: '', email: '', revenue: '', employees: '', industry: '' }] });
+  };
+
+  const removeEntry = (i: number) => {
+    onChange({ ...data, entries: data.entries.filter((_, idx) => idx !== i) });
+  };
+
+  return (
+    <div className="space-y-3">
+      <Field label="Titel" value={data.title} onChange={(v) => onChange({ ...data, title: v })} />
+      <Field label="Untertitel" value={data.subtitle} onChange={(v) => onChange({ ...data, subtitle: v })} />
+      <Field label="Gesamt-Anzahl" value={data.totalCount} onChange={(v) => onChange({ ...data, totalCount: v })} />
+      <Field label="Quelle" value={data.sourceLabel} onChange={(v) => onChange({ ...data, sourceLabel: v })} />
+
+      <div className="border-t border-border pt-3 mt-3">
+        <span className="text-xs text-text-muted font-medium">Farben</span>
+      </div>
+      <ColorRow label="Hintergrund" value={data.backgroundColor} defaultValue="#F8F7F4" onChange={(v) => onChange({ ...data, backgroundColor: v })} />
+      <ColorRow label="Titelfarbe" value={data.textColor} defaultValue="#1A1A2E" onChange={(v) => onChange({ ...data, textColor: v })} />
+      <ColorRow label="Label-Farbe" value={data.labelColor} defaultValue="#8A8A9A" onChange={(v) => onChange({ ...data, labelColor: v })} />
+      <ColorRow label="Gef\u00fcllte Felder" value={data.filledColor} defaultValue="#2563EB" onChange={(v) => onChange({ ...data, filledColor: v })} />
+      <ColorRow label="Leere Felder" value={data.emptyColor} defaultValue="#D4D4D8" onChange={(v) => onChange({ ...data, emptyColor: v })} />
+      <ColorRow label="Rahmen" value={data.borderColor} defaultValue="#E5E5EA" onChange={(v) => onChange({ ...data, borderColor: v })} />
+      <ColorRow label="Warning-Akzent" value={data.warningColor} defaultValue="#1A3FD4" onChange={(v) => onChange({ ...data, warningColor: v })} />
+
+      <div className="border-t border-border pt-3 mt-3 flex items-center justify-between">
+        <span className="text-xs text-text-muted font-medium">Eintr\u00e4ge</span>
+        <button onClick={addEntry} className="text-xs text-primary hover:text-primary-hover">+ Hinzuf\u00fcgen</button>
+      </div>
+
+      {data.entries.map((entry, i) => (
+        <div key={i} className="bg-surface-hover rounded-lg p-3 space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] text-text-muted font-medium uppercase tracking-wider">#{String(i + 1).padStart(3, '0')}</span>
+            {data.entries.length > 1 && (
+              <button onClick={() => removeEntry(i)} className="text-danger text-xs">&times;</button>
+            )}
+          </div>
+          <div className="flex gap-2">
+            <div className="flex-[2]"><Field label="Firma" value={entry.company} onChange={(v) => updateEntry(i, 'company', v)} /></div>
+            <div className="flex-1"><Field label="Land" value={entry.country} onChange={(v) => updateEntry(i, 'country', v)} /></div>
+          </div>
+          <Field label="Domain" value={entry.domain} onChange={(v) => updateEntry(i, 'domain', v)} />
+          <div className="flex gap-2">
+            <div className="flex-1"><Field label="Phone" value={entry.phone} onChange={(v) => updateEntry(i, 'phone', v)} /></div>
+            <div className="flex-1"><Field label="Email" value={entry.email} onChange={(v) => updateEntry(i, 'email', v)} /></div>
+          </div>
+          <div className="flex gap-2">
+            <div className="flex-1"><Field label="Revenue" value={entry.revenue} onChange={(v) => updateEntry(i, 'revenue', v)} /></div>
+            <div className="flex-1"><Field label="Employees" value={entry.employees} onChange={(v) => updateEntry(i, 'employees', v)} /></div>
+          </div>
+          <Field label="Industry" value={entry.industry} onChange={(v) => updateEntry(i, 'industry', v)} />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* ---- Outbound Stack Form ---- */
+
+function OutboundStackForm({ data, onChange }: { data: OutboundStackData; onChange: (d: OutboundStackData) => void }) {
+  const updateStep = (i: number, key: string, val: string) => {
+    const steps = [...data.steps];
+    steps[i] = { ...steps[i], [key]: val };
+    onChange({ ...data, steps });
+  };
+
+  const addStep = () => {
+    onChange({ ...data, steps: [...data.steps, { label: 'NEUER SCHRITT', tool: 'Tool Name', url: 'example.com', price: '$0/Mo', description: 'Beschreibung' }] });
+  };
+
+  const removeStep = (i: number) => {
+    onChange({ ...data, steps: data.steps.filter((_, idx) => idx !== i) });
+  };
+
+  return (
+    <div className="space-y-3">
+      <Field label="Titel" value={data.title} onChange={(v) => onChange({ ...data, title: v })} />
+      <Field label="Untertitel" value={data.subtitle} onChange={(v) => onChange({ ...data, subtitle: v })} />
+      <Field label="Quelle" value={data.sourceLabel} onChange={(v) => onChange({ ...data, sourceLabel: v })} />
+      <Field label="Badge" value={data.badgeText} onChange={(v) => onChange({ ...data, badgeText: v })} />
+
+      <div className="border-t border-border pt-3 mt-3">
+        <span className="text-xs text-text-muted font-medium">Farben</span>
+      </div>
+      <ColorRow label="Hintergrund" value={data.backgroundColor} defaultValue="#F5F5F0" onChange={(v) => onChange({ ...data, backgroundColor: v })} />
+      <ColorRow label="Titelfarbe" value={data.textColor} defaultValue="#1A1A2E" onChange={(v) => onChange({ ...data, textColor: v })} />
+      <ColorRow label="Label-Farbe" value={data.labelColor} defaultValue="#8A8A9A" onChange={(v) => onChange({ ...data, labelColor: v })} />
+      <ColorRow label="Gef\u00fcllte Felder" value={data.filledColor} defaultValue="#2563EB" onChange={(v) => onChange({ ...data, filledColor: v })} />
+      <ColorRow label="Leere Felder" value={data.emptyColor} defaultValue="#D4D4D8" onChange={(v) => onChange({ ...data, emptyColor: v })} />
+      <ColorRow label="Rahmen" value={data.borderColor} defaultValue="#E5E5EA" onChange={(v) => onChange({ ...data, borderColor: v })} />
+      <ColorRow label="Warning-Akzent" value={data.warningColor} defaultValue="#1A3FD4" onChange={(v) => onChange({ ...data, warningColor: v })} />
+
+      <div className="border-t border-border pt-3 mt-3 flex items-center justify-between">
+        <span className="text-xs text-text-muted font-medium">Pipeline-Schritte</span>
+        <button onClick={addStep} className="text-xs text-primary hover:text-primary-hover">+ Hinzuf\u00fcgen</button>
+      </div>
+      {data.steps.map((step, i) => (
+        <div key={i} className="bg-surface-hover rounded-lg p-3 space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] text-text-muted font-medium uppercase tracking-wider">Schritt {i + 1}</span>
+            {data.steps.length > 1 && (
+              <button onClick={() => removeStep(i)} className="text-danger text-xs">&times;</button>
+            )}
+          </div>
+          <Field label="Label" value={step.label} onChange={(v) => updateStep(i, 'label', v)} />
+          <Field label="Tool" value={step.tool} onChange={(v) => updateStep(i, 'tool', v)} />
+          <div className="flex gap-2">
+            <div className="flex-1"><Field label="URL" value={step.url} onChange={(v) => updateStep(i, 'url', v)} /></div>
+            <div className="flex-1"><Field label="Preis" value={step.price} onChange={(v) => updateStep(i, 'price', v)} /></div>
+          </div>
+          <Field label="Beschreibung" value={step.description} onChange={(v) => updateStep(i, 'description', v)} />
+        </div>
+      ))}
+
+      <div className="border-t border-border pt-3 mt-3">
+        <span className="text-xs text-text-muted font-medium">Kosten-Vergleich</span>
+      </div>
+      <div className="flex gap-2">
+        <div className="flex-1"><Field label="Links Titel" value={data.costLeft.title} onChange={(v) => onChange({ ...data, costLeft: { ...data.costLeft, title: v } })} /></div>
+        <div className="flex-1"><Field label="Links Preis" value={data.costLeft.price} onChange={(v) => onChange({ ...data, costLeft: { ...data.costLeft, price: v } })} /></div>
+      </div>
+      <Field label="Links Kleingedruckt" value={data.costLeft.subtitle} onChange={(v) => onChange({ ...data, costLeft: { ...data.costLeft, subtitle: v } })} />
+      <div className="flex gap-2">
+        <div className="flex-1"><Field label="Rechts Titel" value={data.costRight.title} onChange={(v) => onChange({ ...data, costRight: { ...data.costRight, title: v } })} /></div>
+        <div className="flex-1"><Field label="Rechts Preis" value={data.costRight.price} onChange={(v) => onChange({ ...data, costRight: { ...data.costRight, price: v } })} /></div>
+      </div>
+      <Field label="Rechts Kleingedruckt" value={data.costRight.subtitle} onChange={(v) => onChange({ ...data, costRight: { ...data.costRight, subtitle: v } })} />
+
+      <div className="border-t border-border pt-3 mt-3">
+        <span className="text-xs text-text-muted font-medium">Ergebnis</span>
+      </div>
+      <Field label="Ergebnis-Metriken" value={data.resultMetrics} onChange={(v) => onChange({ ...data, resultMetrics: v })} textarea />
+      <Field label="Quelle" value={data.resultSource} onChange={(v) => onChange({ ...data, resultSource: v })} />
+    </div>
+  );
+}
+
+/* ---- Agent-Friendly Form ---- */
+
+function AgentFriendlyForm({ data, onChange }: { data: AgentFriendlyData; onChange: (d: AgentFriendlyData) => void }) {
+  const updateLayer = (i: number, key: string, val: string) => {
+    const layers = [...data.layers];
+    layers[i] = { ...layers[i], [key]: val };
+    onChange({ ...data, layers });
+  };
+
+  const updateFact = (i: number, key: string, val: string) => {
+    const keyFacts = [...data.keyFacts];
+    keyFacts[i] = { ...keyFacts[i], [key]: val };
+    onChange({ ...data, keyFacts });
+  };
+
+  const addLayer = () => {
+    onChange({ ...data, layers: [...data.layers, { label: 'NEUER LAYER', description: 'Beschreibung', difficulty: 'Standard' }] });
+  };
+
+  const removeLayer = (i: number) => {
+    onChange({ ...data, layers: data.layers.filter((_, idx) => idx !== i) });
+  };
+
+  const addFact = () => {
+    onChange({ ...data, keyFacts: [...data.keyFacts, { value: '0', label: 'Beschreibung' }] });
+  };
+
+  const removeFact = (i: number) => {
+    onChange({ ...data, keyFacts: data.keyFacts.filter((_, idx) => idx !== i) });
+  };
+
+  return (
+    <div className="space-y-3">
+      <Field label="Titel" value={data.title} onChange={(v) => onChange({ ...data, title: v })} />
+      <Field label="Untertitel" value={data.subtitle} onChange={(v) => onChange({ ...data, subtitle: v })} />
+      <Field label="Quelle" value={data.sourceLabel} onChange={(v) => onChange({ ...data, sourceLabel: v })} />
+      <Field label="Badge" value={data.badgeText} onChange={(v) => onChange({ ...data, badgeText: v })} />
+
+      <div className="border-t border-border pt-3 mt-3">
+        <span className="text-xs text-text-muted font-medium">Farben</span>
+      </div>
+      <ColorRow label="Hintergrund" value={data.backgroundColor} defaultValue="#F5F5F0" onChange={(v) => onChange({ ...data, backgroundColor: v })} />
+      <ColorRow label="Titelfarbe" value={data.textColor} defaultValue="#1A1A2E" onChange={(v) => onChange({ ...data, textColor: v })} />
+      <ColorRow label="Label-Farbe" value={data.labelColor} defaultValue="#8A8A9A" onChange={(v) => onChange({ ...data, labelColor: v })} />
+      <ColorRow label="Prim\u00e4rfarbe" value={data.filledColor} defaultValue="#2563EB" onChange={(v) => onChange({ ...data, filledColor: v })} />
+      <ColorRow label="Leere Felder" value={data.emptyColor} defaultValue="#D4D4D8" onChange={(v) => onChange({ ...data, emptyColor: v })} />
+      <ColorRow label="Rahmen" value={data.borderColor} defaultValue="#E5E5EA" onChange={(v) => onChange({ ...data, borderColor: v })} />
+      <ColorRow label="Akzent" value={data.warningColor} defaultValue="#1A3FD4" onChange={(v) => onChange({ ...data, warningColor: v })} />
+
+      <div className="border-t border-border pt-3 mt-3 flex items-center justify-between">
+        <span className="text-xs text-text-muted font-medium">Pyramiden-Layer</span>
+        <button onClick={addLayer} className="text-xs text-primary hover:text-primary-hover">+ Hinzuf\u00fcgen</button>
+      </div>
+      {data.layers.map((layer, i) => (
+        <div key={i} className="bg-surface-hover rounded-lg p-3 space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] text-text-muted font-medium uppercase tracking-wider">Layer {i + 1}</span>
+            {data.layers.length > 1 && (
+              <button onClick={() => removeLayer(i)} className="text-danger text-xs">&times;</button>
+            )}
+          </div>
+          <Field label="Label" value={layer.label} onChange={(v) => updateLayer(i, 'label', v)} />
+          <Field label="Beschreibung" value={layer.description} onChange={(v) => updateLayer(i, 'description', v)} />
+          <Field label="Schwierigkeit" value={layer.difficulty} onChange={(v) => updateLayer(i, 'difficulty', v)} />
+        </div>
+      ))}
+
+      <div className="border-t border-border pt-3 mt-3 flex items-center justify-between">
+        <span className="text-xs text-text-muted font-medium">Key Facts</span>
+        <button onClick={addFact} className="text-xs text-primary hover:text-primary-hover">+ Hinzuf\u00fcgen</button>
+      </div>
+      {data.keyFacts.map((fact, i) => (
+        <div key={i} className="bg-surface-hover rounded-lg p-3 space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] text-text-muted font-medium uppercase tracking-wider">Fakt {i + 1}</span>
+            {data.keyFacts.length > 1 && (
+              <button onClick={() => removeFact(i)} className="text-danger text-xs">&times;</button>
+            )}
+          </div>
+          <Field label="Wert" value={fact.value} onChange={(v) => updateFact(i, 'value', v)} />
+          <Field label="Label" value={fact.label} onChange={(v) => updateFact(i, 'label', v)} />
+        </div>
+      ))}
+
+      <div className="border-t border-border pt-3 mt-3">
+        <span className="text-xs text-text-muted font-medium">Footer</span>
+      </div>
+      <Field label="Tools-Zeile" value={data.toolsLine} onChange={(v) => onChange({ ...data, toolsLine: v })} textarea />
+      <Field label="Ergebnis-Text" value={data.resultMetrics} onChange={(v) => onChange({ ...data, resultMetrics: v })} textarea />
+      <Field label="URL/Quelle" value={data.resultSource} onChange={(v) => onChange({ ...data, resultSource: v })} />
+    </div>
+  );
+}
+
+/* ---- Multichannel Outreach Form ---- */
+
+function MultichannelOutreachForm({ data, onChange }: { data: MultichannelOutreachData; onChange: (d: MultichannelOutreachData) => void }) {
+  const updateChannelEntry = (side: 'leftChannel' | 'rightChannel', si: number, ei: number, key: string, val: string) => {
+    const channel = { ...data[side] };
+    const steps = [...channel.steps];
+    const entries = [...steps[si].entries];
+    entries[ei] = { ...entries[ei], [key]: val };
+    steps[si] = { ...steps[si], entries };
+    channel.steps = steps;
+    onChange({ ...data, [side]: channel });
+  };
+
+  const updateStep = (side: 'leftChannel' | 'rightChannel', si: number, key: string, val: string) => {
+    const channel = { ...data[side] };
+    const steps = [...channel.steps];
+    steps[si] = { ...steps[si], [key]: val };
+    channel.steps = steps;
+    onChange({ ...data, [side]: channel });
+  };
+
+  const addEntry = (side: 'leftChannel' | 'rightChannel', si: number) => {
+    const channel = { ...data[side] };
+    const steps = [...channel.steps];
+    steps[si] = { ...steps[si], entries: [...steps[si].entries, { name: 'name@example.de', status: 'Pending\u2026' }] };
+    channel.steps = steps;
+    onChange({ ...data, [side]: channel });
+  };
+
+  const removeEntry = (side: 'leftChannel' | 'rightChannel', si: number, ei: number) => {
+    const channel = { ...data[side] };
+    const steps = [...channel.steps];
+    steps[si] = { ...steps[si], entries: steps[si].entries.filter((_, idx) => idx !== ei) };
+    channel.steps = steps;
+    onChange({ ...data, [side]: channel });
+  };
+
+  const addStep = (side: 'leftChannel' | 'rightChannel') => {
+    const channel = { ...data[side] };
+    channel.steps = [...channel.steps, { day: 'DAY X', action: 'Aktion', entries: [{ name: 'name@example.de', status: 'Pending\u2026' }] }];
+    onChange({ ...data, [side]: channel });
+  };
+
+  const removeStep = (side: 'leftChannel' | 'rightChannel', si: number) => {
+    const channel = { ...data[side] };
+    channel.steps = channel.steps.filter((_, idx) => idx !== si);
+    onChange({ ...data, [side]: channel });
+  };
+
+  const updateFooterStat = (i: number, key: string, val: string) => {
+    const footerStats = [...data.footerStats];
+    footerStats[i] = { ...footerStats[i], [key]: val };
+    onChange({ ...data, footerStats });
+  };
+
+  const renderChannelEditor = (side: 'leftChannel' | 'rightChannel', label: string) => {
+    const channel = data[side];
+    return (
+      <>
+        <div className="border-t border-border pt-3 mt-3 flex items-center justify-between">
+          <span className="text-xs text-text-muted font-medium">{label}</span>
+          <button onClick={() => addStep(side)} className="text-xs text-primary hover:text-primary-hover">+ Step</button>
+        </div>
+        <Field label="Icon" value={channel.icon} onChange={(v) => onChange({ ...data, [side]: { ...channel, icon: v } })} />
+        <Field label="Header" value={channel.header} onChange={(v) => onChange({ ...data, [side]: { ...channel, header: v } })} />
+        {channel.steps.map((step, si) => (
+          <div key={si} className="bg-surface-hover rounded-lg p-3 space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] text-text-muted font-medium uppercase tracking-wider">{step.day}</span>
+              {channel.steps.length > 1 && (
+                <button onClick={() => removeStep(side, si)} className="text-danger text-xs">&times;</button>
+              )}
+            </div>
+            <div className="flex gap-2">
+              <div className="flex-1"><Field label="Day" value={step.day} onChange={(v) => updateStep(side, si, 'day', v)} /></div>
+              <div className="flex-1"><Field label="Aktion" value={step.action} onChange={(v) => updateStep(side, si, 'action', v)} /></div>
+            </div>
+            <div className="flex items-center justify-between mt-1">
+              <span className="text-[10px] text-text-muted">Eintr\u00e4ge</span>
+              <button onClick={() => addEntry(side, si)} className="text-xs text-primary hover:text-primary-hover">+</button>
+            </div>
+            {step.entries.map((entry, ei) => (
+              <div key={ei} className="flex gap-2 items-end">
+                <div className="flex-[2]"><Field label="Name" value={entry.name} onChange={(v) => updateChannelEntry(side, si, ei, 'name', v)} /></div>
+                <div className="flex-1"><Field label="Status" value={entry.status} onChange={(v) => updateChannelEntry(side, si, ei, 'status', v)} /></div>
+                {step.entries.length > 1 && (
+                  <button onClick={() => removeEntry(side, si, ei)} className="text-danger text-xs mb-1">&times;</button>
+                )}
+              </div>
+            ))}
+          </div>
+        ))}
+      </>
+    );
+  };
+
+  return (
+    <div className="space-y-3">
+      <Field label="Titel" value={data.title} onChange={(v) => onChange({ ...data, title: v })} />
+      <Field label="Untertitel" value={data.subtitle} onChange={(v) => onChange({ ...data, subtitle: v })} />
+      <Field label="Quelle" value={data.sourceLabel} onChange={(v) => onChange({ ...data, sourceLabel: v })} />
+      <Field label="Badge" value={data.badgeText} onChange={(v) => onChange({ ...data, badgeText: v })} />
+      <Field label="Counter Wert" value={data.counterValue} onChange={(v) => onChange({ ...data, counterValue: v })} />
+      <Field label="Counter Label" value={data.counterLabel} onChange={(v) => onChange({ ...data, counterLabel: v })} />
+      <Field label="Footer Label" value={data.footerLabel} onChange={(v) => onChange({ ...data, footerLabel: v })} />
+
+      <div className="border-t border-border pt-3 mt-3">
+        <span className="text-xs text-text-muted font-medium">Farben</span>
+      </div>
+      <ColorRow label="Hintergrund" value={data.backgroundColor} defaultValue="#F8F7F4" onChange={(v) => onChange({ ...data, backgroundColor: v })} />
+      <ColorRow label="Titelfarbe" value={data.textColor} defaultValue="#1A1A2E" onChange={(v) => onChange({ ...data, textColor: v })} />
+      <ColorRow label="Label-Farbe" value={data.labelColor} defaultValue="#8A8A9A" onChange={(v) => onChange({ ...data, labelColor: v })} />
+      <ColorRow label="Gef\u00fcllte Felder" value={data.filledColor} defaultValue="#2563EB" onChange={(v) => onChange({ ...data, filledColor: v })} />
+      <ColorRow label="Leere Felder" value={data.emptyColor} defaultValue="#D4D4D8" onChange={(v) => onChange({ ...data, emptyColor: v })} />
+      <ColorRow label="Rahmen" value={data.borderColor} defaultValue="#E5E5EA" onChange={(v) => onChange({ ...data, borderColor: v })} />
+      <ColorRow label="Warning-Akzent" value={data.warningColor} defaultValue="#2563EB" onChange={(v) => onChange({ ...data, warningColor: v })} />
+
+      <div className="border-t border-border pt-3 mt-3">
+        <span className="text-xs text-text-muted font-medium">Footer Stats</span>
+      </div>
+      {data.footerStats.map((stat, i) => (
+        <div key={i} className="flex gap-2">
+          <div className="flex-1"><Field label="Label" value={stat.label} onChange={(v) => updateFooterStat(i, 'label', v)} /></div>
+          <div className="flex-1"><Field label="Wert" value={stat.value} onChange={(v) => updateFooterStat(i, 'value', v)} /></div>
+        </div>
+      ))}
+
+      {renderChannelEditor('leftChannel', 'Linke Spalte (Email)')}
+      {renderChannelEditor('rightChannel', 'Rechte Spalte (LinkedIn)')}
+    </div>
+  );
+}
+
+/* ---- Personalized Outreach Form ---- */
+
+function PersonalizedOutreachForm({ data, onChange }: { data: PersonalizedOutreachData; onChange: (d: PersonalizedOutreachData) => void }) {
+  const updateMessage = (i: number, key: string, val: string) => {
+    const messages = [...data.messages];
+    messages[i] = { ...messages[i], [key]: val };
+    onChange({ ...data, messages });
+  };
+
+  const updateVariable = (mi: number, vi: number, key: string, val: string) => {
+    const messages = [...data.messages];
+    const variables = [...messages[mi].variables];
+    variables[vi] = { ...variables[vi], [key]: val };
+    messages[mi] = { ...messages[mi], variables };
+    onChange({ ...data, messages });
+  };
+
+  const addVariable = (mi: number) => {
+    const messages = [...data.messages];
+    messages[mi] = { ...messages[mi], variables: [...messages[mi].variables, { key: '{{new}}', value: 'Wert' }] };
+    onChange({ ...data, messages });
+  };
+
+  const removeVariable = (mi: number, vi: number) => {
+    const messages = [...data.messages];
+    messages[mi] = { ...messages[mi], variables: messages[mi].variables.filter((_, idx) => idx !== vi) };
+    onChange({ ...data, messages });
+  };
+
+  const addMessage = () => {
+    onChange({ ...data, messages: [...data.messages, { to: 'name@example.de', subject: 'Betreff', variables: [{ key: '{{firmenname}}', value: 'Firma' }], preview: 'Nachricht...', status: '\u2705 READY TO SEND' }] });
+  };
+
+  const removeMessage = (i: number) => {
+    onChange({ ...data, messages: data.messages.filter((_, idx) => idx !== i) });
+  };
+
+  const updateFooterStat = (i: number, key: string, val: string) => {
+    const footerStats = [...data.footerStats];
+    footerStats[i] = { ...footerStats[i], [key]: val };
+    onChange({ ...data, footerStats });
+  };
+
+  return (
+    <div className="space-y-3">
+      <Field label="Titel" value={data.title} onChange={(v) => onChange({ ...data, title: v })} />
+      <Field label="Untertitel" value={data.subtitle} onChange={(v) => onChange({ ...data, subtitle: v })} />
+      <Field label="Quelle" value={data.sourceLabel} onChange={(v) => onChange({ ...data, sourceLabel: v })} />
+      <Field label="Badge" value={data.badgeText} onChange={(v) => onChange({ ...data, badgeText: v })} />
+      <Field label="Nachrichten-Anzahl" value={data.messageCount} onChange={(v) => onChange({ ...data, messageCount: v })} />
+      <Field label="Counter Label" value={data.counterLabel} onChange={(v) => onChange({ ...data, counterLabel: v })} />
+      <Field label="Footer Label" value={data.footerLabel} onChange={(v) => onChange({ ...data, footerLabel: v })} />
+
+      <div className="border-t border-border pt-3 mt-3">
+        <span className="text-xs text-text-muted font-medium">Farben</span>
+      </div>
+      <ColorRow label="Hintergrund" value={data.backgroundColor} defaultValue="#F8F7F4" onChange={(v) => onChange({ ...data, backgroundColor: v })} />
+      <ColorRow label="Titelfarbe" value={data.textColor} defaultValue="#1A1A2E" onChange={(v) => onChange({ ...data, textColor: v })} />
+      <ColorRow label="Label-Farbe" value={data.labelColor} defaultValue="#8A8A9A" onChange={(v) => onChange({ ...data, labelColor: v })} />
+      <ColorRow label="Gef\u00fcllte Felder" value={data.filledColor} defaultValue="#2563EB" onChange={(v) => onChange({ ...data, filledColor: v })} />
+      <ColorRow label="Leere Felder" value={data.emptyColor} defaultValue="#D4D4D8" onChange={(v) => onChange({ ...data, emptyColor: v })} />
+      <ColorRow label="Rahmen" value={data.borderColor} defaultValue="#E5E5EA" onChange={(v) => onChange({ ...data, borderColor: v })} />
+      <ColorRow label="Warning-Akzent" value={data.warningColor} defaultValue="#2563EB" onChange={(v) => onChange({ ...data, warningColor: v })} />
+
+      <div className="border-t border-border pt-3 mt-3">
+        <span className="text-xs text-text-muted font-medium">Footer Stats</span>
+      </div>
+      {data.footerStats.map((stat, i) => (
+        <div key={i} className="flex gap-2">
+          <div className="flex-1"><Field label="Label" value={stat.label} onChange={(v) => updateFooterStat(i, 'label', v)} /></div>
+          <div className="flex-1"><Field label="Wert" value={stat.value} onChange={(v) => updateFooterStat(i, 'value', v)} /></div>
+        </div>
+      ))}
+
+      <div className="border-t border-border pt-3 mt-3 flex items-center justify-between">
+        <span className="text-xs text-text-muted font-medium">Nachrichten</span>
+        <button onClick={addMessage} className="text-xs text-primary hover:text-primary-hover">+ Hinzuf\u00fcgen</button>
+      </div>
+
+      {data.messages.map((msg, i) => (
+        <div key={i} className="bg-surface-hover rounded-lg p-3 space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] text-text-muted font-medium uppercase tracking-wider">Message #{i + 1}</span>
+            {data.messages.length > 1 && (
+              <button onClick={() => removeMessage(i)} className="text-danger text-xs">&times;</button>
+            )}
+          </div>
+          <Field label="An" value={msg.to} onChange={(v) => updateMessage(i, 'to', v)} />
+          <Field label="Betreff" value={msg.subject} onChange={(v) => updateMessage(i, 'subject', v)} />
+          <Field label="Preview" value={msg.preview} onChange={(v) => updateMessage(i, 'preview', v)} textarea />
+          <Field label="Status" value={msg.status} onChange={(v) => updateMessage(i, 'status', v)} />
+          <div className="border-t border-border pt-2 mt-2 flex items-center justify-between">
+            <span className="text-[10px] text-text-muted font-medium">Variablen</span>
+            <button onClick={() => addVariable(i)} className="text-xs text-primary hover:text-primary-hover">+</button>
+          </div>
+          {msg.variables.map((v, vi) => (
+            <div key={vi} className="flex gap-2 items-end">
+              <div className="flex-1"><Field label="Key" value={v.key} onChange={(val) => updateVariable(i, vi, 'key', val)} /></div>
+              <div className="flex-1"><Field label="Value" value={v.value} onChange={(val) => updateVariable(i, vi, 'value', val)} /></div>
+              {msg.variables.length > 1 && (
+                <button onClick={() => removeVariable(i, vi)} className="text-danger text-xs mb-1">&times;</button>
+              )}
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* ---- Qualified Data Form ---- */
+
+function QualifiedDataForm({ data, onChange }: { data: QualifiedDataData; onChange: (d: QualifiedDataData) => void }) {
+  const updateEntry = (i: number, key: string, val: string) => {
+    const entries = [...data.entries];
+    entries[i] = { ...entries[i], [key]: key === 'icpScore' ? Number(val) || 0 : val };
+    onChange({ ...data, entries });
+  };
+
+  const addEntry = () => {
+    onChange({ ...data, entries: [...data.entries, { company: 'Neue Firma GmbH', domain: 'example.de', employees: '50–200', revenue: '€5M–10M', industry: 'SaaS', icpScore: 70, status: 'Review' }] });
+  };
+
+  const removeEntry = (i: number) => {
+    onChange({ ...data, entries: data.entries.filter((_, idx) => idx !== i) });
+  };
+
+  const updateFooterStat = (i: number, key: string, val: string) => {
+    const footerStats = [...data.footerStats];
+    footerStats[i] = { ...footerStats[i], [key]: val };
+    onChange({ ...data, footerStats });
+  };
+
+  return (
+    <div className="space-y-3">
+      <Field label="Titel" value={data.title} onChange={(v) => onChange({ ...data, title: v })} />
+      <Field label="Untertitel" value={data.subtitle} onChange={(v) => onChange({ ...data, subtitle: v })} />
+      <Field label="Gesamt-Anzahl" value={data.totalCount} onChange={(v) => onChange({ ...data, totalCount: v })} />
+      <Field label="Qualified Count" value={data.qualifiedCount} onChange={(v) => onChange({ ...data, qualifiedCount: v })} />
+      <Field label="Quelle" value={data.sourceLabel} onChange={(v) => onChange({ ...data, sourceLabel: v })} />
+      <Field label="Footer Label" value={data.footerLabel} onChange={(v) => onChange({ ...data, footerLabel: v })} />
+
+      <div className="border-t border-border pt-3 mt-3">
+        <span className="text-xs text-text-muted font-medium">Farben</span>
+      </div>
+      <ColorRow label="Hintergrund" value={data.backgroundColor} defaultValue="#F8F7F4" onChange={(v) => onChange({ ...data, backgroundColor: v })} />
+      <ColorRow label="Titelfarbe" value={data.textColor} defaultValue="#1A1A2E" onChange={(v) => onChange({ ...data, textColor: v })} />
+      <ColorRow label="Label-Farbe" value={data.labelColor} defaultValue="#8A8A9A" onChange={(v) => onChange({ ...data, labelColor: v })} />
+      <ColorRow label="Gef\u00fcllte Felder" value={data.filledColor} defaultValue="#2563EB" onChange={(v) => onChange({ ...data, filledColor: v })} />
+      <ColorRow label="Leere Felder" value={data.emptyColor} defaultValue="#D4D4D8" onChange={(v) => onChange({ ...data, emptyColor: v })} />
+      <ColorRow label="Rahmen" value={data.borderColor} defaultValue="#E5E5EA" onChange={(v) => onChange({ ...data, borderColor: v })} />
+      <ColorRow label="Warning-Akzent" value={data.warningColor} defaultValue="#2563EB" onChange={(v) => onChange({ ...data, warningColor: v })} />
+
+      <div className="border-t border-border pt-3 mt-3">
+        <span className="text-xs text-text-muted font-medium">Footer Stats</span>
+      </div>
+      {data.footerStats.map((stat, i) => (
+        <div key={i} className="flex gap-2">
+          <div className="flex-1"><Field label="Label" value={stat.label} onChange={(v) => updateFooterStat(i, 'label', v)} /></div>
+          <div className="flex-1"><Field label="Wert" value={stat.value} onChange={(v) => updateFooterStat(i, 'value', v)} /></div>
+        </div>
+      ))}
+
+      <div className="border-t border-border pt-3 mt-3 flex items-center justify-between">
+        <span className="text-xs text-text-muted font-medium">Eintr\u00e4ge</span>
+        <button onClick={addEntry} className="text-xs text-primary hover:text-primary-hover">+ Hinzuf\u00fcgen</button>
+      </div>
+
+      {data.entries.map((entry, i) => (
+        <div key={i} className="bg-surface-hover rounded-lg p-3 space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] text-text-muted font-medium uppercase tracking-wider">#{String(i + 1).padStart(3, '0')}</span>
+            {data.entries.length > 1 && (
+              <button onClick={() => removeEntry(i)} className="text-danger text-xs">&times;</button>
+            )}
+          </div>
+          <div className="flex gap-2">
+            <div className="flex-[2]"><Field label="Firma" value={entry.company} onChange={(v) => updateEntry(i, 'company', v)} /></div>
+            <div className="flex-1"><Field label="Domain" value={entry.domain} onChange={(v) => updateEntry(i, 'domain', v)} /></div>
+          </div>
+          <div className="flex gap-2">
+            <div className="flex-1"><Field label="Employees" value={entry.employees} onChange={(v) => updateEntry(i, 'employees', v)} /></div>
+            <div className="flex-1"><Field label="Revenue" value={entry.revenue} onChange={(v) => updateEntry(i, 'revenue', v)} /></div>
+          </div>
+          <Field label="Industry" value={entry.industry} onChange={(v) => updateEntry(i, 'industry', v)} />
+          <div className="flex gap-2">
+            <div className="flex-1"><Field label="ICP Score" value={String(entry.icpScore)} onChange={(v) => updateEntry(i, 'icpScore', v)} /></div>
+            <div className="flex-1"><Field label="Status" value={entry.status} onChange={(v) => updateEntry(i, 'status', v)} /></div>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }

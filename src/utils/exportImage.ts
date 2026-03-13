@@ -1,6 +1,18 @@
-import html2canvas from 'html2canvas';
+import { toPng, toJpeg } from 'html-to-image';
 import JSZip from 'jszip';
 import type { FormatPreset } from './formats';
+
+function captureElement(el: HTMLElement, format: FormatPreset, imageType: 'png' | 'jpeg') {
+  const opts = {
+    width: format.width,
+    height: format.height,
+    pixelRatio: 2,
+    style: { transform: 'none', transformOrigin: '0 0' },
+  };
+  return imageType === 'jpeg'
+    ? toJpeg(el, { ...opts, quality: 0.92 })
+    : toPng(el, opts);
+}
 
 export async function exportSlideAsImage(
   slideIndex: number,
@@ -11,17 +23,8 @@ export async function exportSlideAsImage(
   const el = document.getElementById(`slide-export-${slideIndex}`);
   if (!el) return;
 
-  const canvas = await html2canvas(el, {
-    width: format.width,
-    height: format.height,
-    scale: 1.5,
-    useCORS: true,
-    backgroundColor: null,
-  });
-
-  const mimeType = imageType === 'jpeg' ? 'image/jpeg' : 'image/png';
+  const dataUrl = await captureElement(el, format, imageType);
   const ext = imageType === 'jpeg' ? 'jpg' : 'png';
-  const dataUrl = canvas.toDataURL(mimeType, 0.92);
 
   const a = document.createElement('a');
   a.href = dataUrl;
@@ -36,22 +39,13 @@ export async function exportAllSlidesAsZip(
   imageType: 'png' | 'jpeg' = 'png',
 ) {
   const zip = new JSZip();
-  const mimeType = imageType === 'jpeg' ? 'image/jpeg' : 'image/png';
   const ext = imageType === 'jpeg' ? 'jpg' : 'png';
 
   for (let i = 0; i < slideCount; i++) {
     const el = document.getElementById(`slide-export-${i}`);
     if (!el) continue;
 
-    const canvas = await html2canvas(el, {
-      width: format.width,
-      height: format.height,
-      scale: 1.5,
-      useCORS: true,
-      backgroundColor: null,
-    });
-
-    const dataUrl = canvas.toDataURL(mimeType, 0.92);
+    const dataUrl = await captureElement(el, format, imageType);
     const base64 = dataUrl.split(',')[1];
     zip.file(`slide-${i + 1}.${ext}`, base64, { base64: true });
   }

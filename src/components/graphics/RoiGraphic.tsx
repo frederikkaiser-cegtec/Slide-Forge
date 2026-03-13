@@ -185,6 +185,9 @@ export function RoiGraphic({ data, width, height }: { data: RoiData; width: numb
                 width={isTall ? (width - 120 * s) : (width * 0.52)}
                 height={isTall ? height * 0.28 : height * 0.55}
                 scale={s}
+                bgColor={bg}
+                accentColor={BLUE}
+                accentColor2={PINK}
               />
             </div>
           )}
