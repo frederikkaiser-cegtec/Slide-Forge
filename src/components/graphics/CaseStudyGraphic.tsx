@@ -1,4 +1,4 @@
-import type { CaseStudyData } from '../../App';
+import type { CaseStudyData } from '../../types/graphics';
 import { BrandedChart } from './BrandedChart';
 import { LOGO_URL } from '../../utils/assets';
 

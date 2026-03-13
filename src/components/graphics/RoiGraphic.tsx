@@ -1,4 +1,4 @@
-import type { RoiData } from '../../App';
+import type { RoiData } from '../../types/graphics';
 import { BrandedChart } from './BrandedChart';
 import { LOGO_URL } from '../../utils/assets';
 

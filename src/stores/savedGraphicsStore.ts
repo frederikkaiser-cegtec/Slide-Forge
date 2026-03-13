@@ -1,17 +1,12 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { CaseStudyData, RoiData } from '../App';
-import type { KpiBannerData } from '../components/graphics/KpiBannerGraphic';
-import type { RevenueSystemsData } from '../components/graphics/RevenueSystemsGraphic';
 import type { InfographicData } from '../components/graphics/InfographicGraphic';
-
-type GraphicType = 'case-study' | 'roi' | 'kpi-banner' | 'revenue-systems' | 'infographic';
 
 export interface SavedGraphic {
   id: string;
   name: string;
-  type: GraphicType;
-  data: CaseStudyData | RoiData | KpiBannerData | RevenueSystemsData | InfographicData;
+  type: string;
+  data: any;
   formatId: string;
   savedAt: number;
 }
@@ -343,7 +338,7 @@ const SEED_VERSION = 'v3-real-cases';
 interface SavedGraphicsState {
   graphics: SavedGraphic[];
   _seedVersion?: string;
-  save: (name: string, type: GraphicType, data: any, formatId: string) => string;
+  save: (name: string, type: string, data: any, formatId: string) => string;
   overwrite: (id: string, data: any) => void;
   rename: (id: string, name: string) => void;
   remove: (id: string) => void;

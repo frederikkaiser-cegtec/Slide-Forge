@@ -1,4 +1,4 @@
-import type { CaseStudyData, RoiData } from '../App';
+import type { CaseStudyData, RoiData } from '../types/graphics';
 import type { KpiBannerData } from '../components/graphics/KpiBannerGraphic';
 import type { InfographicData } from '../components/graphics/InfographicGraphic';
 
