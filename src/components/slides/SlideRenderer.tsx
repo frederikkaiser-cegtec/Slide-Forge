@@ -49,6 +49,7 @@ export function SlideRenderer({
         height,
         background: slide.background,
         fontFamily: "'Inter', system-ui, sans-serif",
+        isolation: 'isolate',
       }}
       onClick={(e) => {
         if (e.target === e.currentTarget) onBackgroundClick?.();
@@ -149,25 +150,21 @@ function RenderElement({
   if (type === 'image') {
     return (
       <div
-        style={baseStyle}
+        style={{
+          ...baseStyle,
+          backgroundImage: `url(${resolveAsset(content)})`,
+          backgroundSize: style.objectFit === 'contain' ? 'contain' : 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          borderRadius: style.borderRadius ? style.borderRadius * scaleX : 0,
+          filter: style.filter || undefined,
+        }}
         onClick={(e) => {
           if (!interactive) return;
           e.stopPropagation();
           onClick();
         }}
       >
-        <img
-          src={resolveAsset(content)}
-          alt=""
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: style.objectFit || 'cover',
-            borderRadius: style.borderRadius ? style.borderRadius * scaleX : 0,
-            filter: style.filter || undefined,
-          }}
-          draggable={false}
-        />
         {isSelected && interactive && (
           <div className="absolute inset-0 border-2 border-blue-500 pointer-events-none" />
         )}

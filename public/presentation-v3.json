@@ -3037,10 +3037,10 @@
           "width": 76,
           "height": 12,
           "rotation": 0,
-          "content": "<p style=\"color: #c8d5e2\"><strong>In 30 Minuten wissen Sie, was Ihr Dach einbringt.</strong><br/>Kostenlos. Unverbindlich. Konkrete Zahlen für Ihre Dachfläche.</p>",
+          "content": "<p style=\"color: #ffffff\"><strong>In 30 Minuten wissen Sie, was Ihr Dach einbringt.</strong><br/>Kostenlos. Unverbindlich. Konkrete Zahlen für Ihre Dachfläche.</p>",
           "style": {
             "fontSize": 32,
-            "color": "#c8d5e2",
+            "color": "#ffffff",
             "textAlign": "center"
           }
         },
