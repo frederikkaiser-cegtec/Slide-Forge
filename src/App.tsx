@@ -1,7 +1,10 @@
 import { useState, useRef, useCallback, useReducer } from 'react';
-import { Download, Palette, GitBranch, Save, FolderOpen } from 'lucide-react';
+import { Download, Palette, GitBranch, Save, FolderOpen, Presentation } from 'lucide-react';
 import { toPng, toJpeg } from 'html-to-image';
 import { DiagramEditor } from './components/diagram/DiagramEditor';
+import { EditorLayout } from './components/editor/EditorLayout';
+import { PresentationMode } from './components/presentation/PresentationMode';
+import { useFileSync } from './hooks/useFileSync';
 import { useEditorStore } from './stores/editorStore';
 import { FORMAT_PRESETS } from './utils/formats';
 import { LOGO_URL } from './utils/assets';
@@ -108,6 +111,11 @@ function App() {
     link.click();
   };
 
+  // ── Slides mode ────────────────────────────────────────────
+  if (mode === 'slides') {
+    return <SlidesMode />;
+  }
+
   // ── Diagram mode ───────────────────────────────────────────
   if (mode === 'diagram') {
     return (
@@ -122,6 +130,12 @@ function App() {
           </button>
           <button className="flex items-center gap-1 px-2.5 py-1 rounded text-xs bg-primary text-white">
             <GitBranch size={12} /> Diagramme
+          </button>
+          <button
+            onClick={() => setMode('slides')}
+            className="flex items-center gap-1 px-2.5 py-1 rounded text-xs text-text-muted hover:text-text hover:bg-surface-hover transition-colors"
+          >
+            <Presentation size={12} /> Slides
           </button>
         </div>
         <div className="flex-1 overflow-hidden">
@@ -151,6 +165,12 @@ function App() {
                 className="flex items-center gap-1 px-2 py-1 rounded text-[10px] text-text-muted hover:text-text hover:bg-surface-hover transition-colors"
               >
                 <GitBranch size={10} /> Diagramme
+              </button>
+              <button
+                onClick={() => setMode('slides')}
+                className="flex items-center gap-1 px-2 py-1 rounded text-[10px] text-text-muted hover:text-text hover:bg-surface-hover transition-colors"
+              >
+                <Presentation size={10} /> Slides
               </button>
             </div>
           </div>
@@ -251,6 +271,30 @@ function App() {
           onLoad={handleLoadGraphic}
         />
       )}
+    </div>
+  );
+}
+
+function SlidesMode() {
+  const { setMode } = useEditorStore();
+  const isPresentationMode = useEditorStore((s) => s.isPresentationMode);
+  useFileSync();
+  if (isPresentationMode) return <PresentationMode />;
+  return (
+    <div className="h-full flex flex-col">
+      <div className="h-9 bg-bg border-b border-border flex items-center px-3 gap-1 shrink-0">
+        <img src={LOGO_URL} alt="CegTec" className="h-4 mr-2" />
+        <button onClick={() => setMode('graphic')} className="flex items-center gap-1 px-2.5 py-1 rounded text-xs text-text-muted hover:text-text hover:bg-surface-hover transition-colors">
+          <Palette size={12} /> Grafiken
+        </button>
+        <button onClick={() => setMode('diagram')} className="flex items-center gap-1 px-2.5 py-1 rounded text-xs text-text-muted hover:text-text hover:bg-surface-hover transition-colors">
+          <GitBranch size={12} /> Diagramme
+        </button>
+        <button className="flex items-center gap-1 px-2.5 py-1 rounded text-xs bg-primary text-white">
+          <Presentation size={12} /> Slides
+        </button>
+      </div>
+      <div className="flex-1 overflow-hidden"><EditorLayout /></div>
     </div>
   );
 }

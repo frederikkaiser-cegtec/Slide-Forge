@@ -4,7 +4,8 @@ import { usePresentationStore } from '../stores/presentationStore';
 function getSyncFile() {
   const params = new URLSearchParams(window.location.search);
   const v = params.get('v');
-  return v ? `/presentation-v${v}.json` : '/presentation.json';
+  const base = import.meta.env.BASE_URL || '/';
+  return v ? `${base}presentation-v${v}.json` : `${base}presentation.json`;
 }
 const SYNC_FILE = getSyncFile();
 const POLL_INTERVAL = 1500;

@@ -1,6 +1,12 @@
 import { Lock } from 'lucide-react';
 import type { Slide, SlideElement } from '../../types';
 
+const BASE = import.meta.env.BASE_URL || '/';
+function resolveAsset(src: string): string {
+  if (!src || src.startsWith('http') || src.startsWith('data:') || src.startsWith(BASE)) return src;
+  return src.startsWith('/') ? `${BASE}${src.slice(1)}` : `${BASE}${src}`;
+}
+
 interface SlideRendererProps {
   slide: Slide;
   width: number;
@@ -151,7 +157,7 @@ function RenderElement({
         }}
       >
         <img
-          src={content}
+          src={resolveAsset(content)}
           alt=""
           style={{
             width: '100%',

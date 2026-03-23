@@ -1,7 +1,7 @@
 import { Field } from './Field';
 import type { ChartConfig, ChartType, ChartDataPoint } from '../../types/charts';
 
-const CHART_TYPES: { value: ChartType; label: string }[] = [
+export const CHART_TYPES: { value: ChartType; label: string }[] = [
   { value: 'none', label: 'Kein Diagramm' },
   { value: 'bar', label: 'Balken' },
   { value: 'line', label: 'Linie' },
