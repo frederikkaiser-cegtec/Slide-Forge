@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { usePresentationStore } from '../../stores/presentationStore';
 import { useEditorStore } from '../../stores/editorStore';
 import { SlideRenderer } from '../slides/SlideRenderer';
@@ -78,18 +79,23 @@ export function SlideCanvas() {
 
   return (
     <div ref={containerRef} className="flex-1 flex items-center justify-center bg-bg overflow-auto">
-      <div className="relative" style={{ width: canvasSize.width, height: canvasSize.height }}>
-        {/* Export targets (hidden) */}
-        {slides.map((slide, idx) => (
-          <div
-            key={slide.id}
-            id={`slide-export-${idx}`}
-            style={{ position: 'absolute', left: -9999, top: 0, width: format.width, height: format.height }}
-          >
-            <SlideRenderer slide={slide} width={format.width} height={format.height} baseWidth={format.width} baseHeight={format.height} />
-          </div>
-        ))}
+      {/* Export targets - rendered in portal outside canvas to prevent ghost text */}
+      {createPortal(
+        <div id="slide-export-container" style={{ position: 'fixed', left: -9999, top: -9999, pointerEvents: 'none', display: 'none' }} aria-hidden="true">
+          {slides.map((slide, idx) => (
+            <div
+              key={slide.id}
+              id={`slide-export-${idx}`}
+              style={{ width: format.width, height: format.height }}
+            >
+              <SlideRenderer slide={slide} width={format.width} height={format.height} baseWidth={format.width} baseHeight={format.height} />
+            </div>
+          ))}
+        </div>,
+        document.body
+      )}
 
+      <div className="relative" style={{ width: canvasSize.width, height: canvasSize.height }}>
         {/* Main canvas */}
         <div className="rounded-lg overflow-hidden shadow-2xl ring-1 ring-border">
           {editingElementId ? (

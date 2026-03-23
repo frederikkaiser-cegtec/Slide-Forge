@@ -67,6 +67,9 @@ export function EditorToolbar() {
   };
 
   const handleExportPDF = async () => {
+    const container = document.getElementById('slide-export-container');
+    if (container) container.style.display = 'block';
+
     const isLandscape = format.width >= format.height;
     const pdf = new jsPDF({
       orientation: isLandscape ? 'landscape' : 'portrait',
@@ -89,6 +92,7 @@ export function EditorToolbar() {
       pdf.addImage(dataUrl, 'PNG', 0, 0, format.width, format.height);
     }
 
+    if (container) container.style.display = 'none';
     pdf.save(`${safeFilename}.pdf`);
   };
 

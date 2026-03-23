@@ -14,6 +14,15 @@ function captureElement(el: HTMLElement, format: FormatPreset, imageType: 'png' 
     : toPng(el, opts);
 }
 
+function showExportContainer() {
+  const c = document.getElementById('slide-export-container');
+  if (c) c.style.display = 'block';
+}
+function hideExportContainer() {
+  const c = document.getElementById('slide-export-container');
+  if (c) c.style.display = 'none';
+}
+
 export async function exportSlideAsImage(
   slideIndex: number,
   format: FormatPreset,
@@ -23,7 +32,9 @@ export async function exportSlideAsImage(
   const el = document.getElementById(`slide-export-${slideIndex}`);
   if (!el) return;
 
+  showExportContainer();
   const dataUrl = await captureElement(el, format, imageType);
+  hideExportContainer();
   const ext = imageType === 'jpeg' ? 'jpg' : 'png';
 
   const a = document.createElement('a');
@@ -41,6 +52,7 @@ export async function exportAllSlidesAsZip(
   const zip = new JSZip();
   const ext = imageType === 'jpeg' ? 'jpg' : 'png';
 
+  showExportContainer();
   for (let i = 0; i < slideCount; i++) {
     const el = document.getElementById(`slide-export-${i}`);
     if (!el) continue;
@@ -49,6 +61,8 @@ export async function exportAllSlidesAsZip(
     const base64 = dataUrl.split(',')[1];
     zip.file(`slide-${i + 1}.${ext}`, base64, { base64: true });
   }
+
+  hideExportContainer();
 
   const blob = await zip.generateAsync({ type: 'blob' });
   const url = URL.createObjectURL(blob);
