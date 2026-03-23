@@ -1,13 +1,14 @@
 import { useState, useRef, useCallback, useReducer } from 'react';
-import { Download, Palette, GitBranch, Save, FolderOpen, Presentation } from 'lucide-react';
+import { Download, Save, FolderOpen } from 'lucide-react';
 import { toPng, toJpeg } from 'html-to-image';
 import { DiagramEditor } from './components/diagram/DiagramEditor';
 import { EditorLayout } from './components/editor/EditorLayout';
 import { PresentationMode } from './components/presentation/PresentationMode';
+import { ModeNav } from './components/ModeNav';
+import { WelcomeScreen } from './components/WelcomeScreen';
 import { useFileSync } from './hooks/useFileSync';
 import { useEditorStore } from './stores/editorStore';
 import { FORMAT_PRESETS } from './utils/formats';
-import { LOGO_URL } from './utils/assets';
 import { useSavedGraphicsStore, type SavedGraphic } from './stores/savedGraphicsStore';
 import { SavedGraphicsModal } from './components/graphics/SavedGraphicsModal';
 import { GRAPHIC_REGISTRY, getDefinition } from './registry';
@@ -31,6 +32,47 @@ function graphicReducer(state: GraphicState, action: Action): GraphicState {
     default:
       return state;
   }
+}
+
+// ── Graphic Type Categories ──────────────────────────────────────
+const GRAPHIC_CATEGORIES = [
+  { label: 'Case Studies', ids: ['case-study', 'roi', 'kpi-banner', 'infographic'] },
+  { label: 'Daten-Pipeline', ids: ['raw-data', 'enriched-data', 'qualified-data'] },
+  { label: 'Outreach', ids: ['personalized-outreach', 'multichannel-outreach', 'outbound-stack'] },
+  { label: 'Weitere', ids: ['revenue-systems', 'academy', 'agent-friendly'] },
+];
+
+function GraphicTypeSelector({ graphicType, onSwitch }: { graphicType: string; onSwitch: (id: string) => void }) {
+  return (
+    <div className="space-y-3">
+      <p className="text-[10px] text-text-muted uppercase tracking-wider font-medium">Vorlage wählen</p>
+      {GRAPHIC_CATEGORIES.map((cat) => (
+        <div key={cat.label}>
+          <p className="text-[10px] text-text-muted mb-1.5 font-medium">{cat.label}</p>
+          <div className="flex gap-1 flex-wrap">
+            {cat.ids.map((id) => {
+              const def = GRAPHIC_REGISTRY.find((d) => d.id === id);
+              if (!def) return null;
+              const Icon = def.icon;
+              return (
+                <button
+                  key={id}
+                  onClick={() => onSwitch(id)}
+                  className={`flex items-center gap-1 px-2 py-1.5 rounded-md text-xs font-medium transition-colors ${
+                    graphicType === id
+                      ? 'bg-primary text-white'
+                      : 'bg-surface-hover text-text-muted hover:text-text'
+                  }`}
+                >
+                  <Icon size={12} /> {def.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 }
 
 // ── App ─────────────────────────────────────────────────────────
@@ -111,6 +153,11 @@ function App() {
     link.click();
   };
 
+  // ── Home screen ────────────────────────────────────────────
+  if (mode === 'home') {
+    return <WelcomeScreen />;
+  }
+
   // ── Slides mode ────────────────────────────────────────────
   if (mode === 'slides') {
     return <SlidesMode />;
@@ -120,24 +167,7 @@ function App() {
   if (mode === 'diagram') {
     return (
       <div className="h-full flex flex-col">
-        <div className="h-9 bg-bg border-b border-border flex items-center px-3 gap-1 shrink-0">
-          <img src={LOGO_URL} alt="CegTec" className="h-4 mr-2" />
-          <button
-            onClick={() => setMode('graphic')}
-            className="flex items-center gap-1 px-2.5 py-1 rounded text-xs text-text-muted hover:text-text hover:bg-surface-hover transition-colors"
-          >
-            <Palette size={12} /> Grafiken
-          </button>
-          <button className="flex items-center gap-1 px-2.5 py-1 rounded text-xs bg-primary text-white">
-            <GitBranch size={12} /> Diagramme
-          </button>
-          <button
-            onClick={() => setMode('slides')}
-            className="flex items-center gap-1 px-2.5 py-1 rounded text-xs text-text-muted hover:text-text hover:bg-surface-hover transition-colors"
-          >
-            <Presentation size={12} /> Slides
-          </button>
-        </div>
+        <ModeNav />
         <div className="flex-1 overflow-hidden">
           <DiagramEditor />
         </div>
@@ -150,48 +180,15 @@ function App() {
   const GraphicComponent = def.GraphicComponent;
 
   return (
-    <div className="h-full flex">
+    <div className="h-full flex flex-col">
+      <ModeNav />
+      <div className="flex-1 flex overflow-hidden">
       {/* Sidebar */}
       <div className="w-80 bg-surface border-r border-border flex flex-col shrink-0">
         <div className="p-4 border-b border-border">
-          <div className="flex items-center gap-2 mb-3">
-            <img src={LOGO_URL} alt="CegTec" className="h-5" />
-            <div className="flex gap-1 ml-auto">
-              <button className="flex items-center gap-1 px-2 py-1 rounded text-[10px] bg-primary text-white">
-                <Palette size={10} /> Grafiken
-              </button>
-              <button
-                onClick={() => setMode('diagram')}
-                className="flex items-center gap-1 px-2 py-1 rounded text-[10px] text-text-muted hover:text-text hover:bg-surface-hover transition-colors"
-              >
-                <GitBranch size={10} /> Diagramme
-              </button>
-              <button
-                onClick={() => setMode('slides')}
-                className="flex items-center gap-1 px-2 py-1 rounded text-[10px] text-text-muted hover:text-text hover:bg-surface-hover transition-colors"
-              >
-                <Presentation size={10} /> Slides
-              </button>
-            </div>
-          </div>
+          <GraphicTypeSelector graphicType={graphicType} onSwitch={handleSwitchType} />
 
-          <div className="flex gap-1 mb-4 flex-wrap">
-            {GRAPHIC_REGISTRY.map(({ id, label, icon: Icon }) => (
-              <button
-                key={id}
-                onClick={() => handleSwitchType(id)}
-                className={`flex-1 flex items-center justify-center gap-1 px-2 py-2 rounded-lg text-xs font-medium transition-colors ${
-                  graphicType === id
-                    ? 'bg-primary text-white'
-                    : 'bg-surface-hover text-text-muted hover:text-text'
-                }`}
-              >
-                <Icon size={13} /> {label}
-              </button>
-            ))}
-          </div>
-
-          <label className="text-xs text-text-muted block mb-1">Format</label>
+          <label className="text-xs text-text-muted block mb-1 mt-4">Format</label>
           <select
             value={formatId}
             onChange={(e) => setFormatId(e.target.value)}
@@ -272,28 +269,17 @@ function App() {
         />
       )}
     </div>
+    </div>
   );
 }
 
 function SlidesMode() {
-  const { setMode } = useEditorStore();
   const isPresentationMode = useEditorStore((s) => s.isPresentationMode);
   useFileSync();
   if (isPresentationMode) return <PresentationMode />;
   return (
     <div className="h-full flex flex-col">
-      <div className="h-9 bg-bg border-b border-border flex items-center px-3 gap-1 shrink-0">
-        <img src={LOGO_URL} alt="CegTec" className="h-4 mr-2" />
-        <button onClick={() => setMode('graphic')} className="flex items-center gap-1 px-2.5 py-1 rounded text-xs text-text-muted hover:text-text hover:bg-surface-hover transition-colors">
-          <Palette size={12} /> Grafiken
-        </button>
-        <button onClick={() => setMode('diagram')} className="flex items-center gap-1 px-2.5 py-1 rounded text-xs text-text-muted hover:text-text hover:bg-surface-hover transition-colors">
-          <GitBranch size={12} /> Diagramme
-        </button>
-        <button className="flex items-center gap-1 px-2.5 py-1 rounded text-xs bg-primary text-white">
-          <Presentation size={12} /> Slides
-        </button>
-      </div>
+      <ModeNav />
       <div className="flex-1 overflow-hidden"><EditorLayout /></div>
     </div>
   );

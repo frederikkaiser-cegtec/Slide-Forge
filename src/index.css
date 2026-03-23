@@ -12,6 +12,19 @@
   --color-text-muted: #8888a0;
   --color-danger: #ef4444;
   --color-success: #22c55e;
+
+  /* shadcn-kompatible Farben (gemappt auf Slide-Forge Theme) */
+  --color-background: #13131d;
+  --color-foreground: #e2e2f0;
+  --color-card: #1e1e2e;
+  --color-card-foreground: #e2e2f0;
+  --color-muted: #2a2a3e;
+  --color-muted-foreground: #8888a0;
+  --color-secondary: #1e1e2e;
+  --color-secondary-foreground: #e2e2f0;
+  --color-accent: #2a2a3e;
+  --color-accent-foreground: #e2e2f0;
+  --color-ring: #6366f1;
 }
 
 * {

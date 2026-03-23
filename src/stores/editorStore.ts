@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import type { DiagramTool } from '../types/diagram';
 
-type AppMode = 'graphic' | 'diagram' | 'slides';
+type AppMode = 'home' | 'graphic' | 'diagram' | 'slides';
 
 interface EditorState {
   // App mode
@@ -57,7 +57,7 @@ interface EditorState {
 
 export const useEditorStore = create<EditorState>()((set) => ({
   // App mode
-  mode: 'graphic',
+  mode: 'home',
   setMode: (mode) => set({ mode }),
 
   // Diagram
