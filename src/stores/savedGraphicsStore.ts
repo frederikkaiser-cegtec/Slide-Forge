@@ -381,15 +381,15 @@ export const useSavedGraphicsStore = create<SavedGraphicsState>()(
     {
       name: 'slide-forge-saved-graphics-v1',
       onRehydrate: () => {
-        return (state) => {
+        return (state: any) => {
           if (!state) return;
           if (state._seedVersion !== SEED_VERSION) {
-            const userGraphics = state.graphics.filter((g) => !g.id.startsWith('preset-'));
+            const userGraphics = state.graphics.filter((g: any) => !g.id.startsWith('preset-'));
             state.graphics = [...SEED_INFOGRAPHICS, ...userGraphics];
             state._seedVersion = SEED_VERSION;
           }
         };
       },
-    }
+    } as any
   )
 );

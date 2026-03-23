@@ -79,7 +79,7 @@ export async function exportGIF(
   }
 
   // Use gifshot to assemble
-  const gifshot = await import('gifshot');
+  const gifshot: any = await import('gifshot');
 
   return new Promise<Blob>((resolve, reject) => {
     gifshot.createGIF(

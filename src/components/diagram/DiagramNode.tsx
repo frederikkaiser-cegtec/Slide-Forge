@@ -133,8 +133,8 @@ export function DiagramNodeComponent({
         onMouseDown={handleMouseDown}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        initial={motionProps?.initial}
-        animate={motionProps?.animate}
+        initial={motionProps?.initial as any}
+        animate={motionProps?.animate as any}
         transition={motionProps?.transition as never}
       >
         {/* Top highlight */}

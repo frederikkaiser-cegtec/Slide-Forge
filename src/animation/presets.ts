@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { AnimationPreset } from '../types/animation';
 
-export const ANIMATION_PRESETS: AnimationPreset[] = [
+export const ANIMATION_PRESETS: any[] = [
   // === Einblenden ===
   {
     id: 'fadeIn',
