@@ -1,16 +1,16 @@
-import { useState, useRef, useCallback, useReducer } from 'react';
-import { Download, Save, FolderOpen } from 'lucide-react';
+import { useState, useRef, useCallback, useReducer, useEffect } from 'react';
+import { Download, Save } from 'lucide-react';
 import { toPng, toJpeg } from 'html-to-image';
 import { DiagramEditor } from './components/diagram/DiagramEditor';
 import { EditorLayout } from './components/editor/EditorLayout';
 import { PresentationMode } from './components/presentation/PresentationMode';
 import { ModeNav } from './components/ModeNav';
 import { WelcomeScreen } from './components/WelcomeScreen';
+import { GraphicHistory } from './components/graphics/GraphicHistory';
 import { useFileSync } from './hooks/useFileSync';
 import { useEditorStore } from './stores/editorStore';
 import { FORMAT_PRESETS } from './utils/formats';
 import { useSavedGraphicsStore, type SavedGraphic } from './stores/savedGraphicsStore';
-import { SavedGraphicsModal } from './components/graphics/SavedGraphicsModal';
 import { GRAPHIC_REGISTRY, getDefinition } from './registry';
 
 // ── State via useReducer ────────────────────────────────────────
@@ -44,11 +44,10 @@ const GRAPHIC_CATEGORIES = [
 
 function GraphicTypeSelector({ graphicType, onSwitch }: { graphicType: string; onSwitch: (id: string) => void }) {
   return (
-    <div className="space-y-3">
-      <p className="text-[10px] text-text-muted uppercase tracking-wider font-medium">Vorlage wählen</p>
+    <div className="space-y-2.5">
       {GRAPHIC_CATEGORIES.map((cat) => (
         <div key={cat.label}>
-          <p className="text-[10px] text-text-muted mb-1.5 font-medium">{cat.label}</p>
+          <p className="text-[10px] text-text-muted/60 uppercase tracking-wider font-medium mb-1.5" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{cat.label}</p>
           <div className="flex gap-1 flex-wrap">
             {cat.ids.map((id) => {
               const def = GRAPHIC_REGISTRY.find((d) => d.id === id);
@@ -58,13 +57,13 @@ function GraphicTypeSelector({ graphicType, onSwitch }: { graphicType: string; o
                 <button
                   key={id}
                   onClick={() => onSwitch(id)}
-                  className={`flex items-center gap-1 px-2 py-1.5 rounded-md text-xs font-medium transition-colors ${
+                  className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-[12px] font-medium transition-all duration-150 ${
                     graphicType === id
-                      ? 'bg-primary text-white'
-                      : 'bg-surface-hover text-text-muted hover:text-text'
+                      ? 'bg-primary/90 text-white shadow-sm shadow-primary/20'
+                      : 'bg-surface-hover/60 text-text-muted hover:text-text hover:bg-surface-hover'
                   }`}
                 >
-                  <Icon size={12} /> {def.label}
+                  <Icon size={12} strokeWidth={graphicType === id ? 2 : 1.5} /> {def.label}
                 </button>
               );
             })}
@@ -82,8 +81,18 @@ function App() {
   const [formatId, setFormatId] = useState('og');
   const [state, dispatch] = useReducer(graphicReducer, initialState);
   const graphicRef = useRef<HTMLDivElement>(null);
-  const [showSavedGraphics, setShowSavedGraphics] = useState(false);
+  const [activeGraphicId, setActiveGraphicId] = useState<string | null>(null);
   const [saveFlash, setSaveFlash] = useState(false);
+
+  // Listen for template selection from WelcomeScreen
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const id = (e as CustomEvent).detail as string;
+      handleSwitchType(id);
+    };
+    window.addEventListener('sf:select-graphic', handler);
+    return () => window.removeEventListener('sf:select-graphic', handler);
+  });
 
   const format = FORMAT_PRESETS.find((f) => f.id === formatId) ?? FORMAT_PRESETS[0];
   const def = getDefinition(graphicType);
@@ -92,7 +101,8 @@ function App() {
   const handleSaveGraphic = useCallback(() => {
     const d = getDefinition(graphicType);
     const name = d.getDisplayName(state[graphicType]) || 'Unbenannt';
-    useSavedGraphicsStore.getState().save(name, graphicType, state[graphicType], formatId);
+    const id = useSavedGraphicsStore.getState().save(name, graphicType, state[graphicType], formatId);
+    setActiveGraphicId(id);
     setSaveFlash(true);
     setTimeout(() => setSaveFlash(false), 1200);
   }, [graphicType, state, formatId]);
@@ -102,7 +112,15 @@ function App() {
     setGraphicType(g.type);
     setFormatId(g.formatId);
     dispatch({ type: 'SET_DATA', graphicType: g.type, data: g.data });
+    setActiveGraphicId(g.id);
   }, []);
+
+  const handleResetToTemplate = useCallback(() => {
+    const d = getDefinition(graphicType);
+    dispatch({ type: 'SET_DATA', graphicType, data: d.defaultData });
+    setActiveGraphicId(null);
+    if (d.forceFormat && d.defaultFormat) setFormatId(d.defaultFormat);
+  }, [graphicType]);
 
   // ── Switch type (with cross-sync) ──────────────────────────
   const handleSwitchType = useCallback((newType: string) => {
@@ -184,15 +202,22 @@ function App() {
       <ModeNav />
       <div className="flex-1 flex overflow-hidden">
       {/* Sidebar */}
-      <div className="w-80 bg-surface border-r border-border flex flex-col shrink-0">
-        <div className="p-4 border-b border-border">
+      <div className="w-80 bg-surface/80 backdrop-blur-sm border-r border-border/60 flex flex-col shrink-0">
+        <div className="p-4 border-b border-border/40 overflow-y-auto max-h-[45vh] shrink-0">
           <GraphicTypeSelector graphicType={graphicType} onSwitch={handleSwitchType} />
 
-          <label className="text-xs text-text-muted block mb-1 mt-4">Format</label>
+          <GraphicHistory
+            graphicType={graphicType}
+            onLoad={handleLoadGraphic}
+            onReset={handleResetToTemplate}
+            activeId={activeGraphicId}
+          />
+
+          <label className="text-[11px] text-text-muted/60 uppercase tracking-wider font-medium block mb-1.5 mt-4" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Format</label>
           <select
             value={formatId}
             onChange={(e) => setFormatId(e.target.value)}
-            className="w-full bg-surface-hover border border-border rounded-lg px-3 py-2 text-sm text-text outline-none"
+            className="w-full bg-bg/60 border border-border/40 rounded-lg px-3 py-2 text-sm text-text outline-none focus:border-primary/40 transition-colors"
           >
             {FORMAT_PRESETS.map((f) => (
               <option key={f.id} value={f.id}>{f.label}</option>
@@ -208,24 +233,16 @@ function App() {
         </div>
 
         <div className="p-4 border-t border-border space-y-2">
-          <div className="flex gap-2">
-            <button
-              onClick={handleSaveGraphic}
-              className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 text-xs rounded-lg font-medium transition-all ${
-                saveFlash
-                  ? 'bg-green-600/20 text-green-400 border border-green-500/30'
-                  : 'bg-surface-hover hover:bg-border text-text-muted hover:text-text'
-              }`}
-            >
-              <Save size={12} /> {saveFlash ? 'Gespeichert' : 'Speichern'}
-            </button>
-            <button
-              onClick={() => setShowSavedGraphics(true)}
-              className="flex-1 flex items-center justify-center gap-2 px-3 py-2 text-xs rounded-lg font-medium bg-surface-hover hover:bg-border text-text-muted hover:text-text transition-colors"
-            >
-              <FolderOpen size={12} /> Laden
-            </button>
-          </div>
+          <button
+            onClick={handleSaveGraphic}
+            className={`w-full flex items-center justify-center gap-2 px-3 py-2 text-xs rounded-lg font-medium transition-all ${
+              saveFlash
+                ? 'bg-green-600/20 text-green-400 border border-green-500/30'
+                : 'bg-surface-hover/60 hover:bg-surface-hover text-text-muted hover:text-text'
+            }`}
+          >
+            <Save size={12} /> {saveFlash ? 'Gespeichert' : 'Speichern'}
+          </button>
           <div className="flex gap-2">
             <button
               onClick={() => handleExport('png')}
@@ -262,12 +279,6 @@ function App() {
         </div>
       </div>
 
-      {showSavedGraphics && (
-        <SavedGraphicsModal
-          onClose={() => setShowSavedGraphics(false)}
-          onLoad={handleLoadGraphic}
-        />
-      )}
     </div>
     </div>
   );

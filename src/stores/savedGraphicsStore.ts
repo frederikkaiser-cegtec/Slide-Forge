@@ -348,8 +348,8 @@ interface SavedGraphicsState {
 export const useSavedGraphicsStore = create<SavedGraphicsState>()(
   persist(
     (set, get) => ({
-      graphics: [],
-      _seedVersion: undefined,
+      graphics: [...SEED_INFOGRAPHICS],
+      _seedVersion: SEED_VERSION,
 
       save: (name, type, data, formatId) => {
         const id = `g-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
