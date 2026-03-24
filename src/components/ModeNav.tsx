@@ -12,7 +12,7 @@ export function ModeNav() {
   const { mode, setMode } = useEditorStore();
 
   return (
-    <div className="h-11 bg-surface/80 backdrop-blur-md border-b border-border/60 flex items-center px-3 gap-1 shrink-0">
+    <div className="h-11 bg-surface border-b border-border/60 flex items-center px-3 gap-1 shrink-0">
       {/* Home / Logo */}
       <button
         onClick={() => setMode('home')}
@@ -26,14 +26,14 @@ export function ModeNav() {
       <div className="w-px h-4 bg-border/50" />
 
       {/* Mode pills */}
-      <div className="flex items-center gap-0.5 ml-1 bg-bg/60 rounded-lg p-0.5 border border-border/30">
+      <div className="flex items-center gap-0.5 ml-1 bg-muted/60 rounded-lg p-0.5 border border-border/40">
         {modes.map(({ id, label, icon: Icon }) => (
           <button
             key={id}
             onClick={() => setMode(id)}
             className={`relative flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[13px] font-medium transition-all duration-200 ${
               mode === id
-                ? 'bg-surface text-text shadow-sm shadow-black/20'
+                ? 'bg-surface text-text shadow-sm shadow-black/5'
                 : 'text-text-muted hover:text-text'
             }`}
             style={{ fontFamily: "'Plus Jakarta Sans', 'DM Sans', sans-serif" }}

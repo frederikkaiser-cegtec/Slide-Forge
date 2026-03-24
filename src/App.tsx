@@ -59,8 +59,8 @@ function GraphicTypeSelector({ graphicType, onSwitch }: { graphicType: string; o
                   onClick={() => onSwitch(id)}
                   className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-[12px] font-medium transition-all duration-150 ${
                     graphicType === id
-                      ? 'bg-primary/90 text-white shadow-sm shadow-primary/20'
-                      : 'bg-surface-hover/60 text-text-muted hover:text-text hover:bg-surface-hover'
+                      ? 'bg-primary text-white shadow-sm shadow-primary/20'
+                      : 'bg-muted/60 text-text-muted hover:text-text hover:bg-muted'
                   }`}
                 >
                   <Icon size={12} strokeWidth={graphicType === id ? 2 : 1.5} /> {def.label}
@@ -202,7 +202,7 @@ function App() {
       <ModeNav />
       <div className="flex-1 flex overflow-hidden">
       {/* Sidebar */}
-      <div className="w-80 bg-surface/80 backdrop-blur-sm border-r border-border/60 flex flex-col shrink-0">
+      <div className="w-80 bg-surface border-r border-border/60 flex flex-col shrink-0">
         <div className="p-4 border-b border-border/40 overflow-y-auto max-h-[45vh] shrink-0">
           <GraphicTypeSelector graphicType={graphicType} onSwitch={handleSwitchType} />
 
@@ -217,7 +217,7 @@ function App() {
           <select
             value={formatId}
             onChange={(e) => setFormatId(e.target.value)}
-            className="w-full bg-bg/60 border border-border/40 rounded-lg px-3 py-2 text-sm text-text outline-none focus:border-primary/40 transition-colors"
+            className="w-full bg-muted/40 border border-border/50 rounded-lg px-3 py-2 text-sm text-text outline-none focus:border-primary/40 transition-colors"
           >
             {FORMAT_PRESETS.map((f) => (
               <option key={f.id} value={f.id}>{f.label}</option>
@@ -238,7 +238,7 @@ function App() {
             className={`w-full flex items-center justify-center gap-2 px-3 py-2 text-xs rounded-lg font-medium transition-all ${
               saveFlash
                 ? 'bg-green-600/20 text-green-400 border border-green-500/30'
-                : 'bg-surface-hover/60 hover:bg-surface-hover text-text-muted hover:text-text'
+                : 'bg-muted/50 hover:bg-muted text-text-muted hover:text-text'
             }`}
           >
             <Save size={12} /> {saveFlash ? 'Gespeichert' : 'Speichern'}
@@ -252,7 +252,7 @@ function App() {
             </button>
             <button
               onClick={() => handleExport('jpeg')}
-              className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-surface-hover hover:bg-border text-text text-sm rounded-lg font-medium transition-colors"
+              className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-muted hover:bg-border text-text text-sm rounded-lg font-medium transition-colors"
             >
               <Download size={14} /> JPG
             </button>

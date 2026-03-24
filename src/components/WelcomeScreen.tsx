@@ -100,10 +100,10 @@ export function WelcomeScreen() {
       <DotPattern
         width={32}
         height={32}
-        cr={0.4}
+        cr={0.5}
         className={cn(
-          "fixed inset-0 fill-text-muted/[0.03]",
-          "[mask-image:radial-gradient(800px_circle_at_50%_200px,white,transparent)]",
+          "fixed inset-0 fill-text-muted/[0.07]",
+          "[mask-image:radial-gradient(600px_circle_at_50%_200px,white,transparent)]",
         )}
       />
 
@@ -142,7 +142,7 @@ export function WelcomeScreen() {
               <button
                 key={id}
                 onClick={() => setMode(id)}
-                className="group relative text-left rounded-xl border border-border/40 bg-surface/30 backdrop-blur-sm px-5 py-4 transition-all duration-300 cursor-pointer hover:border-border/80 hover:bg-surface/60"
+                className="group relative text-left rounded-xl border border-border/60 bg-surface shadow-sm px-5 py-4 transition-all duration-300 cursor-pointer hover:shadow-md hover:border-border"
               >
                 <div className="flex items-center gap-3 mb-2">
                   <div className={cn("w-8 h-8 rounded-lg flex items-center justify-center", bg)}>
@@ -180,7 +180,7 @@ export function WelcomeScreen() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Vorlage suchen..."
-                className="w-full bg-surface/40 border border-border/30 rounded-lg pl-9 pr-3 py-2 text-sm text-text placeholder:text-text-muted/30 outline-none focus:border-primary/40 transition-colors"
+                className="w-full bg-surface border border-border/60 rounded-lg pl-9 pr-3 py-2 text-sm text-text placeholder:text-text-muted/40 outline-none focus:border-primary/40 shadow-sm transition-colors"
               />
             </div>
           </div>
@@ -217,10 +217,10 @@ export function WelcomeScreen() {
                   whileTap={{ scale: 0.98 }}
                   transition={{ duration: 0.2 }}
                   onClick={() => handleTemplateClick(template.id)}
-                  className="group w-full text-left rounded-xl border border-border/30 bg-surface/20 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:border-border/60 hover:bg-surface/40 cursor-pointer"
+                  className="group w-full text-left rounded-xl border border-border/50 bg-surface shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md hover:border-border cursor-pointer"
                 >
                   {/* Preview area */}
-                  <div className="aspect-[4/3] w-full bg-gradient-to-br from-surface/60 to-bg flex flex-col items-center justify-center gap-2 relative overflow-hidden">
+                  <div className="aspect-[4/3] w-full bg-gradient-to-br from-muted/40 to-bg/60 flex flex-col items-center justify-center gap-2 relative overflow-hidden">
                     {/* Decorative grid */}
                     <div className="absolute inset-0 opacity-[0.03]" style={{
                       backgroundImage: 'linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)',

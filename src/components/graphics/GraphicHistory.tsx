@@ -50,7 +50,7 @@ export function GraphicHistory({ graphicType, onLoad, onReset, activeId }: Graph
           {/* New from template */}
           <button
             onClick={onReset}
-            className="flex items-center gap-2 w-full px-2.5 py-2 rounded-md text-[12px] font-medium text-text-muted hover:text-text hover:bg-surface-hover/60 transition-all group"
+            className="flex items-center gap-2 w-full px-2.5 py-2 rounded-md text-[12px] font-medium text-text-muted hover:text-text hover:bg-muted/50 transition-all group"
           >
             <div className="w-5 h-5 rounded flex items-center justify-center bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
               <Plus size={11} strokeWidth={2.5} />
@@ -65,7 +65,7 @@ export function GraphicHistory({ graphicType, onLoad, onReset, activeId }: Graph
               className={`group flex items-center gap-2 w-full px-2.5 py-1.5 rounded-md text-[12px] transition-all cursor-pointer ${
                 activeId === g.id
                   ? 'bg-primary/10 text-text'
-                  : 'text-text-muted hover:text-text hover:bg-surface-hover/40'
+                  : 'text-text-muted hover:text-text hover:bg-muted/60'
               }`}
               onClick={() => onLoad(g)}
             >
@@ -104,7 +104,7 @@ export function GraphicHistory({ graphicType, onLoad, onReset, activeId }: Graph
                   className={`group flex items-center gap-2 w-full px-2.5 py-1.5 rounded-md text-[12px] transition-all cursor-pointer ${
                     activeId === g.id
                       ? 'bg-primary/10 text-text'
-                      : 'text-text-muted/60 hover:text-text-muted hover:bg-surface-hover/30'
+                      : 'text-text-muted/60 hover:text-text-muted hover:bg-muted/40'
                   }`}
                   onClick={() => onLoad(g)}
                 >

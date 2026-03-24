@@ -1,30 +1,32 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --color-primary: #6366f1;
-  --color-primary-hover: #4f46e5;
-  --color-surface: #1e1e2e;
-  --color-surface-hover: #2a2a3e;
-  --color-bg: #13131d;
-  --color-border: #2e2e42;
-  --color-text: #e2e2f0;
-  --color-text-muted: #8888a0;
-  --color-danger: #ef4444;
-  --color-success: #22c55e;
+  --font-sans: 'Plus Jakarta Sans', 'DM Sans', system-ui, sans-serif;
 
-  /* shadcn-kompatible Farben (gemappt auf Slide-Forge Theme) */
-  --color-background: #13131d;
-  --color-foreground: #e2e2f0;
-  --color-card: #1e1e2e;
-  --color-card-foreground: #e2e2f0;
-  --color-muted: #2a2a3e;
-  --color-muted-foreground: #8888a0;
-  --color-secondary: #1e1e2e;
-  --color-secondary-foreground: #e2e2f0;
-  --color-accent: #2a2a3e;
-  --color-accent-foreground: #e2e2f0;
-  --color-ring: #6366f1;
+  /* ── Light Theme ─────────────────────────────── */
+  --color-primary: #4f46e5;
+  --color-primary-hover: #4338ca;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f5f5f7;
+  --color-bg: #fafafa;
+  --color-border: #e5e5ea;
+  --color-text: #1a1a2e;
+  --color-text-muted: #6b7085;
+  --color-danger: #dc2626;
+  --color-success: #16a34a;
+
+  /* shadcn-kompatible Farben */
+  --color-background: #fafafa;
+  --color-foreground: #1a1a2e;
+  --color-card: #ffffff;
+  --color-card-foreground: #1a1a2e;
+  --color-muted: #f4f4f6;
+  --color-muted-foreground: #6b7085;
+  --color-secondary: #f4f4f6;
+  --color-secondary-foreground: #1a1a2e;
+  --color-accent: #f0f0f4;
+  --color-accent-foreground: #1a1a2e;
+  --color-ring: #4f46e5;
 }
 
 * {
@@ -45,7 +47,7 @@ select option {
 }
 
 body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Plus Jakarta Sans', 'DM Sans', system-ui, sans-serif;
   background: var(--color-bg);
   color: var(--color-text);
   -webkit-font-smoothing: antialiased;
