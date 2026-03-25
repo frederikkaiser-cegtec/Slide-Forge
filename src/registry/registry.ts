@@ -1,7 +1,7 @@
 import {
   Image, BarChart3, Trophy, Boxes, LayoutDashboard,
   GraduationCap, Database, DatabaseZap, ScanSearch,
-  Mail, Radio, Layers, Bot,
+  Mail, Radio, Layers, Bot, MessageSquareText,
 } from 'lucide-react';
 
 import type { GraphicDefinition } from './types';
@@ -20,6 +20,7 @@ import { PersonalizedOutreachGraphic, defaultPersonalizedOutreachData } from '..
 import { MultichannelOutreachGraphic, defaultMultichannelOutreachData } from '../components/graphics/MultichannelOutreachGraphic';
 import { OutboundStackGraphic, defaultOutboundStackData } from '../components/graphics/OutboundStackGraphic';
 import { AgentFriendlyGraphic, defaultAgentFriendlyData } from '../components/graphics/AgentFriendlyGraphic';
+import { LinkedInPostGraphic, defaultLinkedInPostData } from '../components/graphics/LinkedInPostGraphic';
 
 // Form components
 import { CaseStudyForm } from '../components/graphics/CaseStudyForm';
@@ -35,6 +36,7 @@ import { PersonalizedOutreachForm } from '../components/graphics/PersonalizedOut
 import { MultichannelOutreachForm } from '../components/graphics/MultichannelOutreachForm';
 import { OutboundStackForm } from '../components/graphics/OutboundStackForm';
 import { AgentFriendlyForm } from '../components/graphics/AgentFriendlyForm';
+import { LinkedInPostForm } from '../components/graphics/LinkedInPostForm';
 
 // Types & defaults
 import type { CaseStudyData, RoiData } from '../types/graphics';
@@ -267,6 +269,17 @@ export const GRAPHIC_REGISTRY: GraphicDefinition[] = [
     getDisplayName: (d: any) => d.title,
     FormComponent: AgentFriendlyForm,
     GraphicComponent: AgentFriendlyGraphic,
+  },
+  {
+    id: 'linkedin-post',
+    label: 'LinkedIn Post',
+    icon: MessageSquareText,
+    defaultData: defaultLinkedInPostData,
+    defaultFormat: '1:1',
+    forceFormat: false,
+    getDisplayName: (d: any) => d.topLabel || 'LinkedIn Post',
+    FormComponent: LinkedInPostForm,
+    GraphicComponent: LinkedInPostGraphic,
   },
 ];
 

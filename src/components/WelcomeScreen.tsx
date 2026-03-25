@@ -3,7 +3,7 @@ import {
   Palette, GitBranch, Presentation, ArrowUpRight,
   Search, Image, BarChart3, Trophy, Boxes, LayoutDashboard,
   GraduationCap, Database, DatabaseZap, ScanSearch,
-  Mail, Radio, Layers, Bot,
+  Mail, Radio, Layers, Bot, MessageSquareText,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { BlurFade } from './ui/blur-fade';
@@ -27,6 +27,7 @@ const TEMPLATES = [
   { id: 'revenue-systems', label: 'Systems', icon: Boxes, category: 'other', desc: 'Revenue-Architektur' },
   { id: 'academy', label: 'Academy', icon: GraduationCap, category: 'other', desc: 'Schulungsmaterial' },
   { id: 'agent-friendly', label: 'AI-Ready', icon: Bot, category: 'other', desc: 'Agent-optimiert' },
+  { id: 'linkedin-post', label: 'LinkedIn Post', icon: MessageSquareText, category: 'other', desc: 'Thought-Leadership Grafik' },
 ];
 
 const CATEGORIES = [
@@ -42,7 +43,7 @@ const MODES = [
     id: 'graphic' as const,
     icon: Palette,
     title: 'Grafiken',
-    desc: '13 Vorlagen im CegTec Design',
+    desc: '14 Vorlagen im CegTec Design',
     gradient: 'from-indigo-500 to-violet-500',
     bg: 'bg-indigo-500/8',
   },

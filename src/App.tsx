@@ -39,7 +39,7 @@ const GRAPHIC_CATEGORIES = [
   { label: 'Case Studies', ids: ['case-study', 'roi', 'kpi-banner', 'infographic'] },
   { label: 'Daten-Pipeline', ids: ['raw-data', 'enriched-data', 'qualified-data'] },
   { label: 'Outreach', ids: ['personalized-outreach', 'multichannel-outreach', 'outbound-stack'] },
-  { label: 'Weitere', ids: ['revenue-systems', 'academy', 'agent-friendly'] },
+  { label: 'Weitere', ids: ['revenue-systems', 'academy', 'agent-friendly', 'linkedin-post'] },
 ];
 
 function GraphicTypeSelector({ graphicType, onSwitch }: { graphicType: string; onSwitch: (id: string) => void }) {
