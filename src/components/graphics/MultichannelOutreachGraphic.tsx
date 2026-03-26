@@ -1,4 +1,5 @@
 import { LOGO_URL } from '../../utils/assets';
+import { logoFilter } from '../../utils/cegtecTheme';
 
 export interface SequenceStep {
   day: string;
@@ -469,7 +470,7 @@ export function MultichannelOutreachGraphic({
             <img
               src={LOGO_URL}
               alt="CegTec"
-              style={{ height: 18 * s, opacity: 0.85 }}
+              style={{ height: 18 * s, opacity: 0.85, ...logoFilter(bg) }}
             />
           </div>
         </div>

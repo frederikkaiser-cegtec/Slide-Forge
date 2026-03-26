@@ -1,4 +1,5 @@
 import { LOGO_URL } from '../../utils/assets';
+import { logoFilter } from '../../utils/cegtecTheme';
 
 export interface AcademyData {
   title: string;
@@ -151,7 +152,7 @@ function AcademyPortrait({ data, width, height }: { data: AcademyData; width: nu
         {/* ── 1. HEADER ── */}
         <div style={{ marginBottom: 36 * s }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 28 * s }}>
-            <img src={LOGO_URL} alt="CegTec" style={{ height: 32 * s }} />
+            <img src={LOGO_URL} alt="CegTec" style={{ height: 32 * s, ...logoFilter(bg) }} />
             <span style={{
               fontFamily: "'IBM Plex Mono', monospace",
               fontSize: 11 * s, fontWeight: 600, letterSpacing: 3 * s,
@@ -384,7 +385,7 @@ function AcademyLandscape({ data, width, height }: { data: AcademyData; width: n
           display: 'flex', alignItems: 'center', gap: 20 * s,
           marginBottom: 14 * s, flexShrink: 0,
         }}>
-          <img src={LOGO_URL} alt="CegTec" style={{ height: 28 * s }} />
+          <img src={LOGO_URL} alt="CegTec" style={{ height: 28 * s, ...logoFilter(bg) }} />
           <div style={{
             fontSize: 24 * s, fontWeight: 800, lineHeight: 1.1,
             letterSpacing: -1.5 * s, flex: 1,

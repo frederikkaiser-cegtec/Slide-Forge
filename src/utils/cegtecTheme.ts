@@ -92,6 +92,11 @@ export function hexToRgb(hex: string): [number, number, number] {
   ];
 }
 
+/** Logo filter — macht das Logo weiß auf dunklem Hintergrund */
+export function logoFilter(bg: string): React.CSSProperties {
+  return isDark(bg) ? { filter: 'brightness(0) invert(1)' } : {};
+}
+
 // ── SVG Background Components (React) ───────────────────────────
 // Wiederverwendbare SVG-Elemente fuer den Hintergrund.
 // `s` = Skalierungsfaktor, `uid` = unique prefix fuer filter IDs.

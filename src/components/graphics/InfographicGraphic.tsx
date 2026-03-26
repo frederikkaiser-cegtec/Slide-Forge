@@ -1,4 +1,5 @@
 import { LOGO_URL } from '../../utils/assets';
+import { logoFilter } from '../../utils/cegtecTheme';
 
 export interface InfographicData {
   companyName: string;
@@ -268,7 +269,7 @@ export function InfographicGraphic({
           <img
             src={LOGO_URL}
             alt="CegTec"
-            style={{ height: 16 * s, marginTop: 4 * s, opacity: 0.7 }}
+            style={{ height: 16 * s, marginTop: 4 * s, opacity: 0.7, ...logoFilter(bg) }}
           />
         </div>
 

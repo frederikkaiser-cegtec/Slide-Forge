@@ -1,4 +1,5 @@
 import { LOGO_URL } from '../../utils/assets';
+import { logoFilter } from '../../utils/cegtecTheme';
 
 export interface KpiBannerData {
   title: string;
@@ -151,7 +152,7 @@ export function KpiBannerGraphic({ data, width, height }: { data: KpiBannerData;
           }}>
             {data.title}
           </div>
-          <img src={LOGO_URL} alt="CegTec" style={{ height: 16 * s }} />
+          <img src={LOGO_URL} alt="CegTec" style={{ height: 16 * s, ...logoFilter(bg) }} />
         </div>
 
         {/* KPIs */}

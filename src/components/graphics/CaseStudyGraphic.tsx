@@ -1,6 +1,7 @@
 import type { CaseStudyData } from '../../types/graphics';
 import { BrandedChart } from './BrandedChart';
 import { LOGO_URL } from '../../utils/assets';
+import { logoFilter } from '../../utils/cegtecTheme';
 
 function lighten(hex: string): string {
   const r = parseInt(hex.slice(1, 3), 16);
@@ -99,7 +100,7 @@ export function CaseStudyGraphic({ data, width, height }: { data: CaseStudyData;
           }}>
             {tagline} — {data.industry}
           </div>
-          <img src={LOGO_URL} alt="CegTec" style={{ height: 18 * s }} />
+          <img src={LOGO_URL} alt="CegTec" style={{ height: 18 * s, ...logoFilter(bg) }} />
         </div>
 
         {/* Main */}

@@ -1,4 +1,5 @@
 import { LOGO_URL } from '../../utils/assets';
+import { logoFilter } from '../../utils/cegtecTheme';
 
 export interface PipelineStep {
   label: string;
@@ -189,7 +190,7 @@ export function OutboundStackGraphic({
         <div style={{ marginBottom: 44 * s }}>
           {/* Logo row */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 40 * s }}>
-            <img src={LOGO_URL} alt="CegTec" style={{ height: 36 * s, opacity: 0.85 }} />
+            <img src={LOGO_URL} alt="CegTec" style={{ height: 36 * s, opacity: 0.85, ...logoFilter(bg) }} />
             <div style={{ display: 'flex', alignItems: 'center', gap: 12 * s }}>
               <span
                 style={{

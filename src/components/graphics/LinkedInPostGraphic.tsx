@@ -1,7 +1,7 @@
 import { LOGO_URL } from '../../utils/assets';
 import {
   FONTS, COLORS, CEGTEC_LIGHT_DEFAULTS,
-  isDark, adjustBrightness, cardStyle, monoLabel, scanlineProps, noiseFilterDef,
+  isDark, adjustBrightness, cardStyle, monoLabel, scanlineProps, noiseFilterDef, logoFilter,
 } from '../../utils/cegtecTheme';
 
 // ── Data Interface ──────────────────────────────────────────────
@@ -131,7 +131,7 @@ export function LinkedInPostGraphic({
       >
         {/* ── HEADER ── */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 * s }}>
-          <img src={LOGO_URL} alt="CegTec" style={{ height: 24 * s, opacity: 0.85 }} />
+          <img src={LOGO_URL} alt="CegTec" style={{ height: 24 * s, opacity: 0.85, ...logoFilter(bg) }} />
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 * s }}>
             <span style={{ ...monoLabel(s, textDim), fontSize: 10 * s, letterSpacing: 2 * s }}>
               CEGTEC INSIGHTS
