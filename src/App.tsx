@@ -157,7 +157,7 @@ function App() {
     const opts = {
       width: format.width,
       height: format.height,
-      pixelRatio: 2,
+      pixelRatio: 3,
       style: { transform: 'none', transformOrigin: '0 0' },
     };
     const dataUrl = type === 'jpeg'
