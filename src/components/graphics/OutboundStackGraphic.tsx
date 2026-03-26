@@ -1,5 +1,5 @@
 import { LOGO_URL } from '../../utils/assets';
-import { logoFilter } from '../../utils/cegtecTheme';
+import { logoFilter, adjustBrightness } from '../../utils/cegtecTheme';
 
 export interface PipelineStep {
   label: string;
@@ -58,13 +58,6 @@ export const defaultOutboundStackData: OutboundStackData = {
   borderColor: '#E5E5EA',
   warningColor: '#1A3FD4',
 };
-
-function adjustBrightness(hex: string, amount: number): string {
-  const r = Math.max(0, Math.min(255, parseInt(hex.slice(1, 3), 16) + amount));
-  const g = Math.max(0, Math.min(255, parseInt(hex.slice(3, 5), 16) + amount));
-  const b = Math.max(0, Math.min(255, parseInt(hex.slice(5, 7), 16) + amount));
-  return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
-}
 
 const MONO = "'IBM Plex Mono', 'JetBrains Mono', 'SF Mono', monospace";
 const DISPLAY = "'DM Sans', 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif";

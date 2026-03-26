@@ -1,5 +1,5 @@
 import { LOGO_URL } from '../../utils/assets';
-import { logoFilter } from '../../utils/cegtecTheme';
+import { logoFilter, adjustBrightness } from '../../utils/cegtecTheme';
 
 export interface SequenceStep {
   day: string;
@@ -115,13 +115,6 @@ export const defaultMultichannelOutreachData: MultichannelOutreachData = {
     ],
   },
 };
-
-function adjustBrightness(hex: string, amount: number): string {
-  const r = Math.max(0, Math.min(255, parseInt(hex.slice(1, 3), 16) + amount));
-  const g = Math.max(0, Math.min(255, parseInt(hex.slice(3, 5), 16) + amount));
-  const b = Math.max(0, Math.min(255, parseInt(hex.slice(5, 7), 16) + amount));
-  return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
-}
 
 const MONO = "'JetBrains Mono', 'IBM Plex Mono', 'SF Mono', monospace";
 const DISPLAY = "'Plus Jakarta Sans', 'DM Sans', 'Inter', system-ui, sans-serif";

@@ -1,5 +1,5 @@
 import { LOGO_URL } from '../../utils/assets';
-import { logoFilter } from '../../utils/cegtecTheme';
+import { logoFilter, isDark } from '../../utils/cegtecTheme';
 
 export interface InfographicData {
   companyName: string;
@@ -54,13 +54,6 @@ export const defaultInfographicData: InfographicData = {
 const DISPLAY = "'Plus Jakarta Sans', 'DM Sans', 'Inter', system-ui, sans-serif";
 const MONO = "'JetBrains Mono', 'IBM Plex Mono', 'SF Mono', monospace";
 
-function isDarkBg(hex: string): boolean {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  return (r * 299 + g * 587 + b * 114) / 1000 < 128;
-}
-
 function hexToRgb(hex: string): [number, number, number] {
   return [
     parseInt(hex.slice(1, 3), 16),
@@ -80,7 +73,7 @@ export function InfographicGraphic({
 }) {
   const s = Math.min(width / 1200, height / 630);
   const bg = data.backgroundColor || '#FAFAFA';
-  const dark = isDarkBg(bg);
+  const dark = isDark(bg);
   const accent = data.accentColor || '#3B4BF9';
   const accent2 = data.accentColor2 || '#E93BCD';
   const [ar, ag, ab] = hexToRgb(accent);

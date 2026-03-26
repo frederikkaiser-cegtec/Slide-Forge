@@ -26,3 +26,19 @@ dist-ssr
 # Large files
 *.pdf
 public/images/preview/
+
+# Screenshots & temp exports (Root only)
+/screenshot-*.png
+/linkedin-post-*.png
+/last-page-*.jpg
+/sf-*.jpg
+/*-mode.png
+/*-state.png
+/*-reference.png
+/*-result.png
+/*-working.png
+/*-final.png
+/*-screen.png
+/nav-*.png
+/welcome-*.png
+/text-mask.png

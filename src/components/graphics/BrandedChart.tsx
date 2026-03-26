@@ -4,6 +4,7 @@ import {
   PieChart, Pie,
 } from 'recharts';
 import type { ChartConfig } from '../../types/charts';
+import { isDark } from '../../utils/cegtecTheme';
 
 const DEFAULT_COLORS = ['#3B4BF9', '#E93BCD', '#6875FF', '#FF6BE6', '#4BCCF9', '#F94B8A'];
 
@@ -16,13 +17,6 @@ interface Props {
   bgColor?: string;
   accentColor?: string;
   accentColor2?: string;
-}
-
-function isDark(hex: string): boolean {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  return (r * 299 + g * 587 + b * 114) / 1000 < 128;
 }
 
 export function BrandedChart({ config, width, height, scale, bgColor, accentColor, accentColor2 }: Props) {
