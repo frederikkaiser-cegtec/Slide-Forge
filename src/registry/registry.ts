@@ -2,6 +2,7 @@ import {
   Image, BarChart3, Trophy, Boxes, LayoutDashboard,
   GraduationCap, Database, DatabaseZap, ScanSearch,
   Mail, Radio, Layers, Bot, MessageSquareText,
+  GitCompare, Clock, Filter,
 } from 'lucide-react';
 
 import type { GraphicDefinition } from './types';
@@ -21,6 +22,9 @@ import { MultichannelOutreachGraphic, defaultMultichannelOutreachData } from '..
 import { OutboundStackGraphic, defaultOutboundStackData } from '../components/graphics/OutboundStackGraphic';
 import { AgentFriendlyGraphic, defaultAgentFriendlyData } from '../components/graphics/AgentFriendlyGraphic';
 import { LinkedInPostGraphic, defaultLinkedInPostData } from '../components/graphics/LinkedInPostGraphic';
+import { ComparisonGraphic, defaultComparisonData } from '../components/graphics/ComparisonGraphic';
+import { TimelineGraphic, defaultTimelineData } from '../components/graphics/TimelineGraphic';
+import { FunnelGraphic, defaultFunnelData } from '../components/graphics/FunnelGraphic';
 
 // Form components
 import { CaseStudyForm } from '../components/graphics/CaseStudyForm';
@@ -37,6 +41,9 @@ import { MultichannelOutreachForm } from '../components/graphics/MultichannelOut
 import { OutboundStackForm } from '../components/graphics/OutboundStackForm';
 import { AgentFriendlyForm } from '../components/graphics/AgentFriendlyForm';
 import { LinkedInPostForm } from '../components/graphics/LinkedInPostForm';
+import { ComparisonForm } from '../components/graphics/ComparisonForm';
+import { TimelineForm } from '../components/graphics/TimelineForm';
+import { FunnelForm } from '../components/graphics/FunnelForm';
 
 // Types & defaults
 import type { CaseStudyData, RoiData } from '../types/graphics';
@@ -280,6 +287,39 @@ export const GRAPHIC_REGISTRY: GraphicDefinition[] = [
     getDisplayName: (d: any) => d.topLabel || 'LinkedIn Post',
     FormComponent: LinkedInPostForm,
     GraphicComponent: LinkedInPostGraphic,
+  },
+  {
+    id: 'comparison',
+    label: 'Vergleich',
+    icon: GitCompare,
+    defaultData: defaultComparisonData,
+    defaultFormat: '1:1',
+    forceFormat: false,
+    getDisplayName: (d: any) => d.topLabel || 'Vergleich',
+    FormComponent: ComparisonForm,
+    GraphicComponent: ComparisonGraphic,
+  },
+  {
+    id: 'timeline',
+    label: 'Timeline',
+    icon: Clock,
+    defaultData: defaultTimelineData,
+    defaultFormat: '16:9',
+    forceFormat: true,
+    getDisplayName: (d: any) => d.topLabel || 'Timeline',
+    FormComponent: TimelineForm,
+    GraphicComponent: TimelineGraphic,
+  },
+  {
+    id: 'funnel',
+    label: 'Funnel',
+    icon: Filter,
+    defaultData: defaultFunnelData,
+    defaultFormat: '1:1',
+    forceFormat: false,
+    getDisplayName: (d: any) => d.topLabel || 'Funnel',
+    FormComponent: FunnelForm,
+    GraphicComponent: FunnelGraphic,
   },
 ];
 

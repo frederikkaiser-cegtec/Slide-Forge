@@ -4,6 +4,7 @@ import {
   Search, Image, BarChart3, Trophy, Boxes, LayoutDashboard,
   GraduationCap, Database, DatabaseZap, ScanSearch,
   Mail, Radio, Layers, Bot, MessageSquareText,
+  GitCompare, Clock, Filter,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { BlurFade } from './ui/blur-fade';
@@ -28,6 +29,9 @@ const TEMPLATES = [
   { id: 'academy', label: 'Academy', icon: GraduationCap, category: 'other', desc: 'Schulungsmaterial' },
   { id: 'agent-friendly', label: 'AI-Ready', icon: Bot, category: 'other', desc: 'Agent-optimiert' },
   { id: 'linkedin-post', label: 'LinkedIn Post', icon: MessageSquareText, category: 'other', desc: 'Thought-Leadership Grafik' },
+  { id: 'comparison', label: 'Vergleich', icon: GitCompare, category: 'other', desc: 'Vorher/Nachher Vergleich' },
+  { id: 'timeline', label: 'Timeline', icon: Clock, category: 'other', desc: 'Roadmap & Zeitplan' },
+  { id: 'funnel', label: 'Funnel', icon: Filter, category: 'other', desc: 'Sales Funnel Visualisierung' },
 ];
 
 const CATEGORIES = [
@@ -43,7 +47,7 @@ const MODES = [
     id: 'graphic' as const,
     icon: Palette,
     title: 'Grafiken',
-    desc: '14 Vorlagen im CegTec Design',
+    desc: '17 Vorlagen im CegTec Design',
     gradient: 'from-indigo-500 to-violet-500',
     bg: 'bg-indigo-500/8',
   },
