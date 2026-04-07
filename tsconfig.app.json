@@ -24,7 +24,8 @@
     "baseUrl": ".",
     "paths": { "@/*": ["src/*"] },
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    "resolveJsonModule": true
   },
-  "include": ["src"]
+  "include": ["src", "brand.json"]
 }

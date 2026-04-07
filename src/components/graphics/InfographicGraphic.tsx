@@ -1,5 +1,5 @@
 import { LOGO_URL } from '../../utils/assets';
-import { logoFilter, isDark } from '../../utils/cegtecTheme';
+import { logoFilter, isDark, FONTS } from '../../utils/cegtecTheme';
 
 export interface InfographicData {
   companyName: string;
@@ -51,8 +51,8 @@ export const defaultInfographicData: InfographicData = {
   kpiTagColor: '#9CA3AF',
 };
 
-const DISPLAY = "'Plus Jakarta Sans', 'DM Sans', 'Inter', system-ui, sans-serif";
-const MONO = "'JetBrains Mono', 'IBM Plex Mono', 'SF Mono', monospace";
+const DISPLAY = FONTS.display;
+const MONO = FONTS.mono;
 
 function hexToRgb(hex: string): [number, number, number] {
   return [

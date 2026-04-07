@@ -4,6 +4,7 @@ import { parseDiagramPrompt } from '../../utils/diagramParser';
 import { autoLayoutDiagram } from '../../utils/diagramLayout';
 import { useDiagramStore } from '../../stores/diagramStore';
 import { generateId } from '../../utils/id';
+import { FONTS } from '../../utils/cegtecTheme';
 
 const EXAMPLES = [
   'Lead Scraping → Enrichment → Sequencing → Follow-Up → Meeting',
@@ -93,7 +94,7 @@ export function PromptInput() {
               background: '#f8f9fb',
               color: '#1a1a2e',
               fontSize: 13,
-              fontFamily: 'Inter, sans-serif',
+              fontFamily: FONTS.display,
               resize: 'none',
               outline: 'none',
               lineHeight: 1.5,
@@ -141,7 +142,7 @@ export function PromptInput() {
                     cursor: 'pointer',
                     fontSize: 12,
                     color: '#4b5563',
-                    fontFamily: 'Inter, sans-serif',
+                    fontFamily: FONTS.display,
                     whiteSpace: 'pre-line',
                     lineHeight: 1.4,
                     transition: 'background 0.1s',

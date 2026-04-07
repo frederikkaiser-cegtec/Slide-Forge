@@ -17,6 +17,8 @@ export interface SvgChartOptions {
   title?: string;
 }
 
+import { FONTS } from './cegtecTheme';
+
 const DEFAULT_COLORS = ['#3B4BF9', '#E93BCD', '#22c55e', '#f59e0b', '#06b6d4', '#8b5cf6'];
 
 export function generateSvgChart(opts: SvgChartOptions): string {
@@ -58,12 +60,12 @@ function barChart(data: ChartDataPoint[], w: number, h: number, opts: SvgChartOp
     return `<rect class="sf-bar" x="${x}" y="${y}" width="${barW}" height="${barH}" rx="4" fill="${color}" style="${delay}">
       <title>${d.label}: ${d.value}</title>
     </rect>
-    <text x="${x + barW / 2}" y="${h - 10}" text-anchor="middle" fill="${textColor}" font-size="10" font-family="Inter,sans-serif">${d.label}</text>`;
+    <text x="${x + barW / 2}" y="${h - 10}" text-anchor="middle" fill="${textColor}" font-size="10" font-family="${FONTS.display}">${d.label}</text>`;
   }).join('\n');
 
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}">
 ${anim}
-${opts.title ? `<text x="${w / 2}" y="18" text-anchor="middle" fill="${textColor}" font-size="12" font-weight="600" font-family="Inter,sans-serif">${opts.title}</text>` : ''}
+${opts.title ? `<text x="${w / 2}" y="18" text-anchor="middle" fill="${textColor}" font-size="12" font-weight="600" font-family="${FONTS.display}">${opts.title}</text>` : ''}
 ${bars}
 </svg>`;
 }
@@ -97,12 +99,12 @@ function lineChart(data: ChartDataPoint[], w: number, h: number, opts: SvgChartO
   ).join('\n');
 
   const labels = data.map((d, i) =>
-    `<text x="${points[i].x}" y="${h - 10}" text-anchor="middle" fill="${textColor}" font-size="10" font-family="Inter,sans-serif">${d.label}</text>`
+    `<text x="${points[i].x}" y="${h - 10}" text-anchor="middle" fill="${textColor}" font-size="10" font-family="${FONTS.display}">${d.label}</text>`
   ).join('\n');
 
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}">
 ${anim}
-${opts.title ? `<text x="${w / 2}" y="18" text-anchor="middle" fill="${textColor}" font-size="12" font-weight="600" font-family="Inter,sans-serif">${opts.title}</text>` : ''}
+${opts.title ? `<text x="${w / 2}" y="18" text-anchor="middle" fill="${textColor}" font-size="12" font-weight="600" font-family="${FONTS.display}">${opts.title}</text>` : ''}
 <path class="sf-line" d="${pathD}" fill="none" stroke="${color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 ${dots}
 ${labels}
@@ -127,7 +129,7 @@ function areaChart(data: ChartDataPoint[], w: number, h: number, opts: SvgChartO
 
   const gradId = 'sf-area-grad';
   const labels = data.map((d, i) =>
-    `<text x="${points[i].x}" y="${h - 10}" text-anchor="middle" fill="${textColor}" font-size="10" font-family="Inter,sans-serif">${d.label}</text>`
+    `<text x="${points[i].x}" y="${h - 10}" text-anchor="middle" fill="${textColor}" font-size="10" font-family="${FONTS.display}">${d.label}</text>`
   ).join('\n');
 
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}">
@@ -137,7 +139,7 @@ function areaChart(data: ChartDataPoint[], w: number, h: number, opts: SvgChartO
     <stop offset="100%" stop-color="${color}" stop-opacity="0"/>
   </linearGradient>
 </defs>
-${opts.title ? `<text x="${w / 2}" y="18" text-anchor="middle" fill="${textColor}" font-size="12" font-weight="600" font-family="Inter,sans-serif">${opts.title}</text>` : ''}
+${opts.title ? `<text x="${w / 2}" y="18" text-anchor="middle" fill="${textColor}" font-size="12" font-weight="600" font-family="${FONTS.display}">${opts.title}</text>` : ''}
 <path d="${areaD}" fill="url(#${gradId})"/>
 <path d="${lineD}" fill="none" stroke="${color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 ${labels}
@@ -163,9 +165,9 @@ function donutChart(data: ChartDataPoint[], w: number, h: number, opts: SvgChart
   }).join('\n');
 
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}">
-${opts.title ? `<text x="${w / 2}" y="18" text-anchor="middle" fill="${textColor}" font-size="12" font-weight="600" font-family="Inter,sans-serif">${opts.title}</text>` : ''}
+${opts.title ? `<text x="${w / 2}" y="18" text-anchor="middle" fill="${textColor}" font-size="12" font-weight="600" font-family="${FONTS.display}">${opts.title}</text>` : ''}
 ${paths}
-<text x="${cx}" y="${cy + 4}" text-anchor="middle" fill="${textColor}" font-size="18" font-weight="700" font-family="Inter,sans-serif">${total}</text>
+<text x="${cx}" y="${cy + 4}" text-anchor="middle" fill="${textColor}" font-size="18" font-weight="700" font-family="${FONTS.display}">${total}</text>
 </svg>`;
 }
 

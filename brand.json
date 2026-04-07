@@ -1,0 +1,45 @@
+{
+  "name": "CegTec GmbH",
+  "logo": "cegtec-logo.png",
+
+  "fonts": {
+    "display": "'DM Sans', 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif",
+    "mono": "'JetBrains Mono', 'IBM Plex Mono', 'SF Mono', monospace",
+    "ui": "'Plus Jakarta Sans', 'DM Sans', system-ui, sans-serif"
+  },
+
+  "colors": {
+    "light": {
+      "background": "#FAFAFA",
+      "backgroundAlt": "#F8F7F4",
+      "text": "#0A0A0A",
+      "textTitle": "#1A1A2E",
+      "label": "#71717A",
+      "card": "#FFFFFF",
+      "cardBorder": "#E5E7EB",
+      "border": "#E5E5EA",
+      "tag": "#9CA3AF"
+    },
+    "dark": {
+      "background": "#070718",
+      "backgroundAlt": "#080820",
+      "text": "#f0f0f5",
+      "textTitle": "#ffffff",
+      "label": "#8888a0",
+      "card": "#0f0f22",
+      "cardBorder": "#1e1e38",
+      "border": "#1e1e38",
+      "tag": "#7a7a90"
+    },
+    "accent": {
+      "primary": "#3B4BF9",
+      "secondary": "#E93BCD",
+      "filled": "#2563EB",
+      "filledDark": "#1A3FD4",
+      "success": "#10B981",
+      "warning": "#F59E0B",
+      "danger": "#EF4444",
+      "empty": "#D4D4D8"
+    }
+  }
+}

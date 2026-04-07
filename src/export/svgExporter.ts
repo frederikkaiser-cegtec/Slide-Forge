@@ -2,6 +2,7 @@ import type { Diagram, DiagramNode, DiagramEdge } from '../types/diagram';
 import { getEdgePath } from '../utils/edgePaths';
 import { getPreset, compileKeyframes, compileAnimationProperty } from '../animation';
 import { compileToSVGAnimate } from '../animation/svgCompiler';
+import { FONTS } from '../utils/cegtecTheme';
 
 export function generateAnimatedSVG(diagram: Diagram): string {
   if (diagram.nodes.length === 0) return '<svg xmlns="http://www.w3.org/2000/svg"></svg>';
@@ -89,7 +90,7 @@ export function generateAnimatedSVG(diagram: Diagram): string {
     let labelSvg = '';
     if (edge.label) {
       const tw = edge.label.length * 7 + 12;
-      labelSvg = `<rect x="${labelPos.x - tw / 2}" y="${labelPos.y - 11}" width="${tw}" height="22" rx="6" fill="rgba(255,255,255,0.95)" stroke="${strokeColor}" stroke-width="1" stroke-opacity="0.3"/><text x="${labelPos.x}" y="${labelPos.y + 4}" text-anchor="middle" fill="#1a1a2e" font-size="11" font-family="Inter, sans-serif" font-weight="500">${escapeXml(edge.label)}</text>`;
+      labelSvg = `<rect x="${labelPos.x - tw / 2}" y="${labelPos.y - 11}" width="${tw}" height="22" rx="6" fill="rgba(255,255,255,0.95)" stroke="${strokeColor}" stroke-width="1" stroke-opacity="0.3"/><text x="${labelPos.x}" y="${labelPos.y + 4}" text-anchor="middle" fill="#1a1a2e" font-size="11" font-family="${FONTS.display}" font-weight="500">${escapeXml(edge.label)}</text>`;
     }
 
     return `<defs>${marker}</defs>
@@ -130,7 +131,7 @@ ${labelSvg}`;
     }
 
     return `<foreignObject x="${x}" y="${y}" width="${node.width}" height="${node.height}">
-  <div xmlns="http://www.w3.org/1999/xhtml" class="${prefix}-n${animClass}" style="width:${node.width}px;height:${node.height}px;background:${backgroundColor};border:${borderWidth}px solid ${borderColor}4d;border-radius:${br};color:${color};font-size:${fontSize}px;font-weight:${fontWeight};opacity:${opacity};display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8px 12px;font-family:Inter,sans-serif;letter-spacing:-0.01em;${transform}">
+  <div xmlns="http://www.w3.org/1999/xhtml" class="${prefix}-n${animClass}" style="width:${node.width}px;height:${node.height}px;background:${backgroundColor};border:${borderWidth}px solid ${borderColor}4d;border-radius:${br};color:${color};font-size:${fontSize}px;font-weight:${fontWeight};opacity:${opacity};display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8px 12px;font-family:${FONTS.display};letter-spacing:-0.01em;${transform}">
     <div style="${innerTransform}">
 ${node.icon ? `      <span style="font-size:${fontSize * 1.6}px;margin-bottom:4px;display:block">${node.icon}</span>` : ''}
       <div style="line-height:1.3;word-break:break-word">${escapeXml(node.label)}</div>

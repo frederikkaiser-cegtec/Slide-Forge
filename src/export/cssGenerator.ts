@@ -1,5 +1,6 @@
 import type { Diagram } from '../types/diagram';
 import { getPreset, compileKeyframes, compileAnimationProperty } from '../animation';
+import { FONTS } from '../utils/cegtecTheme';
 
 function generateShimmerCSS(diagram: Diagram, prefix: string): string {
   const shimmerNodes = diagram.nodes.filter((n) => n.animation?.presetId === 'shimmer');
@@ -154,7 +155,7 @@ ${diagram.nodes.map((_, i) => `.${prefix}-node:nth-child(${i + 1}) { animation-d
   min-height: 500px;
   margin: 0 auto;
   background: #f8f9fb;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: ${FONTS.display};
   overflow: hidden;
   border-radius: 16px;
   border: 1px solid #e2e5ea;
@@ -214,7 +215,7 @@ ${diagram.nodes.map((_, i) => `.${prefix}-node:nth-child(${i + 1}) { animation-d
   margin-bottom: 4px;
 }
 .${prefix}-edge-label {
-  font-family: 'Inter', sans-serif;
+  font-family: ${FONTS.display};
 }
 .${prefix}-tooltip {
   position: absolute;

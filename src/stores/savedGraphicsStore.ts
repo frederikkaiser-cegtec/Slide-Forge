@@ -1,6 +1,8 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { InfographicData } from '../components/graphics/InfographicGraphic';
+import type { LinkedInPostData } from '../components/graphics/LinkedInPostGraphic';
+import { CEGTEC_LIGHT_DEFAULTS, BRAND_LIGHT, BRAND_DARK } from '../utils/cegtecTheme';
 
 export interface SavedGraphic {
   id: string;
@@ -11,15 +13,9 @@ export interface SavedGraphic {
   savedAt: number;
 }
 
-// CegTec brand
-const CT = {
-  bg: '#FAFAFA', accent: '#3B4BF9', accent2: '#E93BCD',
-  text: '#0A0A0A', label: '#71717A', card: '#FFFFFF', border: '#E5E7EB', tag: '#9CA3AF',
-};
-const CT_DARK = {
-  bg: '#070718', accent: '#3B4BF9', accent2: '#E93BCD',
-  text: '#f0f0f5', label: '#8888a0', card: '#0f0f22', border: '#1e1e38', tag: '#7a7a90',
-};
+// Brand colors from brand.json (via cegtecTheme)
+const CT = BRAND_LIGHT;
+const CT_DARK = BRAND_DARK;
 
 function ctLight(d: Partial<InfographicData>): InfographicData {
   return {
@@ -331,9 +327,103 @@ const SEED_INFOGRAPHICS: SavedGraphic[] = [
       funnelSubtitle: 'WIND DACH + ENG',
     }),
   },
+  // ── LINKEDIN POST: AI Agents vs. Schreibmaschine ─────────
+  {
+    id: 'preset-ai-agents-linkedin-hell',
+    name: 'LinkedIn — AI Agents vs. Schreibmaschine (Hell)',
+    type: 'infographic',
+    formatId: 'og',
+    savedAt: Date.now(),
+    data: ctLight({
+      companyName: 'CegTec GmbH',
+      industry: 'AI Agents',
+      headline: 'Autonome Agenten vs. Schreibmaschine',
+      subline: 'Warum KI im B2B mehr kann als Text generieren — Zahlen, die den Unterschied zeigen',
+      metrics: [
+        { value: '65%', label: 'Workflows komplett automatisiert', icon: '\u2699\uFE0F', tag: 'AUTOMATION' },
+        { value: '+40%', label: 'Sales-Produktivit\u00e4t mit AI Agents', icon: '\uD83D\uDCC8', tag: 'PRODUKTIVIT\u00C4T' },
+        { value: '-65%', label: 'Response Time vs. Rule-Based', icon: '\u26A1', tag: 'GESCHWINDIGKEIT' },
+      ],
+      funnelSteps: [
+        { label: 'Routine-Tasks autonom', value: '80%', pct: 80 },
+        { label: 'ROI im ersten Jahr', value: '74%', pct: 74 },
+        { label: 'Enterprise-Apps 2026', value: '40%', pct: 40 },
+        { label: 'Handling-Kosten gesenkt', value: '30-40%', pct: 35 },
+        { label: 'Sales Cycle verk\u00fcrzt', value: '25%', pct: 25 },
+      ],
+      quote: '\u201eDie Frage ist nicht mehr \u201AWen stellen wir ein?\u2018 sondern \u201AWie viele Agents deployen wir?\u2018\u201c \u2014 Gartner',
+      ctaText: 'cegtec.net/platform',
+      funnelTitle: 'AI Agent Impact',
+      funnelSubtitle: 'GARTNER \u2022 GOOGLE CLOUD \u2022 G2',
+    }),
+  },
+  {
+    id: 'preset-ai-agents-linkedin-dunkel',
+    name: 'LinkedIn — AI Agents vs. Schreibmaschine (Dunkel)',
+    type: 'infographic',
+    formatId: 'og',
+    savedAt: Date.now(),
+    data: ctDark({
+      companyName: 'CegTec GmbH',
+      industry: 'AI Agents',
+      headline: 'Autonome Agenten vs. Schreibmaschine',
+      subline: 'Warum KI im B2B mehr kann als Text generieren — Zahlen, die den Unterschied zeigen',
+      metrics: [
+        { value: '65%', label: 'Workflows komplett automatisiert', icon: '\u2699\uFE0F', tag: 'AUTOMATION' },
+        { value: '+40%', label: 'Sales-Produktivit\u00e4t mit AI Agents', icon: '\uD83D\uDCC8', tag: 'PRODUKTIVIT\u00C4T' },
+        { value: '-65%', label: 'Response Time vs. Rule-Based', icon: '\u26A1', tag: 'GESCHWINDIGKEIT' },
+      ],
+      funnelSteps: [
+        { label: 'Routine-Tasks autonom', value: '80%', pct: 80 },
+        { label: 'ROI im ersten Jahr', value: '74%', pct: 74 },
+        { label: 'Enterprise-Apps 2026', value: '40%', pct: 40 },
+        { label: 'Handling-Kosten gesenkt', value: '30-40%', pct: 35 },
+        { label: 'Sales Cycle verk\u00fcrzt', value: '25%', pct: 25 },
+      ],
+      quote: '\u201eDie Frage ist nicht mehr \u201AWen stellen wir ein?\u2018 sondern \u201AWie viele Agents deployen wir?\u2018\u201c \u2014 Gartner',
+      ctaText: 'cegtec.net/platform',
+      funnelTitle: 'AI Agent Impact',
+      funnelSubtitle: 'GARTNER \u2022 GOOGLE CLOUD \u2022 G2',
+    }),
+  },
 ];
 
-const SEED_VERSION = 'v3-real-cases';
+// ── LinkedIn Post Presets ──────────────────────────────────────
+const SEED_LINKEDIN_POSTS: SavedGraphic[] = [
+  {
+    id: 'preset-seo-hidden-cost-hell',
+    name: 'LinkedIn — SEO Hidden Cost 2026 (Hell)',
+    type: 'linkedin-post',
+    formatId: '1:1',
+    savedAt: Date.now(),
+    data: {
+      topLabel: 'SEO IST TOT? DIE ZAHLEN.',
+      headline: 'Warum SEO allein\n2026 nicht mehr reicht.',
+      subline: 'Gartner, SparkToro & Forrester zeigen: Der klassische Suchtraffic bricht ein.',
+      gapTitle: 'DER RÜCKGANG',
+      gapBars: [
+        { value: '-25%', label: 'Suchvolumen bis 2026 — Gartner', pct: 75 },
+        { value: '58,5%', label: 'Zero-Click-Suchen — SparkToro', pct: 58, color: '#F59E0B' },
+        { value: '-61%', label: 'CTR bei AI Overviews — Seer Interactive', pct: 61, color: '#EF4444' },
+      ],
+      stats: [
+        { value: '50%', label: 'der B2B-Buyer starten in AI Chatbots', source: 'FORRESTER' },
+        { value: '+31%', label: 'Conversion bei AI-Traffic vs. Organic', source: 'SEL 2025' },
+        { value: '96%', label: 'der AI Overview Quellen mit E-E-A-T', source: 'GOOGLE' },
+      ],
+      bullets: [
+        { text: 'Topical Authority statt Keywords — KI zitiert nur Quellen mit echter Expertise (E-E-A-T).' },
+        { text: 'Zero-Click akzeptieren — Content so strukturieren, dass Maschinen ihn als Faktenquelle nutzen.' },
+        { text: 'Search Everywhere — LinkedIn, Reddit, Fachmedien: dort sein, wo Entscheidungen fallen.' },
+      ],
+      ctaQuestion: 'Siehst du den Rückgang bereits in deinen Daten?',
+      ctaLine: 'cegtec.net',
+      ...CEGTEC_LIGHT_DEFAULTS,
+    } as LinkedInPostData,
+  },
+];
+
+const SEED_VERSION = 'v5-seo-hidden-cost-v2';
 
 interface SavedGraphicsState {
   graphics: SavedGraphic[];
@@ -348,7 +438,7 @@ interface SavedGraphicsState {
 export const useSavedGraphicsStore = create<SavedGraphicsState>()(
   persist(
     (set, get) => ({
-      graphics: [...SEED_INFOGRAPHICS],
+      graphics: [...SEED_INFOGRAPHICS, ...SEED_LINKEDIN_POSTS],
       _seedVersion: SEED_VERSION,
 
       save: (name, type, data, formatId) => {
@@ -385,7 +475,7 @@ export const useSavedGraphicsStore = create<SavedGraphicsState>()(
           if (!state) return;
           if (state._seedVersion !== SEED_VERSION) {
             const userGraphics = state.graphics.filter((g: any) => !g.id.startsWith('preset-'));
-            state.graphics = [...SEED_INFOGRAPHICS, ...userGraphics];
+            state.graphics = [...SEED_INFOGRAPHICS, ...SEED_LINKEDIN_POSTS, ...userGraphics];
             state._seedVersion = SEED_VERSION;
           }
         };

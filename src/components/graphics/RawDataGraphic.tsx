@@ -1,5 +1,5 @@
 import { LOGO_URL } from '../../utils/assets';
-import { logoFilter, adjustBrightness } from '../../utils/cegtecTheme';
+import { logoFilter, adjustBrightness, FONTS } from '../../utils/cegtecTheme';
 
 export interface RawDataEntry {
   company: string;
@@ -51,8 +51,8 @@ export const defaultRawDataData: RawDataData = {
   ],
 };
 
-const MONO = "'JetBrains Mono', 'IBM Plex Mono', 'SF Mono', monospace";
-const DISPLAY = "'Plus Jakarta Sans', 'DM Sans', 'Inter', system-ui, sans-serif";
+const MONO = FONTS.mono;
+const DISPLAY = FONTS.display;
 
 const COLUMNS = [
   { key: 'company', label: 'Company', width: 0.22 },

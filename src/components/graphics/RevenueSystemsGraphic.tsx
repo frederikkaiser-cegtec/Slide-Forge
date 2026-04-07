@@ -65,7 +65,9 @@ function getColors(data: RevenueSystemsData) {
   };
 }
 
-const MONO = "'JetBrains Mono', 'IBM Plex Mono', 'SF Mono', monospace";
+import { FONTS } from '../../utils/cegtecTheme';
+
+const MONO = FONTS.mono;
 
 export function RevenueSystemsGraphic({
   data,
@@ -101,7 +103,7 @@ export function RevenueSystemsGraphic({
         position: 'relative',
         overflow: 'hidden',
         background: COLORS.bg,
-        fontFamily: "'DM Sans', 'Inter', system-ui, sans-serif",
+        fontFamily: FONTS.display,
       }}
     >
       {/* SVG layer for connection lines + knots */}

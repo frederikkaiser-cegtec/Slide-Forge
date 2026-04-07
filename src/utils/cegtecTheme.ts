@@ -4,55 +4,77 @@
  * ALLE Grafik-Komponenten sollen aus dieser Datei importieren.
  * Niemals Farben, Fonts oder Effekte direkt in Komponenten hartcodieren.
  *
- * Zwei Varianten:
- *   LIGHT — #F8F7F4 / #F5F5F0 Hintergrund (Data-Pipeline, Outreach, Academy, LinkedIn)
- *   DARK  — #080820 / #070718 / #0A1628 Hintergrund (Case Study, ROI, KPI Banner)
+ * Liest Brand-Config aus /brand.json — dort Fonts, Farben, Logo anpassen.
  */
 
-// ── Font Stacks ─────────────────────────────────────────────────
-// Canonical order: the first font is the primary, rest are fallbacks.
-// Data-Pipeline-Grafiken nutzen JetBrains Mono zuerst,
-// OutboundStack/Academy nutzen IBM Plex Mono zuerst.
-// Beide sind akzeptabel — Hauptsache konsistent pro Grafik-Gruppe.
+import brand from '../../brand.json';
+
+// ── Font Stacks (aus brand.json) ────────────────────────────────
 
 export const FONTS = {
-  mono: "'JetBrains Mono', 'IBM Plex Mono', 'SF Mono', monospace",
-  display: "'DM Sans', 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif",
+  mono: brand.fonts.mono,
+  display: brand.fonts.display,
+  ui: brand.fonts.ui,
 } as const;
 
-// ── Farb-System ─────────────────────────────────────────────────
+// ── Farb-System (aus brand.json) ────────────────────────────────
 
 export const COLORS = {
   // Hintergruende
-  bgLight: '#F8F7F4',       // Data-Pipeline, Outreach, Multichannel
-  bgLightAlt: '#F5F5F0',    // OutboundStack, Academy, AgentFriendly
-  bgDark: '#080820',        // Case Study
-  bgDarkAlt: '#070718',     // ROI
+  bgLight: brand.colors.light.backgroundAlt,
+  bgLightAlt: brand.colors.light.background,
+  bgDark: brand.colors.dark.backgroundAlt,
+  bgDarkAlt: brand.colors.dark.background,
 
   // Text
-  titleLight: '#1A1A2E',    // Titel auf hellem Hintergrund
-  titleDark: '#ffffff',      // Titel auf dunklem Hintergrund
+  titleLight: brand.colors.light.textTitle,
+  titleDark: brand.colors.dark.textTitle,
 
   // Labels / Muted
-  labelLight: '#8A8A9A',    // Labels auf hellem Hintergrund
-  labelDark: '#8888a0',     // Labels auf dunklem Hintergrund
+  labelLight: brand.colors.light.label,
+  labelDark: brand.colors.dark.label,
 
   // Akzentfarben
-  filled: '#2563EB',        // Primaer-Blau (Deep Blue Primary)
-  filledDark: '#1A3FD4',    // Deep Blue Dark / Warning-Akzent
-  accent1: '#3B4BF9',       // Case Study / Infographic Akzent 1
-  accent2: '#E93BCD',       // Case Study / Infographic Akzent 2 (Pink)
+  filled: brand.colors.accent.filled,
+  filledDark: brand.colors.accent.filledDark,
+  accent1: brand.colors.accent.primary,
+  accent2: brand.colors.accent.secondary,
 
   // Semantisch
-  empty: '#D4D4D8',         // Leere / fehlende Daten
-  border: '#E5E5EA',        // Rahmenfarbe (Light Mode)
-  success: '#10B981',       // Verifiziert / Enriched
-  warning: '#F59E0B',       // Review / Pruefung
-  danger: '#EF4444',        // Fehler / negative Stats
+  empty: brand.colors.accent.empty,
+  border: brand.colors.light.border,
+  success: brand.colors.accent.success,
+  warning: brand.colors.accent.warning,
+  danger: brand.colors.accent.danger,
 
-  // Card-Farben (Light Mode — solide, kein Glassmorphism)
-  cardLight: '#ffffff',
+  // Card-Farben
+  cardLight: brand.colors.light.card,
   cardDark: 'rgba(255,255,255,0.02)',
+} as const;
+
+// ── Brand-Presets fuer Light/Dark Mode ──────────────────────────
+// Verwendet in savedGraphicsStore.ts und Graphic-Komponenten.
+
+export const BRAND_LIGHT = {
+  bg: brand.colors.light.background,
+  accent: brand.colors.accent.primary,
+  accent2: brand.colors.accent.secondary,
+  text: brand.colors.light.text,
+  label: brand.colors.light.label,
+  card: brand.colors.light.card,
+  border: brand.colors.light.cardBorder,
+  tag: brand.colors.light.tag,
+} as const;
+
+export const BRAND_DARK = {
+  bg: brand.colors.dark.background,
+  accent: brand.colors.accent.primary,
+  accent2: brand.colors.accent.secondary,
+  text: brand.colors.dark.text,
+  label: brand.colors.dark.label,
+  card: brand.colors.dark.card,
+  border: brand.colors.dark.cardBorder,
+  tag: brand.colors.dark.tag,
 } as const;
 
 // ── Standard-Farbset fuer Light-Mode-Grafiken ───────────────────

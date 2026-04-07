@@ -1,7 +1,7 @@
 import type { RoiData } from '../../types/graphics';
 import { BrandedChart } from './BrandedChart';
 import { LOGO_URL } from '../../utils/assets';
-import { logoFilter } from '../../utils/cegtecTheme';
+import { logoFilter, FONTS } from '../../utils/cegtecTheme';
 
 function lighten(hex: string): string {
   const r = parseInt(hex.slice(1, 3), 16);
@@ -31,7 +31,7 @@ export function RoiGraphic({ data, width, height }: { data: RoiData; width: numb
   return (
     <div style={{
       width, height, position: 'relative', overflow: 'hidden',
-      fontFamily: "'Inter', system-ui, sans-serif",
+      fontFamily: FONTS.display,
       background: bg,
     }}>
       {/* SVG Background */}

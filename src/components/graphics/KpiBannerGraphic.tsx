@@ -1,5 +1,5 @@
 import { LOGO_URL } from '../../utils/assets';
-import { logoFilter } from '../../utils/cegtecTheme';
+import { logoFilter, FONTS } from '../../utils/cegtecTheme';
 
 export interface KpiBannerData {
   title: string;
@@ -34,7 +34,7 @@ export function KpiBannerGraphic({ data, width, height }: { data: KpiBannerData;
   return (
     <div style={{
       width, height, position: 'relative', overflow: 'hidden',
-      fontFamily: "'Inter', system-ui, sans-serif",
+      fontFamily: FONTS.display,
       background: bg,
     }}>
       {/* === SVG Background Layer === */}

@@ -6,6 +6,7 @@ import { DiagramEdgeComponent } from './DiagramEdge';
 import { EdgeDrawing } from './EdgeDrawing';
 import { generateId } from '../../utils/id';
 import { createDefaultPorts } from '../../utils/edgePaths';
+import { FONTS } from '../../utils/cegtecTheme';
 
 const BLUE = '#3B4BF9';
 const PINK = '#E93BCD';
@@ -301,7 +302,7 @@ export function DiagramCanvas() {
           borderRadius: 6,
           border: '1px solid rgba(0,0,0,0.08)',
           boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
-          fontFamily: 'Inter, sans-serif',
+          fontFamily: FONTS.display,
           letterSpacing: '0.05em',
         }}
       >

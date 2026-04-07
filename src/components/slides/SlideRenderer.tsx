@@ -1,5 +1,6 @@
 import { Lock } from 'lucide-react';
 import type { Slide, SlideElement } from '../../types';
+import { FONTS } from '../../utils/cegtecTheme';
 
 const BASE = import.meta.env.BASE_URL || '/';
 function resolveAsset(src: string): string {
@@ -48,7 +49,7 @@ export function SlideRenderer({
         width,
         height,
         background: slide.background,
-        fontFamily: "'Inter', system-ui, sans-serif",
+        fontFamily: FONTS.display,
         isolation: 'isolate',
       }}
       onClick={(e) => {

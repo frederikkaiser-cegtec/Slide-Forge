@@ -6,6 +6,7 @@ import { SlideRenderer } from '../slides/SlideRenderer';
 import { TextEditor } from './TextEditor';
 import { getFormat } from '../../utils/formats';
 import type { SlideElement } from '../../types';
+import { FONTS } from '../../utils/cegtecTheme';
 
 export function SlideCanvas() {
   const slides = usePresentationStore((s) => s.presentation.slides);
@@ -176,7 +177,7 @@ function EditableSlideView({
 
   return (
     <div
-      style={{ width, height, background: slide.background, position: 'relative', overflow: 'hidden', fontFamily: "'Inter', system-ui, sans-serif" }}
+      style={{ width, height, background: slide.background, position: 'relative', overflow: 'hidden', fontFamily: FONTS.display }}
       onClick={(e) => { if (e.target === e.currentTarget) { onFinishEditing(); onBackgroundClick(); } }}
     >
       {slide.elements.map((element) => {

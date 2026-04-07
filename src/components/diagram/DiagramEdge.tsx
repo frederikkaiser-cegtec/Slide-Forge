@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import type { DiagramEdge as DiagramEdgeType, DiagramNode } from '../../types/diagram';
 import { getEdgePath } from '../../utils/edgePaths';
 import { useEdgeAnimationPreview } from '../../hooks/useAnimationPreview';
+import { FONTS } from '../../utils/cegtecTheme';
 
 const PINK = '#E93BCD';
 
@@ -123,7 +124,7 @@ export function DiagramEdgeComponent({ edge, sourceNode, targetNode, selected, o
             textAnchor="middle"
             fill="#1a1a2e"
             fontSize={11}
-            fontFamily="Inter, sans-serif"
+            fontFamily={FONTS.display}
             fontWeight={500}
             letterSpacing="0.02em"
           >

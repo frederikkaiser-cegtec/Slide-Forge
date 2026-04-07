@@ -1,5 +1,5 @@
 import { LOGO_URL } from '../../utils/assets';
-import { logoFilter, adjustBrightness } from '../../utils/cegtecTheme';
+import { logoFilter, adjustBrightness, FONTS } from '../../utils/cegtecTheme';
 
 export interface PipelineStep {
   label: string;
@@ -59,8 +59,8 @@ export const defaultOutboundStackData: OutboundStackData = {
   warningColor: '#1A3FD4',
 };
 
-const MONO = "'IBM Plex Mono', 'JetBrains Mono', 'SF Mono', monospace";
-const DISPLAY = "'DM Sans', 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif";
+const MONO = FONTS.mono;
+const DISPLAY = FONTS.display;
 
 const STEP_ICONS = [
   (sz: number, color: string) => (

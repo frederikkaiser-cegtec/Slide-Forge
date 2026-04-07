@@ -1,5 +1,5 @@
 import { LOGO_URL } from '../../utils/assets';
-import { logoFilter, adjustBrightness } from '../../utils/cegtecTheme';
+import { logoFilter, adjustBrightness, FONTS } from '../../utils/cegtecTheme';
 
 export interface PyramidLayer {
   label: string;
@@ -67,8 +67,8 @@ function hexToRgba(hex: string, alpha: number): string {
   return `rgba(${r},${g},${b},${alpha})`;
 }
 
-const MONO = "'IBM Plex Mono', 'JetBrains Mono', 'SF Mono', monospace";
-const DISPLAY = "'DM Sans', 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif";
+const MONO = FONTS.mono;
+const DISPLAY = FONTS.display;
 
 // Layer icons (bottom to top): HTML tags, JSON braces, TXT file, graph nodes, plug/protocol
 const LAYER_ICONS = [
