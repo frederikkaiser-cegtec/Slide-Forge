@@ -33,26 +33,26 @@ export interface LinkedInPostData {
 }
 
 export const defaultLinkedInPostData: LinkedInPostData = {
-  topLabel: 'KI-READINESS CHECK',
-  headline: 'Mangelnde Datenqualität\nist das größte Risiko\nfür KI-Projekte.',
-  subline: 'Die meisten Entscheider übersehen, was das wirklich bedeutet.',
-  gapTitle: 'READINESS GAP',
+  topLabel: 'PEOPLE VS. TECHNOLOGY',
+  headline: 'KI-Erfolg ist zu 70 % People,\nzu 30 % Technologie.',
+  subline: 'BCG bestätigt: Der größte Hebel ist nicht die Software – sondern die Menschen dahinter.',
+  gapTitle: 'DIE LÜCKE',
   gapBars: [
-    { value: '87%', label: 'wollen KI einsetzen — nur 23% sind datenseitig bereit', pct: 87 },
-    { value: '65%', label: 'der KI-Projekte scheitern an mangelnder Datenqualität', pct: 65, color: '#F59E0B' },
-    { value: '12%', label: 'haben einen strukturierten Daten-Audit-Prozess', pct: 12, color: '#EF4444' },
+    { value: '80,3%', label: 'aller KI-Projekte scheitern insgesamt (RAND 2025)', pct: 80 },
+    { value: '88%', label: 'der Unternehmen nutzen bereits KI (McKinsey 2025)', pct: 88, color: '#F59E0B' },
+    { value: '6%', label: 'davon mit messbarem Bottom-Line-Impact (McKinsey 2025)', pct: 6, color: '#EF4444' },
   ],
   stats: [
-    { value: '85%', label: 'der KI-Projekte liefern nicht den erwarteten ROI', source: 'GARTNER' },
-    { value: '$3,1T', label: 'jährliche Kosten schlechter Daten in den USA', source: 'IBM RESEARCH' },
-    { value: '+40%', label: 'Effizienzgewinn bei sauberer Datenbasis', source: 'MCKINSEY' },
+    { value: '63%', label: 'aller Implementierungsprobleme sind menschliche Faktoren', source: 'PROSCI (N=1.107)' },
+    { value: '2,9x', label: 'Erfolgsrate mit dediziertem Change Management', source: 'RAND 2025' },
+    { value: '4,2 J.', label: 'Ø ROI-Timeline vs. 1,8 Jahre Prognose', source: 'RAND 2025' },
   ],
   bullets: [
-    { text: 'Daten-Audit statt Tool-Suche — Quellen prüfen, bevor du eine Lizenz kaufst' },
-    { text: 'Infrastruktur skalierbar machen — Cloud-Ressourcen für KI-Last auslegen' },
-    { text: 'KI-Literacy im Team — ohne Schulung bleibt jedes Tool eine teure Spielerei' },
+    { text: 'Tools ohne Vertrauen werden sabotiert — 63 % aller Probleme sind menschliche Faktoren, nicht Technik.' },
+    { text: 'Training schlägt Tool-Auswahl — Erfolgreiche Projekte investieren 47 % in Foundations vs. 18 % bei Gescheiterten.' },
+    { text: 'Middle Management wird vergessen — ohne Brücke bleibt jede KI-Strategie ein Pilotprojekt.' },
   ],
-  ctaQuestion: 'Wo steht eure Datenqualität auf einer Skala von 1–10? 📈',
+  ctaQuestion: 'Tool gekauft oder Transformation gestartet?',
   ctaLine: 'cegtec.net',
   ...CEGTEC_LIGHT_DEFAULTS,
 };
@@ -154,10 +154,9 @@ export function LinkedInPostGraphic({
         padding: `${40 * s}px ${pad}px ${32 * s}px`,
       }}>
 
-        {/* ── HEADER ── */}
+        {/* ── TOP GROUP — header stays at top ── */}
         <div style={{
           display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-          marginBottom: 20 * s,
         }}>
           <img src={LOGO_URL} alt="CegTec" style={{ height: 26 * s, opacity: 0.9, ...logoFilter(bg) }} />
           <div style={{
@@ -173,56 +172,62 @@ export function LinkedInPostGraphic({
           </div>
         </div>
 
-        {/* ── BADGE ── */}
+        {/* ── MAIN CONTENT — fills available space evenly ── */}
         <div style={{
-          display: 'inline-flex', alignItems: 'center', gap: 10 * s,
-          marginBottom: 14 * s,
+          flex: 1, display: 'flex', flexDirection: 'column',
+          justifyContent: 'space-between', paddingTop: 8 * s, paddingBottom: 8 * s,
         }}>
+
+        {/* ── BADGE + HEADLINE + SUBLINE ── */}
+        <div>
           <div style={{
-            width: 3.5 * s, height: 22 * s, borderRadius: 2 * s,
-            background: textFilled,
-          }} />
-          <span style={{
-            fontFamily: FONTS.mono, fontSize: 13 * s, fontWeight: 700,
-            letterSpacing: 3 * s, textTransform: 'uppercase' as const,
-            color: textFilled,
+            display: 'inline-flex', alignItems: 'center', gap: 10 * s,
+            marginBottom: 10 * s,
           }}>
-            {data.topLabel}
-          </span>
-        </div>
-
-        {/* ── HEADLINE ── */}
-        <h1 style={{
-          fontFamily: "'DM Sans', 'Plus Jakarta Sans', sans-serif",
-          fontSize: 54 * s,
-          fontWeight: 800,
-          color: titleCol,
-          lineHeight: 1.0,
-          letterSpacing: -2.5 * s,
-          margin: 0, marginBottom: 8 * s,
-          whiteSpace: 'pre-line' as const,
-        }}>
-          {headlineLines.map((line, i) => (
-            <span key={i}>
-              {i === lastLineIdx ? (
-                <span style={{ color: textFilled }}>{line}</span>
-              ) : line}
-              {i < lastLineIdx && '\n'}
+            <div style={{
+              width: 3.5 * s, height: 22 * s, borderRadius: 2 * s,
+              background: textFilled,
+            }} />
+            <span style={{
+              fontFamily: FONTS.mono, fontSize: 13 * s, fontWeight: 700,
+              letterSpacing: 3 * s, textTransform: 'uppercase' as const,
+              color: textFilled,
+            }}>
+              {data.topLabel}
             </span>
-          ))}
-        </h1>
+          </div>
 
-        <p style={{
-          fontSize: 17 * s, color: textMuted,
-          fontWeight: 500, fontStyle: 'italic',
-          margin: 0, marginBottom: 22 * s, lineHeight: 1.4,
-        }}>
-          {data.subline}
-        </p>
+          <h1 style={{
+            fontFamily: FONTS.display,
+            fontSize: 54 * s,
+            fontWeight: 800,
+            color: titleCol,
+            lineHeight: 1.0,
+            letterSpacing: -2.5 * s,
+            margin: 0, marginBottom: 8 * s,
+            whiteSpace: 'pre-line' as const,
+          }}>
+            {headlineLines.map((line, i) => (
+              <span key={i}>
+                {i === lastLineIdx ? (
+                  <span style={{ color: textFilled }}>{line}</span>
+                ) : line}
+                {i < lastLineIdx && '\n'}
+              </span>
+            ))}
+          </h1>
+
+          <p style={{
+            fontSize: 17 * s, color: textMuted,
+            fontWeight: 500, fontStyle: 'italic',
+            margin: 0, lineHeight: 1.4,
+          }}>
+            {data.subline}
+          </p>
+        </div>
 
         {/* ── GAP BARS — horizontal, full-width ── */}
         <div style={{
-          marginBottom: 18 * s,
           padding: `${16 * s}px ${18 * s}px`,
           background: dark ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.015)',
           borderRadius: 10 * s,
@@ -249,9 +254,9 @@ export function LinkedInPostGraphic({
                 <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 14 * s }}>
                   {/* Big value */}
                   <div style={{
-                    width: 68 * s, flexShrink: 0,
+                    width: 86 * s, flexShrink: 0,
                     fontFamily: FONTS.display,
-                    fontSize: 34 * s, fontWeight: 800,
+                    fontSize: 30 * s, fontWeight: 800,
                     color: barColor, lineHeight: 1,
                     letterSpacing: -1 * s, textAlign: 'right',
                   }}>
@@ -278,7 +283,7 @@ export function LinkedInPostGraphic({
                     </div>
                     {/* Label */}
                     <div style={{
-                      fontSize: 13 * s, color: textMuted,
+                      fontSize: 12 * s, color: textMuted,
                       fontWeight: 500, lineHeight: 1.2,
                     }}>
                       {bar.label}
@@ -291,7 +296,7 @@ export function LinkedInPostGraphic({
         </div>
 
         {/* ── STATS ROW — three cards side by side ── */}
-        <div style={{ display: 'flex', gap: 10 * s, marginBottom: 16 * s }}>
+        <div style={{ display: 'flex', gap: 10 * s }}>
           {data.stats.map((stat, i) => {
             const isLast = i === data.stats.length - 1;
             const statColor = isLast ? COLORS.success : (i === 0 ? COLORS.danger : textFilled);
@@ -368,8 +373,7 @@ export function LinkedInPostGraphic({
           ))}
         </div>
 
-        {/* Spacer */}
-        <div style={{ flex: 1, minHeight: 8 * s }} />
+        </div>{/* close MAIN CONTENT */}
 
         {/* ── CTA FOOTER ── */}
         <div style={{
