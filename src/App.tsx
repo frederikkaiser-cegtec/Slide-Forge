@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback, useReducer, useEffect } from 'react';
-import { Download, Save } from 'lucide-react';
+import { Download, Save, Upload } from 'lucide-react';
 import { toPng, toJpeg } from 'html-to-image';
+import { GitHubPushModal } from './components/graphics/GitHubPushModal';
 import { DiagramEditor } from './components/diagram/DiagramEditor';
 import { EditorLayout } from './components/editor/EditorLayout';
 import { PresentationMode } from './components/presentation/PresentationMode';
@@ -83,6 +84,7 @@ function App() {
   const graphicRef = useRef<HTMLDivElement>(null);
   const [activeGraphicId, setActiveGraphicId] = useState<string | null>(null);
   const [saveFlash, setSaveFlash] = useState(false);
+  const [showGitHubPush, setShowGitHubPush] = useState(false);
 
   // Listen for template selection from WelcomeScreen
   useEffect(() => {
@@ -171,6 +173,22 @@ function App() {
     link.click();
   };
 
+  // ── Capture for GitHub push ─────────────────────────────────
+  const captureForGitHub = async (): Promise<string> => {
+    if (!graphicRef.current) throw new Error('No graphic element');
+    const el = graphicRef.current;
+    const prevTransform = el.style.transform;
+    el.style.transform = 'none';
+    const dataUrl = await toPng(el, {
+      width: format.width,
+      height: format.height,
+      pixelRatio: 3,
+      style: { transform: 'none', transformOrigin: '0 0' },
+    });
+    el.style.transform = prevTransform;
+    return dataUrl;
+  };
+
   // ── Home screen ────────────────────────────────────────────
   if (mode === 'home') {
     return <WelcomeScreen />;
@@ -257,6 +275,12 @@ function App() {
               <Download size={14} /> JPG
             </button>
           </div>
+          <button
+            onClick={() => setShowGitHubPush(true)}
+            className="w-full flex items-center justify-center gap-2 px-3 py-2 text-xs rounded-lg font-medium bg-muted/50 hover:bg-muted text-text-muted hover:text-text transition-all border border-border/40 hover:border-border"
+          >
+            <Upload size={12} /> Push to GitHub
+          </button>
         </div>
       </div>
 
@@ -280,6 +304,14 @@ function App() {
       </div>
 
     </div>
+
+      <GitHubPushModal
+        open={showGitHubPush}
+        onClose={() => setShowGitHubPush(false)}
+        graphicType={graphicType}
+        formatId={formatId}
+        captureImage={captureForGitHub}
+      />
     </div>
   );
 }
