@@ -552,7 +552,7 @@
           "width": 20,
           "height": 22,
           "rotation": 0,
-          "content": "<p>Bei intakten Dächern zahlen wir Ihnen zwischen 2,50 € und 4,00 € pro Quadratmeter und Jahr. Die genaue Höhe richtet sich nach Dachzustand, Ausrichtung und statischen Gegebenheiten.</p>",
+          "content": "<p>Bei intakten Dächern zahlen wir Ihnen zwischen 2,50 € und 5,00 € pro Quadratmeter und Jahr. Die genaue Höhe richtet sich nach Dachzustand, Ausrichtung und statischen Gegebenheiten.</p>",
           "style": {
             "fontSize": 20,
             "color": "#c8d5e2"
@@ -566,7 +566,7 @@
           "width": 20,
           "height": 10,
           "rotation": 0,
-          "content": "<h2>2,50–4,00 €</h2>",
+          "content": "<h2>2,50–5,00 €</h2>",
           "style": {
             "fontSize": 48,
             "fontWeight": 800,
@@ -756,7 +756,7 @@
           "width": 20,
           "height": 22,
           "rotation": 0,
-          "content": "<p>Einmalige Zahlung zwischen 185 € und 220 € pro installiertem Kilowattpeak. Sofortige Liquidität statt laufender Zahlungen – ideal für Investitionsprojekte.</p>",
+          "content": "<p>Einmalige Zahlung bis 250 € pro installiertem Kilowattpeak. Sofortige Liquidität statt laufender Zahlungen – ideal für Investitionsprojekte.</p>",
           "style": {
             "fontSize": 20,
             "color": "#c8d5e2"
@@ -770,7 +770,7 @@
           "width": 20,
           "height": 10,
           "rotation": 0,
-          "content": "<h2>185–220 €</h2>",
+          "content": "<h2>bis 250 €</h2>",
           "style": {
             "fontSize": 48,
             "fontWeight": 800,
@@ -1006,7 +1006,7 @@
           "width": 34,
           "height": 10,
           "rotation": 0,
-          "content": "<h1>4.000 € / Jahr</h1>",
+          "content": "<h1>5.000 € / Jahr</h1>",
           "style": {
             "fontSize": 56,
             "fontWeight": 800,
@@ -1021,7 +1021,7 @@
           "width": 34,
           "height": 6,
           "rotation": 0,
-          "content": "<p>= <strong style=\"color: #f0f2f5\">80.000 €</strong> über 25 Jahre Laufzeit</p>",
+          "content": "<p>= <strong style=\"color: #f0f2f5\">125.000 €</strong> über 25 Jahre Laufzeit</p>",
           "style": {
             "fontSize": 32,
             "color": "#c8d5e2"
@@ -1064,7 +1064,7 @@
           "width": 34,
           "height": 10,
           "rotation": 0,
-          "content": "<h1>bis 55.000 €</h1>",
+          "content": "<h1>bis 62.500 €</h1>",
           "style": {
             "fontSize": 56,
             "fontWeight": 800,
@@ -1093,7 +1093,7 @@
           "width": 84,
           "height": 10,
           "rotation": 0,
-          "content": "<p>Basierend auf 4,00 €/m²/Jahr bzw. 220 €/kWp bei ca. 250 kWp. Konditionen abhängig von Dachzustand, Statik und Ausrichtung.</p>",
+          "content": "<p>Basierend auf 5,00 €/m²/Jahr bzw. 250 €/kWp bei ca. 250 kWp. Konditionen abhängig von Dachzustand, Statik und Ausrichtung.</p>",
           "style": {
             "fontSize": 24,
             "color": "#c8d5e2"

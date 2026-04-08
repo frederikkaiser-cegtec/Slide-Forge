@@ -33,26 +33,26 @@ export interface LinkedInPostData {
 }
 
 export const defaultLinkedInPostData: LinkedInPostData = {
-  topLabel: 'PEOPLE VS. TECHNOLOGY',
-  headline: 'KI-Erfolg ist zu 70 % People,\nzu 30 % Technologie.',
-  subline: 'BCG bestätigt: Der größte Hebel ist nicht die Software – sondern die Menschen dahinter.',
-  gapTitle: 'DIE LÜCKE',
+  topLabel: 'DARK FUNNEL & ATTRIBUTION',
+  headline: 'Dein Attribution-Report lügt.\n70 % der Buyer Journey\nsind unsichtbar.',
+  subline: 'Käufer entscheiden in Kanälen, die dein Dashboard nie sieht.',
+  gapTitle: 'DIE UNSICHTBARE JOURNEY',
   gapBars: [
-    { value: '80,3%', label: 'aller KI-Projekte scheitern insgesamt (RAND 2025)', pct: 80 },
-    { value: '88%', label: 'der Unternehmen nutzen bereits KI (McKinsey 2025)', pct: 88, color: '#F59E0B' },
-    { value: '6%', label: 'davon mit messbarem Bottom-Line-Impact (McKinsey 2025)', pct: 6, color: '#EF4444' },
+    { value: '57%', label: 'Buyer Journey vor Vendorkontakt (UK/IE) — MarketOne / 6sense 2025', pct: 57 },
+    { value: '73%', label: 'Buyer Journey vor Vendorkontakt (APAC) — Green Hat / 6sense', pct: 73 },
+    { value: '61%', label: 'Buyer Journey vor Vendorkontakt (global) — 6sense 2025', pct: 61 },
   ],
   stats: [
-    { value: '63%', label: 'aller Implementierungsprobleme sind menschliche Faktoren', source: 'PROSCI (N=1.107)' },
-    { value: '2,9x', label: 'Erfolgsrate mit dediziertem Change Management', source: 'RAND 2025' },
-    { value: '4,2 J.', label: 'Ø ROI-Timeline vs. 1,8 Jahre Prognose', source: 'RAND 2025' },
+    { value: '84%', label: 'der Käufer haben ihren Anbieter gewählt bevor sie Sales kontaktieren', source: '6SENSE 2025' },
+    { value: '78 vs. 85%', label: 'Software sagt Websuche, Käufer sagen Dark Social', source: 'REFINE LABS' },
+    { value: '70–80%', label: 'der Recherche passieren vor dem ersten Sales-Kontakt', source: 'FORRESTER 2025' },
   ],
   bullets: [
-    { text: 'Tools ohne Vertrauen werden sabotiert — 63 % aller Probleme sind menschliche Faktoren, nicht Technik.' },
-    { text: 'Training schlägt Tool-Auswahl — Erfolgreiche Projekte investieren 47 % in Foundations vs. 18 % bei Gescheiterten.' },
-    { text: 'Middle Management wird vergessen — ohne Brücke bleibt jede KI-Strategie ein Pilotprojekt.' },
+    { text: 'Käufer entscheiden ohne dich — 84 % haben ihren Anbieter gewählt bevor die Evaluation startet.' },
+    { text: 'Last-Click belügt dich — Software-Attribution und Self-Reported Attribution erzählen komplett verschiedene Geschichten.' },
+    { text: 'KI macht es schlimmer — 94 % der B2B-Käufer nutzen LLMs im Kaufprozess, mit null Attribution.' },
   ],
-  ctaQuestion: 'Tool gekauft oder Transformation gestartet?',
+  ctaQuestion: 'Was sagt dein CRM – und was sagen deine Kunden?',
   ctaLine: 'cegtec.net',
   ...CEGTEC_LIGHT_DEFAULTS,
 };

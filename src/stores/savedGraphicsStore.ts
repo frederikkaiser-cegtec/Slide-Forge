@@ -421,9 +421,138 @@ const SEED_LINKEDIN_POSTS: SavedGraphic[] = [
       ...CEGTEC_LIGHT_DEFAULTS,
     } as LinkedInPostData,
   },
+  // ── Post 2: Funnel Handoff / Speed to Lead ──────────────────
+  {
+    id: 'preset-funnel-handoff-hell',
+    name: 'LinkedIn — Funnel Handoff / Speed to Lead (Hell)',
+    type: 'linkedin-post',
+    formatId: '1:1',
+    savedAt: Date.now(),
+    data: {
+      topLabel: 'SPEED TO LEAD',
+      headline: 'Dein Funnel hat kein\nTraffic-Problem.\nEr hat ein Handoff-Problem.',
+      subline: 'MQL → SQL Conversion liegt im Schnitt bei 13 %. Der Rest versickert zwischen Marketing und Sales.',
+      gapTitle: 'WO LEADS VERSICKERN',
+      gapBars: [
+        { value: '13%', label: 'Ø MQL-to-SQL Conversion Rate — Gartner / Salesforce', pct: 13 },
+        { value: '42h', label: 'Ø Zeit bis zur ersten Sales-Reaktion — Chilipiper 2025', pct: 35, color: '#F59E0B' },
+        { value: '79%', label: 'der MQLs konvertieren nie zu einem Sale — Benchmarks', pct: 79, color: '#EF4444' },
+      ],
+      stats: [
+        { value: '391%', label: 'höhere Conversion bei Antwort in <1 Minute', source: 'CALLPAGE 2025' },
+        { value: '79%', label: 'der MQLs konvertieren nie — weil kein Follow-up kommt', source: 'BENCHMARKS 2025' },
+        { value: '5 Min', label: 'nach 5 Minuten sinkt die Conversion um 80 %', source: 'CHILI PIPER 2025' },
+      ],
+      bullets: [
+        { text: 'Speed to Lead entscheidet — nach 5 Minuten sinkt die Conversion um 80 %. Die meisten Teams antworten in 42 Stunden.' },
+        { text: '79 % der MQLs versickern — nicht wegen schlechter Qualität, sondern weil kein zeitnahes Follow-up kommt.' },
+        { text: 'Der Funnel ist kein Marketing-Problem — er ist ein Handoff-Problem zwischen Marketing, SDR und Sales.' },
+      ],
+      ctaQuestion: 'Wie schnell antwortet dein Team auf einen qualifizierten Lead?',
+      ctaLine: 'cegtec.net',
+      ...CEGTEC_LIGHT_DEFAULTS,
+    } as LinkedInPostData,
+  },
+  // ── Post 3: Email Deliverability ────────────────────────────
+  {
+    id: 'preset-email-deliverability-hell',
+    name: 'LinkedIn — Email Deliverability (Hell)',
+    type: 'linkedin-post',
+    formatId: '1:1',
+    savedAt: Date.now(),
+    data: {
+      topLabel: 'EMAIL DELIVERABILITY',
+      headline: 'Dein Outreach-Problem ist\nnicht dein Text.\nEs ist deine Infrastruktur.',
+      subline: 'Jede 6. E-Mail erreicht den Posteingang nicht – und du merkst es nicht.',
+      gapTitle: 'WO DEINE MAILS LANDEN',
+      gapBars: [
+        { value: '84%', label: 'Inbox Placement Rate global (Validity 2025)', pct: 84 },
+        { value: '9,1%', label: 'Ø Spam Landing Rate (Saleshandy 2026)', pct: 9, color: '#F59E0B' },
+        { value: '0,1%', label: 'Gmail Spam-Beschwerde-Schwelle (Google Guidelines)', pct: 3, color: '#EF4444' },
+      ],
+      stats: [
+        { value: '3,43%', label: 'Ø Reply Rate (Top 10 %: über 10 %)', source: 'INSTANTLY 2026' },
+        { value: '84%', label: 'globale Inbox Placement Rate', source: 'VALIDITY 2025' },
+        { value: '50%', label: 'mehr Leads durch bessere Deliverability bei -33 % Kosten', source: 'MARTAL 2026' },
+      ],
+      bullets: [
+        { text: 'Jede 6. Mail landet im Spam — ohne Bounce, ohne Fehlermeldung, ohne dass du es merkst.' },
+        { text: 'Gmail blockt ab 0,1 % Beschwerderate — 1 Beschwerde pro 1.000 Mails reicht.' },
+        { text: 'Infrastruktur vor Copywriting — SPF, DKIM, DMARC und Domain Warmup entscheiden über Erfolg.' },
+      ],
+      ctaQuestion: 'Wann hast du das letzte Mal deine Sender Reputation geprüft?',
+      ctaLine: 'cegtec.net',
+      ...CEGTEC_LIGHT_DEFAULTS,
+    } as LinkedInPostData,
+  },
+  // ── Post 4: Dark Funnel & Attribution ───────────────────────
+  {
+    id: 'preset-dark-funnel-hell',
+    name: 'LinkedIn — Dark Funnel & Attribution (Hell)',
+    type: 'linkedin-post',
+    formatId: '1:1',
+    savedAt: Date.now(),
+    data: {
+      topLabel: 'DARK FUNNEL & ATTRIBUTION',
+      headline: 'Dein Attribution-Report lügt.\n70 % der Buyer Journey\nsind unsichtbar.',
+      subline: 'Käufer entscheiden in Kanälen, die dein Dashboard nie sieht.',
+      gapTitle: 'DIE UNSICHTBARE JOURNEY',
+      gapBars: [
+        { value: '57%', label: 'Buyer Journey vor Vendorkontakt (UK/IE) — MarketOne / 6sense 2025', pct: 57 },
+        { value: '73%', label: 'Buyer Journey vor Vendorkontakt (APAC) — Green Hat / 6sense', pct: 73 },
+        { value: '61%', label: 'Buyer Journey vor Vendorkontakt (global) — 6sense 2025', pct: 61 },
+      ],
+      stats: [
+        { value: '84%', label: 'der Käufer haben ihren Anbieter gewählt bevor sie Sales kontaktieren', source: '6SENSE 2025' },
+        { value: '78 vs. 85%', label: 'Software sagt Websuche, Käufer sagen Dark Social', source: 'REFINE LABS' },
+        { value: '70–80%', label: 'der Recherche passieren vor dem ersten Sales-Kontakt', source: 'FORRESTER 2025' },
+      ],
+      bullets: [
+        { text: 'Käufer entscheiden ohne dich — 84 % haben ihren Anbieter gewählt bevor die Evaluation startet.' },
+        { text: 'Last-Click belügt dich — Software-Attribution und Self-Reported Attribution erzählen komplett verschiedene Geschichten.' },
+        { text: 'KI macht es schlimmer — 94 % der B2B-Käufer nutzen LLMs im Kaufprozess, mit null Attribution.' },
+      ],
+      ctaQuestion: 'Was sagt dein CRM – und was sagen deine Kunden?',
+      ctaLine: 'cegtec.net',
+      ...CEGTEC_LIGHT_DEFAULTS,
+    } as LinkedInPostData,
+  },
+  // ── Post 5: Lead Quality vs. Volume ─────────────────────────
+  {
+    id: 'preset-lead-quality-hell',
+    name: 'LinkedIn — Lead Quality vs. Volume (Hell)',
+    type: 'linkedin-post',
+    formatId: '1:1',
+    savedAt: Date.now(),
+    data: {
+      topLabel: 'LEAD QUALITY VS. VOLUME',
+      headline: 'Weniger Leads.\nBessere Leads.\nMehr Umsatz.',
+      subline: '79 % der MQLs konvertieren nie – weil Volumen keine Strategie ist.',
+      gapTitle: 'QUALITY VS. QUANTITY',
+      gapBars: [
+        { value: '79%', label: 'MQLs die nie konvertieren — Benchmarks 2025', pct: 79, color: '#EF4444' },
+        { value: '5–20%', label: 'Leads die als hochwertig gelten — Prospectvine 2026', pct: 12 },
+        { value: '40%', label: 'Close Rate qualifizierte Leads — Prospectvine 2026', pct: 40 },
+        { value: '11%', label: 'Close Rate unqualifizierte Leads — Prospectvine 2026', pct: 11, color: '#F59E0B' },
+      ],
+      stats: [
+        { value: '92%', label: 'der Käufer starten mit einem Anbieter im Kopf', source: '6SENSE 2025' },
+        { value: '33%', label: 'niedrigere Kosten bei Fokus auf Lead-Qualität', source: 'PROSPECTVINE 2026' },
+        { value: '208%', label: 'mehr Marketing-Revenue bei Sales-Marketing Alignment', source: 'MONDAY.COM 2026' },
+      ],
+      bullets: [
+        { text: 'Volumen ist eine Vanity Metric — nur 5–20 % aller Leads sind qualitativ hochwertig.' },
+        { text: 'Der Käufer hat schon entschieden — 92 % starten mit einem Anbieter im Kopf, 41 % haben bereits gewählt.' },
+        { text: 'Präzision senkt Kosten — 33 % weniger Kosten, 50 % mehr Abschlüsse bei Quality-First.' },
+      ],
+      ctaQuestion: 'Misst du noch Lead-Volumen oder schon Pipeline-Qualität?',
+      ctaLine: 'cegtec.net',
+      ...CEGTEC_LIGHT_DEFAULTS,
+    } as LinkedInPostData,
+  },
 ];
 
-const SEED_VERSION = 'v5-seo-hidden-cost-v2';
+const SEED_VERSION = 'v6-linkedin-posts-all';
 
 interface SavedGraphicsState {
   graphics: SavedGraphic[];
@@ -470,13 +599,15 @@ export const useSavedGraphicsStore = create<SavedGraphicsState>()(
     }),
     {
       name: 'slide-forge-saved-graphics-v1',
-      onRehydrate: () => {
+      onRehydrate: (api: any) => {
         return (state: any) => {
           if (!state) return;
           if (state._seedVersion !== SEED_VERSION) {
             const userGraphics = state.graphics.filter((g: any) => !g.id.startsWith('preset-'));
-            state.graphics = [...SEED_INFOGRAPHICS, ...SEED_LINKEDIN_POSTS, ...userGraphics];
-            state._seedVersion = SEED_VERSION;
+            api.setState({
+              graphics: [...SEED_INFOGRAPHICS, ...SEED_LINKEDIN_POSTS, ...userGraphics],
+              _seedVersion: SEED_VERSION,
+            });
           }
         };
       },

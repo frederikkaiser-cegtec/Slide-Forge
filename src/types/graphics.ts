@@ -1,27 +1,39 @@
 import type { ChartConfig } from './charts';
 
+export interface CaseStudySection {
+  title: string;
+  intro?: string;
+  bullets: string[];
+}
+
+export interface CaseStudyFunnelStep {
+  label: string;
+  value: string;
+  pct: number;
+  color: string;
+}
+
 export interface CaseStudyData {
   companyName: string;
   industry: string;
   headline: string;
-  metricValue: string;
-  metricLabel: string;
-  metric2Value: string;
-  metric2Label: string;
-  metric3Value: string;
-  metric3Label: string;
+  heroValue: string;
+  heroLabel: string;
+  metrics: Array<{ value: string; label: string }>;
+  sections: CaseStudySection[];
+  funnelSteps: CaseStudyFunnelStep[];
   quote: string;
   chart: ChartConfig;
   backgroundColor?: string;
   accentColor?: string;
-  accentColor2?: string;
   textColor?: string;
   labelColor?: string;
   tagline?: string;
   footerLeft?: string;
   footerRight?: string;
-  cardColor?: string;
-  cardBorderColor?: string;
+  ctaText?: string;
+  ctaSub?: string;
+  clientLogoUrl?: string;
 }
 
 export interface RoiData {
@@ -42,28 +54,77 @@ export interface RoiData {
 }
 
 export const defaultCaseStudy: CaseStudyData = {
-  companyName: 'Jomavis Solar',
-  industry: 'Erneuerbare Energien',
-  headline: 'Wie Jomavis Solar 3x mehr Leads generiert',
-  metricValue: '312%',
-  metricLabel: 'Mehr qualifizierte Leads',
-  metric2Value: '14 Tage',
-  metric2Label: 'Time-to-First-Meeting',
-  metric3Value: '67%',
-  metric3Label: 'Weniger manueller Aufwand',
-  quote: '"CegTec hat unseren Vertrieb komplett transformiert."',
+  companyName: 'Caya GmbH',
+  industry: 'SaaS / Dokumentenautomatisierung',
+  headline: '329 Hausverwaltungen kontaktiert.\n12,5% Reply Rate. 8 Opportunities.',
+  heroValue: '12,5%',
+  heroLabel: 'Reply Rate',
+  clientLogoUrl: 'https://cdn.prod.website-files.com/6683d1f8d68ae361de2dcf21/6683d1f8d68ae361de2dd061_caya-logo.svg',
+  metrics: [
+    { value: '329', label: 'Sequenzen gestartet' },
+    { value: '12,5%', label: 'Reply Rate' },
+    { value: '19,5%', label: 'Positive Reply Rate' },
+    { value: '8', label: 'Opportunities' },
+  ],
+  sections: [
+    {
+      title: 'Ausgangssituation',
+      intro: 'Caya ist ein Berliner SaaS-Unternehmen f\u00fcr Dokumentenautomatisierung. Kernprodukt: vollautomatische Postdigitalisierung f\u00fcr Hausverwaltungen mit ERP-Integration.',
+      bullets: [
+        'Zielgruppe: Hausverwaltungen in Deutschland mit hohem Postvolumen',
+        'Value Prop: 30% mehr verwaltete Einheiten pro Mitarbeiter',
+        'GoBD-konform und revisionssicher',
+        'Kein skalierbarer Outreach-Prozess vorhanden',
+        'Konservative Zielgruppe \u2014 generische Ansprache funktioniert nicht',
+      ],
+    },
+    {
+      title: 'L\u00f6sung',
+      intro: 'CegTec baute eine fokussierte Cold Email Kampagne mit 3-Step-Sequenz:',
+      bullets: [
+        'Branchenspezifisches ICP \u2014 Hausverwaltungen mit ERP-Systemen',
+        'Buying-Signal-Erkennung \u2014 Stellenausschreibungen, Wachstum, \u00dcbernahmen',
+        'Compliance-Messaging \u2014 GoBD-Sicherheit als Hauptargument',
+        '3-Step Email-Sequenz \u00fcber Instantly mit optimiertem Timing',
+        'Konkrete ROI-Zahlen im Messaging: \u201e30% mehr Einheiten pro MA\u201c',
+      ],
+    },
+    {
+      title: 'Ergebnisse',
+      intro: 'Die Kampagne lieferte \u00fcberdurchschnittliche Ergebnisse:',
+      bullets: [
+        '329 Sequenzen gestartet',
+        '12,5% Reply Rate (41 Replies) \u2014 weit \u00fcber Benchmark',
+        '19,5% Positive Reply Rate (8 von 41 positiv)',
+        '8 Opportunities generiert',
+        'Step 1 am st\u00e4rksten: 25 Replies, 6 Opportunities',
+        'Step 2+3 brachten 16 weitere Replies',
+      ],
+    },
+  ],
+  funnelSteps: [
+    { label: 'Sequences started', value: '329', pct: 100, color: '#3B82F6' },
+    { label: 'Step 2 reached', value: '236', pct: 71.7, color: '#22C55E' },
+    { label: 'Step 3 reached', value: '119', pct: 36.2, color: '#F59E0B' },
+    { label: 'Replied', value: '41', pct: 12.5, color: '#8B5CF6' },
+    { label: 'Positive Replies', value: '8', pct: 2.4, color: '#4F46E5' },
+    { label: 'Opportunities', value: '8', pct: 2.4, color: '#16A34A' },
+  ],
+  quote: '\u201eCegTec hat unseren Vertrieb komplett transformiert.\u201c',
   chart: {
     type: 'bar',
-    title: 'Leads pro Monat',
+    title: 'Replies pro Step',
     data: [
-      { label: 'Jan', value: 12 },
-      { label: 'Feb', value: 18 },
-      { label: 'Mär', value: 31 },
-      { label: 'Apr', value: 42 },
-      { label: 'Mai', value: 55 },
-      { label: 'Jun', value: 68 },
+      { label: 'Step 1', value: 25 },
+      { label: 'Step 2', value: 10 },
+      { label: 'Step 3', value: 6 },
     ],
   },
+  tagline: 'Case Study',
+  ctaText: 'Erstgespr\u00e4ch vereinbaren',
+  ctaSub: 'Wir zeigen Ihnen in 30 Minuten, wie das f\u00fcr Ihre Zielgruppe funktioniert.',
+  footerLeft: 'cegtec.net',
+  footerRight: 'GTM Engineering Partner',
 };
 
 export const defaultRoi: RoiData = {

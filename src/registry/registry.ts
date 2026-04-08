@@ -69,9 +69,8 @@ function extractCaseStudyCore(d: CaseStudyData): CoreData {
     industry: d.industry,
     headline: d.headline,
     metrics: [
-      { value: d.metricValue, label: d.metricLabel, icon: '\u2191' },
-      { value: d.metric2Value, label: d.metric2Label, icon: '\u23F1' },
-      { value: d.metric3Value, label: d.metric3Label, icon: '\u26A1' },
+      { value: d.heroValue, label: d.heroLabel, icon: '\u2191' },
+      ...d.metrics.map((m) => ({ value: m.value, label: m.label })),
     ],
     quote: d.quote,
   };
@@ -127,7 +126,7 @@ export const GRAPHIC_REGISTRY: GraphicDefinition[] = [
     label: 'Case Study',
     icon: Image,
     defaultData: defaultCaseStudy,
-    defaultFormat: 'linkedin',
+    defaultFormat: 'a4',
     forceFormat: false,
     getDisplayName: (d: CaseStudyData) => d.companyName,
     FormComponent: CaseStudyForm,
@@ -187,7 +186,7 @@ export const GRAPHIC_REGISTRY: GraphicDefinition[] = [
     GraphicComponent: InfographicGraphic,
     syncGroup: 'core',
     extractCore: extractInfographicCore,
-    applyCore: (core: CoreData, current: InfographicData) => syncToInfographic('case-study', { companyName: core.companyName, industry: core.industry, headline: core.headline, metricValue: core.metrics[0]?.value ?? '', metricLabel: core.metrics[0]?.label ?? '', metric2Value: core.metrics[1]?.value ?? '', metric2Label: core.metrics[1]?.label ?? '', metric3Value: core.metrics[2]?.value ?? '', metric3Label: core.metrics[2]?.label ?? '', quote: core.quote } as any, current),
+    applyCore: (core: CoreData, current: InfographicData) => syncToInfographic('case-study', { companyName: core.companyName, industry: core.industry, headline: core.headline, heroValue: core.metrics[0]?.value ?? '', heroLabel: core.metrics[0]?.label ?? '', metrics: core.metrics.slice(1).map((m) => ({ value: m.value, label: m.label })), sections: [], funnelSteps: [], quote: core.quote, chart: { type: 'none', title: '', data: [] } } as any, current),
   },
   {
     id: 'academy',

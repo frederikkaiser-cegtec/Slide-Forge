@@ -14,6 +14,7 @@ export const FORMAT_PRESETS: FormatPreset[] = [
   { id: 'og', label: 'OG Image (1200×630)', width: 1200, height: 630 },
   { id: 'banner', label: 'Banner (1200×400)', width: 1200, height: 400 },
   { id: 'banner-wide', label: 'Banner breit (1600×400)', width: 1600, height: 400 },
+  { id: 'a4', label: 'DIN A4 Portrait (1240×1754)', width: 1240, height: 1754 },
 ];
 
 export function getFormat(id: string): FormatPreset {

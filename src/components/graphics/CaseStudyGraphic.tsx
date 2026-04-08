@@ -1,215 +1,282 @@
-import type { CaseStudyData } from '../../types/graphics';
-import { BrandedChart } from './BrandedChart';
 import { LOGO_URL } from '../../utils/assets';
-import { logoFilter, FONTS } from '../../utils/cegtecTheme';
+import { FONTS, COLORS, isDark, logoFilter, hexToRgb } from '../../utils/cegtecTheme';
+import type { CaseStudyData } from '../../types/graphics';
 
-function lighten(hex: string): string {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  const mix = (c: number) => Math.min(255, c + Math.round((255 - c) * 0.35));
-  return `#${mix(r).toString(16).padStart(2, '0')}${mix(g).toString(16).padStart(2, '0')}${mix(b).toString(16).padStart(2, '0')}`;
-}
+const REF_W = 1240;
+const REF_H = 1754;
 
 export function CaseStudyGraphic({ data, width, height }: { data: CaseStudyData; width: number; height: number }) {
-  const BLUE = data.accentColor || '#3B4BF9';
-  const PINK = data.accentColor2 || '#E93BCD';
-  const BLUE_L = lighten(BLUE);
-  const PINK_L = lighten(PINK);
-  const bg = data.backgroundColor || '#080820';
-  const textCol = data.textColor || '#ffffff';
-  const labelCol = data.labelColor || '#8888a0';
-  const tagline = data.tagline || 'Case Study';
-  const footerL = data.footerLeft || 'cegtec.net';
-  const footerR = data.footerRight || 'AI Sales Automation';
-  const cardCol = data.cardColor || 'rgba(255,255,255,0.02)';
-  const cardBorder = data.cardBorderColor || 'rgba(255,255,255,0.04)';
-  const s = Math.min(width / 1200, height / 627);
-  const isTall = height > width * 1.2;
+  const s = Math.min(width / REF_W, height / REF_H);
+  const accent = data.accentColor || '#2E75B6';
+  const accentDark = '#1F4E79';
+  const pink = '#E040FB';
+  const purple = '#6B5CE7';
+  const [ar, ag, ab] = hexToRgb(accent);
+  const titleCol = data.textColor || '#1a1a2e';
+  const labelCol = data.labelColor || '#6b7280';
+  const bodyCol = '#374151';
+  const cardBg = '#ffffff';
+  const pageBg = `linear-gradient(135deg, #f0f0ff 0%, #fce4ff 40%, #e8f0ff 100%)`;
+  const shadow = '0 2px 16px rgba(0,0,0,0.06)';
+  const radius = 16 * s;
+  const pad = 32 * s;
+  const sectionColors = [accent, purple, '#10b981'];
+
+  const hasFunnel = data.funnelSteps && data.funnelSteps.length > 0;
   const hasChart = data.chart.type !== 'none' && data.chart.data.length > 0;
 
   return (
-    <div style={{
-      width, height, position: 'relative', overflow: 'hidden',
-      fontFamily: FONTS.display,
-      background: bg,
-    }}>
-      {/* SVG Background */}
-      <svg viewBox={`0 0 ${width} ${height}`} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
-        <defs>
-          <filter id="cs-soft" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation={90 * s} />
-          </filter>
-          <filter id="cs-noise">
-            <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="3" stitchTiles="stitch" />
-            <feColorMatrix type="saturate" values="0" />
-            <feBlend in="SourceGraphic" mode="multiply" />
-          </filter>
-          <linearGradient id="cs-topLine" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor={PINK} stopOpacity="0" />
-            <stop offset="30%" stopColor={PINK} />
-            <stop offset="70%" stopColor={BLUE} />
-            <stop offset="100%" stopColor={BLUE} stopOpacity="0" />
-          </linearGradient>
-          <linearGradient id="cs-heroGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor={BLUE_L} />
-            <stop offset="100%" stopColor={PINK} />
-          </linearGradient>
-        </defs>
+    <div style={{ width, height, position: 'relative', overflow: 'hidden', fontFamily: "'Inter', sans-serif", background: pageBg }}>
 
-        <rect width={width} height={height} fill={bg} />
+      <div style={{ position: 'relative', zIndex: 1, width: '100%', height: '100%', display: 'flex', flexDirection: 'column', padding: `${24 * s}px ${pad}px ${20 * s}px`, gap: 14 * s }}>
 
-        {/* Atmospheric orbs */}
-        <ellipse cx={width * 0.7} cy={height * 0.2} rx={350 * s} ry={250 * s} fill={BLUE} opacity="0.06" filter="url(#cs-soft)" />
-        <ellipse cx={width * 0.2} cy={height * 0.8} rx={300 * s} ry={200 * s} fill={PINK} opacity="0.05" filter="url(#cs-soft)" />
-        <circle cx={width * 0.5} cy={height * 0.5} r={400 * s} fill={BLUE} opacity="0.015" filter="url(#cs-soft)" />
+        {/* ═══ HERO CARD ═══ */}
+        <div style={{
+          background: cardBg, borderRadius: radius, padding: `${28 * s}px ${32 * s}px`,
+          boxShadow: shadow, position: 'relative', overflow: 'hidden',
+        }}>
+          {/* Decorative orb */}
+          <div style={{ position: 'absolute', top: -50 * s, right: -50 * s, width: 200 * s, height: 200 * s, borderRadius: '50%', background: `linear-gradient(135deg, rgba(224,64,251,0.1), rgba(107,92,231,0.08))` }} />
 
-        {/* Geometric rings */}
-        <circle cx={hasChart ? width * 0.72 : width * 0.75} cy={height * 0.45} r={140 * s} fill="none" stroke={BLUE} strokeWidth={1.5} opacity="0.06" />
-        <circle cx={hasChart ? width * 0.72 : width * 0.75} cy={height * 0.45} r={180 * s} fill="none" stroke={BLUE} strokeWidth={0.5} opacity="0.04" />
-        <circle cx={hasChart ? width * 0.72 : width * 0.75} cy={height * 0.45} r={220 * s} fill="none" stroke={PINK} strokeWidth={0.3} opacity="0.03" />
-
-        {/* Corner accent arcs */}
-        <path d={`M 0 ${height * 0.6} Q ${width * 0.15} ${height * 0.9} ${width * 0.35} ${height}`} fill="none" stroke={PINK} strokeWidth={0.8} opacity="0.05" />
-        <path d={`M ${width * 0.7} 0 Q ${width * 0.9} ${height * 0.1} ${width} ${height * 0.35}`} fill="none" stroke={BLUE} strokeWidth={0.8} opacity="0.05" />
-
-        {/* Accent line top */}
-        <rect y={0} width={width} height={2.5 * s} fill="url(#cs-topLine)" />
-
-        {/* Noise */}
-        <rect width={width} height={height} opacity="0.012" filter="url(#cs-noise)" />
-
-        {/* Hero metric glow */}
-        {!hasChart && (
-          <ellipse cx={width * 0.72} cy={height * 0.42} rx={120 * s} ry={80 * s} fill={BLUE} opacity="0.08" filter="url(#cs-soft)" />
-        )}
-      </svg>
-
-      {/* Content */}
-      <div style={{
-        position: 'relative', zIndex: 1, width: '100%', height: '100%',
-        display: 'flex', flexDirection: 'column',
-        padding: `${28 * s}px ${40 * s}px`,
-      }}>
-        {/* Top bar */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 * s }}>
+          {/* Tag */}
           <div style={{
-            fontSize: 10 * s, fontWeight: 700, color: PINK,
-            letterSpacing: 3 * s, textTransform: 'uppercase',
-            opacity: 0.8,
+            display: 'inline-block', background: `linear-gradient(135deg, rgba(107,92,231,0.1), rgba(224,64,251,0.08))`,
+            padding: `${3 * s}px ${12 * s}px`, borderRadius: 100, marginBottom: 12 * s,
+            fontFamily: "'Inter', sans-serif", fontSize: 10 * s, fontWeight: 600, color: purple,
+            letterSpacing: 1.5 * s, textTransform: 'uppercase' as const,
           }}>
-            {tagline} — {data.industry}
+            {data.tagline || 'Case Study'}
           </div>
-          <img src={LOGO_URL} alt="CegTec" style={{ height: 18 * s, ...logoFilter(bg) }} />
-        </div>
 
-        {/* Main */}
-        <div style={{
-          flex: 1, display: 'flex',
-          flexDirection: isTall ? 'column' : 'row',
-          gap: 32 * s, minHeight: 0, alignItems: 'center',
-        }}>
-          {/* Left: text */}
-          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          {/* Headline */}
+          <h1 style={{
+            fontSize: 30 * s, fontWeight: 800, color: titleCol, lineHeight: 1.15,
+            margin: 0, marginBottom: 10 * s, maxWidth: '75%', whiteSpace: 'pre-line',
+          }}>
+            {data.headline}
+          </h1>
+          <p style={{ fontSize: 13 * s, color: labelCol, margin: 0, marginBottom: 20 * s, maxWidth: '70%', lineHeight: 1.5 }}>
+            {data.sections[0]?.intro || `${data.companyName} — ${data.industry}`}
+          </p>
+
+          {/* Client logo badge */}
+          {data.clientLogoUrl && (
             <div style={{
-              fontSize: 12 * s, fontWeight: 700, color: BLUE,
-              letterSpacing: 2 * s, textTransform: 'uppercase', marginBottom: 10 * s, opacity: 0.7,
+              display: 'inline-flex', alignItems: 'center', gap: 10 * s,
+              border: `1.5px solid #e5e7eb`, borderRadius: 10 * s,
+              padding: `${8 * s}px ${18 * s}px`, background: '#fafafa', marginBottom: 16 * s,
             }}>
-              {data.companyName}
-            </div>
-            <div style={{
-              fontSize: (hasChart ? 30 : 36) * s, fontWeight: 800, color: textCol,
-              lineHeight: 1.08, letterSpacing: -1 * s, marginBottom: 24 * s,
-            }}>
-              {data.headline}
-            </div>
-
-            {/* Hero metric inline */}
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 14 * s, marginBottom: 20 * s }}>
-              <span style={{
-                fontSize: 64 * s, fontWeight: 900, lineHeight: 0.85,
-                letterSpacing: -3 * s,
-                background: `linear-gradient(135deg, ${BLUE_L}, ${PINK})`,
-                WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-                filter: `drop-shadow(0 0 ${25 * s}px ${BLUE}55)`,
-              } as React.CSSProperties}>
-                {data.metricValue}
-              </span>
-              <span style={{ fontSize: 13 * s, color: labelCol, fontWeight: 500, maxWidth: 120 * s, lineHeight: 1.3 }}>
-                {data.metricLabel}
-              </span>
-            </div>
-
-            {/* Secondary metrics */}
-            <div style={{ display: 'flex', gap: 28 * s }}>
-              {[
-                { value: data.metric2Value, label: data.metric2Label, color: PINK },
-                { value: data.metric3Value, label: data.metric3Label, color: BLUE },
-              ].map((m, i) => (
-                <div key={i}>
-                  <div style={{
-                    fontSize: 26 * s, fontWeight: 800, lineHeight: 1,
-                    letterSpacing: -1 * s,
-                    background: `linear-gradient(180deg, ${m.color === PINK ? PINK_L : BLUE_L}, ${m.color})`,
-                    WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-                    filter: `drop-shadow(0 0 ${12 * s}px ${m.color}33)`,
-                  } as React.CSSProperties}>
-                    {m.value}
-                  </div>
-                  <div style={{ fontSize: 9.5 * s, color: labelCol, marginTop: 4 * s, fontWeight: 500, letterSpacing: 0.3 * s }}>
-                    {m.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {data.quote && !hasChart && (
-              <div style={{
-                fontSize: 11.5 * s, color: labelCol, fontStyle: 'italic',
-                marginTop: 20 * s, lineHeight: 1.5, maxWidth: 380 * s,
-                borderLeft: `2px solid ${PINK}33`, paddingLeft: 14 * s,
-              }}>
-                {data.quote}
+              <img src={data.clientLogoUrl} alt={data.companyName} style={{ height: 20 * s, objectFit: 'contain' as const }} />
+              <div>
+                <div style={{ fontSize: 12 * s, fontWeight: 800, color: titleCol, letterSpacing: 0.5 * s }}>{data.companyName}</div>
+                <div style={{ fontSize: 9 * s, color: labelCol }}>{data.industry}</div>
               </div>
-            )}
+            </div>
+          )}
+
+          {/* Stats strip */}
+          <div style={{
+            display: 'flex', background: '#e5e7eb', gap: 1, borderRadius: 12 * s, overflow: 'hidden',
+            border: `1.5px solid #e5e7eb`,
+          }}>
+            {data.metrics.map((m, i) => (
+              <div key={i} style={{ flex: 1, background: cardBg, padding: `${14 * s}px ${16 * s}px` }}>
+                <div style={{ fontSize: 9.5 * s, fontWeight: 500, color: labelCol, textTransform: 'uppercase' as const, letterSpacing: 0.8 * s, marginBottom: 4 * s }}>
+                  {m.label}
+                </div>
+                <div style={{ fontSize: 14 * s, fontWeight: 700, color: titleCol, lineHeight: 1.2 }}>
+                  {m.value}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ═══ TWO-COLUMN: Ausgangssituation + Funnel ═══ */}
+        <div style={{ display: 'flex', gap: 14 * s }}>
+          {/* Section text */}
+          <div style={{
+            flex: 1, background: cardBg, borderRadius: radius, padding: `${24 * s}px ${28 * s}px`,
+            boxShadow: shadow,
+          }}>
+            <div style={{ fontSize: 10 * s, fontWeight: 600, color: labelCol, letterSpacing: 1.5 * s, textTransform: 'uppercase' as const, marginBottom: 6 * s }}>
+              {data.sections[0]?.title || 'Ausgangssituation'}
+            </div>
+            <h2 style={{ fontSize: 20 * s, fontWeight: 800, color: titleCol, margin: 0, marginBottom: 14 * s, lineHeight: 1.2 }}>
+              {data.sections[0]?.title === 'Ausgangssituation' ? 'Viel Potenzial — fehlende Skalierung' : data.sections[0]?.title}
+            </h2>
+            {data.sections[0]?.bullets.map((b, j) => (
+              <div key={j} style={{ display: 'flex', gap: 8 * s, alignItems: 'flex-start', marginBottom: 7 * s }}>
+                <div style={{ width: 6 * s, height: 6 * s, borderRadius: '50%', background: `linear-gradient(135deg, ${purple}, ${pink})`, marginTop: 6 * s, flexShrink: 0 }} />
+                <span style={{ fontSize: 12.5 * s, color: bodyCol, lineHeight: 1.55 }}>{b}</span>
+              </div>
+            ))}
           </div>
 
-          {/* Right: chart */}
-          {hasChart && (
+          {/* Funnel mock dashboard */}
+          {hasFunnel && (
             <div style={{
-              flex: isTall ? 'none' : 0.9,
-              width: isTall ? '100%' : undefined,
-              background: cardCol,
-              border: `1px solid ${cardBorder}`,
-              borderRadius: 20 * s,
-              padding: `${20 * s}px`,
-              backdropFilter: `blur(${10 * s}px)`,
+              flex: 1, background: cardBg, borderRadius: radius,
+              boxShadow: shadow, overflow: 'hidden',
             }}>
-              <BrandedChart
-                config={data.chart}
-                width={isTall ? (width - 120 * s) : (width * 0.38)}
-                height={isTall ? height * 0.28 : height * 0.58}
-                scale={s}
-                bgColor={bg}
-                accentColor={BLUE}
-                accentColor2={PINK}
-              />
+              {/* Dashboard topbar */}
+              <div style={{
+                background: '#f8f9fc', borderBottom: '1px solid #e5e7eb',
+                padding: `${8 * s}px ${16 * s}px`, display: 'flex', alignItems: 'center', gap: 6 * s,
+              }}>
+                <div style={{ width: 7 * s, height: 7 * s, borderRadius: '50%', background: '#10b981' }} />
+                <span style={{ fontSize: 10 * s, fontWeight: 600, color: labelCol, letterSpacing: 0.5 * s }}>Lead Funnel Overview</span>
+              </div>
+              <div style={{ padding: `${12 * s}px ${16 * s}px`, display: 'flex', flexDirection: 'column', gap: 8 * s }}>
+                {data.funnelSteps.map((step, i) => {
+                  const maxPct = Math.max(...data.funnelSteps.map(f => f.pct), 1);
+                  const widthPct = Math.max((step.pct / maxPct) * 100, 4);
+                  const stepColor = step.color || accent;
+                  return (
+                    <div key={i}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10 * s, marginBottom: 3 * s }}>
+                        <span style={{ color: labelCol }}>{step.label}</span>
+                        <span style={{ fontWeight: 700, color: titleCol }}>{step.value} {step.pct < 100 ? `(${step.pct}%)` : ''}</span>
+                      </div>
+                      <div style={{ height: 5 * s, borderRadius: 100, background: '#f0f0f0', overflow: 'hidden' }}>
+                        <div style={{ width: `${widthPct}%`, height: '100%', borderRadius: 100, background: stepColor }} />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           )}
         </div>
 
-        {/* Footer */}
+        {/* ═══ TWO-COLUMN: Lösung + Metric Cards ═══ */}
+        <div style={{ display: 'flex', gap: 14 * s }}>
+          {/* Metric cards left */}
+          <div style={{
+            width: 280 * s, flexShrink: 0,
+            display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 * s,
+          }}>
+            {[
+              { val: data.heroValue, label: data.heroLabel, gradient: true },
+              { val: data.metrics[3]?.value || '8', label: data.metrics[3]?.label || 'Opportunities', gradient: true },
+              { val: '3-Step', label: 'Email-Sequenz', gradient: false },
+              { val: '4 Wochen', label: 'Laufzeit', gradient: false },
+            ].map((card, i) => (
+              <div key={i} style={{
+                borderRadius: 12 * s, padding: `${14 * s}px ${16 * s}px`,
+                background: card.gradient ? `linear-gradient(135deg, ${accentDark}, ${accent})` : '#f0f4ff',
+                color: card.gradient ? '#fff' : titleCol,
+              }}>
+                <div style={{ fontSize: 22 * s, fontWeight: 800, lineHeight: 1, marginBottom: 3 * s, color: card.gradient ? '#fff' : accentDark }}>
+                  {card.val}
+                </div>
+                <div style={{ fontSize: 9.5 * s, fontWeight: 500, opacity: card.gradient ? 0.75 : 1, color: card.gradient ? undefined : labelCol }}>
+                  {card.label}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Lösung text right */}
+          <div style={{
+            flex: 1, background: cardBg, borderRadius: radius, padding: `${24 * s}px ${28 * s}px`,
+            boxShadow: shadow,
+          }}>
+            <div style={{ fontSize: 10 * s, fontWeight: 600, color: labelCol, letterSpacing: 1.5 * s, textTransform: 'uppercase' as const, marginBottom: 6 * s }}>
+              {data.sections[1]?.title || 'Lösung'}
+            </div>
+            <h2 style={{ fontSize: 20 * s, fontWeight: 800, color: titleCol, margin: 0, marginBottom: 6 * s, lineHeight: 1.2 }}>
+              Automatisierte Ansprache mit System
+            </h2>
+            {data.sections[1]?.intro && (
+              <p style={{ fontSize: 11.5 * s, color: labelCol, fontStyle: 'italic', margin: `0 0 ${12 * s}px`, lineHeight: 1.4 }}>{data.sections[1].intro}</p>
+            )}
+            {data.sections[1]?.bullets.map((b, j) => (
+              <div key={j} style={{ display: 'flex', gap: 8 * s, alignItems: 'flex-start', marginBottom: 6 * s }}>
+                <div style={{ width: 6 * s, height: 6 * s, borderRadius: '50%', background: `linear-gradient(135deg, ${purple}, ${pink})`, marginTop: 6 * s, flexShrink: 0 }} />
+                <span style={{ fontSize: 12 * s, color: bodyCol, lineHeight: 1.55 }}>{b}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ═══ ERGEBNISSE — big metric cards + results table ═══ */}
         <div style={{
-          display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-          paddingTop: 12 * s,
+          background: cardBg, borderRadius: radius, padding: `${24 * s}px ${28 * s}px`,
+          boxShadow: shadow, flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column',
         }}>
-          <span style={{ fontSize: 9 * s, color: labelCol, opacity: 0.5, letterSpacing: 1.5 * s }}>{footerL}</span>
-          {data.quote && hasChart && (
-            <span style={{ fontSize: 9 * s, color: labelCol, opacity: 0.5, fontStyle: 'italic', maxWidth: '55%', textAlign: 'right' }}>
-              {data.quote}
-            </span>
+          <div style={{ fontSize: 10 * s, fontWeight: 600, color: labelCol, letterSpacing: 1.5 * s, textTransform: 'uppercase' as const, marginBottom: 4 * s }}>
+            {data.sections[2]?.title || 'Ergebnisse'}
+          </div>
+          <h2 style={{ fontSize: 20 * s, fontWeight: 800, color: titleCol, margin: 0, marginBottom: 16 * s, lineHeight: 1.2 }}>
+            Messbare Erfolge
+          </h2>
+
+          {/* Three big metric cards */}
+          <div style={{ display: 'flex', gap: 10 * s, marginBottom: 16 * s }}>
+            {data.metrics.slice(0, 3).map((m, i) => {
+              const colors = [`linear-gradient(135deg, ${accentDark}, ${accent})`, `linear-gradient(135deg, ${purple}, #8B5CF6)`, `linear-gradient(135deg, #E040FB, ${purple})`];
+              return (
+                <div key={i} style={{
+                  flex: 1, borderRadius: 12 * s, padding: `${16 * s}px ${18 * s}px`,
+                  background: colors[i], color: '#fff', textAlign: 'center' as const,
+                }}>
+                  <div style={{ fontSize: 28 * s, fontWeight: 800, lineHeight: 1, marginBottom: 4 * s }}>{m.value}</div>
+                  <div style={{ fontSize: 10 * s, fontWeight: 500, opacity: 0.8 }}>{m.label}</div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Results table */}
+          <div style={{ flex: 1 }}>
+            <div style={{ display: 'flex', borderBottom: `2px solid #e5e7eb`, paddingBottom: 6 * s, marginBottom: 6 * s }}>
+              <div style={{ flex: 1, fontSize: 10 * s, fontWeight: 600, color: labelCol, textTransform: 'uppercase' as const, letterSpacing: 0.8 * s }}>Kennzahl</div>
+              <div style={{ width: 200 * s, fontSize: 10 * s, fontWeight: 600, color: labelCol, textTransform: 'uppercase' as const, letterSpacing: 0.8 * s }}>Ergebnis</div>
+            </div>
+            {data.sections[2]?.bullets.map((b, j) => {
+              const parts = b.split(/[—–:]/);
+              const label = parts[0]?.trim() || b;
+              const val = parts[1]?.trim() || '';
+              return (
+                <div key={j} style={{
+                  display: 'flex', padding: `${5 * s}px 0`,
+                  borderBottom: `1px solid #f0f0f0`,
+                }}>
+                  <div style={{ flex: 1, fontSize: 12 * s, color: bodyCol }}>{label}</div>
+                  <div style={{ width: 200 * s, fontSize: 12 * s, fontWeight: 600, color: titleCol }}>{val}</div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Quote */}
+          {data.quote && (
+            <div style={{ borderLeft: `3px solid ${purple}`, paddingLeft: 14 * s, marginTop: 12 * s }}>
+              <span style={{ fontSize: 13 * s, fontStyle: 'italic', color: labelCol, lineHeight: 1.5 }}>{data.quote}</span>
+            </div>
           )}
-          {!hasChart && <span style={{ fontSize: 9 * s, color: labelCol, opacity: 0.5, letterSpacing: 1.5 * s }}>{footerR}</span>}
+        </div>
+
+        {/* ═══ CTA BAND ═══ */}
+        <div style={{
+          background: `linear-gradient(135deg, ${accentDark}, ${accent})`,
+          borderRadius: radius, padding: `${24 * s}px ${32 * s}px`,
+          textAlign: 'center' as const, color: '#fff',
+        }}>
+          <div style={{ fontSize: 20 * s, fontWeight: 800, marginBottom: 6 * s }}>
+            {data.ctaText || 'Erstgespräch vereinbaren'}
+          </div>
+          {data.ctaSub && <div style={{ fontSize: 12 * s, opacity: 0.8, marginBottom: 10 * s }}>{data.ctaSub}</div>}
+          <div style={{ display: 'flex', justifyContent: 'center', gap: 20 * s }}>
+            <span style={{ fontSize: 11 * s, fontWeight: 600, opacity: 0.9 }}>{data.footerLeft || 'cegtec.net'}</span>
+          </div>
+        </div>
+
+        {/* ═══ FOOTER ═══ */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: `${4 * s}px ${8 * s}px` }}>
+          <img src={LOGO_URL} alt="CegTec" style={{ height: 14 * s, opacity: 0.35, ...logoFilter('#f0f0ff') }} />
+          <span style={{ fontSize: 8 * s, color: labelCol, opacity: 0.4 }}>© CegTec GmbH · {data.footerRight || 'GTM Engineering Partner'}</span>
         </div>
       </div>
     </div>

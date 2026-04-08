@@ -23,9 +23,8 @@ function extractCore(type: string, data: any): CoreData {
         industry: d.industry,
         headline: d.headline,
         metrics: [
-          { value: d.metricValue, label: d.metricLabel, icon: '\u2191' },
-          { value: d.metric2Value, label: d.metric2Label, icon: '\u23F1' },
-          { value: d.metric3Value, label: d.metric3Label, icon: '\u26A1' },
+          { value: d.heroValue, label: d.heroLabel, icon: '\u2191' },
+          ...d.metrics.slice(0, 2).map((m) => ({ value: m.value, label: m.label })),
         ],
         quote: d.quote,
       };
@@ -80,12 +79,10 @@ export function syncToCaseStudy(fromType: string, fromData: any, current: CaseSt
     companyName: core.companyName || current.companyName,
     industry: core.industry || current.industry,
     headline: core.headline || current.headline,
-    metricValue: m(core, 0).value,
-    metricLabel: m(core, 0).label,
-    metric2Value: m(core, 1).value,
-    metric2Label: m(core, 1).label,
-    metric3Value: m(core, 2).value,
-    metric3Label: m(core, 2).label,
+    heroValue: m(core, 0).value,
+    heroLabel: m(core, 0).label,
+    metrics: core.metrics.slice(1).map((met) => ({ value: met.value, label: met.label })),
+    funnelSteps: current.funnelSteps,
     quote: core.quote || current.quote,
   };
 }
