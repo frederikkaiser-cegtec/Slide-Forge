@@ -11,11 +11,15 @@ import {
   FilePlus2,
   ChevronDown,
   RatioIcon,
+  Save,
+  FolderOpen,
 } from 'lucide-react';
 import { usePresentationStore } from '../../stores/presentationStore';
 import { useEditorStore } from '../../stores/editorStore';
+import { useSavedPresentationsStore } from '../../stores/savedPresentationsStore';
 import { FORMAT_PRESETS, getFormat } from '../../utils/formats';
 import { exportSlideAsImage, exportAllSlidesAsZip } from '../../utils/exportImage';
+import { exportVectorPDF } from '../../utils/exportPdfVector';
 import { toPng } from 'html-to-image';
 import { jsPDF } from 'jspdf';
 
@@ -37,9 +41,35 @@ export function EditorToolbar() {
   const setShowThemePicker = useEditorStore((s) => s.setShowThemePicker);
   const selectedSlideId = useEditorStore((s) => s.selectedSlideId);
 
+  const presentation = usePresentationStore((s) => s.presentation);
+  const savedPresentations = useSavedPresentationsStore((s) => s.presentations);
+  const savePresentation = useSavedPresentationsStore((s) => s.save);
+  const [showLoadMenu, setShowLoadMenu] = useState(false);
+  const loadMenuRef = useRef<HTMLDivElement>(null);
+
   const format = getFormat(formatId ?? '16:9');
   const currentSlideIndex = slides.findIndex((s) => s.id === selectedSlideId);
   const safeFilename = title.replace(/\s+/g, '-').toLowerCase();
+
+  useEffect(() => {
+    if (!showLoadMenu) return;
+    const handleClick = (e: MouseEvent) => {
+      if (loadMenuRef.current && !loadMenuRef.current.contains(e.target as Node)) setShowLoadMenu(false);
+    };
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, [showLoadMenu]);
+
+  const handleSave = () => {
+    const name = prompt('Name für die Vorlage:', title);
+    if (!name) return;
+    savePresentation(name, presentation);
+  };
+
+  const handleLoad = (data: any) => {
+    importJSON(JSON.stringify(data));
+    setShowLoadMenu(false);
+  };
 
   const handleExportJSON = () => {
     const json = exportJSON();
@@ -65,6 +95,8 @@ export function EditorToolbar() {
     };
     input.click();
   };
+
+  const handleExportVectorPDF = () => exportVectorPDF(slides, format, safeFilename);
 
   const handleExportPDF = async () => {
     const container = document.getElementById('slide-export-container');
@@ -123,12 +155,36 @@ export function EditorToolbar() {
         <ToolbarButton icon={Plus} onClick={() => setShowTemplatePicker(true)} title="Add Slide" />
         <ToolbarButton icon={Palette} onClick={() => setShowThemePicker(true)} title="Change Theme" />
         <div className="w-px h-5 bg-border mx-1" />
+        <ToolbarButton icon={Save} onClick={handleSave} title="Als Vorlage speichern" />
+        <div ref={loadMenuRef} className="relative">
+          <ToolbarButton icon={FolderOpen} onClick={() => setShowLoadMenu(!showLoadMenu)} title="Vorlage laden" />
+          {showLoadMenu && (
+            <div className="absolute top-full mt-1 right-0 bg-surface border border-border rounded-lg shadow-xl z-50 min-w-[240px] py-1">
+              {savedPresentations.length === 0 ? (
+                <div className="px-3 py-2 text-xs text-text-muted">Keine Vorlagen</div>
+              ) : (
+                savedPresentations.map((p) => (
+                  <button
+                    key={p.id}
+                    onClick={() => handleLoad(p.data)}
+                    className="w-full text-left px-3 py-2 text-xs hover:bg-surface-hover text-text transition-colors flex justify-between items-center"
+                  >
+                    <span className="truncate">{p.name}</span>
+                    <span className="text-text-muted ml-2 shrink-0">{p.data.slides?.length || 0} Slides</span>
+                  </button>
+                ))
+              )}
+            </div>
+          )}
+        </div>
+        <div className="w-px h-5 bg-border mx-1" />
         <ToolbarButton icon={FileJson} onClick={handleExportJSON} title="Export JSON" />
         <ToolbarButton icon={Upload} onClick={handleImportJSON} title="Import JSON" />
 
         {/* Export Dropdown */}
         <ExportDropdown
           onExportPDF={handleExportPDF}
+          onExportVectorPDF={handleExportVectorPDF}
           onExportCurrentPNG={() => {
             if (currentSlideIndex >= 0) exportSlideAsImage(currentSlideIndex, format, `${safeFilename}-slide-${currentSlideIndex + 1}`, 'png');
           }}
@@ -200,6 +256,7 @@ function FormatDropdown({ currentFormatId, onSelect }: { currentFormatId: string
 
 function ExportDropdown({
   onExportPDF,
+  onExportVectorPDF,
   onExportCurrentPNG,
   onExportCurrentJPG,
   onExportAllPNG,
@@ -207,6 +264,7 @@ function ExportDropdown({
   hasSelectedSlide,
 }: {
   onExportPDF: () => void;
+  onExportVectorPDF: () => void;
   onExportCurrentPNG: () => void;
   onExportCurrentJPG: () => void;
   onExportAllPNG: () => void;
@@ -226,7 +284,8 @@ function ExportDropdown({
   }, [open]);
 
   const items = [
-    { label: 'PDF', onClick: onExportPDF },
+    { label: 'PDF (Pixel)', onClick: onExportPDF },
+    { label: 'PDF (Vektor)', onClick: onExportVectorPDF },
     { label: 'Current Slide as PNG', onClick: onExportCurrentPNG, disabled: !hasSelectedSlide },
     { label: 'Current Slide as JPG', onClick: onExportCurrentJPG, disabled: !hasSelectedSlide },
     { label: 'All Slides as PNG (ZIP)', onClick: onExportAllPNG },
