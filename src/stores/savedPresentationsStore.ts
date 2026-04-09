@@ -3,6 +3,7 @@ import { persist } from 'zustand/middleware';
 import type { Presentation } from '../types';
 import outboundStackData from '../data/outbound-stack.json';
 import crmAuditData from '../data/crm-audit.json';
+import dataPlaybookData from '../data/data-playbook.json';
 
 export interface SavedPresentation {
   id: string;
@@ -37,6 +38,19 @@ const PRESET_CRM: SavedPresentation = {
   savedAt: 0,
 };
 
+const PRESET_PLAYBOOK: SavedPresentation = {
+  id: 'preset-data-playbook',
+  name: 'Data-Driven Playbook',
+  data: {
+    ...(dataPlaybookData as unknown as Presentation),
+    themeId: 'cegtec',
+    formatId: '4:5',
+    createdAt: 0,
+    updatedAt: 0,
+  },
+  savedAt: 0,
+};
+
 interface SavedPresentationsState {
   presentations: SavedPresentation[];
   save: (name: string, data: Presentation) => string;
@@ -49,7 +63,7 @@ interface SavedPresentationsState {
 export const useSavedPresentationsStore = create<SavedPresentationsState>()(
   persist(
     (set, get) => ({
-      presentations: [PRESET_OUTBOUND, PRESET_CRM],
+      presentations: [PRESET_OUTBOUND, PRESET_CRM, PRESET_PLAYBOOK],
 
       save: (name, data) => {
         const id = `pres-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
