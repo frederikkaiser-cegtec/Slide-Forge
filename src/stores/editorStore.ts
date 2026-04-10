@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import type { DiagramTool } from '../types/diagram';
 
-type AppMode = 'home' | 'graphic' | 'diagram' | 'slides' | 'carousel';
+type AppMode = 'home' | 'graphic' | 'diagram' | 'slides' | 'carousel' | 'charts';
 
 interface EditorState {
   // App mode

@@ -17,6 +17,7 @@ import { AssetLibraryModal } from './components/graphics/AssetLibraryModal';
 import { LayerCanvas } from './components/graphics/LayerCanvas';
 import { LayerPanel } from './components/graphics/LayerPanel';
 import { CarouselMode } from './components/carousel/CarouselMode';
+import { ChartBuilder } from './components/charts/ChartBuilder';
 import { type Layer, createSvgLayer, createTextLayer } from './types/layers';
 
 // ── State via useReducer ────────────────────────────────────────
@@ -129,6 +130,17 @@ function App() {
     return () => window.removeEventListener('sf:select-graphic', handler);
   });
 
+  // Listen for SVG insert from ChartBuilder
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const svgStr = (e as CustomEvent<string>).detail;
+      addLayer(createSvgLayer(svgStr));
+      setMode('graphic');
+    };
+    window.addEventListener('sf:insert-svg', handler);
+    return () => window.removeEventListener('sf:insert-svg', handler);
+  }, [addLayer, setMode]);
+
   // ── Save ────────────────────────────────────────────────────
   const handleSaveGraphic = useCallback(() => {
     const d = getDefinition(graphicType);
@@ -224,6 +236,16 @@ function App() {
       <div className="h-full flex flex-col">
         <ModeNav />
         <CarouselMode />
+      </div>
+    );
+  }
+
+  // ── Charts mode ────────────────────────────────────────────
+  if (mode === 'charts') {
+    return (
+      <div className="h-full flex flex-col">
+        <ModeNav />
+        <ChartBuilder />
       </div>
     );
   }

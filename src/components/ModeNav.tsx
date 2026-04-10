@@ -1,10 +1,11 @@
-import { Palette, GitBranch, Presentation, ChevronLeft, GalleryHorizontal } from 'lucide-react';
+import { Palette, GitBranch, Presentation, ChevronLeft, GalleryHorizontal, BarChart2 } from 'lucide-react';
 import { useEditorStore } from '../stores/editorStore';
 import { LOGO_URL } from '../utils/assets';
 
 const modes = [
   { id: 'graphic' as const, label: 'Grafiken', icon: Palette },
   { id: 'carousel' as const, label: 'Carousel', icon: GalleryHorizontal },
+  { id: 'charts' as const, label: 'Charts', icon: BarChart2 },
   { id: 'diagram' as const, label: 'Diagramme', icon: GitBranch },
   { id: 'slides' as const, label: 'Slides', icon: Presentation },
 ];
