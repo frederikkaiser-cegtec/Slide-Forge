@@ -1,11 +1,14 @@
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { toPng } from 'html-to-image';
 import JSZip from 'jszip';
-import { Plus, Trash2, ChevronLeft, ChevronRight, Download, Archive, ChevronDown, ChevronUp } from 'lucide-react';
-import { useCarouselStore } from '../../stores/carouselStore';
+import { Plus, Trash2, ChevronLeft, ChevronRight, Download, Archive, ChevronDown, ChevronUp, Layers, ImagePlus, X, Library, Copy } from 'lucide-react';
+import { useCarouselStore, DEFAULT_OVERLAY } from '../../stores/carouselStore';
+import type { SvgOverlayData } from '../../stores/carouselStore';
 import { GRAPHIC_REGISTRY, getDefinition } from '../../registry';
 import { FORMAT_PRESETS, getFormat } from '../../utils/formats';
 import { useEditorStore } from '../../stores/editorStore';
+import { AssetLibraryModal } from '../graphics/AssetLibraryModal';
+import { defaultOutreachPipelineData } from '../graphics/OutreachPipelineGraphic';
 
 // ── Global color utils ───────────────────────────────────────────
 const HEX6 = /^#[0-9a-fA-F]{6}$/;
@@ -24,16 +27,31 @@ const LABEL_MAP: Record<string, string> = {
   textColor: 'Text', headlineColor: 'Headline', iconColor: 'Icon',
   borderColor: 'Rahmen', highlightColor: 'Highlight',
 };
-
 function colorLabel(key: string) {
   return LABEL_MAP[key] ?? key.replace(/([A-Z])/g, ' $1').replace(/^./, (s) => s.toUpperCase());
 }
 
+// ── SVG overlay utils ────────────────────────────────────────────
+function normalizeSvgSize(svg: string): string {
+  return svg.replace(/<svg([^>]*)>/, (_, attrs) => {
+    const cleaned = attrs.replace(/\s*(width|height)="[^"]*"/g, '');
+    return `<svg${cleaned} width="100%" height="100%">`;
+  });
+}
+
+const QUICK_POSITIONS = (w: number, h: number, size: number) => [
+  { label: '↖', x: 16, y: 16 },
+  { label: '↗', x: w - size - 16, y: 16 },
+  { label: '⊕', x: Math.round((w - size) / 2), y: Math.round((h - size) / 2) },
+  { label: '↙', x: 16, y: h - size - 16 },
+  { label: '↘', x: w - size - 16, y: h - size - 16 },
+];
+
 // ── Thumbnail ────────────────────────────────────────────────────
 const THUMB_W = 130;
 
-function Thumbnail({ graphicType, formatId, data, active, index, onClick, onRemove, onMoveLeft, onMoveRight, isFirst, isLast }: {
-  graphicType: string; formatId: string; data: unknown;
+function Thumbnail({ graphicType, formatId, data, overlay, active, index, onClick, onRemove, onMoveLeft, onMoveRight, isFirst, isLast }: {
+  graphicType: string; formatId: string; data: unknown; overlay: SvgOverlayData;
   active: boolean; index: number;
   onClick: () => void; onRemove: () => void;
   onMoveLeft: () => void; onMoveRight: () => void;
@@ -47,28 +65,27 @@ function Thumbnail({ graphicType, formatId, data, active, index, onClick, onRemo
 
   return (
     <div className="flex flex-col items-center gap-1 shrink-0" style={{ width: THUMB_W }}>
-      <div
-        onClick={onClick}
+      <div onClick={onClick}
         className={`relative cursor-pointer rounded overflow-hidden border-2 transition-all ${active ? 'border-primary shadow-lg shadow-primary/20' : 'border-border/40 hover:border-border'}`}
-        style={{ width: THUMB_W, height: thumbH }}
-      >
-        <div style={{ width: format.width, height: format.height, transform: `scale(${scale})`, transformOrigin: '0 0', pointerEvents: 'none' }}>
+        style={{ width: THUMB_W, height: thumbH }}>
+        <div style={{ width: format.width, height: format.height, transform: `scale(${scale})`, transformOrigin: '0 0', pointerEvents: 'none', position: 'relative' }}>
           <GraphicComponent data={data as any} width={format.width} height={format.height} />
+          {overlay.svg && (
+            <div style={{
+              position: 'absolute', left: overlay.x, top: overlay.y,
+              width: overlay.size, height: overlay.size,
+              opacity: overlay.opacity / 100, color: overlay.color, zIndex: 10, overflow: 'hidden',
+              transform: overlay.rotation ? `rotate(${overlay.rotation}deg)` : undefined,
+            }} dangerouslySetInnerHTML={{ __html: normalizeSvgSize(overlay.svg) }} />
+          )}
         </div>
-        {/* hover controls */}
         <div className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity bg-black/40 flex items-end justify-between p-1">
           <button onClick={(e) => { e.stopPropagation(); onMoveLeft(); }} disabled={isFirst}
-            className="p-0.5 rounded bg-black/60 text-white disabled:opacity-30 hover:bg-black/80">
-            <ChevronLeft size={10} />
-          </button>
+            className="p-0.5 rounded bg-black/60 text-white disabled:opacity-30 hover:bg-black/80"><ChevronLeft size={10} /></button>
           <button onClick={(e) => { e.stopPropagation(); onRemove(); }}
-            className="p-0.5 rounded bg-red-500/80 text-white hover:bg-red-600">
-            <Trash2 size={10} />
-          </button>
+            className="p-0.5 rounded bg-red-500/80 text-white hover:bg-red-600"><Trash2 size={10} /></button>
           <button onClick={(e) => { e.stopPropagation(); onMoveRight(); }} disabled={isLast}
-            className="p-0.5 rounded bg-black/60 text-white disabled:opacity-30 hover:bg-black/80">
-            <ChevronRight size={10} />
-          </button>
+            className="p-0.5 rounded bg-black/60 text-white disabled:opacity-30 hover:bg-black/80"><ChevronRight size={10} /></button>
         </div>
       </div>
       <span className={`text-[10px] font-medium ${active ? 'text-primary' : 'text-text-muted/50'}`}>{index + 1}</span>
@@ -79,11 +96,20 @@ function Thumbnail({ graphicType, formatId, data, active, index, onClick, onRemo
 // ── Setup Screen ─────────────────────────────────────────────────
 function SetupScreen() {
   const { create } = useCarouselStore();
+
+  const handlePipelineSplit = () => {
+    const base = structuredClone(defaultOutreachPipelineData);
+    const slides = base.phases.map((_, pi) => ({
+      id: crypto.randomUUID(),
+      data: { ...structuredClone(base), activePhaseIndex: pi },
+      overlay: structuredClone(DEFAULT_OVERLAY),
+    }));
+    useCarouselStore.setState({ carousel: { graphicType: 'outreach-pipeline', formatId: '4:5', slides }, activeSlideId: slides[0].id });
+  };
+
   const [graphicType, setGraphicType] = useState('outreach-pipeline');
   const [formatId, setFormatId] = useState('4:5');
   const [count, setCount] = useState(6);
-
-  // Only show graphic types that make sense for carousels (not force-format banners)
   const types = GRAPHIC_REGISTRY.filter((d) => !['kpi-banner'].includes(d.id));
 
   return (
@@ -93,7 +119,6 @@ function SetupScreen() {
           <h2 className="text-lg font-semibold text-text" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Carousel erstellen</h2>
           <p className="text-sm text-text-muted mt-1">Mehrere Slides desselben Templates bearbeiten &amp; exportieren</p>
         </div>
-
         <div className="space-y-3">
           <div>
             <label className="text-[11px] text-text-muted/60 uppercase tracking-wider font-medium block mb-1.5">Grafik-Typ</label>
@@ -111,14 +136,26 @@ function SetupScreen() {
           </div>
           <div>
             <label className="text-[11px] text-text-muted/60 uppercase tracking-wider font-medium block mb-1.5">Anzahl Slides: {count}</label>
-            <input type="range" min={1} max={12} value={count} onChange={(e) => setCount(+e.target.value)}
-              className="w-full accent-primary" />
-            <div className="flex justify-between text-[10px] text-text-muted/40 mt-0.5">
-              <span>1</span><span>12</span>
-            </div>
+            <input type="range" min={1} max={12} value={count} onChange={(e) => setCount(+e.target.value)} className="w-full accent-primary" />
+            <div className="flex justify-between text-[10px] text-text-muted/40 mt-0.5"><span>1</span><span>12</span></div>
           </div>
         </div>
-
+        <div className="border border-border/60 rounded-xl p-4 bg-muted/20">
+          <div className="flex items-center gap-2 mb-2">
+            <Layers size={14} className="text-primary" />
+            <span className="text-sm font-semibold text-text" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Pipeline aufteilen</span>
+          </div>
+          <p className="text-xs text-text-muted mb-3">Erstellt automatisch 5 Slides — je eine pro Phase</p>
+          <button onClick={handlePipelineSplit}
+            className="w-full py-2 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20 rounded-lg font-medium text-sm transition-colors">
+            Pipeline → 5 Slides
+          </button>
+        </div>
+        <div className="relative flex items-center gap-2">
+          <div className="flex-1 h-px bg-border/40" />
+          <span className="text-[10px] text-text-muted/40 uppercase tracking-wider">oder manuell</span>
+          <div className="flex-1 h-px bg-border/40" />
+        </div>
         <button onClick={() => create(graphicType, formatId, count)}
           className="w-full py-2.5 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium text-sm transition-colors">
           {count} Slides erstellen
@@ -130,10 +167,13 @@ function SetupScreen() {
 
 // ── Editor ───────────────────────────────────────────────────────
 function Editor() {
-  const { carousel, activeSlideId, setActive, updateSlide, addSlide, removeSlide, moveSlide, applyGlobal, reset } = useCarouselStore();
-  const setMode = useEditorStore((s) => s.setMode);
+  const { carousel, activeSlideId, setActive, updateSlide, addSlide, removeSlide, moveSlide, applyGlobal, updateOverlay, reset } = useCarouselStore();
   const [exporting, setExporting] = useState(false);
   const [globalOpen, setGlobalOpen] = useState(false);
+  const [overlayOpen, setOverlayOpen] = useState(false);
+  const [showAssetLibrary, setShowAssetLibrary] = useState<'normal' | 'insert' | false>(false);
+  const previewRef = useRef<HTMLDivElement>(null);
+  const exportRefs = useRef<Map<string, HTMLDivElement>>(new Map());
 
   if (!carousel) return null;
 
@@ -142,9 +182,8 @@ function Editor() {
   const FormComponent = def.FormComponent;
   const GraphicComponent = def.GraphicComponent;
   const activeSlide = carousel.slides.find((s) => s.id === activeSlideId) ?? carousel.slides[0];
-
-  // refs for off-screen export
-  const exportRefs = useRef<Map<string, HTMLDivElement>>(new Map());
+  const ov = activeSlide.overlay;
+  const setOv = (patch: Partial<SvgOverlayData>) => updateOverlay(activeSlide.id, patch);
 
   const previewScale = Math.min(
     (window.innerWidth - 340) / format.width,
@@ -152,34 +191,61 @@ function Editor() {
     1,
   );
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const handleOverlayDrag = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    const rect = previewRef.current?.getBoundingClientRect();
+    const scale = rect ? rect.width / format.width : previewScale;
+    const sx = e.clientX, sy = e.clientY, ox = ov.x, oy = ov.y;
+    const onMove = (me: MouseEvent) => updateOverlay(activeSlide.id, {
+      x: Math.round(ox + (me.clientX - sx) / scale),
+      y: Math.round(oy + (me.clientY - sy) / scale),
+    });
+    const onUp = () => { window.removeEventListener('mousemove', onMove); window.removeEventListener('mouseup', onUp); };
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [format.width, previewScale, ov.x, ov.y, activeSlide.id]);
+
+  const capture = async (el: HTMLDivElement) =>
+    toPng(el, { width: format.width, height: format.height, pixelRatio: 3 });
+
   const handleExportZip = async () => {
     setExporting(true);
     try {
       const zip = new JSZip();
       for (let i = 0; i < carousel.slides.length; i++) {
-        const slide = carousel.slides[i];
-        const el = exportRefs.current.get(slide.id);
+        const el = exportRefs.current.get(carousel.slides[i].id);
         if (!el) continue;
-        const dataUrl = await toPng(el, { width: format.width, height: format.height, pixelRatio: 3 });
+        const dataUrl = await capture(el);
         zip.file(`slide-${String(i + 1).padStart(2, '0')}.png`, dataUrl.split(',')[1], { base64: true });
       }
       const blob = await zip.generateAsync({ type: 'blob' });
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = `carousel-${carousel.graphicType}.zip`; a.click();
+      const a = document.createElement('a'); a.href = url; a.download = `carousel-${carousel.graphicType}.zip`; a.click();
       URL.revokeObjectURL(url);
-    } finally {
-      setExporting(false);
-    }
+    } finally { setExporting(false); }
   };
 
   const handleExportActive = async () => {
     const el = exportRefs.current.get(activeSlide.id);
     if (!el) return;
-    const dataUrl = await toPng(el, { width: format.width, height: format.height, pixelRatio: 3 });
-    const a = document.createElement('a'); a.href = dataUrl;
+    const a = document.createElement('a'); a.href = await capture(el);
     a.download = `slide-${carousel.slides.indexOf(activeSlide) + 1}.png`; a.click();
   };
+
+  const handleCopyPng = async () => {
+    const el = exportRefs.current.get(activeSlide.id);
+    if (!el) return;
+    const blob = await (await fetch(await capture(el))).blob();
+    await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+  };
+
+  const overlayStyle = (o: SvgOverlayData): React.CSSProperties => ({
+    position: 'absolute', left: o.x, top: o.y, width: o.size, height: o.size,
+    opacity: o.opacity / 100, color: o.color, zIndex: 10, overflow: 'hidden',
+    transform: o.rotation ? `rotate(${o.rotation}deg)` : undefined,
+  });
 
   return (
     <div className="flex-1 flex overflow-hidden">
@@ -201,6 +267,71 @@ function Editor() {
           <FormComponent data={activeSlide.data as any} onChange={(d: any) => updateSlide(activeSlide.id, d)} />
         </div>
 
+        {/* SVG Overlay Panel */}
+        <div className="border-t border-border/40">
+          <button onClick={() => setOverlayOpen((o) => !o)}
+            className="w-full flex items-center justify-between px-3 py-2 text-xs font-medium text-text-muted hover:text-text hover:bg-muted/20 transition-colors">
+            <span className="flex items-center gap-1.5">
+              <ImagePlus size={12} /> SVG Overlay
+              {ov.svg && <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block" />}
+            </span>
+            <div className="flex items-center gap-1">
+              {ov.svg && <span onClick={(e) => { e.stopPropagation(); setOv({ svg: '' }); }} className="text-text-muted/60 hover:text-red-400 cursor-pointer p-0.5"><X size={10} /></span>}
+              {overlayOpen ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
+            </div>
+          </button>
+          {overlayOpen && (
+            <div className="px-3 pb-3 space-y-2 border-t border-border/30">
+              <textarea placeholder="SVG hier einfügen…" value={ov.svg} onChange={(e) => setOv({ svg: e.target.value })}
+                className="w-full h-12 mt-2 bg-muted/40 border border-border/50 rounded text-[11px] text-text font-mono px-2 py-1.5 resize-none outline-none focus:border-primary/40" />
+              <div className="flex gap-1">
+                <button onClick={() => setShowAssetLibrary('insert')}
+                  className="flex-1 text-[11px] text-primary py-1 border border-primary/20 rounded hover:bg-primary/5 transition-colors flex items-center justify-center gap-1">
+                  <Library size={10} /> Library
+                </button>
+                {QUICK_POSITIONS(format.width, format.height, ov.size).map(({ label, x, y }) => (
+                  <button key={label} onClick={() => setOv({ x, y })}
+                    className="w-7 h-7 text-xs bg-muted/50 hover:bg-muted text-text-muted hover:text-text rounded transition-colors">{label}</button>
+                ))}
+              </div>
+              <div className="flex gap-2">
+                {(['x', 'y', 'size'] as const).map((k) => (
+                  <div key={k} className="flex-1">
+                    <p className="text-[10px] text-text-muted/50 uppercase tracking-wider mb-1">{k === 'size' ? 'Größe' : k.toUpperCase()}</p>
+                    <input type="number" value={ov[k]} onChange={(e) => setOv({ [k]: +e.target.value })}
+                      className="w-full bg-muted/40 border border-border/50 rounded px-2 py-1 text-xs text-text outline-none focus:border-primary/40" />
+                  </div>
+                ))}
+              </div>
+              <div>
+                <p className="text-[10px] text-text-muted/50 uppercase tracking-wider mb-1">Farbe</p>
+                <div className="flex gap-1.5 items-center">
+                  <input type="color" value={ov.color} onChange={(e) => setOv({ color: e.target.value })}
+                    className="w-7 h-7 rounded cursor-pointer border border-border/50 bg-transparent p-0.5 shrink-0" />
+                  <input type="text" value={ov.color} onChange={(e) => setOv({ color: e.target.value })}
+                    className="flex-1 bg-muted/40 border border-border/50 rounded px-2 py-1 text-xs text-text font-mono outline-none focus:border-primary/40" />
+                </div>
+              </div>
+              <div className="flex gap-2">
+                <div className="flex-1">
+                  <p className="text-[10px] text-text-muted/50 uppercase tracking-wider mb-1">Deckkraft: {ov.opacity}%</p>
+                  <input type="range" min={10} max={100} value={ov.opacity} onChange={(e) => setOv({ opacity: +e.target.value })} className="w-full accent-primary" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-[10px] text-text-muted/50 uppercase tracking-wider mb-1">Rotation: {ov.rotation}°</p>
+                  <input type="range" min={0} max={360} value={ov.rotation} onChange={(e) => setOv({ rotation: +e.target.value })} className="w-full accent-primary" />
+                </div>
+              </div>
+              {ov.svg && (
+                <button onClick={() => setOv({ svg: '' })}
+                  className="w-full flex items-center justify-center gap-1.5 py-1.5 text-[11px] text-red-400 border border-red-500/20 hover:border-red-400/40 rounded hover:bg-red-500/5 transition-colors">
+                  <X size={11} /> Overlay entfernen
+                </button>
+              )}
+            </div>
+          )}
+        </div>
+
         {/* Global colors */}
         <div className="border-t border-border/40">
           <button onClick={() => setGlobalOpen((o) => !o)}
@@ -209,16 +340,13 @@ function Editor() {
             {globalOpen ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
           </button>
           {globalOpen && (() => {
-            const colors = findColorPaths(activeSlide.data);
-            // dedupe by path
-            const unique = colors.filter((c, i) => colors.findIndex((x) => x.path === c.path) === i);
+            const unique = findColorPaths(activeSlide.data).filter((c, i, a) => a.findIndex((x) => x.path === c.path) === i);
             return (
               <div className="px-3 pb-3 space-y-2">
                 {unique.length === 0 && <p className="text-[11px] text-text-muted/50">Keine Farbfelder gefunden.</p>}
                 {unique.map(({ path, key, value }) => (
                   <div key={path} className="flex items-center gap-2">
-                    <input type="color" defaultValue={value}
-                      onChange={(e) => applyGlobal(path, e.target.value)}
+                    <input type="color" defaultValue={value} onChange={(e) => applyGlobal(path, e.target.value)}
                       className="w-6 h-6 rounded cursor-pointer border border-border/50 bg-transparent p-0.5 shrink-0" />
                     <span className="text-[11px] text-text-muted truncate">{colorLabel(key)}</span>
                     <span className="text-[10px] text-text-muted/40 font-mono ml-auto">{value}</span>
@@ -230,15 +358,20 @@ function Editor() {
           })()}
         </div>
 
+        {/* Export */}
         <div className="p-3 border-t border-border/40 space-y-2">
           <div className="flex gap-2">
             <button onClick={handleExportActive}
               className="flex-1 flex items-center justify-center gap-1.5 py-2 text-xs bg-muted/50 hover:bg-muted text-text-muted hover:text-text rounded-lg transition-colors">
               <Download size={12} /> PNG
             </button>
+            <button onClick={handleCopyPng}
+              className="flex items-center justify-center px-3 py-2 text-xs bg-muted/50 hover:bg-muted text-text-muted hover:text-text rounded-lg transition-colors" title="PNG kopieren">
+              <Copy size={12} />
+            </button>
             <button onClick={handleExportZip} disabled={exporting}
               className="flex-1 flex items-center justify-center gap-1.5 py-2 text-xs bg-primary hover:bg-primary-hover text-white rounded-lg transition-colors disabled:opacity-60">
-              <Archive size={12} /> {exporting ? 'Exportiere…' : 'ZIP alle'}
+              <Archive size={12} /> {exporting ? '…' : 'ZIP alle'}
             </button>
           </div>
         </div>
@@ -251,7 +384,8 @@ function Editor() {
           <div className="flex items-end gap-3 overflow-x-auto pb-1">
             {carousel.slides.map((slide, i) => (
               <Thumbnail key={slide.id}
-                graphicType={carousel.graphicType} formatId={carousel.formatId} data={slide.data}
+                graphicType={carousel.graphicType} formatId={carousel.formatId}
+                data={slide.data} overlay={slide.overlay}
                 active={slide.id === activeSlide.id} index={i}
                 onClick={() => setActive(slide.id)}
                 onRemove={() => removeSlide(slide.id)}
@@ -262,7 +396,7 @@ function Editor() {
             ))}
             <button onClick={addSlide}
               className="flex flex-col items-center justify-center gap-1 shrink-0 rounded border-2 border-dashed border-border/40 hover:border-primary/40 text-text-muted/40 hover:text-primary transition-colors"
-              style={{ width: THUMB_W, height: Math.round(getFormat(carousel.formatId).height * (THUMB_W / getFormat(carousel.formatId).width)) }}>
+              style={{ width: THUMB_W, height: Math.round(format.height * (THUMB_W / format.width)) }}>
               <Plus size={18} />
               <span className="text-[10px]">Slide</span>
             </button>
@@ -271,26 +405,41 @@ function Editor() {
 
         {/* Active preview */}
         <div className="flex-1 flex items-center justify-center overflow-auto p-8">
-          <div style={{
+          <div ref={previewRef} style={{
             width: format.width, height: format.height,
             transform: `scale(${previewScale})`, transformOrigin: 'center center',
             position: 'relative',
           }}>
             <GraphicComponent data={activeSlide.data as any} width={format.width} height={format.height} />
+            {ov.svg && (
+              <div onMouseDown={handleOverlayDrag}
+                style={{ ...overlayStyle(ov), cursor: 'move' }}
+                dangerouslySetInnerHTML={{ __html: normalizeSvgSize(ov.svg) }} />
+            )}
           </div>
         </div>
       </div>
 
-      {/* Off-screen export container */}
+      {/* Off-screen export */}
       <div style={{ position: 'fixed', left: -9999, top: -9999, pointerEvents: 'none', zIndex: -1 }}>
         {carousel.slides.map((slide) => (
           <div key={slide.id}
             ref={(el) => { if (el) exportRefs.current.set(slide.id, el); else exportRefs.current.delete(slide.id); }}
             style={{ width: format.width, height: format.height, position: 'relative' }}>
             <GraphicComponent data={slide.data as any} width={format.width} height={format.height} />
+            {slide.overlay.svg && (
+              <div style={overlayStyle(slide.overlay)} dangerouslySetInnerHTML={{ __html: normalizeSvgSize(slide.overlay.svg) }} />
+            )}
           </div>
         ))}
       </div>
+
+      {showAssetLibrary && (
+        <AssetLibraryModal
+          onClose={() => setShowAssetLibrary(false)}
+          onInsert={showAssetLibrary === 'insert' ? (svg) => { setOv({ svg }); setOverlayOpen(true); setShowAssetLibrary(false); } : undefined}
+        />
+      )}
     </div>
   );
 }

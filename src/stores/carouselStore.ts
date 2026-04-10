@@ -1,9 +1,15 @@
 import { create } from 'zustand';
 import { getDefinition } from '../registry';
 
+export interface SvgOverlayData {
+  svg: string; x: number; y: number; size: number; opacity: number; color: string; rotation: number;
+}
+export const DEFAULT_OVERLAY: SvgOverlayData = { svg: '', x: 16, y: 16, size: 80, opacity: 100, color: '#ffffff', rotation: 0 };
+
 export interface CarouselSlide {
   id: string;
   data: unknown;
+  overlay: SvgOverlayData;
 }
 
 export interface Carousel {
@@ -22,6 +28,7 @@ interface CarouselStore {
   removeSlide: (id: string) => void;
   moveSlide: (from: number, to: number) => void;
   applyGlobal: (path: string, value: string) => void;
+  updateOverlay: (id: string, overlay: Partial<SvgOverlayData>) => void;
   reset: () => void;
 }
 
@@ -34,6 +41,7 @@ export const useCarouselStore = create<CarouselStore>((set, get) => ({
     const slides: CarouselSlide[] = Array.from({ length: count }, () => ({
       id: crypto.randomUUID(),
       data: structuredClone(def.defaultData),
+      overlay: structuredClone(DEFAULT_OVERLAY),
     }));
     set({ carousel: { graphicType, formatId, slides }, activeSlideId: slides[0].id });
   },
@@ -51,7 +59,7 @@ export const useCarouselStore = create<CarouselStore>((set, get) => ({
     set((s) => {
       if (!s.carousel) return s;
       const def = getDefinition(s.carousel.graphicType);
-      const newSlide: CarouselSlide = { id: crypto.randomUUID(), data: structuredClone(def.defaultData) };
+      const newSlide: CarouselSlide = { id: crypto.randomUUID(), data: structuredClone(def.defaultData), overlay: structuredClone(DEFAULT_OVERLAY) };
       return {
         carousel: { ...s.carousel, slides: [...s.carousel.slides, newSlide] },
         activeSlideId: newSlide.id,
@@ -93,6 +101,13 @@ export const useCarouselStore = create<CarouselStore>((set, get) => ({
         },
       };
     }),
+
+  updateOverlay: (id, overlay) =>
+    set((s) => ({
+      carousel: s.carousel
+        ? { ...s.carousel, slides: s.carousel.slides.map((sl) => sl.id === id ? { ...sl, overlay: { ...sl.overlay, ...overlay } } : sl) }
+        : null,
+    })),
 
   reset: () => set({ carousel: null, activeSlideId: null }),
 }));
