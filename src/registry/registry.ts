@@ -2,7 +2,7 @@ import {
   Image, BarChart3, Trophy, Boxes, LayoutDashboard,
   GraduationCap, Database, DatabaseZap, ScanSearch,
   Mail, Radio, Layers, Bot, MessageSquareText,
-  GitCompare, Clock, Filter,
+  GitCompare, Clock, Filter, Network,
 } from 'lucide-react';
 
 import type { GraphicDefinition } from './types';
@@ -25,6 +25,7 @@ import { LinkedInPostGraphic, defaultLinkedInPostData } from '../components/grap
 import { ComparisonGraphic, defaultComparisonData } from '../components/graphics/ComparisonGraphic';
 import { TimelineGraphic, defaultTimelineData } from '../components/graphics/TimelineGraphic';
 import { FunnelGraphic, defaultFunnelData } from '../components/graphics/FunnelGraphic';
+import { OutreachPipelineGraphic, defaultOutreachPipelineData } from '../components/graphics/OutreachPipelineGraphic';
 
 // Form components
 import { CaseStudyForm } from '../components/graphics/CaseStudyForm';
@@ -44,6 +45,7 @@ import { LinkedInPostForm } from '../components/graphics/LinkedInPostForm';
 import { ComparisonForm } from '../components/graphics/ComparisonForm';
 import { TimelineForm } from '../components/graphics/TimelineForm';
 import { FunnelForm } from '../components/graphics/FunnelForm';
+import { OutreachPipelineForm } from '../components/graphics/OutreachPipelineForm';
 
 // Types & defaults
 import type { CaseStudyData, RoiData } from '../types/graphics';
@@ -319,6 +321,17 @@ export const GRAPHIC_REGISTRY: GraphicDefinition[] = [
     getDisplayName: (d: any) => d.topLabel || 'Funnel',
     FormComponent: FunnelForm,
     GraphicComponent: FunnelGraphic,
+  },
+  {
+    id: 'outreach-pipeline',
+    label: 'Pipeline',
+    icon: Network,
+    defaultData: defaultOutreachPipelineData,
+    defaultFormat: '9:16',
+    forceFormat: true,
+    getDisplayName: (d: any) => d.title?.replace('\n', ' ') || 'Pipeline',
+    FormComponent: OutreachPipelineForm,
+    GraphicComponent: OutreachPipelineGraphic,
   },
 ];
 

@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback, useReducer, useEffect } from 'react';
-import { Download, Save, Upload, Library, ImagePlus, X, ChevronDown, ChevronUp, Copy } from 'lucide-react';
+import { Download, Save, Upload, Copy } from 'lucide-react';
 import { toPng, toJpeg } from 'html-to-image';
 import { GitHubPushModal } from './components/graphics/GitHubPushModal';
 import { DiagramEditor } from './components/diagram/DiagramEditor';
@@ -14,7 +14,10 @@ import { FORMAT_PRESETS } from './utils/formats';
 import { useSavedGraphicsStore, type SavedGraphic } from './stores/savedGraphicsStore';
 import { GRAPHIC_REGISTRY, getDefinition } from './registry';
 import { AssetLibraryModal } from './components/graphics/AssetLibraryModal';
+import { LayerCanvas } from './components/graphics/LayerCanvas';
+import { LayerPanel } from './components/graphics/LayerPanel';
 import { CarouselMode } from './components/carousel/CarouselMode';
+import { type Layer, createSvgLayer, createTextLayer } from './types/layers';
 
 // ── State via useReducer ────────────────────────────────────────
 type GraphicState = Record<string, unknown>;
@@ -77,13 +80,6 @@ function GraphicTypeSelector({ graphicType, onSwitch }: { graphicType: string; o
   );
 }
 
-// Force SVG to fill its container by overriding width/height attrs
-function normalizeSvgSize(svg: string): string {
-  return svg.replace(/<svg([^>]*)>/, (_, attrs) => {
-    const cleaned = attrs.replace(/\s*(width|height)="[^"]*"/g, '');
-    return `<svg${cleaned} width="100%" height="100%">`;
-  });
-}
 
 // ── App ─────────────────────────────────────────────────────────
 function App() {
@@ -95,36 +91,33 @@ function App() {
   const [activeGraphicId, setActiveGraphicId] = useState<string | null>(null);
   const [saveFlash, setSaveFlash] = useState(false);
   const [showGitHubPush, setShowGitHubPush] = useState(false);
-  const [showAssetLibrary, setShowAssetLibrary] = useState<'normal' | 'insert' | false>(false);
-  const [svgOverlay, setSvgOverlay] = useState({ svg: '', x: 16, y: 16, size: 80, opacity: 100, color: '#ffffff', rotation: 0 });
-  const [overlayOpen, setOverlayOpen] = useState(false);
+  const [showAssetLibrary, setShowAssetLibrary] = useState(false);
+  const [layers, setLayers] = useState<Layer[]>([]);
+  const [selectedLayerId, setSelectedLayerId] = useState<string | null>(null);
 
   const format = FORMAT_PRESETS.find((f) => f.id === formatId) ?? FORMAT_PRESETS[0];
   const def = getDefinition(graphicType);
 
-  const handleOverlayDrag = useCallback((e: React.MouseEvent) => {
-    e.preventDefault();
-    // Use actual rendered size for accurate scale (accounts for padding etc.)
-    const rect = graphicRef.current?.getBoundingClientRect();
-    const scale = rect ? rect.width / format.width : getPreviewScale(format.width, format.height);
-    const startMouseX = e.clientX;
-    const startMouseY = e.clientY;
-    const startX = svgOverlay.x;
-    const startY = svgOverlay.y;
-    const onMove = (me: MouseEvent) => {
-      setSvgOverlay(o => ({
-        ...o,
-        x: Math.round(startX + (me.clientX - startMouseX) / scale),
-        y: Math.round(startY + (me.clientY - startMouseY) / scale),
-      }));
-    };
-    const onUp = () => {
-      window.removeEventListener('mousemove', onMove);
-      window.removeEventListener('mouseup', onUp);
-    };
-    window.addEventListener('mousemove', onMove);
-    window.addEventListener('mouseup', onUp);
-  }, [format.width, svgOverlay.x, svgOverlay.y]);
+  const addLayer = useCallback((layer: Layer) => {
+    setLayers((ls) => [...ls, layer]);
+    setSelectedLayerId(layer.id);
+  }, []);
+  const updateLayer = useCallback((id: string, patch: Partial<Layer>) =>
+    setLayers((ls) => ls.map((l) => (l.id === id ? { ...l, ...patch } as Layer : l))), []);
+  const deleteLayer = useCallback((id: string) => {
+    setLayers((ls) => ls.filter((l) => l.id !== id));
+    setSelectedLayerId((s) => (s === id ? null : s));
+  }, []);
+  const moveLayerUp = useCallback((id: string) => setLayers((ls) => {
+    const i = ls.findIndex((l) => l.id === id);
+    if (i >= ls.length - 1) return ls;
+    const a = [...ls]; [a[i], a[i + 1]] = [a[i + 1], a[i]]; return a;
+  }), []);
+  const moveLayerDown = useCallback((id: string) => setLayers((ls) => {
+    const i = ls.findIndex((l) => l.id === id);
+    if (i <= 0) return ls;
+    const a = [...ls]; [a[i], a[i - 1]] = [a[i - 1], a[i]]; return a;
+  }), []);
 
   // Listen for template selection from WelcomeScreen
   useEffect(() => {
@@ -188,55 +181,37 @@ function App() {
   }, [graphicType, state, formatId]);
 
   // ── Export ──────────────────────────────────────────────────
-  const handleExport = async (type: 'png' | 'jpeg') => {
-    if (!graphicRef.current) return;
+  const captureGraphic = async (type: 'png' | 'jpeg' = 'png') => {
+    if (!graphicRef.current) throw new Error('no ref');
+    const prevSel = selectedLayerId;
+    setSelectedLayerId(null);
+    await new Promise<void>((r) => requestAnimationFrame(() => requestAnimationFrame(() => r())));
     const el = graphicRef.current;
     const prevTransform = el.style.transform;
     el.style.transform = 'none';
-    const opts = {
-      width: format.width,
-      height: format.height,
-      pixelRatio: 3,
-      style: { transform: 'none', transformOrigin: '0 0' },
-    };
-    const dataUrl = type === 'jpeg'
-      ? await toJpeg(el, { ...opts, quality: 0.95 })
-      : await toPng(el, opts);
+    const opts = { width: format.width, height: format.height, pixelRatio: 3, style: { transform: 'none', transformOrigin: '0 0' } };
+    const dataUrl = type === 'jpeg' ? await toJpeg(el, { ...opts, quality: 0.95 }) : await toPng(el, opts);
     el.style.transform = prevTransform;
+    setSelectedLayerId(prevSel);
+    return dataUrl;
+  };
+
+  const handleExport = async (type: 'png' | 'jpeg') => {
+    const dataUrl = await captureGraphic(type);
     const link = document.createElement('a');
-    const filename = `cegtec-${graphicType}-${format.id}`;
-    link.download = `${filename}.${type === 'jpeg' ? 'jpg' : 'png'}`;
-    link.href = dataUrl;
-    link.click();
+    link.download = `cegtec-${graphicType}-${format.id}.${type === 'jpeg' ? 'jpg' : 'png'}`;
+    link.href = dataUrl; link.click();
   };
 
   // ── Copy PNG to clipboard ───────────────────────────────────
   const handleCopyPng = async () => {
-    if (!graphicRef.current) return;
-    const el = graphicRef.current;
-    const prevTransform = el.style.transform;
-    el.style.transform = 'none';
-    const dataUrl = await toPng(el, { width: format.width, height: format.height, pixelRatio: 3, style: { transform: 'none', transformOrigin: '0 0' } });
-    el.style.transform = prevTransform;
+    const dataUrl = await captureGraphic('png');
     const blob = await (await fetch(dataUrl)).blob();
     await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
   };
 
   // ── Capture for GitHub push ─────────────────────────────────
-  const captureForGitHub = async (): Promise<string> => {
-    if (!graphicRef.current) throw new Error('No graphic element');
-    const el = graphicRef.current;
-    const prevTransform = el.style.transform;
-    el.style.transform = 'none';
-    const dataUrl = await toPng(el, {
-      width: format.width,
-      height: format.height,
-      pixelRatio: 3,
-      style: { transform: 'none', transformOrigin: '0 0' },
-    });
-    el.style.transform = prevTransform;
-    return dataUrl;
-  };
+  const captureForGitHub = () => captureGraphic('png');
 
   // ── Home screen ────────────────────────────────────────────
   if (mode === 'home') {
@@ -309,111 +284,21 @@ function App() {
           />
         </div>
 
-        <div className="p-4 border-t border-border space-y-2">
-          {/* SVG Overlay Panel */}
-          <div className="border border-border/40 rounded-lg overflow-hidden">
-            <button
-              onClick={() => setOverlayOpen(o => !o)}
-              className="w-full flex items-center justify-between px-3 py-2 text-xs font-medium text-text-muted hover:text-text hover:bg-muted/30 transition-colors"
-            >
-              <span className="flex items-center gap-1.5">
-                <ImagePlus size={12} />
-                SVG Overlay
-                {svgOverlay.svg && <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block" />}
-              </span>
-              <div className="flex items-center gap-1">
-                {svgOverlay.svg && (
-                  <span
-                    onClick={(e) => { e.stopPropagation(); setSvgOverlay(o => ({ ...o, svg: '' })); }}
-                    className="text-text-muted/60 hover:text-red-400 transition-colors cursor-pointer p-0.5"
-                    title="Overlay entfernen"
-                  >
-                    <X size={10} />
-                  </span>
-                )}
-                {overlayOpen ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
-              </div>
-            </button>
-            {overlayOpen && (
-              <div className="px-3 pb-3 space-y-2.5 border-t border-border/30">
-                <textarea
-                  placeholder="SVG hier einfügen…"
-                  value={svgOverlay.svg}
-                  onChange={(e) => setSvgOverlay(o => ({ ...o, svg: e.target.value }))}
-                  className="w-full h-14 mt-2 bg-muted/40 border border-border/50 rounded text-[11px] text-text font-mono px-2 py-1.5 resize-none outline-none focus:border-primary/40"
-                />
-                <button
-                  onClick={() => setShowAssetLibrary('insert')}
-                  className="w-full text-[11px] text-primary hover:text-primary/80 text-center py-1.5 border border-primary/20 rounded hover:bg-primary/5 transition-colors"
-                >
-                  + Library öffnen
-                </button>
-                {/* Quick position presets */}
-                <div className="flex gap-1">
-                  {([['↖',16,16],['↗',format.width-svgOverlay.size-16,16],['⊕',Math.round((format.width-svgOverlay.size)/2),Math.round((format.height-svgOverlay.size)/2)],['↙',16,format.height-svgOverlay.size-16],['↘',format.width-svgOverlay.size-16,format.height-svgOverlay.size-16]] as [string,number,number][]).map(([label,px,py]) => (
-                    <button key={label} onClick={() => setSvgOverlay(o => ({ ...o, x: px, y: py }))}
-                      className="flex-1 py-1 text-xs bg-muted/50 hover:bg-muted text-text-muted hover:text-text rounded transition-colors">
-                      {label}
-                    </button>
-                  ))}
-                </div>
-                <div className="flex gap-2">
-                  <div className="flex-1">
-                    <p className="text-[10px] text-text-muted/50 uppercase tracking-wider mb-1">X (px)</p>
-                    <input type="number" value={svgOverlay.x}
-                      onChange={(e) => setSvgOverlay(o => ({ ...o, x: Math.max(0, +e.target.value) }))}
-                      className="w-full bg-muted/40 border border-border/50 rounded px-2 py-1 text-xs text-text outline-none focus:border-primary/40" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-[10px] text-text-muted/50 uppercase tracking-wider mb-1">Y (px)</p>
-                    <input type="number" value={svgOverlay.y}
-                      onChange={(e) => setSvgOverlay(o => ({ ...o, y: +e.target.value }))}
-                      className="w-full bg-muted/40 border border-border/50 rounded px-2 py-1 text-xs text-text outline-none focus:border-primary/40" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-[10px] text-text-muted/50 uppercase tracking-wider mb-1">Größe</p>
-                    <input type="number" value={svgOverlay.size}
-                      onChange={(e) => setSvgOverlay(o => ({ ...o, size: Math.max(10, +e.target.value) }))}
-                      className="w-full bg-muted/40 border border-border/50 rounded px-2 py-1 text-xs text-text outline-none focus:border-primary/40" />
-                  </div>
-                </div>
-                <div>
-                  <p className="text-[10px] text-text-muted/50 uppercase tracking-wider mb-1">Farbe</p>
-                  <div className="flex gap-2 items-center">
-                    <input type="color" value={svgOverlay.color}
-                      onChange={(e) => setSvgOverlay(o => ({ ...o, color: e.target.value }))}
-                      className="w-7 h-7 rounded cursor-pointer border border-border/50 bg-transparent p-0.5 shrink-0" />
-                    <input type="text" value={svgOverlay.color}
-                      onChange={(e) => setSvgOverlay(o => ({ ...o, color: e.target.value }))}
-                      className="flex-1 bg-muted/40 border border-border/50 rounded px-2 py-1 text-xs text-text font-mono outline-none focus:border-primary/40" />
-                  </div>
-                </div>
-                <div className="flex gap-2">
-                  <div className="flex-1">
-                    <p className="text-[10px] text-text-muted/50 uppercase tracking-wider mb-1">Deckkraft: {svgOverlay.opacity}%</p>
-                    <input type="range" min={10} max={100} value={svgOverlay.opacity}
-                      onChange={(e) => setSvgOverlay(o => ({ ...o, opacity: +e.target.value }))}
-                      className="w-full accent-primary" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-[10px] text-text-muted/50 uppercase tracking-wider mb-1">Rotation: {svgOverlay.rotation}°</p>
-                    <input type="range" min={0} max={360} value={svgOverlay.rotation}
-                      onChange={(e) => setSvgOverlay(o => ({ ...o, rotation: +e.target.value }))}
-                      className="w-full accent-primary" />
-                  </div>
-                </div>
-                {svgOverlay.svg && (
-                  <button
-                    onClick={() => setSvgOverlay(o => ({ ...o, svg: '' }))}
-                    className="w-full flex items-center justify-center gap-1.5 py-1.5 text-[11px] text-red-400 hover:text-red-300 border border-red-500/20 hover:border-red-400/40 rounded hover:bg-red-500/5 transition-colors"
-                  >
-                    <X size={11} /> Overlay entfernen
-                  </button>
-                )}
-              </div>
-            )}
-          </div>
+        <div className="border-t border-border/40">
+          <LayerPanel
+            layers={layers}
+            selectedId={selectedLayerId}
+            onSelect={setSelectedLayerId}
+            onUpdate={updateLayer}
+            onDelete={deleteLayer}
+            onMoveUp={moveLayerUp}
+            onMoveDown={moveLayerDown}
+            onAddText={() => addLayer(createTextLayer())}
+            onOpenLibrary={() => setShowAssetLibrary(true)}
+          />
+        </div>
 
+        <div className="p-4 border-t border-border space-y-2">
           <div className="flex gap-2">
             <button
               onClick={handleSaveGraphic}
@@ -424,13 +309,6 @@ function App() {
               }`}
             >
               <Save size={12} /> {saveFlash ? 'Gespeichert' : 'Speichern'}
-            </button>
-            <button
-              onClick={() => setShowAssetLibrary('normal')}
-              className="flex items-center justify-center gap-1.5 px-3 py-2 text-xs rounded-lg font-medium bg-muted/50 hover:bg-muted text-text-muted hover:text-text transition-all"
-              title="Asset Library"
-            >
-              <Library size={12} /> Assets
             </button>
           </div>
           <div className="flex gap-2">
@@ -480,25 +358,14 @@ function App() {
             width={format.width}
             height={format.height}
           />
-          {svgOverlay.svg && (
-            <div
-              onMouseDown={handleOverlayDrag}
-              style={{
-                position: 'absolute',
-                left: svgOverlay.x,
-                top: svgOverlay.y,
-                width: svgOverlay.size,
-                height: svgOverlay.size,
-                opacity: svgOverlay.opacity / 100,
-                color: svgOverlay.color,
-                zIndex: 10,
-                overflow: 'hidden',
-                cursor: 'move',
-                transform: svgOverlay.rotation ? `rotate(${svgOverlay.rotation}deg)` : undefined,
-              }}
-              dangerouslySetInnerHTML={{ __html: normalizeSvgSize(svgOverlay.svg) }}
-            />
-          )}
+          <LayerCanvas
+            layers={layers}
+            selectedId={selectedLayerId}
+            onSelect={setSelectedLayerId}
+            onUpdate={updateLayer}
+            previewRef={graphicRef}
+            formatWidth={format.width}
+          />
         </div>
       </div>
 
@@ -514,7 +381,7 @@ function App() {
       {showAssetLibrary && (
         <AssetLibraryModal
           onClose={() => setShowAssetLibrary(false)}
-          onInsert={showAssetLibrary === 'insert' ? (svg) => { setSvgOverlay(o => ({ ...o, svg })); setOverlayOpen(true); } : undefined}
+          onInsert={(svg) => { addLayer(createSvgLayer(svg)); setShowAssetLibrary(false); }}
         />
       )}
     </div>
