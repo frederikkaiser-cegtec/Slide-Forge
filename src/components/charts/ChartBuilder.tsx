@@ -15,6 +15,8 @@ const DEFAULT_STYLE: ChartConfig['style'] = {
   showValues: false,
   barRadius: 4,
   padding: 10,
+  xAxisLabel: '',
+  yAxisLabel: '',
 };
 
 const PRESETS: Array<{ label: string; config: Omit<ChartConfig, 'style' | 'width' | 'height'> }> = [
@@ -494,6 +496,33 @@ export function ChartBuilder() {
               <Toggle label="Werte anzeigen" value={config.style.showValues} onChange={(v) => patchStyle({ showValues: v })} />
             </div>
           </div>
+
+          {/* Axis labels — not for pie */}
+          {!isPie && (
+            <div>
+              <SectionLabel>Achsenbeschriftung</SectionLabel>
+              <div className="space-y-1.5">
+                <div>
+                  <span className="text-[10px] text-text-muted/60 block mb-1">Y-Achse</span>
+                  <input
+                    value={config.style.yAxisLabel}
+                    onChange={(e) => patchStyle({ yAxisLabel: e.target.value })}
+                    placeholder="z.B. Anzahl"
+                    className="w-full bg-muted/40 border border-border/40 rounded px-2 py-1.5 text-xs text-text outline-none focus:border-primary/50 placeholder:text-text-muted/30"
+                  />
+                </div>
+                <div>
+                  <span className="text-[10px] text-text-muted/60 block mb-1">X-Achse</span>
+                  <input
+                    value={config.style.xAxisLabel}
+                    onChange={(e) => patchStyle({ xAxisLabel: e.target.value })}
+                    placeholder="z.B. Monat"
+                    className="w-full bg-muted/40 border border-border/40 rounded px-2 py-1.5 text-xs text-text outline-none focus:border-primary/50 placeholder:text-text-muted/30"
+                  />
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Bar radius — only for bar types */}
           {isBar && (

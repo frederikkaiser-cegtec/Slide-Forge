@@ -19,6 +19,8 @@ export interface ChartConfig {
     showValues: boolean;
     barRadius: number;
     padding: number;
+    xAxisLabel: string;
+    yAxisLabel: string;
   };
   width: number;
   height: number;
@@ -50,7 +52,8 @@ export function generateBarSvg(config: ChartConfig): string {
   const { backgroundColor, gridColor, textColor, fontFamily, fontSize: fs, showGrid, showValues } = style;
   const p = style.padding;
   const legH = legendHeight(config);
-  const ml = 52 + p, mr = 16 + (p >> 1), mt = 16 + (p >> 1), mb = 38 + p;
+  const hasYL = !!style.yAxisLabel, hasXL = !!style.xAxisLabel;
+  const ml = 52 + p + (hasYL ? fs + 6 : 0), mr = 16 + (p >> 1), mt = 16 + (p >> 1), mb = 38 + p + (hasXL ? fs + 4 : 0);
   const plotW = W - ml - mr;
   const plotH = H - mt - mb - legH;
 
@@ -91,6 +94,7 @@ export function generateBarSvg(config: ChartConfig): string {
   }
 
   out += axes(ml, mt, plotW, plotH, gridColor);
+  out += axisLabels(style, ml, mt, plotW, plotH, H, legH, fs, textColor, fontFamily);
   out += legend(config, ml, W, H, legH, fs, textColor, fontFamily);
 
   return svg(W, H, backgroundColor, out);
@@ -101,7 +105,8 @@ export function generateBarHSvg(config: ChartConfig): string {
   const { backgroundColor, gridColor, textColor, fontFamily, fontSize: fs, showGrid, showValues } = style;
   const p = style.padding;
   const legH = legendHeight(config);
-  const ml = 80 + p, mr = 20 + (p >> 1), mt = 16 + (p >> 1), mb = 36 + p;
+  const hasYL = !!style.yAxisLabel, hasXL = !!style.xAxisLabel;
+  const ml = 80 + p + (hasYL ? fs + 6 : 0), mr = 20 + (p >> 1), mt = 16 + (p >> 1), mb = 36 + p + (hasXL ? fs + 4 : 0);
   const plotW = W - ml - mr;
   const plotH = H - mt - mb - legH;
 
@@ -141,6 +146,7 @@ export function generateBarHSvg(config: ChartConfig): string {
   }
 
   out += axes(ml, mt, plotW, plotH, gridColor);
+  out += axisLabels(style, ml, mt, plotW, plotH, H, legH, fs, textColor, fontFamily);
   out += legend(config, ml, W, H, legH, fs, textColor, fontFamily);
 
   return svg(W, H, backgroundColor, out);
@@ -152,7 +158,8 @@ export function generateLineSvg(config: ChartConfig): string {
   const isArea = type === 'area';
   const p = style.padding;
   const legH = legendHeight(config);
-  const ml = 52 + p, mr = 16 + (p >> 1), mt = 16 + (p >> 1), mb = 38 + p;
+  const hasYL = !!style.yAxisLabel, hasXL = !!style.xAxisLabel;
+  const ml = 52 + p + (hasYL ? fs + 6 : 0), mr = 16 + (p >> 1), mt = 16 + (p >> 1), mb = 38 + p + (hasXL ? fs + 4 : 0);
   const plotW = W - ml - mr;
   const plotH = H - mt - mb - legH;
 
@@ -207,6 +214,7 @@ export function generateLineSvg(config: ChartConfig): string {
   }
 
   out += axes(ml, mt, plotW, plotH, gridColor);
+  out += axisLabels(style, ml, mt, plotW, plotH, H, legH, fs, textColor, fontFamily);
 
   if (style.showLegend && nS > 1) {
     const ly = H - legH + 7;
@@ -287,6 +295,23 @@ export function generateSvg(config: ChartConfig): string {
 
 // ── Helpers ──────────────────────────────────────────────────────────────
 function f1(n: number) { return n.toFixed(1); }
+
+function axisLabels(
+  style: ChartConfig['style'],
+  ml: number, mt: number, plotW: number, plotH: number,
+  H: number, legH: number, fs: number, textColor: string, fontFamily: string,
+): string {
+  let out = '';
+  if (style.yAxisLabel) {
+    const cx = fs + 2;
+    const cy = mt + plotH / 2;
+    out += `<text x="${f1(cx)}" y="${f1(cy)}" text-anchor="middle" fill="${textColor}" font-family="${fontFamily}" font-size="${fs}" opacity="0.7" transform="rotate(-90,${f1(cx)},${f1(cy)})">${style.yAxisLabel}</text>`;
+  }
+  if (style.xAxisLabel) {
+    out += `<text x="${f1(ml + plotW / 2)}" y="${f1(H - legH - 2)}" text-anchor="middle" fill="${textColor}" font-family="${fontFamily}" font-size="${fs}" opacity="0.7">${style.xAxisLabel}</text>`;
+  }
+  return out;
+}
 function f2(n: number) { return n.toFixed(2); }
 
 function emptysvg(w: number, h: number, bg: string) {
