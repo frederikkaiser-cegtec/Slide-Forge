@@ -21,6 +21,7 @@ interface CarouselStore {
   addSlide: () => void;
   removeSlide: (id: string) => void;
   moveSlide: (from: number, to: number) => void;
+  applyGlobal: (path: string, value: string) => void;
   reset: () => void;
 }
 
@@ -72,6 +73,25 @@ export const useCarouselStore = create<CarouselStore>((set, get) => ({
       const [item] = slides.splice(from, 1);
       slides.splice(to, 0, item);
       return { carousel: { ...s.carousel, slides } };
+    }),
+
+  applyGlobal: (path, value) =>
+    set((s) => {
+      if (!s.carousel) return s;
+      const parts = path.split('.');
+      function setPath(obj: unknown): unknown {
+        const clone = structuredClone(obj) as Record<string, unknown>;
+        let cur: Record<string, unknown> = clone;
+        for (let i = 0; i < parts.length - 1; i++) cur = cur[parts[i]] as Record<string, unknown>;
+        cur[parts[parts.length - 1]] = value;
+        return clone;
+      }
+      return {
+        carousel: {
+          ...s.carousel,
+          slides: s.carousel.slides.map((sl) => ({ ...sl, data: setPath(sl.data) })),
+        },
+      };
     }),
 
   reset: () => set({ carousel: null, activeSlideId: null }),

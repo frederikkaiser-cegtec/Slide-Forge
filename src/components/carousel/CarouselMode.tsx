@@ -1,11 +1,33 @@
 import { useRef, useState } from 'react';
 import { toPng } from 'html-to-image';
 import JSZip from 'jszip';
-import { Plus, Trash2, ChevronLeft, ChevronRight, Download, Archive } from 'lucide-react';
+import { Plus, Trash2, ChevronLeft, ChevronRight, Download, Archive, ChevronDown, ChevronUp } from 'lucide-react';
 import { useCarouselStore } from '../../stores/carouselStore';
 import { GRAPHIC_REGISTRY, getDefinition } from '../../registry';
 import { FORMAT_PRESETS, getFormat } from '../../utils/formats';
 import { useEditorStore } from '../../stores/editorStore';
+
+// ── Global color utils ───────────────────────────────────────────
+const HEX6 = /^#[0-9a-fA-F]{6}$/;
+
+function findColorPaths(obj: unknown, path: string[] = []): { path: string; key: string; value: string }[] {
+  if (typeof obj === 'string' && HEX6.test(obj))
+    return [{ path: path.join('.'), key: path[path.length - 1] ?? 'color', value: obj }];
+  if (obj && typeof obj === 'object' && !Array.isArray(obj))
+    return Object.entries(obj).flatMap(([k, v]) => findColorPaths(v, [...path, k]));
+  return [];
+}
+
+const LABEL_MAP: Record<string, string> = {
+  bgColor: 'Hintergrund', backgroundColor: 'Hintergrund', bg: 'Hintergrund',
+  accentColor: 'Akzent', accent: 'Akzent', color: 'Farbe',
+  textColor: 'Text', headlineColor: 'Headline', iconColor: 'Icon',
+  borderColor: 'Rahmen', highlightColor: 'Highlight',
+};
+
+function colorLabel(key: string) {
+  return LABEL_MAP[key] ?? key.replace(/([A-Z])/g, ' $1').replace(/^./, (s) => s.toUpperCase());
+}
 
 // ── Thumbnail ────────────────────────────────────────────────────
 const THUMB_W = 130;
@@ -108,9 +130,10 @@ function SetupScreen() {
 
 // ── Editor ───────────────────────────────────────────────────────
 function Editor() {
-  const { carousel, activeSlideId, setActive, updateSlide, addSlide, removeSlide, moveSlide, reset } = useCarouselStore();
+  const { carousel, activeSlideId, setActive, updateSlide, addSlide, removeSlide, moveSlide, applyGlobal, reset } = useCarouselStore();
   const setMode = useEditorStore((s) => s.setMode);
   const [exporting, setExporting] = useState(false);
+  const [globalOpen, setGlobalOpen] = useState(false);
 
   if (!carousel) return null;
 
@@ -176,6 +199,35 @@ function Editor() {
             Slide {carousel.slides.indexOf(activeSlide) + 1} von {carousel.slides.length}
           </p>
           <FormComponent data={activeSlide.data as any} onChange={(d: any) => updateSlide(activeSlide.id, d)} />
+        </div>
+
+        {/* Global colors */}
+        <div className="border-t border-border/40">
+          <button onClick={() => setGlobalOpen((o) => !o)}
+            className="w-full flex items-center justify-between px-3 py-2 text-xs font-medium text-text-muted hover:text-text hover:bg-muted/20 transition-colors">
+            <span>Farben global ändern</span>
+            {globalOpen ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
+          </button>
+          {globalOpen && (() => {
+            const colors = findColorPaths(activeSlide.data);
+            // dedupe by path
+            const unique = colors.filter((c, i) => colors.findIndex((x) => x.path === c.path) === i);
+            return (
+              <div className="px-3 pb-3 space-y-2">
+                {unique.length === 0 && <p className="text-[11px] text-text-muted/50">Keine Farbfelder gefunden.</p>}
+                {unique.map(({ path, key, value }) => (
+                  <div key={path} className="flex items-center gap-2">
+                    <input type="color" defaultValue={value}
+                      onChange={(e) => applyGlobal(path, e.target.value)}
+                      className="w-6 h-6 rounded cursor-pointer border border-border/50 bg-transparent p-0.5 shrink-0" />
+                    <span className="text-[11px] text-text-muted truncate">{colorLabel(key)}</span>
+                    <span className="text-[10px] text-text-muted/40 font-mono ml-auto">{value}</span>
+                  </div>
+                ))}
+                <p className="text-[10px] text-text-muted/30 pt-1">Ändert Farbe auf allen {carousel.slides.length} Slides</p>
+              </div>
+            );
+          })()}
         </div>
 
         <div className="p-3 border-t border-border/40 space-y-2">
