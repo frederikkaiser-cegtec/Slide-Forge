@@ -42,7 +42,8 @@ interface SVGRepoResult {
 }
 
 async function searchSVGRepo(query: string): Promise<SVGRepoResult[]> {
-  const res = await fetch(`https://api.svgrepo.com/svg/search?query=${encodeURIComponent(query)}&limit=24`);
+  const url = `https://api.svgrepo.com/svg/search?query=${encodeURIComponent(query)}&limit=24`;
+  const res = await fetch(PROXY + encodeURIComponent(url));
   if (!res.ok) throw new Error('SVGRepo error');
   const data = await res.json();
   return (data.collection ?? data.results ?? []) as SVGRepoResult[];

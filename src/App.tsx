@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback, useReducer, useEffect } from 'react';
-import { Download, Save, Upload, Library, ImagePlus, X, ChevronDown, ChevronUp } from 'lucide-react';
+import { Download, Save, Upload, Library, ImagePlus, X, ChevronDown, ChevronUp, Copy } from 'lucide-react';
 import { toPng, toJpeg } from 'html-to-image';
 import { GitHubPushModal } from './components/graphics/GitHubPushModal';
 import { DiagramEditor } from './components/diagram/DiagramEditor';
@@ -40,7 +40,7 @@ function graphicReducer(state: GraphicState, action: Action): GraphicState {
 const GRAPHIC_CATEGORIES = [
   { label: 'Case Studies', ids: ['case-study', 'roi', 'kpi-banner', 'infographic'] },
   { label: 'Daten-Pipeline', ids: ['raw-data', 'enriched-data', 'qualified-data'] },
-  { label: 'Outreach', ids: ['personalized-outreach', 'multichannel-outreach', 'outbound-stack'] },
+  { label: 'Outreach', ids: ['personalized-outreach', 'multichannel-outreach', 'outbound-stack', 'outreach-pipeline'] },
   { label: 'Weitere', ids: ['revenue-systems', 'academy', 'agent-friendly', 'linkedin-post', 'comparison', 'timeline', 'funnel'] },
 ];
 
@@ -95,12 +95,17 @@ function App() {
   const [saveFlash, setSaveFlash] = useState(false);
   const [showGitHubPush, setShowGitHubPush] = useState(false);
   const [showAssetLibrary, setShowAssetLibrary] = useState<'normal' | 'insert' | false>(false);
-  const [svgOverlay, setSvgOverlay] = useState({ svg: '', x: 16, y: 16, size: 80, opacity: 100, color: '#ffffff' });
+  const [svgOverlay, setSvgOverlay] = useState({ svg: '', x: 16, y: 16, size: 80, opacity: 100, color: '#ffffff', rotation: 0 });
   const [overlayOpen, setOverlayOpen] = useState(false);
+
+  const format = FORMAT_PRESETS.find((f) => f.id === formatId) ?? FORMAT_PRESETS[0];
+  const def = getDefinition(graphicType);
 
   const handleOverlayDrag = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
-    const scale = getPreviewScale(format.width, format.height);
+    // Use actual rendered size for accurate scale (accounts for padding etc.)
+    const rect = graphicRef.current?.getBoundingClientRect();
+    const scale = rect ? rect.width / format.width : getPreviewScale(format.width, format.height);
     const startMouseX = e.clientX;
     const startMouseY = e.clientY;
     const startX = svgOverlay.x;
@@ -108,8 +113,8 @@ function App() {
     const onMove = (me: MouseEvent) => {
       setSvgOverlay(o => ({
         ...o,
-        x: Math.max(0, Math.round(startX + (me.clientX - startMouseX) / scale)),
-        y: Math.max(0, Math.round(startY + (me.clientY - startMouseY) / scale)),
+        x: Math.round(startX + (me.clientX - startMouseX) / scale),
+        y: Math.round(startY + (me.clientY - startMouseY) / scale),
       }));
     };
     const onUp = () => {
@@ -118,7 +123,7 @@ function App() {
     };
     window.addEventListener('mousemove', onMove);
     window.addEventListener('mouseup', onUp);
-  }, [format.width, format.height, svgOverlay.x, svgOverlay.y]);
+  }, [format.width, svgOverlay.x, svgOverlay.y]);
 
   // Listen for template selection from WelcomeScreen
   useEffect(() => {
@@ -129,9 +134,6 @@ function App() {
     window.addEventListener('sf:select-graphic', handler);
     return () => window.removeEventListener('sf:select-graphic', handler);
   });
-
-  const format = FORMAT_PRESETS.find((f) => f.id === formatId) ?? FORMAT_PRESETS[0];
-  const def = getDefinition(graphicType);
 
   // ── Save ────────────────────────────────────────────────────
   const handleSaveGraphic = useCallback(() => {
@@ -205,6 +207,18 @@ function App() {
     link.download = `${filename}.${type === 'jpeg' ? 'jpg' : 'png'}`;
     link.href = dataUrl;
     link.click();
+  };
+
+  // ── Copy PNG to clipboard ───────────────────────────────────
+  const handleCopyPng = async () => {
+    if (!graphicRef.current) return;
+    const el = graphicRef.current;
+    const prevTransform = el.style.transform;
+    el.style.transform = 'none';
+    const dataUrl = await toPng(el, { width: format.width, height: format.height, pixelRatio: 3, style: { transform: 'none', transformOrigin: '0 0' } });
+    el.style.transform = prevTransform;
+    const blob = await (await fetch(dataUrl)).blob();
+    await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
   };
 
   // ── Capture for GitHub push ─────────────────────────────────
@@ -323,6 +337,15 @@ function App() {
                 >
                   + Library öffnen
                 </button>
+                {/* Quick position presets */}
+                <div className="flex gap-1">
+                  {([['↖',16,16],['↗',format.width-svgOverlay.size-16,16],['⊕',Math.round((format.width-svgOverlay.size)/2),Math.round((format.height-svgOverlay.size)/2)],['↙',16,format.height-svgOverlay.size-16],['↘',format.width-svgOverlay.size-16,format.height-svgOverlay.size-16]] as [string,number,number][]).map(([label,px,py]) => (
+                    <button key={label} onClick={() => setSvgOverlay(o => ({ ...o, x: px, y: py }))}
+                      className="flex-1 py-1 text-xs bg-muted/50 hover:bg-muted text-text-muted hover:text-text rounded transition-colors">
+                      {label}
+                    </button>
+                  ))}
+                </div>
                 <div className="flex gap-2">
                   <div className="flex-1">
                     <p className="text-[10px] text-text-muted/50 uppercase tracking-wider mb-1">X (px)</p>
@@ -333,7 +356,7 @@ function App() {
                   <div className="flex-1">
                     <p className="text-[10px] text-text-muted/50 uppercase tracking-wider mb-1">Y (px)</p>
                     <input type="number" value={svgOverlay.y}
-                      onChange={(e) => setSvgOverlay(o => ({ ...o, y: Math.max(0, +e.target.value) }))}
+                      onChange={(e) => setSvgOverlay(o => ({ ...o, y: +e.target.value }))}
                       className="w-full bg-muted/40 border border-border/50 rounded px-2 py-1 text-xs text-text outline-none focus:border-primary/40" />
                   </div>
                   <div className="flex-1">
@@ -354,12 +377,28 @@ function App() {
                       className="flex-1 bg-muted/40 border border-border/50 rounded px-2 py-1 text-xs text-text font-mono outline-none focus:border-primary/40" />
                   </div>
                 </div>
-                <div>
-                  <p className="text-[10px] text-text-muted/50 uppercase tracking-wider mb-1">Deckkraft: {svgOverlay.opacity}%</p>
-                  <input type="range" min={10} max={100} value={svgOverlay.opacity}
-                    onChange={(e) => setSvgOverlay(o => ({ ...o, opacity: +e.target.value }))}
-                    className="w-full accent-primary" />
+                <div className="flex gap-2">
+                  <div className="flex-1">
+                    <p className="text-[10px] text-text-muted/50 uppercase tracking-wider mb-1">Deckkraft: {svgOverlay.opacity}%</p>
+                    <input type="range" min={10} max={100} value={svgOverlay.opacity}
+                      onChange={(e) => setSvgOverlay(o => ({ ...o, opacity: +e.target.value }))}
+                      className="w-full accent-primary" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-[10px] text-text-muted/50 uppercase tracking-wider mb-1">Rotation: {svgOverlay.rotation}°</p>
+                    <input type="range" min={0} max={360} value={svgOverlay.rotation}
+                      onChange={(e) => setSvgOverlay(o => ({ ...o, rotation: +e.target.value }))}
+                      className="w-full accent-primary" />
+                  </div>
                 </div>
+                {svgOverlay.svg && (
+                  <button
+                    onClick={() => setSvgOverlay(o => ({ ...o, svg: '' }))}
+                    className="w-full flex items-center justify-center gap-1.5 py-1.5 text-[11px] text-red-400 hover:text-red-300 border border-red-500/20 hover:border-red-400/40 rounded hover:bg-red-500/5 transition-colors"
+                  >
+                    <X size={11} /> Overlay entfernen
+                  </button>
+                )}
               </div>
             )}
           </div>
@@ -395,6 +434,13 @@ function App() {
               className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-muted hover:bg-border text-text text-sm rounded-lg font-medium transition-colors"
             >
               <Download size={14} /> JPG
+            </button>
+            <button
+              onClick={handleCopyPng}
+              className="flex items-center justify-center px-3 py-2.5 bg-muted hover:bg-border text-text-muted hover:text-text text-sm rounded-lg font-medium transition-colors"
+              title="Als PNG kopieren"
+            >
+              <Copy size={14} />
             </button>
           </div>
           <button
@@ -437,6 +483,7 @@ function App() {
                 zIndex: 10,
                 overflow: 'hidden',
                 cursor: 'move',
+                transform: svgOverlay.rotation ? `rotate(${svgOverlay.rotation}deg)` : undefined,
               }}
               dangerouslySetInnerHTML={{ __html: normalizeSvgSize(svgOverlay.svg) }}
             />
