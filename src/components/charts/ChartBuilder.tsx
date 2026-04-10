@@ -418,19 +418,25 @@ export function ChartBuilder() {
           {/* Background */}
           <div>
             <SectionLabel>Hintergrund</SectionLabel>
-            <div className="flex items-center gap-2">
-              <input
-                type="color"
-                value={config.style.backgroundColor}
-                onChange={(e) => patchStyle({ backgroundColor: e.target.value })}
-                className="w-6 h-6 rounded border border-border/40 cursor-pointer bg-transparent p-0"
-              />
-              <input
-                value={config.style.backgroundColor}
-                onChange={(e) => patchStyle({ backgroundColor: e.target.value })}
-                className="flex-1 bg-muted/40 border border-border/40 rounded px-2 py-1 text-xs text-text font-mono outline-none focus:border-primary/50"
-              />
-            </div>
+            {config.style.backgroundColor === 'transparent' ? (
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-6 rounded border border-border/40 shrink-0" style={{ background: 'repeating-conic-gradient(#888 0% 25%, #555 0% 50%) 0 0 / 8px 8px' }} />
+                <span className="flex-1 text-xs text-text-muted">Transparent</span>
+                <button onClick={() => patchStyle({ backgroundColor: '#0f1117' })}
+                  className="text-[10px] text-text-muted/60 hover:text-text transition-colors">ändern</button>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2">
+                <input type="color" value={config.style.backgroundColor}
+                  onChange={(e) => patchStyle({ backgroundColor: e.target.value })}
+                  className="w-6 h-6 rounded border border-border/40 cursor-pointer bg-transparent p-0 shrink-0" />
+                <input value={config.style.backgroundColor}
+                  onChange={(e) => patchStyle({ backgroundColor: e.target.value })}
+                  className="flex-1 bg-muted/40 border border-border/40 rounded px-2 py-1 text-xs text-text font-mono outline-none focus:border-primary/50" />
+                <button onClick={() => patchStyle({ backgroundColor: 'transparent' })}
+                  className="text-[10px] text-text-muted/60 hover:text-primary transition-colors shrink-0">transparent</button>
+              </div>
+            )}
           </div>
 
           {/* Grid & text colors */}

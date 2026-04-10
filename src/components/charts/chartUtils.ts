@@ -315,11 +315,13 @@ function axisLabels(
 function f2(n: number) { return n.toFixed(2); }
 
 function emptysvg(w: number, h: number, bg: string) {
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}"><rect width="${w}" height="${h}" fill="${bg}"/></svg>`;
+  const bgRect = bg === 'transparent' || bg === 'none' ? '' : `<rect width="${w}" height="${h}" fill="${bg}"/>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}">${bgRect}</svg>`;
 }
 
 function svg(w: number, h: number, bg: string, inner: string) {
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}"><rect width="${w}" height="${h}" fill="${bg}"/>${inner}</svg>`;
+  const bgRect = bg === 'transparent' || bg === 'none' ? '' : `<rect width="${w}" height="${h}" fill="${bg}"/>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}">${bgRect}${inner}</svg>`;
 }
 
 function axes(ml: number, mt: number, plotW: number, plotH: number, color: string) {
