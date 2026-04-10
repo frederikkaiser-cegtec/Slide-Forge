@@ -262,7 +262,7 @@ export function OutreachPipelineGraphic({
           </div>
 
           {/* Divider with accent */}
-          <div style={{ width: '100%', height: 1.5 * s, background: cardBorder, marginBottom: 28 * s, position: 'relative' }}>
+          <div style={{ width: '100%', height: 1.5 * s, background: borderCol, marginBottom: 28 * s, position: 'relative' }}>
             <div style={{ position: 'absolute', left: 0, top: 0, width: 80 * s, height: 1.5 * s, background: phase.accentColor }} />
           </div>
 
@@ -341,7 +341,7 @@ export function OutreachPipelineGraphic({
           {/* Footer */}
           <div style={{
             marginTop: 20 * s, paddingTop: 16 * s,
-            borderTop: `1px solid ${cardBorder}`,
+            borderTop: `1px solid ${borderCol}`,
             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           }}>
             <span style={{ fontFamily: FONTS.mono, fontSize: 10 * s, color: textDim, letterSpacing: 1.5 * s, textTransform: 'uppercase' as const }}>
