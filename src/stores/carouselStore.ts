@@ -1,15 +1,11 @@
 import { create } from 'zustand';
 import { getDefinition } from '../registry';
-
-export interface SvgOverlayData {
-  svg: string; x: number; y: number; size: number; opacity: number; color: string; rotation: number;
-}
-export const DEFAULT_OVERLAY: SvgOverlayData = { svg: '', x: 16, y: 16, size: 80, opacity: 100, color: '#ffffff', rotation: 0 };
+import type { Layer } from '../types/layers';
 
 export interface CarouselSlide {
   id: string;
   data: unknown;
-  overlay: SvgOverlayData;
+  layers: Layer[];
 }
 
 export interface Carousel {
@@ -28,8 +24,16 @@ interface CarouselStore {
   removeSlide: (id: string) => void;
   moveSlide: (from: number, to: number) => void;
   applyGlobal: (path: string, value: string) => void;
-  updateOverlay: (id: string, overlay: Partial<SvgOverlayData>) => void;
+  addSlideLayer: (slideId: string, layer: Layer) => void;
+  updateSlideLayer: (slideId: string, layerId: string, patch: Partial<Layer>) => void;
+  deleteSlideLayer: (slideId: string, layerId: string) => void;
+  moveSlideLayerUp: (slideId: string, layerId: string) => void;
+  moveSlideLayerDown: (slideId: string, layerId: string) => void;
   reset: () => void;
+}
+
+function slidesMap(slides: CarouselSlide[], id: string, fn: (s: CarouselSlide) => CarouselSlide): CarouselSlide[] {
+  return slides.map((sl) => sl.id === id ? fn(sl) : sl);
 }
 
 export const useCarouselStore = create<CarouselStore>((set, get) => ({
@@ -41,7 +45,7 @@ export const useCarouselStore = create<CarouselStore>((set, get) => ({
     const slides: CarouselSlide[] = Array.from({ length: count }, () => ({
       id: crypto.randomUUID(),
       data: structuredClone(def.defaultData),
-      overlay: structuredClone(DEFAULT_OVERLAY),
+      layers: [],
     }));
     set({ carousel: { graphicType, formatId, slides }, activeSlideId: slides[0].id });
   },
@@ -51,7 +55,7 @@ export const useCarouselStore = create<CarouselStore>((set, get) => ({
   updateSlide: (id, data) =>
     set((s) => ({
       carousel: s.carousel
-        ? { ...s.carousel, slides: s.carousel.slides.map((sl) => (sl.id === id ? { ...sl, data } : sl)) }
+        ? { ...s.carousel, slides: slidesMap(s.carousel.slides, id, (sl) => ({ ...sl, data })) }
         : null,
     })),
 
@@ -59,7 +63,7 @@ export const useCarouselStore = create<CarouselStore>((set, get) => ({
     set((s) => {
       if (!s.carousel) return s;
       const def = getDefinition(s.carousel.graphicType);
-      const newSlide: CarouselSlide = { id: crypto.randomUUID(), data: structuredClone(def.defaultData), overlay: structuredClone(DEFAULT_OVERLAY) };
+      const newSlide: CarouselSlide = { id: crypto.randomUUID(), data: structuredClone(def.defaultData), layers: [] };
       return {
         carousel: { ...s.carousel, slides: [...s.carousel.slides, newSlide] },
         activeSlideId: newSlide.id,
@@ -70,8 +74,7 @@ export const useCarouselStore = create<CarouselStore>((set, get) => ({
     set((s) => {
       if (!s.carousel || s.carousel.slides.length <= 1) return s;
       const slides = s.carousel.slides.filter((sl) => sl.id !== id);
-      const activeSlideId = s.activeSlideId === id ? slides[0].id : s.activeSlideId;
-      return { carousel: { ...s.carousel, slides }, activeSlideId };
+      return { carousel: { ...s.carousel, slides }, activeSlideId: s.activeSlideId === id ? slides[0].id : s.activeSlideId };
     }),
 
   moveSlide: (from, to) =>
@@ -94,18 +97,57 @@ export const useCarouselStore = create<CarouselStore>((set, get) => ({
         cur[parts[parts.length - 1]] = value;
         return clone;
       }
-      return {
-        carousel: {
-          ...s.carousel,
-          slides: s.carousel.slides.map((sl) => ({ ...sl, data: setPath(sl.data) })),
-        },
-      };
+      return { carousel: { ...s.carousel, slides: s.carousel.slides.map((sl) => ({ ...sl, data: setPath(sl.data) })) } };
     }),
 
-  updateOverlay: (id, overlay) =>
+  addSlideLayer: (slideId, layer) =>
     set((s) => ({
       carousel: s.carousel
-        ? { ...s.carousel, slides: s.carousel.slides.map((sl) => sl.id === id ? { ...sl, overlay: { ...sl.overlay, ...overlay } } : sl) }
+        ? { ...s.carousel, slides: slidesMap(s.carousel.slides, slideId, (sl) => ({ ...sl, layers: [...sl.layers, layer] })) }
+        : null,
+    })),
+
+  updateSlideLayer: (slideId, layerId, patch) =>
+    set((s) => ({
+      carousel: s.carousel
+        ? { ...s.carousel, slides: slidesMap(s.carousel.slides, slideId, (sl) => ({
+            ...sl,
+            layers: sl.layers.map((l) => l.id === layerId ? { ...l, ...patch } as Layer : l),
+          })) }
+        : null,
+    })),
+
+  deleteSlideLayer: (slideId, layerId) =>
+    set((s) => ({
+      carousel: s.carousel
+        ? { ...s.carousel, slides: slidesMap(s.carousel.slides, slideId, (sl) => ({
+            ...sl,
+            layers: sl.layers.filter((l) => l.id !== layerId),
+          })) }
+        : null,
+    })),
+
+  moveSlideLayerUp: (slideId, layerId) =>
+    set((s) => ({
+      carousel: s.carousel
+        ? { ...s.carousel, slides: slidesMap(s.carousel.slides, slideId, (sl) => {
+            const i = sl.layers.findIndex((l) => l.id === layerId);
+            if (i >= sl.layers.length - 1) return sl;
+            const a = [...sl.layers]; [a[i], a[i + 1]] = [a[i + 1], a[i]];
+            return { ...sl, layers: a };
+          }) }
+        : null,
+    })),
+
+  moveSlideLayerDown: (slideId, layerId) =>
+    set((s) => ({
+      carousel: s.carousel
+        ? { ...s.carousel, slides: slidesMap(s.carousel.slides, slideId, (sl) => {
+            const i = sl.layers.findIndex((l) => l.id === layerId);
+            if (i <= 0) return sl;
+            const a = [...sl.layers]; [a[i], a[i - 1]] = [a[i - 1], a[i]];
+            return { ...sl, layers: a };
+          }) }
         : null,
     })),
 

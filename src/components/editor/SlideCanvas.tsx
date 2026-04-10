@@ -236,6 +236,19 @@ function EditableSlideView({
           );
         }
 
+        if (element.type === 'svg') {
+          return (
+            <div key={element.id}
+              style={{ position: 'absolute', left, top, width: w, height: h, overflow: 'hidden', cursor: 'pointer',
+                transform: rotation ? `rotate(${rotation}deg)` : undefined, color: element.style.color || '#ffffff', opacity: element.style.opacity ?? 1 }}
+              onClick={(e) => { e.stopPropagation(); onElementClick(element.id); }}>
+              <div style={{ width: '100%', height: '100%', pointerEvents: 'none' }}
+                dangerouslySetInnerHTML={{ __html: element.content.replace(/<svg([^>]*)>/, (_, a) => `<svg${a.replace(/\s*(width|height)="[^"]*"/g, '')} width="100%" height="100%">`) }} />
+              {isSelected && <div className="absolute inset-0 border-2 border-blue-500 pointer-events-none" />}
+            </div>
+          );
+        }
+
         if (element.type === 'image') {
           return (
             <div

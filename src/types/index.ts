@@ -1,6 +1,6 @@
 export interface SlideElement {
   id: string;
-  type: 'text' | 'image' | 'shape';
+  type: 'text' | 'image' | 'shape' | 'svg';
   x: number; // percentage 0-100
   y: number;
   width: number;

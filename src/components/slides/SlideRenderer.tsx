@@ -174,6 +174,20 @@ function RenderElement({
     );
   }
 
+  if (type === 'svg') {
+    return (
+      <div
+        style={{ ...baseStyle, overflow: 'hidden', color: style.color || '#ffffff' }}
+        onClick={(e) => { if (!interactive) return; e.stopPropagation(); onClick(); }}
+      >
+        <div style={{ width: '100%', height: '100%', pointerEvents: 'none' }}
+          dangerouslySetInnerHTML={{ __html: content.replace(/<svg([^>]*)>/, (_, a) => `<svg${a.replace(/\s*(width|height)="[^"]*"/g, '')} width="100%" height="100%">`) }} />
+        {isSelected && interactive && <div className="absolute inset-0 border-2 border-blue-500 pointer-events-none" />}
+        {lockOverlay}
+      </div>
+    );
+  }
+
   // Text element
   return (
     <div

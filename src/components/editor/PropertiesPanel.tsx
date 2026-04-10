@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import { usePresentationStore } from '../../stores/presentationStore';
 import { useEditorStore } from '../../stores/editorStore';
-import { Trash2, ImagePlus, Lock, Unlock } from 'lucide-react';
+import { Trash2, ImagePlus, Lock, Unlock, Type } from 'lucide-react';
 import type { SlideElement, ElementStyle } from '../../types';
 import { generateId } from '../../utils/id';
 import { getTheme } from '../../themes';
+import { AssetLibraryModal } from '../graphics/AssetLibraryModal';
 
 export function PropertiesPanel() {
   const slides = usePresentationStore((s) => s.presentation.slides);
@@ -81,6 +83,20 @@ export function PropertiesPanel() {
   };
 
   const isLocked = !!element?.locked;
+  const [showAssetLibrary, setShowAssetLibrary] = useState(false);
+
+  const handleAddSvg = (svg: string) => {
+    if (!selectedSlideId) return;
+    pushUndo();
+    addElement(selectedSlideId, {
+      id: generateId(),
+      type: 'svg',
+      x: 10, y: 10, width: 20, height: 20,
+      rotation: 0,
+      content: svg,
+      style: { color: '#ffffff', opacity: 1 },
+    });
+  };
 
   return (
     <div className="w-64 bg-surface border-l border-border flex flex-col shrink-0">
@@ -91,15 +107,39 @@ export function PropertiesPanel() {
         {/* Add elements */}
         <div>
           <label className="text-xs text-text-muted font-medium block mb-2">Add Element</label>
-          <div className="flex gap-2">
-            <button onClick={handleAddText} className="flex-1 py-2 text-xs bg-surface-hover hover:bg-border rounded-md text-text transition-colors">
-              + Text
+          <div className="flex gap-2 flex-wrap">
+            <button onClick={handleAddText} className="flex-1 py-2 text-xs bg-surface-hover hover:bg-border rounded-md text-text transition-colors flex items-center justify-center gap-1">
+              <Type size={11} /> Text
             </button>
             <button onClick={handleAddImage} className="flex-1 py-2 text-xs bg-surface-hover hover:bg-border rounded-md text-text transition-colors flex items-center justify-center gap-1">
-              <ImagePlus size={12} /> Image
+              <ImagePlus size={11} /> Image
+            </button>
+            <button onClick={() => setShowAssetLibrary(true)} className="w-full py-2 text-xs bg-surface-hover hover:bg-border rounded-md text-text transition-colors flex items-center justify-center gap-1">
+              <ImagePlus size={11} /> SVG aus Library
             </button>
           </div>
         </div>
+
+        {/* Layer list */}
+        {slide && slide.elements.length > 0 && (
+          <div>
+            <label className="text-xs text-text-muted font-medium block mb-2">Ebenen ({slide.elements.length})</label>
+            <div className="space-y-1">
+              {[...slide.elements].reverse().map((el) => (
+                <div key={el.id}
+                  onClick={() => useEditorStore.getState().selectElement(el.id)}
+                  className={`flex items-center gap-2 px-2 py-1.5 rounded cursor-pointer text-xs transition-colors ${selectedElementId === el.id ? 'bg-primary/15 text-text' : 'hover:bg-surface-hover text-text-muted'}`}>
+                  <span className="shrink-0 text-[10px]">{el.type === 'text' ? 'T' : el.type === 'svg' ? '⬡' : el.type === 'image' ? '🖼' : '▭'}</span>
+                  <span className="flex-1 truncate">{el.type === 'text' ? el.content.replace(/<[^>]+>/g, '').slice(0, 20) || '(leer)' : el.type === 'svg' ? 'SVG' : el.type === 'image' ? 'Bild' : 'Form'}</span>
+                  <button onClick={(e) => { e.stopPropagation(); if (!el.locked) { pushUndo(); removeElement(selectedSlideId!, el.id); clearSelection(); } }}
+                    className="shrink-0 hover:text-red-400 transition-colors disabled:opacity-30" disabled={!!el.locked}>
+                    <Trash2 size={10} />
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {element ? (
           <>
@@ -166,6 +206,19 @@ export function PropertiesPanel() {
                 </div>
               )}
 
+              {element.type === 'svg' && (
+                <div className="space-y-2">
+                  <div>
+                    <label className="text-[10px] text-text-muted">Farbe</label>
+                    <input type="color" value={element.style.color || '#ffffff'}
+                      onChange={(e) => handleStyleUpdate({ color: e.target.value })}
+                      className="w-full h-8 rounded cursor-pointer bg-transparent border border-border" />
+                  </div>
+                  <PropInput label="Deckkraft %" value={(element.style.opacity ?? 1) * 100}
+                    onChange={(v) => handleStyleUpdate({ opacity: v / 100 })} />
+                </div>
+              )}
+
               {(element.type === 'shape' || element.type === 'image') && (
                 <div className="space-y-2">
                   {element.type === 'shape' && (
@@ -212,6 +265,12 @@ export function PropertiesPanel() {
           <p className="text-xs text-text-muted">Select an element to edit its properties</p>
         )}
       </div>
+      {showAssetLibrary && (
+        <AssetLibraryModal
+          onClose={() => setShowAssetLibrary(false)}
+          onInsert={(svg) => { handleAddSvg(svg); setShowAssetLibrary(false); }}
+        />
+      )}
     </div>
   );
 }

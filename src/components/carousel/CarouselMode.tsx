@@ -1,13 +1,15 @@
 import { useCallback, useRef, useState } from 'react';
 import { toPng } from 'html-to-image';
 import JSZip from 'jszip';
-import { Plus, Trash2, ChevronLeft, ChevronRight, Download, Archive, ChevronDown, ChevronUp, Layers, ImagePlus, X, Library, Copy } from 'lucide-react';
-import { useCarouselStore, DEFAULT_OVERLAY } from '../../stores/carouselStore';
-import type { SvgOverlayData } from '../../stores/carouselStore';
+import { Plus, Trash2, ChevronLeft, ChevronRight, Download, Archive, ChevronDown, ChevronUp, Layers, Copy } from 'lucide-react';
+import { useCarouselStore } from '../../stores/carouselStore';
 import { GRAPHIC_REGISTRY, getDefinition } from '../../registry';
 import { FORMAT_PRESETS, getFormat } from '../../utils/formats';
 import { useEditorStore } from '../../stores/editorStore';
 import { AssetLibraryModal } from '../graphics/AssetLibraryModal';
+import { LayerCanvas, normalizeSvgSize } from '../graphics/LayerCanvas';
+import { LayerPanel } from '../graphics/LayerPanel';
+import { type Layer, type TextLayer, createSvgLayer, createTextLayer } from '../../types/layers';
 import { defaultOutreachPipelineData } from '../graphics/OutreachPipelineGraphic';
 
 // ── Global color utils ───────────────────────────────────────────
@@ -31,27 +33,42 @@ function colorLabel(key: string) {
   return LABEL_MAP[key] ?? key.replace(/([A-Z])/g, ' $1').replace(/^./, (s) => s.toUpperCase());
 }
 
-// ── SVG overlay utils ────────────────────────────────────────────
-function normalizeSvgSize(svg: string): string {
-  return svg.replace(/<svg([^>]*)>/, (_, attrs) => {
-    const cleaned = attrs.replace(/\s*(width|height)="[^"]*"/g, '');
-    return `<svg${cleaned} width="100%" height="100%">`;
-  });
+// ── Static layer renderer (thumbnail + export) ───────────────────
+function StaticLayer({ layer }: { layer: Layer }) {
+  const tl = layer as TextLayer;
+  return (
+    <div style={{
+      position: 'absolute', left: layer.x, top: layer.y,
+      width: layer.width, height: layer.height,
+      transform: layer.rotation ? `rotate(${layer.rotation}deg)` : undefined,
+      transformOrigin: 'center center',
+      opacity: layer.opacity / 100,
+      color: layer.color,
+      overflow: 'hidden',
+      pointerEvents: 'none',
+    }}>
+      {layer.type === 'svg' ? (
+        <div style={{ width: '100%', height: '100%' }} dangerouslySetInnerHTML={{ __html: normalizeSvgSize(layer.content) }} />
+      ) : (
+        <div style={{
+          width: '100%', height: '100%', overflow: 'hidden',
+          fontSize: tl.fontSize, fontWeight: tl.fontWeight,
+          textAlign: tl.textAlign, fontFamily: tl.fontFamily,
+          lineHeight: 1.2, display: 'flex', alignItems: 'center',
+          wordBreak: 'break-word',
+        }}>
+          {layer.content || ' '}
+        </div>
+      )}
+    </div>
+  );
 }
-
-const QUICK_POSITIONS = (w: number, h: number, size: number) => [
-  { label: '↖', x: 16, y: 16 },
-  { label: '↗', x: w - size - 16, y: 16 },
-  { label: '⊕', x: Math.round((w - size) / 2), y: Math.round((h - size) / 2) },
-  { label: '↙', x: 16, y: h - size - 16 },
-  { label: '↘', x: w - size - 16, y: h - size - 16 },
-];
 
 // ── Thumbnail ────────────────────────────────────────────────────
 const THUMB_W = 130;
 
-function Thumbnail({ graphicType, formatId, data, overlay, active, index, onClick, onRemove, onMoveLeft, onMoveRight, isFirst, isLast }: {
-  graphicType: string; formatId: string; data: unknown; overlay: SvgOverlayData;
+function Thumbnail({ graphicType, formatId, data, layers, active, index, onClick, onRemove, onMoveLeft, onMoveRight, isFirst, isLast }: {
+  graphicType: string; formatId: string; data: unknown; layers: Layer[];
   active: boolean; index: number;
   onClick: () => void; onRemove: () => void;
   onMoveLeft: () => void; onMoveRight: () => void;
@@ -70,14 +87,7 @@ function Thumbnail({ graphicType, formatId, data, overlay, active, index, onClic
         style={{ width: THUMB_W, height: thumbH }}>
         <div style={{ width: format.width, height: format.height, transform: `scale(${scale})`, transformOrigin: '0 0', pointerEvents: 'none', position: 'relative' }}>
           <GraphicComponent data={data as any} width={format.width} height={format.height} />
-          {overlay.svg && (
-            <div style={{
-              position: 'absolute', left: overlay.x, top: overlay.y,
-              width: overlay.size, height: overlay.size,
-              opacity: overlay.opacity / 100, color: overlay.color, zIndex: 10, overflow: 'hidden',
-              transform: overlay.rotation ? `rotate(${overlay.rotation}deg)` : undefined,
-            }} dangerouslySetInnerHTML={{ __html: normalizeSvgSize(overlay.svg) }} />
-          )}
+          {layers.map((layer) => <StaticLayer key={layer.id} layer={layer} />)}
         </div>
         <div className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity bg-black/40 flex items-end justify-between p-1">
           <button onClick={(e) => { e.stopPropagation(); onMoveLeft(); }} disabled={isFirst}
@@ -102,7 +112,7 @@ function SetupScreen() {
     const slides = base.phases.map((_, pi) => ({
       id: crypto.randomUUID(),
       data: { ...structuredClone(base), activePhaseIndex: pi },
-      overlay: structuredClone(DEFAULT_OVERLAY),
+      layers: [] as Layer[],
     }));
     useCarouselStore.setState({ carousel: { graphicType: 'outreach-pipeline', formatId: '4:5', slides }, activeSlideId: slides[0].id });
   };
@@ -167,11 +177,12 @@ function SetupScreen() {
 
 // ── Editor ───────────────────────────────────────────────────────
 function Editor() {
-  const { carousel, activeSlideId, setActive, updateSlide, addSlide, removeSlide, moveSlide, applyGlobal, updateOverlay, reset } = useCarouselStore();
+  const { carousel, activeSlideId, setActive, updateSlide, addSlide, removeSlide, moveSlide, applyGlobal,
+    addSlideLayer, updateSlideLayer, deleteSlideLayer, moveSlideLayerUp, moveSlideLayerDown, reset } = useCarouselStore();
   const [exporting, setExporting] = useState(false);
   const [globalOpen, setGlobalOpen] = useState(false);
-  const [overlayOpen, setOverlayOpen] = useState(false);
-  const [showAssetLibrary, setShowAssetLibrary] = useState<'normal' | 'insert' | false>(false);
+  const [showAssetLibrary, setShowAssetLibrary] = useState(false);
+  const [selectedLayerId, setSelectedLayerId] = useState<string | null>(null);
   const previewRef = useRef<HTMLDivElement>(null);
   const exportRefs = useRef<Map<string, HTMLDivElement>>(new Map());
 
@@ -182,8 +193,7 @@ function Editor() {
   const FormComponent = def.FormComponent;
   const GraphicComponent = def.GraphicComponent;
   const activeSlide = carousel.slides.find((s) => s.id === activeSlideId) ?? carousel.slides[0];
-  const ov = activeSlide.overlay;
-  const setOv = (patch: Partial<SvgOverlayData>) => updateOverlay(activeSlide.id, patch);
+  const activeLayers = activeSlide.layers;
 
   const previewScale = Math.min(
     (window.innerWidth - 340) / format.width,
@@ -191,27 +201,35 @@ function Editor() {
     1,
   );
 
+  // Layer callbacks for active slide
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const handleOverlayDrag = useCallback((e: React.MouseEvent) => {
-    e.preventDefault();
-    const rect = previewRef.current?.getBoundingClientRect();
-    const scale = rect ? rect.width / format.width : previewScale;
-    const sx = e.clientX, sy = e.clientY, ox = ov.x, oy = ov.y;
-    const onMove = (me: MouseEvent) => updateOverlay(activeSlide.id, {
-      x: Math.round(ox + (me.clientX - sx) / scale),
-      y: Math.round(oy + (me.clientY - sy) / scale),
-    });
-    const onUp = () => { window.removeEventListener('mousemove', onMove); window.removeEventListener('mouseup', onUp); };
-    window.addEventListener('mousemove', onMove);
-    window.addEventListener('mouseup', onUp);
+  const addLayer = useCallback((layer: Layer) => {
+    addSlideLayer(activeSlide.id, layer);
+    setSelectedLayerId(layer.id);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [format.width, previewScale, ov.x, ov.y, activeSlide.id]);
+  }, [activeSlide.id]);
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const updateLayer = useCallback((layerId: string, patch: Partial<Layer>) =>
+    updateSlideLayer(activeSlide.id, layerId, patch),
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  [activeSlide.id]);
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const deleteLayer = useCallback((layerId: string) => {
+    deleteSlideLayer(activeSlide.id, layerId);
+    setSelectedLayerId((s) => (s === layerId ? null : s));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeSlide.id]);
 
   const capture = async (el: HTMLDivElement) =>
     toPng(el, { width: format.width, height: format.height, pixelRatio: 3 });
 
   const handleExportZip = async () => {
     setExporting(true);
+    const prevSel = selectedLayerId;
+    setSelectedLayerId(null);
+    await new Promise<void>((r) => requestAnimationFrame(() => requestAnimationFrame(() => r())));
     try {
       const zip = new JSZip();
       for (let i = 0; i < carousel.slides.length; i++) {
@@ -224,28 +242,35 @@ function Editor() {
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a'); a.href = url; a.download = `carousel-${carousel.graphicType}.zip`; a.click();
       URL.revokeObjectURL(url);
-    } finally { setExporting(false); }
+    } finally {
+      setSelectedLayerId(prevSel);
+      setExporting(false);
+    }
   };
 
   const handleExportActive = async () => {
+    const prevSel = selectedLayerId;
+    setSelectedLayerId(null);
+    await new Promise<void>((r) => requestAnimationFrame(() => requestAnimationFrame(() => r())));
     const el = exportRefs.current.get(activeSlide.id);
-    if (!el) return;
-    const a = document.createElement('a'); a.href = await capture(el);
-    a.download = `slide-${carousel.slides.indexOf(activeSlide) + 1}.png`; a.click();
+    if (el) {
+      const a = document.createElement('a'); a.href = await capture(el);
+      a.download = `slide-${carousel.slides.indexOf(activeSlide) + 1}.png`; a.click();
+    }
+    setSelectedLayerId(prevSel);
   };
 
   const handleCopyPng = async () => {
+    const prevSel = selectedLayerId;
+    setSelectedLayerId(null);
+    await new Promise<void>((r) => requestAnimationFrame(() => requestAnimationFrame(() => r())));
     const el = exportRefs.current.get(activeSlide.id);
-    if (!el) return;
-    const blob = await (await fetch(await capture(el))).blob();
-    await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+    if (el) {
+      const blob = await (await fetch(await capture(el))).blob();
+      await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+    }
+    setSelectedLayerId(prevSel);
   };
-
-  const overlayStyle = (o: SvgOverlayData): React.CSSProperties => ({
-    position: 'absolute', left: o.x, top: o.y, width: o.size, height: o.size,
-    opacity: o.opacity / 100, color: o.color, zIndex: 10, overflow: 'hidden',
-    transform: o.rotation ? `rotate(${o.rotation}deg)` : undefined,
-  });
 
   return (
     <div className="flex-1 flex overflow-hidden">
@@ -267,69 +292,19 @@ function Editor() {
           <FormComponent data={activeSlide.data as any} onChange={(d: any) => updateSlide(activeSlide.id, d)} />
         </div>
 
-        {/* SVG Overlay Panel */}
+        {/* Layer Panel */}
         <div className="border-t border-border/40">
-          <button onClick={() => setOverlayOpen((o) => !o)}
-            className="w-full flex items-center justify-between px-3 py-2 text-xs font-medium text-text-muted hover:text-text hover:bg-muted/20 transition-colors">
-            <span className="flex items-center gap-1.5">
-              <ImagePlus size={12} /> SVG Overlay
-              {ov.svg && <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block" />}
-            </span>
-            <div className="flex items-center gap-1">
-              {ov.svg && <span onClick={(e) => { e.stopPropagation(); setOv({ svg: '' }); }} className="text-text-muted/60 hover:text-red-400 cursor-pointer p-0.5"><X size={10} /></span>}
-              {overlayOpen ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
-            </div>
-          </button>
-          {overlayOpen && (
-            <div className="px-3 pb-3 space-y-2 border-t border-border/30">
-              <textarea placeholder="SVG hier einfügen…" value={ov.svg} onChange={(e) => setOv({ svg: e.target.value })}
-                className="w-full h-12 mt-2 bg-muted/40 border border-border/50 rounded text-[11px] text-text font-mono px-2 py-1.5 resize-none outline-none focus:border-primary/40" />
-              <div className="flex gap-1">
-                <button onClick={() => setShowAssetLibrary('insert')}
-                  className="flex-1 text-[11px] text-primary py-1 border border-primary/20 rounded hover:bg-primary/5 transition-colors flex items-center justify-center gap-1">
-                  <Library size={10} /> Library
-                </button>
-                {QUICK_POSITIONS(format.width, format.height, ov.size).map(({ label, x, y }) => (
-                  <button key={label} onClick={() => setOv({ x, y })}
-                    className="w-7 h-7 text-xs bg-muted/50 hover:bg-muted text-text-muted hover:text-text rounded transition-colors">{label}</button>
-                ))}
-              </div>
-              <div className="flex gap-2">
-                {(['x', 'y', 'size'] as const).map((k) => (
-                  <div key={k} className="flex-1">
-                    <p className="text-[10px] text-text-muted/50 uppercase tracking-wider mb-1">{k === 'size' ? 'Größe' : k.toUpperCase()}</p>
-                    <input type="number" value={ov[k]} onChange={(e) => setOv({ [k]: +e.target.value })}
-                      className="w-full bg-muted/40 border border-border/50 rounded px-2 py-1 text-xs text-text outline-none focus:border-primary/40" />
-                  </div>
-                ))}
-              </div>
-              <div>
-                <p className="text-[10px] text-text-muted/50 uppercase tracking-wider mb-1">Farbe</p>
-                <div className="flex gap-1.5 items-center">
-                  <input type="color" value={ov.color} onChange={(e) => setOv({ color: e.target.value })}
-                    className="w-7 h-7 rounded cursor-pointer border border-border/50 bg-transparent p-0.5 shrink-0" />
-                  <input type="text" value={ov.color} onChange={(e) => setOv({ color: e.target.value })}
-                    className="flex-1 bg-muted/40 border border-border/50 rounded px-2 py-1 text-xs text-text font-mono outline-none focus:border-primary/40" />
-                </div>
-              </div>
-              <div className="flex gap-2">
-                <div className="flex-1">
-                  <p className="text-[10px] text-text-muted/50 uppercase tracking-wider mb-1">Deckkraft: {ov.opacity}%</p>
-                  <input type="range" min={10} max={100} value={ov.opacity} onChange={(e) => setOv({ opacity: +e.target.value })} className="w-full accent-primary" />
-                </div>
-                <div className="flex-1">
-                  <p className="text-[10px] text-text-muted/50 uppercase tracking-wider mb-1">Rotation: {ov.rotation}°</p>
-                  <input type="range" min={0} max={360} value={ov.rotation} onChange={(e) => setOv({ rotation: +e.target.value })} className="w-full accent-primary" />
-                </div>
-              </div>
-              {ov.svg && (
-                <button onClick={() => setOv({ svg: '' })}
-                  className="w-full flex items-center justify-center gap-1.5 py-1.5 text-[11px] text-red-400 border border-red-500/20 hover:border-red-400/40 rounded hover:bg-red-500/5 transition-colors">
-                  <X size={11} /> Overlay entfernen
-                </button>
-              )}
-            </div>
-          )}
+          <LayerPanel
+            layers={activeLayers}
+            selectedId={selectedLayerId}
+            onSelect={setSelectedLayerId}
+            onUpdate={updateLayer}
+            onDelete={deleteLayer}
+            onMoveUp={(id) => moveSlideLayerUp(activeSlide.id, id)}
+            onMoveDown={(id) => moveSlideLayerDown(activeSlide.id, id)}
+            onAddText={() => addLayer(createTextLayer())}
+            onOpenLibrary={() => setShowAssetLibrary(true)}
+          />
         </div>
 
         {/* Global colors */}
@@ -385,9 +360,9 @@ function Editor() {
             {carousel.slides.map((slide, i) => (
               <Thumbnail key={slide.id}
                 graphicType={carousel.graphicType} formatId={carousel.formatId}
-                data={slide.data} overlay={slide.overlay}
+                data={slide.data} layers={slide.layers}
                 active={slide.id === activeSlide.id} index={i}
-                onClick={() => setActive(slide.id)}
+                onClick={() => { setActive(slide.id); setSelectedLayerId(null); }}
                 onRemove={() => removeSlide(slide.id)}
                 onMoveLeft={() => moveSlide(i, i - 1)}
                 onMoveRight={() => moveSlide(i, i + 1)}
@@ -411,11 +386,14 @@ function Editor() {
             position: 'relative',
           }}>
             <GraphicComponent data={activeSlide.data as any} width={format.width} height={format.height} />
-            {ov.svg && (
-              <div onMouseDown={handleOverlayDrag}
-                style={{ ...overlayStyle(ov), cursor: 'move' }}
-                dangerouslySetInnerHTML={{ __html: normalizeSvgSize(ov.svg) }} />
-            )}
+            <LayerCanvas
+              layers={activeLayers}
+              selectedId={selectedLayerId}
+              onSelect={setSelectedLayerId}
+              onUpdate={updateLayer}
+              previewRef={previewRef}
+              formatWidth={format.width}
+            />
           </div>
         </div>
       </div>
@@ -427,9 +405,7 @@ function Editor() {
             ref={(el) => { if (el) exportRefs.current.set(slide.id, el); else exportRefs.current.delete(slide.id); }}
             style={{ width: format.width, height: format.height, position: 'relative' }}>
             <GraphicComponent data={slide.data as any} width={format.width} height={format.height} />
-            {slide.overlay.svg && (
-              <div style={overlayStyle(slide.overlay)} dangerouslySetInnerHTML={{ __html: normalizeSvgSize(slide.overlay.svg) }} />
-            )}
+            {slide.layers.map((layer) => <StaticLayer key={layer.id} layer={layer} />)}
           </div>
         ))}
       </div>
@@ -437,7 +413,7 @@ function Editor() {
       {showAssetLibrary && (
         <AssetLibraryModal
           onClose={() => setShowAssetLibrary(false)}
-          onInsert={showAssetLibrary === 'insert' ? (svg) => { setOv({ svg }); setOverlayOpen(true); setShowAssetLibrary(false); } : undefined}
+          onInsert={(svg) => { addLayer(createSvgLayer(svg)); setShowAssetLibrary(false); }}
         />
       )}
     </div>
