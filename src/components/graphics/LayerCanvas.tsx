@@ -153,7 +153,7 @@ interface CanvasProps {
   showHandles?: boolean;
   onSelect: (id: string | null) => void;
   onUpdate: (id: string, patch: Partial<Layer>) => void;
-  previewRef: React.RefObject<HTMLDivElement>;
+  previewRef: React.RefObject<HTMLDivElement | null>;
   formatWidth: number;
 }
 

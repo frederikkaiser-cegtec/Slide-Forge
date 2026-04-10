@@ -1,0 +1,1715 @@
+{
+  "id": "ai-lesbar-anleitung-v1",
+  "title": "Website KI-lesbar machen",
+  "slides": [
+    {
+      "id": "s01-cover",
+      "background": "#F2EDE8",
+      "elements": [
+        {
+          "id": "s01-rule",
+          "type": "shape",
+          "x": 8,
+          "y": 4,
+          "width": 84,
+          "height": 0.2,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1A1A2E"
+          }
+        },
+        {
+          "id": "s01-meta",
+          "type": "text",
+          "x": 8,
+          "y": 5.5,
+          "width": 50,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p>CegTec Academy · AI Visibility</p>",
+          "style": {
+            "fontSize": 20,
+            "fontWeight": 400,
+            "color": "#6b7280",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s01-pg",
+          "type": "text",
+          "x": 80,
+          "y": 5.5,
+          "width": 12,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p>1 / 4</p>",
+          "style": {
+            "fontSize": 20,
+            "fontWeight": 400,
+            "color": "#6b7280",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s01-head",
+          "type": "text",
+          "x": 8,
+          "y": 10,
+          "width": 84,
+          "height": 22,
+          "rotation": 0,
+          "content": "<h1>Deine Website KI-lesbar machen</h1>",
+          "style": {
+            "fontSize": 84,
+            "fontWeight": 800,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s01-sub",
+          "type": "text",
+          "x": 8,
+          "y": 33,
+          "width": 70,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p>3 Schritte. Unter 2 Stunden. 0 €.</p>",
+          "style": {
+            "fontSize": 38,
+            "fontWeight": 500,
+            "color": "#374151",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s01-accent",
+          "type": "shape",
+          "x": 8,
+          "y": 40,
+          "width": 12,
+          "height": 0.5,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#4f46e5"
+          }
+        },
+        {
+          "id": "s01-gap-label",
+          "type": "text",
+          "x": 8,
+          "y": 43,
+          "width": 84,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p>DAS READINESS-GAP</p>",
+          "style": {
+            "fontSize": 19,
+            "fontWeight": 700,
+            "color": "#6b7280",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s01-b1-track",
+          "type": "shape",
+          "x": 8,
+          "y": 47,
+          "width": 84,
+          "height": 7,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#e5e2dc",
+            "borderRadius": 6
+          }
+        },
+        {
+          "id": "s01-b1-fill",
+          "type": "shape",
+          "x": 8,
+          "y": 47,
+          "width": 79,
+          "height": 7,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#4f46e5",
+            "borderRadius": 6
+          }
+        },
+        {
+          "id": "s01-b1-val",
+          "type": "text",
+          "x": 10,
+          "y": 47,
+          "width": 15,
+          "height": 3.5,
+          "rotation": 0,
+          "content": "<p><strong>94%</strong></p>",
+          "style": {
+            "fontSize": 34,
+            "fontWeight": 800,
+            "color": "#F2EDE8",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s01-b1-label",
+          "type": "text",
+          "x": 10,
+          "y": 50.5,
+          "width": 75,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p>der B2B-Käufer nutzen LLMs im Kaufprozess — 6sense 2025</p>",
+          "style": {
+            "fontSize": 19,
+            "fontWeight": 500,
+            "color": "#F2EDE8",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s01-b2-track",
+          "type": "shape",
+          "x": 8,
+          "y": 55,
+          "width": 84,
+          "height": 7,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#e5e2dc",
+            "borderRadius": 6
+          }
+        },
+        {
+          "id": "s01-b2-fill",
+          "type": "shape",
+          "x": 8,
+          "y": 55,
+          "width": 46,
+          "height": 7,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#4f46e5",
+            "borderRadius": 6
+          }
+        },
+        {
+          "id": "s01-b2-val",
+          "type": "text",
+          "x": 10,
+          "y": 55,
+          "width": 15,
+          "height": 3.5,
+          "rotation": 0,
+          "content": "<p><strong>55%</strong></p>",
+          "style": {
+            "fontSize": 34,
+            "fontWeight": 800,
+            "color": "#F2EDE8",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s01-b2-label",
+          "type": "text",
+          "x": 10,
+          "y": 58.5,
+          "width": 75,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p>der Marketer nutzen AI für Content Creation — HubSpot 2025</p>",
+          "style": {
+            "fontSize": 19,
+            "fontWeight": 500,
+            "color": "#F2EDE8",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s01-b3-track",
+          "type": "shape",
+          "x": 8,
+          "y": 63,
+          "width": 84,
+          "height": 7,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#e5e2dc",
+            "borderRadius": 6
+          }
+        },
+        {
+          "id": "s01-b3-fill",
+          "type": "shape",
+          "x": 8,
+          "y": 63,
+          "width": 1.5,
+          "height": 7,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#dc2626",
+            "borderRadius": 6
+          }
+        },
+        {
+          "id": "s01-b3-val",
+          "type": "text",
+          "x": 12,
+          "y": 63,
+          "width": 20,
+          "height": 3.5,
+          "rotation": 0,
+          "content": "<p><strong>0,015%</strong></p>",
+          "style": {
+            "fontSize": 34,
+            "fontWeight": 800,
+            "color": "#dc2626",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s01-b3-label",
+          "type": "text",
+          "x": 12,
+          "y": 66.5,
+          "width": 78,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p>der Top-Websites haben eine llms.txt Datei — Majestic Million 2025</p>",
+          "style": {
+            "fontSize": 19,
+            "fontWeight": 500,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s01-punch",
+          "type": "text",
+          "x": 8,
+          "y": 72,
+          "width": 84,
+          "height": 8,
+          "rotation": 0,
+          "content": "<p>Alle generieren Content mit KI.<br/>Fast keiner ist <strong>für KI lesbar</strong>.</p>",
+          "style": {
+            "fontSize": 36,
+            "fontWeight": 700,
+            "color": "#4f46e5",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s01-pipeline",
+          "type": "text",
+          "x": 8,
+          "y": 80,
+          "width": 84,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>llms.txt → Schema Markup → Semantic HTML</p>",
+          "style": {
+            "fontSize": 28,
+            "fontWeight": 600,
+            "color": "#4f46e5",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s01-rule2",
+          "type": "shape",
+          "x": 8,
+          "y": 86,
+          "width": 84,
+          "height": 0.12,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#d1d5db"
+          }
+        },
+        {
+          "id": "s01-logo",
+          "type": "image",
+          "x": 8,
+          "y": 88,
+          "width": 14,
+          "height": 4,
+          "rotation": 0,
+          "content": "/cegtec-logo.png",
+          "style": {
+            "objectFit": "contain"
+          }
+        },
+        {
+          "id": "s01-swipe",
+          "type": "text",
+          "x": 65,
+          "y": 88,
+          "width": 27,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>4 Slides →</p>",
+          "style": {
+            "fontSize": 28,
+            "fontWeight": 600,
+            "color": "#4f46e5",
+            "textAlign": "right"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s02-steps",
+      "background": "#F2EDE8",
+      "elements": [
+        {
+          "id": "s02-rule",
+          "type": "shape",
+          "x": 8,
+          "y": 4,
+          "width": 84,
+          "height": 0.2,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1A1A2E"
+          }
+        },
+        {
+          "id": "s02-section",
+          "type": "text",
+          "x": 8,
+          "y": 5.5,
+          "width": 50,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p>Die 3 Schritte</p>",
+          "style": {
+            "fontSize": 20,
+            "fontWeight": 400,
+            "color": "#6b7280",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02-pg",
+          "type": "text",
+          "x": 80,
+          "y": 5.5,
+          "width": 12,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p>2 / 4</p>",
+          "style": {
+            "fontSize": 20,
+            "fontWeight": 400,
+            "color": "#6b7280",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s02-head",
+          "type": "text",
+          "x": 8,
+          "y": 10,
+          "width": 84,
+          "height": 16,
+          "rotation": 0,
+          "content": "<h1>3 Schritte. Alles kostenlos.</h1>",
+          "style": {
+            "fontSize": 72,
+            "fontWeight": 800,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02-n1-circle",
+          "type": "shape",
+          "x": 8,
+          "y": 28,
+          "width": 5.5,
+          "height": 4,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#4f46e5",
+            "borderRadius": 999
+          }
+        },
+        {
+          "id": "s02-n1-num",
+          "type": "text",
+          "x": 8,
+          "y": 28,
+          "width": 5.5,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>01</p>",
+          "style": {
+            "fontSize": 20,
+            "fontWeight": 800,
+            "color": "#F2EDE8",
+            "textAlign": "center"
+          }
+        },
+        {
+          "id": "s02-n1-name",
+          "type": "text",
+          "x": 16,
+          "y": 27,
+          "width": 50,
+          "height": 3.5,
+          "rotation": 0,
+          "content": "<p><strong>llms.txt</strong></p>",
+          "style": {
+            "fontSize": 36,
+            "fontWeight": 800,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02-n1-desc",
+          "type": "text",
+          "x": 16,
+          "y": 31,
+          "width": 55,
+          "height": 6,
+          "rotation": 0,
+          "content": "<p>Das robots.txt für AI. Eine kuratierte Markdown-Datei im Root-Verzeichnis. Sagt AI-Agents: Hier ist das Wichtigste.</p>",
+          "style": {
+            "fontSize": 22,
+            "fontWeight": 400,
+            "color": "#374151",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02-n1-badge-bg",
+          "type": "shape",
+          "x": 74,
+          "y": 28,
+          "width": 18,
+          "height": 4,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#059669",
+            "borderRadius": 20
+          }
+        },
+        {
+          "id": "s02-n1-badge",
+          "type": "text",
+          "x": 74,
+          "y": 28,
+          "width": 18,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>15 Min</p>",
+          "style": {
+            "fontSize": 20,
+            "fontWeight": 700,
+            "color": "#F2EDE8",
+            "textAlign": "center"
+          }
+        },
+        {
+          "id": "s02-line1",
+          "type": "shape",
+          "x": 10.5,
+          "y": 38,
+          "width": 0.4,
+          "height": 4,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#4f46e5"
+          }
+        },
+        {
+          "id": "s02-n2-circle",
+          "type": "shape",
+          "x": 8,
+          "y": 43,
+          "width": 5.5,
+          "height": 4,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#4f46e5",
+            "borderRadius": 999
+          }
+        },
+        {
+          "id": "s02-n2-num",
+          "type": "text",
+          "x": 8,
+          "y": 43,
+          "width": 5.5,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>02</p>",
+          "style": {
+            "fontSize": 20,
+            "fontWeight": 800,
+            "color": "#F2EDE8",
+            "textAlign": "center"
+          }
+        },
+        {
+          "id": "s02-n2-name",
+          "type": "text",
+          "x": 16,
+          "y": 42,
+          "width": 50,
+          "height": 3.5,
+          "rotation": 0,
+          "content": "<p><strong>Schema Markup</strong></p>",
+          "style": {
+            "fontSize": 36,
+            "fontWeight": 800,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02-n2-desc",
+          "type": "text",
+          "x": 16,
+          "y": 46,
+          "width": 55,
+          "height": 6,
+          "rotation": 0,
+          "content": "<p>Organization + FAQPage als JSON-LD im Head. AI versteht wer ihr seid, was ihr macht, und kann es zitieren.</p>",
+          "style": {
+            "fontSize": 22,
+            "fontWeight": 400,
+            "color": "#374151",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02-n2-badge-bg",
+          "type": "shape",
+          "x": 74,
+          "y": 43,
+          "width": 18,
+          "height": 4,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#059669",
+            "borderRadius": 20
+          }
+        },
+        {
+          "id": "s02-n2-badge",
+          "type": "text",
+          "x": 74,
+          "y": 43,
+          "width": 18,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>1 Std</p>",
+          "style": {
+            "fontSize": 20,
+            "fontWeight": 700,
+            "color": "#F2EDE8",
+            "textAlign": "center"
+          }
+        },
+        {
+          "id": "s02-line2",
+          "type": "shape",
+          "x": 10.5,
+          "y": 53,
+          "width": 0.4,
+          "height": 4,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#4f46e5"
+          }
+        },
+        {
+          "id": "s02-n3-circle",
+          "type": "shape",
+          "x": 8,
+          "y": 58,
+          "width": 5.5,
+          "height": 4,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#4f46e5",
+            "borderRadius": 999
+          }
+        },
+        {
+          "id": "s02-n3-num",
+          "type": "text",
+          "x": 8,
+          "y": 58,
+          "width": 5.5,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>03</p>",
+          "style": {
+            "fontSize": 20,
+            "fontWeight": 800,
+            "color": "#F2EDE8",
+            "textAlign": "center"
+          }
+        },
+        {
+          "id": "s02-n3-name",
+          "type": "text",
+          "x": 16,
+          "y": 57,
+          "width": 50,
+          "height": 3.5,
+          "rotation": 0,
+          "content": "<p><strong>Semantic HTML</strong></p>",
+          "style": {
+            "fontSize": 36,
+            "fontWeight": 800,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02-n3-desc",
+          "type": "text",
+          "x": 16,
+          "y": 61,
+          "width": 55,
+          "height": 6,
+          "rotation": 0,
+          "content": "<p>H1→H2→H3 Hierarchie, &lt;section&gt; &lt;article&gt; &lt;nav&gt; statt div-Suppe. Alt-Texte, Meta-Descriptions.</p>",
+          "style": {
+            "fontSize": 22,
+            "fontWeight": 400,
+            "color": "#374151",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02-n3-badge-bg",
+          "type": "shape",
+          "x": 74,
+          "y": 58,
+          "width": 18,
+          "height": 4,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#059669",
+            "borderRadius": 20
+          }
+        },
+        {
+          "id": "s02-n3-badge",
+          "type": "text",
+          "x": 74,
+          "y": 58,
+          "width": 18,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>30 Min</p>",
+          "style": {
+            "fontSize": 20,
+            "fontWeight": 700,
+            "color": "#F2EDE8",
+            "textAlign": "center"
+          }
+        },
+        {
+          "id": "s02-total-bar",
+          "type": "shape",
+          "x": 8,
+          "y": 71,
+          "width": 84,
+          "height": 7,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#4f46e5",
+            "borderRadius": 8
+          }
+        },
+        {
+          "id": "s02-total-label",
+          "type": "text",
+          "x": 12,
+          "y": 71,
+          "width": 20,
+          "height": 7,
+          "rotation": 0,
+          "content": "<p>GESAMT</p>",
+          "style": {
+            "fontSize": 19,
+            "fontWeight": 700,
+            "color": "#a5b4fc",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02-total-val",
+          "type": "text",
+          "x": 35,
+          "y": 71,
+          "width": 30,
+          "height": 7,
+          "rotation": 0,
+          "content": "<p><strong>&lt; 2 Stunden</strong></p>",
+          "style": {
+            "fontSize": 36,
+            "fontWeight": 800,
+            "color": "#F2EDE8",
+            "textAlign": "center"
+          }
+        },
+        {
+          "id": "s02-total-cost",
+          "type": "text",
+          "x": 70,
+          "y": 71,
+          "width": 20,
+          "height": 7,
+          "rotation": 0,
+          "content": "<p><strong>0 €</strong></p>",
+          "style": {
+            "fontSize": 36,
+            "fontWeight": 800,
+            "color": "#F2EDE8",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s02-bonus-label",
+          "type": "text",
+          "x": 8,
+          "y": 80,
+          "width": 84,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p>ERGEBNIS</p>",
+          "style": {
+            "fontSize": 18,
+            "fontWeight": 700,
+            "color": "#6b7280",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02-bonus",
+          "type": "text",
+          "x": 8,
+          "y": 83,
+          "width": 84,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>2,5x höhere Chance in AI-Antworten zitiert zu werden · 30% weniger Token-Verbrauch</p>",
+          "style": {
+            "fontSize": 22,
+            "fontWeight": 600,
+            "color": "#374151",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02-rule2",
+          "type": "shape",
+          "x": 8,
+          "y": 89,
+          "width": 84,
+          "height": 0.12,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#d1d5db"
+          }
+        },
+        {
+          "id": "s02-logo",
+          "type": "image",
+          "x": 8,
+          "y": 91,
+          "width": 14,
+          "height": 4,
+          "rotation": 0,
+          "content": "/cegtec-logo.png",
+          "style": {
+            "objectFit": "contain"
+          }
+        },
+        {
+          "id": "s02-next",
+          "type": "text",
+          "x": 55,
+          "y": 91,
+          "width": 37,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>Vorher / Nachher →</p>",
+          "style": {
+            "fontSize": 28,
+            "fontWeight": 600,
+            "color": "#4f46e5",
+            "textAlign": "right"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s03-compare",
+      "background": "#F2EDE8",
+      "elements": [
+        {
+          "id": "s03-rule",
+          "type": "shape",
+          "x": 8,
+          "y": 4,
+          "width": 84,
+          "height": 0.2,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1A1A2E"
+          }
+        },
+        {
+          "id": "s03-section",
+          "type": "text",
+          "x": 8,
+          "y": 5.5,
+          "width": 50,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p>Vorher / Nachher</p>",
+          "style": {
+            "fontSize": 20,
+            "fontWeight": 400,
+            "color": "#6b7280",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s03-pg",
+          "type": "text",
+          "x": 80,
+          "y": 5.5,
+          "width": 12,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p>3 / 4</p>",
+          "style": {
+            "fontSize": 20,
+            "fontWeight": 400,
+            "color": "#6b7280",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s03-head",
+          "type": "text",
+          "x": 8,
+          "y": 10,
+          "width": 84,
+          "height": 16,
+          "rotation": 0,
+          "content": "<h1>Der Unterschied ist messbar.</h1>",
+          "style": {
+            "fontSize": 72,
+            "fontWeight": 800,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s03-accent",
+          "type": "shape",
+          "x": 8,
+          "y": 27,
+          "width": 12,
+          "height": 0.5,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#4f46e5"
+          }
+        },
+        {
+          "id": "s03-dot-l",
+          "type": "shape",
+          "x": 8,
+          "y": 31,
+          "width": 2,
+          "height": 1.5,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#dc2626",
+            "borderRadius": 999
+          }
+        },
+        {
+          "id": "s03-th-left",
+          "type": "text",
+          "x": 12,
+          "y": 30,
+          "width": 30,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p><strong>OHNE</strong></p>",
+          "style": {
+            "fontSize": 24,
+            "fontWeight": 800,
+            "color": "#dc2626",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s03-dot-r",
+          "type": "shape",
+          "x": 50,
+          "y": 31,
+          "width": 2,
+          "height": 1.5,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#059669",
+            "borderRadius": 999
+          }
+        },
+        {
+          "id": "s03-th-right",
+          "type": "text",
+          "x": 54,
+          "y": 30,
+          "width": 38,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p><strong>MIT</strong></p>",
+          "style": {
+            "fontSize": 24,
+            "fontWeight": 800,
+            "color": "#059669",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s03-sep1",
+          "type": "shape",
+          "x": 8,
+          "y": 34,
+          "width": 84,
+          "height": 0.1,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#d1d5db"
+          }
+        },
+        {
+          "id": "s03-r1-label",
+          "type": "text",
+          "x": 8,
+          "y": 35,
+          "width": 84,
+          "height": 2.5,
+          "rotation": 0,
+          "content": "<p>AI-Verständnis</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 700,
+            "color": "#6b7280",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s03-r1l",
+          "type": "text",
+          "x": 8,
+          "y": 37.5,
+          "width": 40,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>AI rät was du machst</p>",
+          "style": {
+            "fontSize": 26,
+            "fontWeight": 600,
+            "color": "#dc2626",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s03-r1r",
+          "type": "text",
+          "x": 50,
+          "y": 37.5,
+          "width": 42,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>AI zitiert deine Fakten</p>",
+          "style": {
+            "fontSize": 26,
+            "fontWeight": 600,
+            "color": "#059669",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s03-sep2",
+          "type": "shape",
+          "x": 8,
+          "y": 41.5,
+          "width": 84,
+          "height": 0.1,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#d1d5db"
+          }
+        },
+        {
+          "id": "s03-r2-label",
+          "type": "text",
+          "x": 8,
+          "y": 42.5,
+          "width": 84,
+          "height": 2.5,
+          "rotation": 0,
+          "content": "<p>Sichtbarkeit</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 700,
+            "color": "#6b7280",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s03-r2l",
+          "type": "text",
+          "x": 8,
+          "y": 45,
+          "width": 40,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>Unsichtbar für ChatGPT</p>",
+          "style": {
+            "fontSize": 26,
+            "fontWeight": 600,
+            "color": "#dc2626",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s03-r2r",
+          "type": "text",
+          "x": 50,
+          "y": 45,
+          "width": 42,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>Wird aktiv empfohlen</p>",
+          "style": {
+            "fontSize": 26,
+            "fontWeight": 600,
+            "color": "#059669",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s03-sep3",
+          "type": "shape",
+          "x": 8,
+          "y": 49,
+          "width": 84,
+          "height": 0.1,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#d1d5db"
+          }
+        },
+        {
+          "id": "s03-r3-label",
+          "type": "text",
+          "x": 8,
+          "y": 50,
+          "width": 84,
+          "height": 2.5,
+          "rotation": 0,
+          "content": "<p>Structured Data</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 700,
+            "color": "#6b7280",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s03-r3l",
+          "type": "text",
+          "x": 8,
+          "y": 52.5,
+          "width": 40,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>0 — nichts maschinenlesbar</p>",
+          "style": {
+            "fontSize": 26,
+            "fontWeight": 600,
+            "color": "#dc2626",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s03-r3r",
+          "type": "text",
+          "x": 50,
+          "y": 52.5,
+          "width": 42,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>Schema + llms.txt + HTML</p>",
+          "style": {
+            "fontSize": 26,
+            "fontWeight": 600,
+            "color": "#059669",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s03-code-label",
+          "type": "text",
+          "x": 8,
+          "y": 58,
+          "width": 84,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p>llms.txt — kopieren, anpassen, unter /llms.txt ablegen</p>",
+          "style": {
+            "fontSize": 19,
+            "fontWeight": 700,
+            "color": "#6b7280",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s03-code-bg",
+          "type": "shape",
+          "x": 8,
+          "y": 61,
+          "width": 84,
+          "height": 25,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1A1A2E",
+            "borderRadius": 8
+          }
+        },
+        {
+          "id": "s03-code",
+          "type": "text",
+          "x": 11,
+          "y": 62.5,
+          "width": 78,
+          "height": 22,
+          "rotation": 0,
+          "content": "<p><strong># Deine Firma GmbH</strong><br/><br/>&gt; Kurzbeschreibung: Was macht dein<br/>&gt; Unternehmen, für wen?<br/><br/><strong>## Services</strong><br/>- [Service 1](url): Beschreibung<br/>- [Service 2](url): Beschreibung<br/><br/><strong>## Ressourcen</strong><br/>- [Blog](url): Insights<br/>- [Case Studies](url): Ergebnisse<br/><br/><strong>## Kontakt</strong><br/>- [Termin buchen](url)<br/>- E-Mail: info@deinefirma.de</p>",
+          "style": {
+            "fontSize": 20,
+            "fontWeight": 400,
+            "color": "#a5b4fc",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s03-rule2",
+          "type": "shape",
+          "x": 8,
+          "y": 87,
+          "width": 84,
+          "height": 0.12,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#d1d5db"
+          }
+        },
+        {
+          "id": "s03-logo",
+          "type": "image",
+          "x": 8,
+          "y": 89,
+          "width": 14,
+          "height": 4,
+          "rotation": 0,
+          "content": "/cegtec-logo.png",
+          "style": {
+            "objectFit": "contain"
+          }
+        },
+        {
+          "id": "s03-next",
+          "type": "text",
+          "x": 60,
+          "y": 89,
+          "width": 32,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>Nächster Schritt →</p>",
+          "style": {
+            "fontSize": 28,
+            "fontWeight": 600,
+            "color": "#4f46e5",
+            "textAlign": "right"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s04-cta",
+      "background": "#F2EDE8",
+      "elements": [
+        {
+          "id": "s04-rule",
+          "type": "shape",
+          "x": 8,
+          "y": 4,
+          "width": 84,
+          "height": 0.2,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#1A1A2E"
+          }
+        },
+        {
+          "id": "s04-section",
+          "type": "text",
+          "x": 8,
+          "y": 5.5,
+          "width": 50,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p>Dein nächster Schritt</p>",
+          "style": {
+            "fontSize": 20,
+            "fontWeight": 400,
+            "color": "#6b7280",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s04-pg",
+          "type": "text",
+          "x": 80,
+          "y": 5.5,
+          "width": 12,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p>4 / 4</p>",
+          "style": {
+            "fontSize": 20,
+            "fontWeight": 400,
+            "color": "#6b7280",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s04-head",
+          "type": "text",
+          "x": 8,
+          "y": 10,
+          "width": 84,
+          "height": 16,
+          "rotation": 0,
+          "content": "<h1>Teste es. Jetzt.</h1>",
+          "style": {
+            "fontSize": 78,
+            "fontWeight": 800,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s04-check-border",
+          "type": "shape",
+          "x": 8,
+          "y": 26,
+          "width": 84,
+          "height": 14,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#eee9e2",
+            "borderRadius": 8
+          }
+        },
+        {
+          "id": "s04-check-accent",
+          "type": "shape",
+          "x": 8,
+          "y": 26,
+          "width": 1,
+          "height": 14,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#4f46e5",
+            "borderRadius": 8
+          }
+        },
+        {
+          "id": "s04-check-label",
+          "type": "text",
+          "x": 12,
+          "y": 27,
+          "width": 76,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p>SCHNELL-CHECK</p>",
+          "style": {
+            "fontSize": 18,
+            "fontWeight": 700,
+            "color": "#4f46e5",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s04-check-prompt",
+          "type": "text",
+          "x": 12,
+          "y": 30,
+          "width": 76,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p>Frag ChatGPT: <strong>»Was macht [deine Firma] und wo sitzen die?«</strong></p>",
+          "style": {
+            "fontSize": 28,
+            "fontWeight": 600,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s04-check-sub",
+          "type": "text",
+          "x": 12,
+          "y": 35,
+          "width": 76,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>Stimmt die Antwort? Wenn nicht: Diese Anleitung ist dein Startpunkt.</p>",
+          "style": {
+            "fontSize": 20,
+            "fontWeight": 400,
+            "color": "#6b7280",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s04-guides-label",
+          "type": "text",
+          "x": 8,
+          "y": 43,
+          "width": 84,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p>KOMPLETTE GUIDES</p>",
+          "style": {
+            "fontSize": 18,
+            "fontWeight": 700,
+            "color": "#6b7280",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s04-card-a-bg",
+          "type": "shape",
+          "x": 8,
+          "y": 47,
+          "width": 84,
+          "height": 14,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#ffffff",
+            "borderRadius": 8
+          }
+        },
+        {
+          "id": "s04-card-a-bar",
+          "type": "shape",
+          "x": 8,
+          "y": 47,
+          "width": 1,
+          "height": 14,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#4f46e5",
+            "borderRadius": 8
+          }
+        },
+        {
+          "id": "s04-a-label",
+          "type": "text",
+          "x": 12,
+          "y": 48,
+          "width": 60,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p>GUIDE 1</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 700,
+            "color": "#4f46e5",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s04-a-head",
+          "type": "text",
+          "x": 12,
+          "y": 51,
+          "width": 76,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p><strong>Agent-Friendly Content</strong></p>",
+          "style": {
+            "fontSize": 30,
+            "fontWeight": 800,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s04-a-body",
+          "type": "text",
+          "x": 12,
+          "y": 55,
+          "width": 76,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p>Schema Markup, llms.txt, semantisches HTML — Schritt für Schritt erklärt</p>",
+          "style": {
+            "fontSize": 20,
+            "fontWeight": 400,
+            "color": "#6b7280",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s04-a-url",
+          "type": "text",
+          "x": 12,
+          "y": 58,
+          "width": 76,
+          "height": 2.5,
+          "rotation": 0,
+          "content": "<p>cegtec.net/academy/agent-friendly-content</p>",
+          "style": {
+            "fontSize": 19,
+            "fontWeight": 600,
+            "color": "#4f46e5",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s04-card-b-bg",
+          "type": "shape",
+          "x": 8,
+          "y": 63,
+          "width": 84,
+          "height": 14,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#ffffff",
+            "borderRadius": 8
+          }
+        },
+        {
+          "id": "s04-card-b-bar",
+          "type": "shape",
+          "x": 8,
+          "y": 63,
+          "width": 1,
+          "height": 14,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#4f46e5",
+            "borderRadius": 8
+          }
+        },
+        {
+          "id": "s04-b-label",
+          "type": "text",
+          "x": 12,
+          "y": 64,
+          "width": 60,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p>GUIDE 2</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 700,
+            "color": "#4f46e5",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s04-b-head",
+          "type": "text",
+          "x": 12,
+          "y": 67,
+          "width": 76,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p><strong>Website mit Claude Code bauen</strong></p>",
+          "style": {
+            "fontSize": 30,
+            "fontWeight": 800,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s04-b-body",
+          "type": "text",
+          "x": 12,
+          "y": 71,
+          "width": 76,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p>Wie wir cegtec.net komplett AI-native aufgebaut haben — dokumentiert</p>",
+          "style": {
+            "fontSize": 20,
+            "fontWeight": 400,
+            "color": "#6b7280",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s04-b-url",
+          "type": "text",
+          "x": 12,
+          "y": 74,
+          "width": 76,
+          "height": 2.5,
+          "rotation": 0,
+          "content": "<p>cegtec.net/academy/claude-code-website</p>",
+          "style": {
+            "fontSize": 19,
+            "fontWeight": 600,
+            "color": "#4f46e5",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s04-sep",
+          "type": "shape",
+          "x": 8,
+          "y": 79,
+          "width": 84,
+          "height": 0.1,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#d1d5db"
+          }
+        },
+        {
+          "id": "s04-dfy-accent",
+          "type": "shape",
+          "x": 8,
+          "y": 81,
+          "width": 12,
+          "height": 0.5,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#4f46e5"
+          }
+        },
+        {
+          "id": "s04-dfy",
+          "type": "text",
+          "x": 8,
+          "y": 83,
+          "width": 84,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>Oder wir machen's für dich — <strong>kostenloses Audit</strong></p>",
+          "style": {
+            "fontSize": 34,
+            "fontWeight": 700,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s04-url",
+          "type": "text",
+          "x": 8,
+          "y": 87,
+          "width": 84,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p>cegtec.net</p>",
+          "style": {
+            "fontSize": 30,
+            "fontWeight": 700,
+            "color": "#4f46e5",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s04-rule2",
+          "type": "shape",
+          "x": 8,
+          "y": 89,
+          "width": 84,
+          "height": 0.12,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#d1d5db"
+          }
+        },
+        {
+          "id": "s04-logo",
+          "type": "image",
+          "x": 8,
+          "y": 91,
+          "width": 14,
+          "height": 4,
+          "rotation": 0,
+          "content": "/cegtec-logo.png",
+          "style": {
+            "objectFit": "contain"
+          }
+        }
+      ]
+    }
+  ]
+}
