@@ -45,7 +45,7 @@ export const defaultAgentFriendlyData: AgentFriendlyData = {
   ],
   keyFacts: [
     { value: '2,5x', label: 'h\u00f6here Chance in AI-Antworten mit Schema Markup' },
-    { value: '<0,005%', label: 'der Websites nutzen llms.txt (Stand M\u00e4rz 2026)' },
+    { value: '0,015%', label: 'der Top-1-Mio-Websites nutzen llms.txt \u2014 Majestic Million 2025' },
     { value: '30%', label: 'weniger Token-Verbrauch mit Markdown vs. HTML' },
   ],
   toolsLine: 'Unterst\u00fctzt von: Claude \u00b7 ChatGPT \u00b7 Perplexity \u00b7 Google AI Overviews \u00b7 Yoast \u00b7 Cloudflare \u00b7 Vercel',

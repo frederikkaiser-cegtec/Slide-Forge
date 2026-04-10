@@ -22,17 +22,17 @@ export interface ComparisonData {
 }
 
 export const defaultComparisonData: ComparisonData = {
-  topLabel: 'VORHER / NACHHER',
-  headline: 'Was passiert, wenn\nDatenqualität stimmt?',
-  leftTitle: 'Ohne CegTec',
-  rightTitle: 'Mit CegTec',
+  topLabel: 'AI VISIBILITY CHECK',
+  headline: 'KI-generiert\nvs. KI-lesbar',
+  leftTitle: 'KI-generiert',
+  rightTitle: 'KI-lesbar',
   rows: [
-    { label: 'Qualifizierte Leads / Monat', leftValue: '23', rightValue: '187' },
-    { label: 'Response Rate', leftValue: '2,1%', rightValue: '14,8%' },
-    { label: 'Pipeline-Wert', leftValue: '€12k', rightValue: '€142k' },
-    { label: 'Cost per Lead', leftValue: '€340', rightValue: '€38' },
+    { label: 'Content-Erstellung', leftValue: 'ChatGPT schreibt', rightValue: 'ChatGPT findet dich' },
+    { label: 'Structured Data', leftValue: 'Keine', rightValue: 'Schema.org + JSON-LD' },
+    { label: 'llms.txt', leftValue: 'Fehlt (99,98%)', rightValue: 'Vorhanden' },
+    { label: 'AI-Agent Empfehlung', leftValue: 'Unsichtbar', rightValue: 'Wird zitiert' },
   ],
-  bottomLine: 'cegtec.net — Datengetriebener B2B-Vertrieb',
+  bottomLine: 'cegtec.net \u2014 Geh auf die Seite und sag mir: Was siehst du?',
   ...CEGTEC_LIGHT_DEFAULTS,
 };
 

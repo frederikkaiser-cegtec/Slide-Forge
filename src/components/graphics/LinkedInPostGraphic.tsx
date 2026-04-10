@@ -33,26 +33,26 @@ export interface LinkedInPostData {
 }
 
 export const defaultLinkedInPostData: LinkedInPostData = {
-  topLabel: 'DARK FUNNEL & ATTRIBUTION',
-  headline: 'Dein Attribution-Report lügt.\n70 % der Buyer Journey\nsind unsichtbar.',
-  subline: 'Käufer entscheiden in Kanälen, die dein Dashboard nie sieht.',
-  gapTitle: 'DIE UNSICHTBARE JOURNEY',
+  topLabel: 'AI VISIBILITY CHECK',
+  headline: 'Deine Website ist KI-generiert.\nAber ist sie auch\nKI-lesbar?',
+  subline: 'ChatGPT schreibt deinen Content — aber kann ein AI-Agent deine Firma auch finden und empfehlen?',
+  gapTitle: 'DAS READINESS-GAP',
   gapBars: [
-    { value: '57%', label: 'Buyer Journey vor Vendorkontakt (UK/IE) — MarketOne / 6sense 2025', pct: 57 },
-    { value: '73%', label: 'Buyer Journey vor Vendorkontakt (APAC) — Green Hat / 6sense', pct: 73 },
-    { value: '61%', label: 'Buyer Journey vor Vendorkontakt (global) — 6sense 2025', pct: 61 },
+    { value: '94%', label: 'der B2B-K\u00e4ufer nutzen LLMs im Kaufprozess \u2014 6sense 2025', pct: 94 },
+    { value: '55%', label: 'der Marketer nennen Content Creation als Top-AI-Usecase \u2014 HubSpot 2025', pct: 55 },
+    { value: '0,015%', label: 'der Top-1-Mio-Websites haben llms.txt \u2014 Majestic Million 2025', pct: 1 },
   ],
   stats: [
-    { value: '84%', label: 'der Käufer haben ihren Anbieter gewählt bevor sie Sales kontaktieren', source: '6SENSE 2025' },
-    { value: '78 vs. 85%', label: 'Software sagt Websuche, Käufer sagen Dark Social', source: 'REFINE LABS' },
-    { value: '70–80%', label: 'der Recherche passieren vor dem ersten Sales-Kontakt', source: 'FORRESTER 2025' },
+    { value: '95%', label: 'aller Websites sind f\u00fcr ChatGPT, Claude & Perplexity unsichtbar', source: 'CEGTEC BENCHMARK' },
+    { value: '61%', label: 'der Buyer Journey ist abgeschlossen bevor Sales kontaktiert wird', source: '6SENSE 2025' },
+    { value: '77%', label: 'kaufen beim vorab favorisierten Anbieter', source: '6SENSE 2025' },
   ],
   bullets: [
-    { text: 'Käufer entscheiden ohne dich — 84 % haben ihren Anbieter gewählt bevor die Evaluation startet.' },
-    { text: 'Last-Click belügt dich — Software-Attribution und Self-Reported Attribution erzählen komplett verschiedene Geschichten.' },
-    { text: 'KI macht es schlimmer — 94 % der B2B-Käufer nutzen LLMs im Kaufprozess, mit null Attribution.' },
+    { text: 'KI-generiert \u2260 KI-lesbar. Jeder nutzt ChatGPT f\u00fcr Texte — aber kann ChatGPT deine Website auch finden?' },
+    { text: 'AI-Agents scannen Schema.org, llms.txt und Structured Data — nicht sch\u00f6ne Landingpages.' },
+    { text: 'Geh auf cegtec.net und sag mir: KI-generiert oder KI-lesbar? Kommentar \u2192 DM mit Anleitung.' },
   ],
-  ctaQuestion: 'Was sagt dein CRM – und was sagen deine Kunden?',
+  ctaQuestion: 'cegtec.net besuchen \u2192 kommentieren \u2192 Anleitung per DM',
   ctaLine: 'cegtec.net',
   ...CEGTEC_LIGHT_DEFAULTS,
 };

@@ -5,6 +5,12 @@ import { templates } from '../templates';
 import { getTheme } from '../themes';
 import { getFormat } from '../utils/formats';
 import outboundStackData from '../data/outbound-stack.json';
+import aiLesbarData from '../data/ai-lesbar-anleitung.json';
+
+export const PRESENTATION_PRESETS = [
+  { id: 'outbound-stack', label: 'Outbound Stack', data: outboundStackData },
+  { id: 'ai-lesbar', label: 'AI-Lesbar Anleitung', data: aiLesbarData },
+] as const;
 
 interface PresentationState {
   presentation: Presentation;
@@ -13,6 +19,7 @@ interface PresentationState {
   setTitle: (title: string) => void;
   setTheme: (themeId: string) => void;
   setFormat: (formatId: string) => void;
+  loadPreset: (presetId: string) => void;
   addSlide: (slide: Slide, index?: number) => void;
   removeSlide: (slideId: string) => void;
   reorderSlides: (fromIndex: number, toIndex: number) => void;
@@ -31,7 +38,7 @@ interface PresentationState {
 
 function createDefaultPresentation(): Presentation {
   return {
-    ...(outboundStackData as unknown as Presentation),
+    ...(aiLesbarData as unknown as Presentation),
     themeId: 'cegtec',
     formatId: '4:5',
     createdAt: Date.now(),
@@ -238,6 +245,21 @@ export const usePresentationStore = create<PresentationState>()(
         } catch {
           console.error('Invalid JSON');
         }
+      },
+
+      loadPreset: (presetId) => {
+        const preset = PRESENTATION_PRESETS.find(p => p.id === presetId);
+        if (!preset) return;
+        get().pushUndo();
+        set({
+          presentation: {
+            ...(preset.data as unknown as Presentation),
+            themeId: 'cegtec',
+            formatId: '4:5',
+            createdAt: Date.now(),
+            updatedAt: Date.now(),
+          },
+        });
       },
 
       resetPresentation: () => {

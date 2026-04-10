@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback, useReducer, useEffect } from 'react';
-import { Download, Save, Upload } from 'lucide-react';
+import { Download, Save, Upload, Library, ImagePlus, X, ChevronDown, ChevronUp } from 'lucide-react';
 import { toPng, toJpeg } from 'html-to-image';
 import { GitHubPushModal } from './components/graphics/GitHubPushModal';
 import { DiagramEditor } from './components/diagram/DiagramEditor';
@@ -13,6 +13,7 @@ import { useEditorStore } from './stores/editorStore';
 import { FORMAT_PRESETS } from './utils/formats';
 import { useSavedGraphicsStore, type SavedGraphic } from './stores/savedGraphicsStore';
 import { GRAPHIC_REGISTRY, getDefinition } from './registry';
+import { AssetLibraryModal } from './components/graphics/AssetLibraryModal';
 
 // ── State via useReducer ────────────────────────────────────────
 type GraphicState = Record<string, unknown>;
@@ -75,6 +76,36 @@ function GraphicTypeSelector({ graphicType, onSwitch }: { graphicType: string; o
   );
 }
 
+// ── SVG Overlay ──────────────────────────────────────────────────
+type SvgPos = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'center';
+
+const SVG_POSITIONS: { id: SvgPos; label: string; row: number; col: number }[] = [
+  { id: 'top-left',     label: '↖', row: 0, col: 0 },
+  { id: 'top-right',    label: '↗', row: 0, col: 2 },
+  { id: 'center',       label: '⊕', row: 1, col: 1 },
+  { id: 'bottom-left',  label: '↙', row: 2, col: 0 },
+  { id: 'bottom-right', label: '↘', row: 2, col: 2 },
+];
+
+function svgPosStyle(pos: SvgPos, size: number): React.CSSProperties {
+  const base: React.CSSProperties = { position: 'absolute', width: size, height: size, pointerEvents: 'none', zIndex: 10, overflow: 'hidden' };
+  switch (pos) {
+    case 'top-left':     return { ...base, top: 16, left: 16 };
+    case 'top-right':    return { ...base, top: 16, right: 16 };
+    case 'bottom-left':  return { ...base, bottom: 16, left: 16 };
+    case 'bottom-right': return { ...base, bottom: 16, right: 16 };
+    case 'center':       return { ...base, top: '50%', left: '50%', transform: 'translate(-50%, -50%)' };
+  }
+}
+
+// Force SVG to fill its container by overriding width/height attrs
+function normalizeSvgSize(svg: string): string {
+  return svg.replace(/<svg([^>]*)>/, (_, attrs) => {
+    const cleaned = attrs.replace(/\s*(width|height)="[^"]*"/g, '');
+    return `<svg${cleaned} width="100%" height="100%">`;
+  });
+}
+
 // ── App ─────────────────────────────────────────────────────────
 function App() {
   const { mode, setMode } = useEditorStore();
@@ -85,6 +116,9 @@ function App() {
   const [activeGraphicId, setActiveGraphicId] = useState<string | null>(null);
   const [saveFlash, setSaveFlash] = useState(false);
   const [showGitHubPush, setShowGitHubPush] = useState(false);
+  const [showAssetLibrary, setShowAssetLibrary] = useState<'normal' | 'insert' | false>(false);
+  const [svgOverlay, setSvgOverlay] = useState({ svg: '', position: 'bottom-right' as SvgPos, size: 80, opacity: 100 });
+  const [overlayOpen, setOverlayOpen] = useState(false);
 
   // Listen for template selection from WelcomeScreen
   useEffect(() => {
@@ -251,16 +285,104 @@ function App() {
         </div>
 
         <div className="p-4 border-t border-border space-y-2">
-          <button
-            onClick={handleSaveGraphic}
-            className={`w-full flex items-center justify-center gap-2 px-3 py-2 text-xs rounded-lg font-medium transition-all ${
-              saveFlash
-                ? 'bg-green-600/20 text-green-400 border border-green-500/30'
-                : 'bg-muted/50 hover:bg-muted text-text-muted hover:text-text'
-            }`}
-          >
-            <Save size={12} /> {saveFlash ? 'Gespeichert' : 'Speichern'}
-          </button>
+          {/* SVG Overlay Panel */}
+          <div className="border border-border/40 rounded-lg overflow-hidden">
+            <button
+              onClick={() => setOverlayOpen(o => !o)}
+              className="w-full flex items-center justify-between px-3 py-2 text-xs font-medium text-text-muted hover:text-text hover:bg-muted/30 transition-colors"
+            >
+              <span className="flex items-center gap-1.5">
+                <ImagePlus size={12} />
+                SVG Overlay
+                {svgOverlay.svg && <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block" />}
+              </span>
+              <div className="flex items-center gap-1">
+                {svgOverlay.svg && (
+                  <span
+                    onClick={(e) => { e.stopPropagation(); setSvgOverlay(o => ({ ...o, svg: '' })); }}
+                    className="text-text-muted/60 hover:text-red-400 transition-colors cursor-pointer p-0.5"
+                    title="Overlay entfernen"
+                  >
+                    <X size={10} />
+                  </span>
+                )}
+                {overlayOpen ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
+              </div>
+            </button>
+            {overlayOpen && (
+              <div className="px-3 pb-3 space-y-2.5 border-t border-border/30">
+                <textarea
+                  placeholder="SVG hier einfügen…"
+                  value={svgOverlay.svg}
+                  onChange={(e) => setSvgOverlay(o => ({ ...o, svg: e.target.value }))}
+                  className="w-full h-14 mt-2 bg-muted/40 border border-border/50 rounded text-[11px] text-text font-mono px-2 py-1.5 resize-none outline-none focus:border-primary/40"
+                />
+                <button
+                  onClick={() => setShowAssetLibrary('insert')}
+                  className="w-full text-[11px] text-primary hover:text-primary/80 text-center py-1.5 border border-primary/20 rounded hover:bg-primary/5 transition-colors"
+                >
+                  + Library öffnen
+                </button>
+                <div>
+                  <p className="text-[10px] text-text-muted/50 uppercase tracking-wider mb-1.5">Position</p>
+                  <div className="grid grid-cols-3 gap-1" style={{ width: 84 }}>
+                    {([0,1,2] as const).flatMap(row =>
+                      ([0,1,2] as const).map(col => {
+                        const pos = SVG_POSITIONS.find(p => p.row === row && p.col === col);
+                        return (
+                          <button
+                            key={`${row}-${col}`}
+                            onClick={() => pos && setSvgOverlay(o => ({ ...o, position: pos.id }))}
+                            className={`h-6 w-6 rounded text-xs transition-colors ${
+                              pos
+                                ? svgOverlay.position === pos.id
+                                  ? 'bg-primary text-white'
+                                  : 'bg-muted/60 hover:bg-muted text-text-muted'
+                                : 'bg-muted/20 cursor-default'
+                            }`}
+                          >
+                            {pos?.label ?? ''}
+                          </button>
+                        );
+                      })
+                    )}
+                  </div>
+                </div>
+                <div>
+                  <p className="text-[10px] text-text-muted/50 uppercase tracking-wider mb-1">Größe: {svgOverlay.size}px</p>
+                  <input type="range" min={40} max={300} value={svgOverlay.size}
+                    onChange={(e) => setSvgOverlay(o => ({ ...o, size: +e.target.value }))}
+                    className="w-full accent-primary" />
+                </div>
+                <div>
+                  <p className="text-[10px] text-text-muted/50 uppercase tracking-wider mb-1">Deckkraft: {svgOverlay.opacity}%</p>
+                  <input type="range" min={10} max={100} value={svgOverlay.opacity}
+                    onChange={(e) => setSvgOverlay(o => ({ ...o, opacity: +e.target.value }))}
+                    className="w-full accent-primary" />
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div className="flex gap-2">
+            <button
+              onClick={handleSaveGraphic}
+              className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 text-xs rounded-lg font-medium transition-all ${
+                saveFlash
+                  ? 'bg-green-600/20 text-green-400 border border-green-500/30'
+                  : 'bg-muted/50 hover:bg-muted text-text-muted hover:text-text'
+              }`}
+            >
+              <Save size={12} /> {saveFlash ? 'Gespeichert' : 'Speichern'}
+            </button>
+            <button
+              onClick={() => setShowAssetLibrary('normal')}
+              className="flex items-center justify-center gap-1.5 px-3 py-2 text-xs rounded-lg font-medium bg-muted/50 hover:bg-muted text-text-muted hover:text-text transition-all"
+              title="Asset Library"
+            >
+              <Library size={12} /> Assets
+            </button>
+          </div>
           <div className="flex gap-2">
             <button
               onClick={() => handleExport('png')}
@@ -293,6 +415,7 @@ function App() {
             height: format.height,
             transform: `scale(${getPreviewScale(format.width, format.height)})`,
             transformOrigin: 'center center',
+            position: 'relative',
           }}
         >
           <GraphicComponent
@@ -300,6 +423,12 @@ function App() {
             width={format.width}
             height={format.height}
           />
+          {svgOverlay.svg && (
+            <div
+              style={{ ...svgPosStyle(svgOverlay.position, svgOverlay.size), opacity: svgOverlay.opacity / 100 }}
+              dangerouslySetInnerHTML={{ __html: normalizeSvgSize(svgOverlay.svg) }}
+            />
+          )}
         </div>
       </div>
 
@@ -312,6 +441,12 @@ function App() {
         formatId={formatId}
         captureImage={captureForGitHub}
       />
+      {showAssetLibrary && (
+        <AssetLibraryModal
+          onClose={() => setShowAssetLibrary(false)}
+          onInsert={showAssetLibrary === 'insert' ? (svg) => { setSvgOverlay(o => ({ ...o, svg })); setOverlayOpen(true); } : undefined}
+        />
+      )}
     </div>
   );
 }

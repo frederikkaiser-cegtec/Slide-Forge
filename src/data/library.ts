@@ -1,0 +1,186 @@
+import type { Icon } from '@tabler/icons-react';
+import {
+  // Outreach
+  IconMail, IconMailForward, IconMailOpened, IconMailBolt,
+  IconSend, IconMessage, IconMessages,
+  IconBrandLinkedin, IconPhone, IconAt, IconInbox,
+  IconUserPlus, IconUsersPlus, IconAddressBook,
+  IconCalendarEvent, IconCalendarCheck, IconBellRinging,
+  IconClick, IconArrowForwardUp, IconPresentation,
+  // Data
+  IconDatabase, IconFilter, IconSearch, IconChartFunnel,
+  IconChartBar, IconChartLine, IconChartDots, IconChartPie, IconChartArea, IconChartHistogram,
+  IconGraph, IconTrendingUp, IconTrendingDown,
+  IconCode, IconBraces, IconJson, IconBinaryTree,
+  IconNetwork, IconSitemap, IconListCheck,
+  IconReportAnalytics, IconDeviceAnalytics, IconCpu,
+  // Business
+  IconBriefcase, IconBuilding, IconUsers, IconUserCheck, IconUserCircle,
+  IconTarget, IconAward, IconTrophy, IconStar, IconCrown,
+  IconCoin, IconCoins, IconReport, IconBadge, IconLayoutDashboard,
+  IconChecklist, IconGift,
+  // Automation / AI
+  IconRobot, IconBrain, IconBolt, IconSparkles, IconWand,
+  IconCloud, IconServer, IconRefresh, IconRefreshDot,
+  IconArrowIteration, IconRecycle, IconPlayerPlay,
+  IconAtom, IconSettings, IconBroadcast,
+  // Content
+  IconPencil, IconArticle, IconPhoto, IconVideo, IconMicrophone,
+  IconBook, IconTag, IconHash, IconTemplate, IconLayout, IconLayoutGrid,
+  IconBrandYoutube, IconBrandGmail, IconBrandSlack,
+  IconBrandNotion, IconBrandAirtable, IconBrandAsana, IconBrandFigma,
+  // Analytics / Abstract
+  IconActivity, IconEye, IconPercentage, IconMath, IconCalculator,
+  IconHeartRateMonitor,
+  IconArrowRight, IconArrowUp, IconArrowBigUp, IconCheck, IconChecks,
+  IconCircleCheck, IconLayersLinked, IconStack, IconStack2, IconStack3,
+  IconDiamond, IconFlame, IconRocket, IconBulb, IconLink,
+} from '@tabler/icons-react';
+
+export type AssetCategory = 'outreach' | 'data' | 'business' | 'automation' | 'content' | 'abstract';
+
+export interface LibraryAsset {
+  id: string;
+  name: string;
+  category: AssetCategory;
+  tags: string[];
+  Icon: Icon;
+}
+
+export const ASSET_CATEGORIES: { id: AssetCategory | 'all'; label: string }[] = [
+  { id: 'all', label: 'Alle' },
+  { id: 'outreach', label: 'Outreach' },
+  { id: 'data', label: 'Daten' },
+  { id: 'business', label: 'Business' },
+  { id: 'automation', label: 'Automation' },
+  { id: 'content', label: 'Content' },
+  { id: 'abstract', label: 'Abstract' },
+];
+
+export const LIBRARY_ASSETS: LibraryAsset[] = [
+  // ── Outreach ──────────────────────────────────────────────────
+  { id: 'mail', name: 'E-Mail', category: 'outreach', tags: ['email', 'mail', 'outreach'], Icon: IconMail },
+  { id: 'mail-forward', name: 'E-Mail weiterleiten', category: 'outreach', tags: ['email', 'forward', 'send'], Icon: IconMailForward },
+  { id: 'mail-opened', name: 'E-Mail geöffnet', category: 'outreach', tags: ['email', 'open', 'read', 'open rate'], Icon: IconMailOpened },
+  { id: 'mail-bolt', name: 'Cold Mail', category: 'outreach', tags: ['email', 'cold', 'fast', 'instant'], Icon: IconMailBolt },
+  { id: 'send', name: 'Senden', category: 'outreach', tags: ['send', 'outreach', 'launch'], Icon: IconSend },
+  { id: 'message', name: 'Nachricht', category: 'outreach', tags: ['message', 'chat', 'reply', 'dm'], Icon: IconMessage },
+  { id: 'messages', name: 'Nachrichten', category: 'outreach', tags: ['messages', 'chat', 'conversation'], Icon: IconMessages },
+  { id: 'linkedin', name: 'LinkedIn', category: 'outreach', tags: ['linkedin', 'social', 'b2b', 'network'], Icon: IconBrandLinkedin },
+  { id: 'phone', name: 'Telefon', category: 'outreach', tags: ['phone', 'call', 'cold call'], Icon: IconPhone },
+  { id: 'at', name: '@-Mention', category: 'outreach', tags: ['email', 'at', 'mention', 'address'], Icon: IconAt },
+  { id: 'inbox', name: 'Inbox', category: 'outreach', tags: ['inbox', 'receive', 'inbound'], Icon: IconInbox },
+  { id: 'user-plus', name: 'Kontakt hinzufügen', category: 'outreach', tags: ['connect', 'add', 'follow', 'prospect'], Icon: IconUserPlus },
+  { id: 'users-plus', name: 'Leads hinzufügen', category: 'outreach', tags: ['leads', 'bulk', 'import', 'list'], Icon: IconUsersPlus },
+  { id: 'address-book', name: 'Adressbuch', category: 'outreach', tags: ['contacts', 'crm', 'list', 'address'], Icon: IconAddressBook },
+  { id: 'calendar-event', name: 'Termin', category: 'outreach', tags: ['meeting', 'appointment', 'demo', 'calendar'], Icon: IconCalendarEvent },
+  { id: 'calendar-check', name: 'Meeting gebucht', category: 'outreach', tags: ['booked', 'meeting', 'confirmed', 'calendar'], Icon: IconCalendarCheck },
+  { id: 'bell-ringing', name: 'Benachrichtigung', category: 'outreach', tags: ['alert', 'notification', 'follow-up', 'reminder'], Icon: IconBellRinging },
+  { id: 'click', name: 'Click / CTA', category: 'outreach', tags: ['click', 'cta', 'action', 'cursor'], Icon: IconClick },
+  { id: 'arrow-forward-up', name: 'Follow-Up', category: 'outreach', tags: ['follow-up', 'forward', 'next step'], Icon: IconArrowForwardUp },
+  { id: 'presentation', name: 'Präsentation', category: 'outreach', tags: ['presentation', 'demo', 'pitch', 'slide'], Icon: IconPresentation },
+
+  // ── Daten ─────────────────────────────────────────────────────
+  { id: 'database', name: 'Datenbank', category: 'data', tags: ['database', 'data', 'storage', 'leads'], Icon: IconDatabase },
+  { id: 'filter', name: 'Filter / ICP', category: 'data', tags: ['filter', 'icp', 'qualify', 'segment'], Icon: IconFilter },
+  { id: 'search', name: 'Suche / Research', category: 'data', tags: ['search', 'research', 'find', 'prospect'], Icon: IconSearch },
+  { id: 'funnel', name: 'Sales Funnel', category: 'data', tags: ['funnel', 'pipeline', 'conversion', 'sales'], Icon: IconChartFunnel },
+  { id: 'chart-bar', name: 'Balkendiagramm', category: 'data', tags: ['chart', 'bar', 'stats', 'metrics'], Icon: IconChartBar },
+  { id: 'chart-line', name: 'Liniendiagramm', category: 'data', tags: ['chart', 'line', 'trend', 'growth'], Icon: IconChartLine },
+  { id: 'chart-dots', name: 'Punktdiagramm', category: 'data', tags: ['chart', 'dots', 'scatter', 'data points'], Icon: IconChartDots },
+  { id: 'chart-pie', name: 'Kreisdiagramm', category: 'data', tags: ['chart', 'pie', 'share', 'breakdown'], Icon: IconChartPie },
+  { id: 'chart-area', name: 'Flächendiagramm', category: 'data', tags: ['chart', 'area', 'filled', 'volume'], Icon: IconChartArea },
+  { id: 'chart-histogram', name: 'Histogramm', category: 'data', tags: ['chart', 'histogram', 'distribution'], Icon: IconChartHistogram },
+  { id: 'graph', name: 'Graph', category: 'data', tags: ['graph', 'nodes', 'connected', 'network'], Icon: IconGraph },
+  { id: 'trending-up', name: 'Trending Up', category: 'data', tags: ['trending', 'up', 'growth', 'increase', 'roi'], Icon: IconTrendingUp },
+  { id: 'trending-down', name: 'Trending Down', category: 'data', tags: ['trending', 'down', 'decrease', 'drop'], Icon: IconTrendingDown },
+  { id: 'code', name: 'Code', category: 'data', tags: ['code', 'dev', 'api', 'technical'], Icon: IconCode },
+  { id: 'braces', name: 'JSON / API', category: 'data', tags: ['json', 'api', 'code', 'data format'], Icon: IconBraces },
+  { id: 'json', name: 'JSON', category: 'data', tags: ['json', 'data', 'format', 'api'], Icon: IconJson },
+  { id: 'binary-tree', name: 'Daten-Struktur', category: 'data', tags: ['tree', 'structure', 'hierarchy', 'data'], Icon: IconBinaryTree },
+  { id: 'network', name: 'Netzwerk', category: 'data', tags: ['network', 'nodes', 'connected', 'topology'], Icon: IconNetwork },
+  { id: 'sitemap', name: 'Sitemap / Flow', category: 'data', tags: ['sitemap', 'flow', 'process', 'map'], Icon: IconSitemap },
+  { id: 'list-check', name: 'Checkliste', category: 'data', tags: ['checklist', 'list', 'tasks', 'done'], Icon: IconListCheck },
+  { id: 'report-analytics', name: 'Analytics Report', category: 'data', tags: ['analytics', 'report', 'insights', 'data'], Icon: IconReportAnalytics },
+  { id: 'device-analytics', name: 'Dashboard', category: 'data', tags: ['dashboard', 'analytics', 'monitor', 'kpi'], Icon: IconDeviceAnalytics },
+  { id: 'cpu', name: 'Prozessor / AI', category: 'data', tags: ['cpu', 'processor', 'ai', 'compute'], Icon: IconCpu },
+
+  // ── Business ──────────────────────────────────────────────────
+  { id: 'briefcase', name: 'Business', category: 'business', tags: ['business', 'work', 'professional', 'b2b'], Icon: IconBriefcase },
+  { id: 'building', name: 'Unternehmen', category: 'business', tags: ['company', 'building', 'corporate', 'b2b'], Icon: IconBuilding },
+  { id: 'users', name: 'Team / Zielgruppe', category: 'business', tags: ['team', 'users', 'people', 'audience'], Icon: IconUsers },
+  { id: 'user-check', name: 'Qualifizierter Lead', category: 'business', tags: ['qualified', 'lead', 'verified', 'icp'], Icon: IconUserCheck },
+  { id: 'user-circle', name: 'Person', category: 'business', tags: ['person', 'contact', 'decision maker', 'persona'], Icon: IconUserCircle },
+  { id: 'target', name: 'Ziel / ICP', category: 'business', tags: ['target', 'icp', 'goal', 'bullseye'], Icon: IconTarget },
+  { id: 'award', name: 'Award', category: 'business', tags: ['award', 'success', 'achievement', 'win'], Icon: IconAward },
+  { id: 'trophy', name: 'Erfolg', category: 'business', tags: ['trophy', 'success', 'win', 'champion'], Icon: IconTrophy },
+  { id: 'star', name: 'Bewertung', category: 'business', tags: ['star', 'rating', 'review', 'quality'], Icon: IconStar },
+  { id: 'crown', name: 'Premium / Top', category: 'business', tags: ['crown', 'premium', 'top', 'best', 'vip'], Icon: IconCrown },
+  { id: 'coin', name: 'Revenue', category: 'business', tags: ['coin', 'money', 'revenue', 'roi', 'profit'], Icon: IconCoin },
+  { id: 'coins', name: 'Budget', category: 'business', tags: ['coins', 'budget', 'cost', 'money', 'investment'], Icon: IconCoins },
+  { id: 'report', name: 'Report', category: 'business', tags: ['report', 'document', 'summary', 'results'], Icon: IconReport },
+  { id: 'badge', name: 'Badge / Status', category: 'business', tags: ['badge', 'status', 'verified', 'label'], Icon: IconBadge },
+  { id: 'layout-dashboard', name: 'Dashboard', category: 'business', tags: ['dashboard', 'overview', 'platform', 'ui'], Icon: IconLayoutDashboard },
+  { id: 'checklist', name: 'Checklist', category: 'business', tags: ['checklist', 'process', 'steps', 'todo'], Icon: IconChecklist },
+  { id: 'gift', name: 'Angebot / Lead Magnet', category: 'business', tags: ['gift', 'offer', 'lead magnet', 'incentive'], Icon: IconGift },
+
+  // ── Automation / AI ───────────────────────────────────────────
+  { id: 'robot', name: 'KI Agent', category: 'automation', tags: ['robot', 'ai', 'agent', 'bot', 'automation'], Icon: IconRobot },
+  { id: 'brain', name: 'KI / Intelligence', category: 'automation', tags: ['brain', 'ai', 'intelligence', 'smart'], Icon: IconBrain },
+  { id: 'bolt', name: 'Schnell / Instant', category: 'automation', tags: ['bolt', 'fast', 'instant', 'power', 'speed'], Icon: IconBolt },
+  { id: 'sparkles', name: 'KI Magic', category: 'automation', tags: ['sparkles', 'ai', 'magic', 'generate', 'enhance'], Icon: IconSparkles },
+  { id: 'wand', name: 'Automation', category: 'automation', tags: ['wand', 'magic', 'automate', 'transform'], Icon: IconWand },
+  { id: 'cloud', name: 'Cloud', category: 'automation', tags: ['cloud', 'saas', 'platform', 'hosting'], Icon: IconCloud },
+  { id: 'server', name: 'Server / Infra', category: 'automation', tags: ['server', 'infrastructure', 'backend', 'api'], Icon: IconServer },
+  { id: 'refresh', name: 'Sync / Update', category: 'automation', tags: ['refresh', 'sync', 'update', 'loop'], Icon: IconRefresh },
+  { id: 'refresh-dot', name: 'Live Sync', category: 'automation', tags: ['refresh', 'live', 'real-time', 'sync'], Icon: IconRefreshDot },
+  { id: 'arrow-iteration', name: 'Iterieren', category: 'automation', tags: ['iterate', 'loop', 'repeat', 'cycle'], Icon: IconArrowIteration },
+  { id: 'recycle', name: 'Workflow Loop', category: 'automation', tags: ['recycle', 'loop', 'workflow', 'cycle'], Icon: IconRecycle },
+  { id: 'player-play', name: 'Start / Launch', category: 'automation', tags: ['play', 'start', 'launch', 'run', 'execute'], Icon: IconPlayerPlay },
+  { id: 'atom', name: 'Tech / Compound', category: 'automation', tags: ['atom', 'tech', 'science', 'compound'], Icon: IconAtom },
+  { id: 'settings', name: 'Einstellungen', category: 'automation', tags: ['settings', 'config', 'gear', 'configure'], Icon: IconSettings },
+  { id: 'broadcast', name: 'Broadcast', category: 'automation', tags: ['broadcast', 'publish', 'distribute', 'send'], Icon: IconBroadcast },
+
+  // ── Content ───────────────────────────────────────────────────
+  { id: 'pencil', name: 'Schreiben', category: 'content', tags: ['write', 'edit', 'create', 'copywriting'], Icon: IconPencil },
+  { id: 'article', name: 'Artikel', category: 'content', tags: ['article', 'blog', 'post', 'content'], Icon: IconArticle },
+  { id: 'photo', name: 'Bild', category: 'content', tags: ['photo', 'image', 'visual', 'graphic'], Icon: IconPhoto },
+  { id: 'video', name: 'Video', category: 'content', tags: ['video', 'film', 'media', 'youtube'], Icon: IconVideo },
+  { id: 'microphone', name: 'Podcast / Audio', category: 'content', tags: ['microphone', 'podcast', 'audio', 'record'], Icon: IconMicrophone },
+  { id: 'book', name: 'Guide / Ebook', category: 'content', tags: ['book', 'guide', 'ebook', 'resource'], Icon: IconBook },
+  { id: 'tag', name: 'Tag / Label', category: 'content', tags: ['tag', 'label', 'category', 'topic'], Icon: IconTag },
+  { id: 'hash', name: 'Hashtag', category: 'content', tags: ['hashtag', 'topic', 'social', 'tag'], Icon: IconHash },
+  { id: 'template', name: 'Template', category: 'content', tags: ['template', 'layout', 'structure', 'format'], Icon: IconTemplate },
+  { id: 'layout', name: 'Layout', category: 'content', tags: ['layout', 'design', 'structure', 'ui'], Icon: IconLayout },
+  { id: 'layout-grid', name: 'Grid', category: 'content', tags: ['grid', 'layout', 'structure', 'cards'], Icon: IconLayoutGrid },
+  { id: 'brand-youtube', name: 'YouTube', category: 'content', tags: ['youtube', 'video', 'social', 'media'], Icon: IconBrandYoutube },
+  { id: 'brand-gmail', name: 'Gmail', category: 'content', tags: ['gmail', 'email', 'google', 'mail'], Icon: IconBrandGmail },
+  { id: 'brand-slack', name: 'Slack', category: 'content', tags: ['slack', 'team', 'messaging', 'communication'], Icon: IconBrandSlack },
+  { id: 'brand-notion', name: 'Notion', category: 'content', tags: ['notion', 'docs', 'knowledge', 'wiki'], Icon: IconBrandNotion },
+  { id: 'brand-airtable', name: 'Airtable', category: 'content', tags: ['airtable', 'database', 'spreadsheet', 'crm'], Icon: IconBrandAirtable },
+  { id: 'brand-asana', name: 'Asana', category: 'content', tags: ['asana', 'project', 'management', 'tasks'], Icon: IconBrandAsana },
+  { id: 'brand-figma', name: 'Figma', category: 'content', tags: ['figma', 'design', 'ui', 'prototype'], Icon: IconBrandFigma },
+
+  // ── Abstract ──────────────────────────────────────────────────
+  { id: 'activity', name: 'Aktivität', category: 'abstract', tags: ['activity', 'pulse', 'live', 'signal'], Icon: IconActivity },
+  { id: 'eye', name: 'Visibility', category: 'abstract', tags: ['eye', 'view', 'visible', 'impressions'], Icon: IconEye },
+  { id: 'percentage', name: 'Prozent / Rate', category: 'abstract', tags: ['percent', 'rate', 'conversion', 'ratio'], Icon: IconPercentage },
+  { id: 'math', name: 'Berechnung', category: 'abstract', tags: ['math', 'calculate', 'formula', 'number'], Icon: IconMath },
+  { id: 'calculator', name: 'ROI Rechner', category: 'abstract', tags: ['calculator', 'roi', 'calculate', 'cost'], Icon: IconCalculator },
+  { id: 'heart-rate', name: 'Performance', category: 'abstract', tags: ['performance', 'health', 'kpi', 'monitor'], Icon: IconHeartRateMonitor },
+  { id: 'arrow-right', name: 'Weiter', category: 'abstract', tags: ['arrow', 'next', 'forward', 'cta'], Icon: IconArrowRight },
+  { id: 'arrow-up', name: 'Aufwärts', category: 'abstract', tags: ['arrow', 'up', 'growth', 'increase'], Icon: IconArrowUp },
+  { id: 'arrow-big-up', name: 'Starkes Wachstum', category: 'abstract', tags: ['arrow', 'big', 'up', 'growth', 'strong'], Icon: IconArrowBigUp },
+  { id: 'check', name: 'Häkchen', category: 'abstract', tags: ['check', 'done', 'complete', 'tick', 'yes'], Icon: IconCheck },
+  { id: 'checks', name: 'Doppelcheck', category: 'abstract', tags: ['checks', 'double', 'verified', 'confirmed'], Icon: IconChecks },
+  { id: 'circle-check', name: 'Bestätigt', category: 'abstract', tags: ['circle', 'check', 'confirmed', 'success', 'done'], Icon: IconCircleCheck },
+  { id: 'layers', name: 'Ebenen', category: 'abstract', tags: ['layers', 'stack', 'levels', 'depth'], Icon: IconLayersLinked },
+  { id: 'stack', name: 'Stack', category: 'abstract', tags: ['stack', 'pile', 'collection', 'tech stack'], Icon: IconStack },
+  { id: 'stack2', name: 'Tech Stack', category: 'abstract', tags: ['stack', 'tech', 'tools', 'platform'], Icon: IconStack2 },
+  { id: 'stack3', name: 'Layer Stack', category: 'abstract', tags: ['stack', 'layers', 'structure', 'depth'], Icon: IconStack3 },
+  { id: 'diamond', name: 'Premium', category: 'abstract', tags: ['diamond', 'premium', 'quality', 'value', 'gem'], Icon: IconDiamond },
+  { id: 'flame', name: 'Hot / Trending', category: 'abstract', tags: ['flame', 'hot', 'trending', 'viral', 'fire'], Icon: IconFlame },
+  { id: 'rocket', name: 'Launch / Growth', category: 'abstract', tags: ['rocket', 'launch', 'startup', 'growth', 'scale'], Icon: IconRocket },
+  { id: 'bulb', name: 'Idee / Insight', category: 'abstract', tags: ['bulb', 'idea', 'insight', 'tip', 'lightbulb'], Icon: IconBulb },
+  { id: 'link', name: 'Verbindung', category: 'abstract', tags: ['link', 'connect', 'url', 'chain', 'integration'], Icon: IconLink },
+];

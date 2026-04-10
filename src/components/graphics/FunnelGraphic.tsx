@@ -20,16 +20,16 @@ export interface FunnelData {
 }
 
 export const defaultFunnelData: FunnelData = {
-  topLabel: 'SALES FUNNEL',
-  headline: 'Von der Zielgruppe\nzum Abschluss',
+  topLabel: 'DAS READINESS-GAP',
+  headline: 'Alle nutzen KI.\nFast keiner ist sichtbar.',
   stages: [
-    { label: 'Zielunternehmen', value: '2.450', pct: 100 },
-    { label: 'Kontaktiert', value: '1.876', pct: 76 },
-    { label: 'Qualifiziert', value: '423', pct: 17 },
-    { label: 'Opportunity', value: '89', pct: 4 },
-    { label: 'Abschluss', value: '24', pct: 1 },
+    { label: 'B2B-K\u00e4ufer nutzen LLMs im Kaufprozess', value: '94%', pct: 94 },
+    { label: 'Marketer nutzen AI f\u00fcr Content Creation', value: '55%', pct: 55 },
+    { label: 'Websites haben Schema Markup', value: '31%', pct: 31 },
+    { label: 'Websites sind f\u00fcr AI-Agents sichtbar', value: '5%', pct: 5 },
+    { label: 'Websites haben llms.txt', value: '0,015%', pct: 1 },
   ],
-  bottomLine: 'cegtec.net — Datengetriebene Sales Pipeline',
+  bottomLine: 'Quellen: 6sense 2025 \u00b7 HubSpot 2025 \u00b7 W3Techs \u00b7 Majestic Million 2025',
   ...CEGTEC_LIGHT_DEFAULTS,
 };
 

@@ -186,6 +186,9 @@ function RenderElement({
         lineHeight: 1.3,
         overflow: 'hidden',
         wordBreak: 'break-word',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
       }}
       onClick={(e) => {
         if (!interactive) return;

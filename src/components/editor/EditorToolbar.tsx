@@ -14,7 +14,7 @@ import {
   Save,
   FolderOpen,
 } from 'lucide-react';
-import { usePresentationStore } from '../../stores/presentationStore';
+import { usePresentationStore, PRESENTATION_PRESETS } from '../../stores/presentationStore';
 import { useEditorStore } from '../../stores/editorStore';
 import { useSavedPresentationsStore } from '../../stores/savedPresentationsStore';
 import { FORMAT_PRESETS, getFormat } from '../../utils/formats';
@@ -33,6 +33,7 @@ export function EditorToolbar() {
   const exportJSON = usePresentationStore((s) => s.exportJSON);
   const importJSON = usePresentationStore((s) => s.importJSON);
   const resetPresentation = usePresentationStore((s) => s.resetPresentation);
+  const loadPreset = usePresentationStore((s) => s.loadPreset);
   const slides = usePresentationStore((s) => s.presentation.slides);
   const formatId = usePresentationStore((s) => s.presentation.formatId);
   const setFormat = usePresentationStore((s) => s.setFormat);
@@ -143,6 +144,16 @@ export function EditorToolbar() {
 
       <div className="flex items-center gap-1">
         <ToolbarButton icon={FilePlus2} onClick={() => { if (confirm('Neue Präsentation erstellen? Ungespeicherte Änderungen gehen verloren.')) resetPresentation(); }} title="New Presentation" />
+        <select
+          className="bg-surface-hover text-text text-xs rounded px-2 py-1 border border-border outline-none cursor-pointer"
+          onChange={(e) => { if (e.target.value && confirm('Preset laden? Ungespeicherte Änderungen gehen verloren.')) { loadPreset(e.target.value); e.target.value = ''; } }}
+          defaultValue=""
+        >
+          <option value="" disabled>Preset…</option>
+          {PRESENTATION_PRESETS.map((p) => (
+            <option key={p.id} value={p.id}>{p.label}</option>
+          ))}
+        </select>
         <div className="w-px h-5 bg-border mx-1" />
         <ToolbarButton icon={Undo2} onClick={undo} disabled={undoStack.length === 0} title="Undo (Ctrl+Z)" />
         <ToolbarButton icon={Redo2} onClick={redo} disabled={redoStack.length === 0} title="Redo (Ctrl+Shift+Z)" />
