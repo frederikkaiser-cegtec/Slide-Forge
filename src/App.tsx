@@ -76,28 +76,6 @@ function GraphicTypeSelector({ graphicType, onSwitch }: { graphicType: string; o
   );
 }
 
-// ── SVG Overlay ──────────────────────────────────────────────────
-type SvgPos = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'center';
-
-const SVG_POSITIONS: { id: SvgPos; label: string; row: number; col: number }[] = [
-  { id: 'top-left',     label: '↖', row: 0, col: 0 },
-  { id: 'top-right',    label: '↗', row: 0, col: 2 },
-  { id: 'center',       label: '⊕', row: 1, col: 1 },
-  { id: 'bottom-left',  label: '↙', row: 2, col: 0 },
-  { id: 'bottom-right', label: '↘', row: 2, col: 2 },
-];
-
-function svgPosStyle(pos: SvgPos, size: number): React.CSSProperties {
-  const base: React.CSSProperties = { position: 'absolute', width: size, height: size, pointerEvents: 'none', zIndex: 10, overflow: 'hidden' };
-  switch (pos) {
-    case 'top-left':     return { ...base, top: 16, left: 16 };
-    case 'top-right':    return { ...base, top: 16, right: 16 };
-    case 'bottom-left':  return { ...base, bottom: 16, left: 16 };
-    case 'bottom-right': return { ...base, bottom: 16, right: 16 };
-    case 'center':       return { ...base, top: '50%', left: '50%', transform: 'translate(-50%, -50%)' };
-  }
-}
-
 // Force SVG to fill its container by overriding width/height attrs
 function normalizeSvgSize(svg: string): string {
   return svg.replace(/<svg([^>]*)>/, (_, attrs) => {
@@ -117,8 +95,30 @@ function App() {
   const [saveFlash, setSaveFlash] = useState(false);
   const [showGitHubPush, setShowGitHubPush] = useState(false);
   const [showAssetLibrary, setShowAssetLibrary] = useState<'normal' | 'insert' | false>(false);
-  const [svgOverlay, setSvgOverlay] = useState({ svg: '', position: 'bottom-right' as SvgPos, size: 80, opacity: 100 });
+  const [svgOverlay, setSvgOverlay] = useState({ svg: '', x: 16, y: 16, size: 80, opacity: 100, color: '#ffffff' });
   const [overlayOpen, setOverlayOpen] = useState(false);
+
+  const handleOverlayDrag = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    const scale = getPreviewScale(format.width, format.height);
+    const startMouseX = e.clientX;
+    const startMouseY = e.clientY;
+    const startX = svgOverlay.x;
+    const startY = svgOverlay.y;
+    const onMove = (me: MouseEvent) => {
+      setSvgOverlay(o => ({
+        ...o,
+        x: Math.max(0, Math.round(startX + (me.clientX - startMouseX) / scale)),
+        y: Math.max(0, Math.round(startY + (me.clientY - startMouseY) / scale)),
+      }));
+    };
+    const onUp = () => {
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseup', onUp);
+    };
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+  }, [format.width, format.height, svgOverlay.x, svgOverlay.y]);
 
   // Listen for template selection from WelcomeScreen
   useEffect(() => {
@@ -323,36 +323,36 @@ function App() {
                 >
                   + Library öffnen
                 </button>
-                <div>
-                  <p className="text-[10px] text-text-muted/50 uppercase tracking-wider mb-1.5">Position</p>
-                  <div className="grid grid-cols-3 gap-1" style={{ width: 84 }}>
-                    {([0,1,2] as const).flatMap(row =>
-                      ([0,1,2] as const).map(col => {
-                        const pos = SVG_POSITIONS.find(p => p.row === row && p.col === col);
-                        return (
-                          <button
-                            key={`${row}-${col}`}
-                            onClick={() => pos && setSvgOverlay(o => ({ ...o, position: pos.id }))}
-                            className={`h-6 w-6 rounded text-xs transition-colors ${
-                              pos
-                                ? svgOverlay.position === pos.id
-                                  ? 'bg-primary text-white'
-                                  : 'bg-muted/60 hover:bg-muted text-text-muted'
-                                : 'bg-muted/20 cursor-default'
-                            }`}
-                          >
-                            {pos?.label ?? ''}
-                          </button>
-                        );
-                      })
-                    )}
+                <div className="flex gap-2">
+                  <div className="flex-1">
+                    <p className="text-[10px] text-text-muted/50 uppercase tracking-wider mb-1">X (px)</p>
+                    <input type="number" value={svgOverlay.x}
+                      onChange={(e) => setSvgOverlay(o => ({ ...o, x: Math.max(0, +e.target.value) }))}
+                      className="w-full bg-muted/40 border border-border/50 rounded px-2 py-1 text-xs text-text outline-none focus:border-primary/40" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-[10px] text-text-muted/50 uppercase tracking-wider mb-1">Y (px)</p>
+                    <input type="number" value={svgOverlay.y}
+                      onChange={(e) => setSvgOverlay(o => ({ ...o, y: Math.max(0, +e.target.value) }))}
+                      className="w-full bg-muted/40 border border-border/50 rounded px-2 py-1 text-xs text-text outline-none focus:border-primary/40" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-[10px] text-text-muted/50 uppercase tracking-wider mb-1">Größe</p>
+                    <input type="number" value={svgOverlay.size}
+                      onChange={(e) => setSvgOverlay(o => ({ ...o, size: Math.max(10, +e.target.value) }))}
+                      className="w-full bg-muted/40 border border-border/50 rounded px-2 py-1 text-xs text-text outline-none focus:border-primary/40" />
                   </div>
                 </div>
                 <div>
-                  <p className="text-[10px] text-text-muted/50 uppercase tracking-wider mb-1">Größe: {svgOverlay.size}px</p>
-                  <input type="range" min={40} max={300} value={svgOverlay.size}
-                    onChange={(e) => setSvgOverlay(o => ({ ...o, size: +e.target.value }))}
-                    className="w-full accent-primary" />
+                  <p className="text-[10px] text-text-muted/50 uppercase tracking-wider mb-1">Farbe</p>
+                  <div className="flex gap-2 items-center">
+                    <input type="color" value={svgOverlay.color}
+                      onChange={(e) => setSvgOverlay(o => ({ ...o, color: e.target.value }))}
+                      className="w-7 h-7 rounded cursor-pointer border border-border/50 bg-transparent p-0.5 shrink-0" />
+                    <input type="text" value={svgOverlay.color}
+                      onChange={(e) => setSvgOverlay(o => ({ ...o, color: e.target.value }))}
+                      className="flex-1 bg-muted/40 border border-border/50 rounded px-2 py-1 text-xs text-text font-mono outline-none focus:border-primary/40" />
+                  </div>
                 </div>
                 <div>
                   <p className="text-[10px] text-text-muted/50 uppercase tracking-wider mb-1">Deckkraft: {svgOverlay.opacity}%</p>
@@ -425,7 +425,19 @@ function App() {
           />
           {svgOverlay.svg && (
             <div
-              style={{ ...svgPosStyle(svgOverlay.position, svgOverlay.size), opacity: svgOverlay.opacity / 100 }}
+              onMouseDown={handleOverlayDrag}
+              style={{
+                position: 'absolute',
+                left: svgOverlay.x,
+                top: svgOverlay.y,
+                width: svgOverlay.size,
+                height: svgOverlay.size,
+                opacity: svgOverlay.opacity / 100,
+                color: svgOverlay.color,
+                zIndex: 10,
+                overflow: 'hidden',
+                cursor: 'move',
+              }}
               dangerouslySetInnerHTML={{ __html: normalizeSvgSize(svgOverlay.svg) }}
             />
           )}
