@@ -14,6 +14,7 @@ import { FORMAT_PRESETS } from './utils/formats';
 import { useSavedGraphicsStore, type SavedGraphic } from './stores/savedGraphicsStore';
 import { GRAPHIC_REGISTRY, getDefinition } from './registry';
 import { AssetLibraryModal } from './components/graphics/AssetLibraryModal';
+import { CarouselMode } from './components/carousel/CarouselMode';
 
 // ── State via useReducer ────────────────────────────────────────
 type GraphicState = Record<string, unknown>;
@@ -240,6 +241,16 @@ function App() {
   // ── Home screen ────────────────────────────────────────────
   if (mode === 'home') {
     return <WelcomeScreen />;
+  }
+
+  // ── Carousel mode ──────────────────────────────────────────
+  if (mode === 'carousel') {
+    return (
+      <div className="h-full flex flex-col">
+        <ModeNav />
+        <CarouselMode />
+      </div>
+    );
   }
 
   // ── Slides mode ────────────────────────────────────────────
