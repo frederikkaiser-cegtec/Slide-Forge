@@ -5,6 +5,7 @@ import { PropertiesPanel } from './PropertiesPanel';
 import { EditorToolbar } from './EditorToolbar';
 import { usePresentationStore } from '../../stores/presentationStore';
 import { useEditorStore } from '../../stores/editorStore';
+import { generateId } from '../../utils/id';
 
 export function EditorLayout() {
   const slides = usePresentationStore((s) => s.presentation.slides);
@@ -18,6 +19,24 @@ export function EditorLayout() {
   const editingElementId = useEditorStore((s) => s.editingElementId);
   const clearSelection = useEditorStore((s) => s.clearSelection);
   const removeSlide = usePresentationStore((s) => s.removeSlide);
+
+  // Listen for chart SVG inserts
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const svg = (e as CustomEvent<string>).detail;
+      const slideId = useEditorStore.getState().selectedSlideId ?? slides[0]?.id;
+      if (!slideId) return;
+      usePresentationStore.getState().pushUndo();
+      usePresentationStore.getState().addElement(slideId, {
+        id: generateId(), type: 'svg',
+        x: 10, y: 10, width: 80, height: 50,
+        rotation: 0, content: svg,
+        style: { opacity: 1 },
+      });
+    };
+    window.addEventListener('sf:insert-svg', handler);
+    return () => window.removeEventListener('sf:insert-svg', handler);
+  }, [slides]);
 
   // Auto-select first slide
   useEffect(() => {

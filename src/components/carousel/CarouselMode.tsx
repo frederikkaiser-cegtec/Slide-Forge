@@ -1,8 +1,10 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { toPng } from 'html-to-image';
 import JSZip from 'jszip';
-import { Plus, Trash2, ChevronLeft, ChevronRight, Download, Archive, ChevronDown, ChevronUp, Layers, Copy } from 'lucide-react';
+import jsPDF from 'jspdf';
+import { Plus, Trash2, ChevronLeft, ChevronRight, Download, Archive, ChevronDown, ChevronUp, Layers, Copy, FileText, Save, FolderOpen, X } from 'lucide-react';
 import { useCarouselStore } from '../../stores/carouselStore';
+import { useSavedGraphicsStore } from '../../stores/savedGraphicsStore';
 import { GRAPHIC_REGISTRY, getDefinition } from '../../registry';
 import { FORMAT_PRESETS, getFormat } from '../../utils/formats';
 import { useEditorStore } from '../../stores/editorStore';
@@ -106,6 +108,8 @@ function Thumbnail({ graphicType, formatId, data, layers, active, index, onClick
 // ── Setup Screen ─────────────────────────────────────────────────
 function SetupScreen() {
   const { create } = useCarouselStore();
+  const { graphics, remove } = useSavedGraphicsStore();
+  const savedCarousels = graphics.filter((g) => g.type === 'carousel');
 
   const handlePipelineSplit = () => {
     const base = structuredClone(defaultOutreachPipelineData);
@@ -170,6 +174,40 @@ function SetupScreen() {
           className="w-full py-2.5 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium text-sm transition-colors">
           {count} Slides erstellen
         </button>
+
+        {/* Saved templates */}
+        {savedCarousels.length > 0 && (
+          <div className="pt-2 border-t border-border/40 space-y-2">
+            <div className="flex items-center gap-1.5">
+              <FolderOpen size={12} className="text-text-muted/50" />
+              <span className="text-[11px] text-text-muted/60 uppercase tracking-wider font-medium">Gespeicherte Vorlagen</span>
+            </div>
+            <div className="space-y-1.5 max-h-48 overflow-y-auto">
+              {savedCarousels.map((g) => (
+                <div key={g.id} className="flex items-center gap-2 group">
+                  <button
+                    onClick={() => {
+                      const c = g.data as { graphicType: string; formatId: string; slides: any[] };
+                      const slides = c.slides.map((sl: any) => ({ ...sl, id: crypto.randomUUID() }));
+                      useCarouselStore.setState({
+                        carousel: { graphicType: c.graphicType, formatId: c.formatId, slides },
+                        activeSlideId: slides[0].id,
+                      });
+                    }}
+                    className="flex-1 text-left px-3 py-2 rounded-lg bg-muted/40 hover:bg-muted/70 border border-border/40 hover:border-primary/30 transition-colors"
+                  >
+                    <div className="text-[12px] font-medium text-text truncate">{g.name}</div>
+                    <div className="text-[10px] text-text-muted/50 mt-0.5">{(g.data as any)?.slides?.length ?? '?'} Slides · {g.formatId}</div>
+                  </button>
+                  <button onClick={() => remove(g.id)}
+                    className="opacity-0 group-hover:opacity-100 p-1 text-text-muted/40 hover:text-red-400 transition-all">
+                    <X size={12} />
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -209,6 +247,14 @@ function Editor() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeSlide.id]);
 
+  // Listen for chart SVG inserts
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    const handler = (e: Event) => addLayer(createSvgLayer((e as CustomEvent<string>).detail));
+    window.addEventListener('sf:insert-svg', handler);
+    return () => window.removeEventListener('sf:insert-svg', handler);
+  }, [addLayer]);
+
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const updateLayer = useCallback((layerId: string, patch: Partial<Layer>) =>
     updateSlideLayer(activeSlide.id, layerId, patch),
@@ -224,6 +270,33 @@ function Editor() {
 
   const capture = async (el: HTMLDivElement) =>
     toPng(el, { width: format.width, height: format.height, pixelRatio: 3 });
+
+  const handleExportPdf = async () => {
+    setExporting(true);
+    const prevSel = selectedLayerId;
+    setSelectedLayerId(null);
+    await new Promise<void>((r) => requestAnimationFrame(() => requestAnimationFrame(() => r())));
+    try {
+      const pdf = new jsPDF({ orientation: 'portrait', unit: 'px', format: [format.width, format.height], hotfixes: ['px_scaling'] });
+      for (let i = 0; i < carousel.slides.length; i++) {
+        const el = exportRefs.current.get(carousel.slides[i].id);
+        if (!el) continue;
+        const dataUrl = await toPng(el, { width: format.width, height: format.height, pixelRatio: 2 });
+        if (i > 0) pdf.addPage([format.width, format.height], 'portrait');
+        pdf.addImage(dataUrl, 'PNG', 0, 0, format.width, format.height);
+      }
+      pdf.save(`carousel-${carousel.graphicType}.pdf`);
+    } finally {
+      setSelectedLayerId(prevSel);
+      setExporting(false);
+    }
+  };
+
+  const handleSave = () => {
+    const name = window.prompt('Name für dieses Template:', `${def.label} – Carousel`);
+    if (!name) return;
+    useSavedGraphicsStore.getState().save(name, 'carousel', carousel, carousel.formatId);
+  };
 
   const handleExportZip = async () => {
     setExporting(true);
@@ -282,7 +355,10 @@ function Editor() {
           </button>
           <span className="text-[11px] text-text-muted/40">|</span>
           <span className="text-[11px] text-text font-medium truncate">{def.label}</span>
-          <span className="text-[10px] text-text-muted/50 ml-auto">{format.label}</span>
+          <button onClick={handleSave} title="Als Vorlage speichern"
+            className="ml-auto flex items-center gap-1 text-[11px] text-text-muted hover:text-primary transition-colors px-1.5 py-1 rounded hover:bg-primary/10">
+            <Save size={11} /> Speichern
+          </button>
         </div>
 
         <div className="p-3 flex-1 overflow-y-auto">
@@ -345,10 +421,14 @@ function Editor() {
               <Copy size={12} />
             </button>
             <button onClick={handleExportZip} disabled={exporting}
-              className="flex-1 flex items-center justify-center gap-1.5 py-2 text-xs bg-primary hover:bg-primary-hover text-white rounded-lg transition-colors disabled:opacity-60">
-              <Archive size={12} /> {exporting ? '…' : 'ZIP alle'}
+              className="flex-1 flex items-center justify-center gap-1.5 py-2 text-xs bg-muted/50 hover:bg-muted text-text-muted hover:text-text rounded-lg transition-colors disabled:opacity-60">
+              <Archive size={12} /> {exporting ? '…' : 'ZIP'}
             </button>
           </div>
+          <button onClick={handleExportPdf} disabled={exporting}
+            className="w-full flex items-center justify-center gap-1.5 py-2 text-xs bg-primary hover:bg-primary-hover text-white rounded-lg transition-colors disabled:opacity-60">
+            <FileText size={12} /> {exporting ? 'Exportiere…' : 'PDF exportieren'}
+          </button>
         </div>
       </div>
 
