@@ -2,7 +2,8 @@ import {
   Image, BarChart3, Trophy, Boxes, LayoutDashboard,
   GraduationCap, Database, DatabaseZap, ScanSearch,
   Mail, Radio, Layers, Bot, MessageSquareText,
-  GitCompare, Clock, Filter, Network,
+  GitCompare, Clock, Filter, Network, FileCode,
+  Quote,
 } from 'lucide-react';
 
 import type { GraphicDefinition } from './types';
@@ -26,6 +27,8 @@ import { ComparisonGraphic, defaultComparisonData } from '../components/graphics
 import { TimelineGraphic, defaultTimelineData } from '../components/graphics/TimelineGraphic';
 import { FunnelGraphic, defaultFunnelData } from '../components/graphics/FunnelGraphic';
 import { OutreachPipelineGraphic, defaultOutreachPipelineData } from '../components/graphics/OutreachPipelineGraphic';
+import { PromptCardGraphic, defaultPromptCardData } from '../components/graphics/PromptCardGraphic';
+import { QuoteCardGraphic, defaultQuoteCardData } from '../components/graphics/QuoteCardGraphic';
 
 // Form components
 import { CaseStudyForm } from '../components/graphics/CaseStudyForm';
@@ -46,6 +49,8 @@ import { ComparisonForm } from '../components/graphics/ComparisonForm';
 import { TimelineForm } from '../components/graphics/TimelineForm';
 import { FunnelForm } from '../components/graphics/FunnelForm';
 import { OutreachPipelineForm } from '../components/graphics/OutreachPipelineForm';
+import { PromptCardForm } from '../components/graphics/PromptCardForm';
+import { QuoteCardForm } from '../components/graphics/QuoteCardForm';
 
 // Types & defaults
 import type { CaseStudyData, RoiData } from '../types/graphics';
@@ -332,6 +337,28 @@ export const GRAPHIC_REGISTRY: GraphicDefinition[] = [
     getDisplayName: (d: any) => d.title?.replace('\n', ' ') || 'Pipeline',
     FormComponent: OutreachPipelineForm,
     GraphicComponent: OutreachPipelineGraphic,
+  },
+  {
+    id: 'prompt-card',
+    label: 'Prompt Card',
+    icon: FileCode,
+    defaultData: defaultPromptCardData,
+    defaultFormat: '9:16',
+    forceFormat: false,
+    getDisplayName: (d: any) => d.topLabel || 'Prompt Card',
+    FormComponent: PromptCardForm,
+    GraphicComponent: PromptCardGraphic,
+  },
+  {
+    id: 'quote-card',
+    label: 'Quote Card',
+    icon: Quote,
+    defaultData: defaultQuoteCardData,
+    defaultFormat: '1:1',
+    forceFormat: false,
+    getDisplayName: (d: any) => d.personName || 'Quote Card',
+    FormComponent: QuoteCardForm,
+    GraphicComponent: QuoteCardGraphic,
   },
 ];
 
