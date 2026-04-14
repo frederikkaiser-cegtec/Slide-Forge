@@ -1040,7 +1040,109 @@ export const CAROUSEL_PRESETS: SavedGraphic[] = [
   },
 ];
 
-const SEED_VERSION = 'v19-prompt-v3-5slides';
+// ── Prompt Card Single-Slide Presets ─────────────────────────────
+const SEED_PROMPT_CARDS: SavedGraphic[] = [
+  {
+    id: 'preset-prompt-card-reply-handler',
+    name: 'Prompt Card — Reply Handler V1 (7 Typen)',
+    type: 'prompt-card',
+    formatId: '9:16',
+    savedAt: Date.now(),
+    data: {
+      topLabel: 'CegTec Code v1.0',
+      headline: '~/cegtec/replies/classify-and-respond',
+      subline: 'Opus 4.6 · Reply Strategist · DACH B2B',
+      userPrompt: '80 % sterben nach Reply 1. Fix das.',
+      promptFontSize: 16,
+      promptText: `● Read(387 Replies · 22 Kampagnen · 7 Muster)
+  ⎿ Klassifikation geladen
+● Write(reply-handler-v1.md)
+
+--- COPY START ---
+PFLICHT-INPUT — ohne diese: STOPPE.
+Produkt/Service + Original-Email + Reply.
+
+SCHRITT 1 — KLASSIFIZIERE (exakt 1 Typ)
+
+Typ 1 INTERESSE      Will mehr wissen
+Typ 2 WEITERLEITUNG  Falsche Person
+Typ 3 EINWAND        Grund gegen Kauf
+Typ 4 TIMING         Nicht jetzt, später
+Typ 5 INFO-BRUSH     "Schicken Sie Unterlagen"
+Typ 6 ABWESEND       OOO / Auto-Reply
+Typ 7 ABSAGE         Stop-Anfrage
+
+SCHRITT 2 — STRATEGIE PRO TYP
+
+Typ 1 (Interesse):
+→ NICHT sofort Meeting — erst Wert liefern
+→ Asset senden (Case Study, ROI, Loom)
+→ Meeting NICHT in gleicher Nachricht
+→ Asset muss alleine stehen
+→ CTA: "Sag mir ob das passt"
+
+Typ 2 (Weiterleitung):
+→ Neue Person ist wieder KALT
+→ Referenz als Türöffner + Kontext
+→ Angle an ROLLE anpassen
+→ "[Name] hat mich verwiesen. [1 Satz].
+   Ist das ein Thema bei Ihnen?"
+
+Typ 3 (Einwand):
+→ NICHT widerlegen — Rückfrage stellen
+→ "Kein Budget" → "Timing oder Priorität?"
+→ "Haben wir" → "Zufrieden mit [Aspekt]?"
+→ "Kein Bedarf" → "Was nutzt ihr für [X]?"
+→ "Schlechte Erfahrung" → "Was lief schief?"
+→ "Zu klein/groß" → "Ab wann relevant?"
+→ Antwort spiegeln, dann 1 Gegenbeispiel
+
+Typ 4 (Timing):
+→ Konkretes Datum, NICHT "irgendwann"
+→ Nur Assets versprechen die du HAST
+→ "Am [Datum] melden? Vorab [Asset]."
+
+Typ 5 (Info-Brush-Off):
+→ NICHT PDF schicken = Brush-off
+→ "Was ist relevanter: [A], [B], [C]?"
+→ Erzwingt echte Antwort + qualifiziert
+
+Typ 6 (Abwesend):
+→ Rückkehr +2 Tage, neuer Angle
+→ NICHT Original wiederholen
+→ Kein "Willkommen zurück"
+→ "Hi [Name], [neuer Angle]. Relevant?"
+
+Typ 7 (Absage):
+→ Respektieren. Sofort stoppen.
+→ "Verstanden, nehme Sie raus."
+→ NIEMALS argumentieren
+→ Kein Füllmaterial
+
+SCHRITT 3 — SCHREIBE DIE ANTWORT
+Max 3-4 Sätze
+Kein "Vielen Dank für Ihre Antwort"
+Direkt, menschlich, kein Corporate-Sprech
+1 klare nächste Aktion, keine MC-CTAs
+Nur Assets versprechen die existieren
+
+OUTPUT: TYP · STRATEGIE · REPLY
+--- COPY END ---
+
+  ⎿ V1 · 7 Reply-Typen · 58 Zeilen`,
+      bottomLine: 'cegtec.net  ·  Reply Handler V1',
+      metaLabel: 'reply-handler — 82×32',
+      backgroundColor: '#1A1815',
+      textColor: '#E8E6E3',
+      labelColor: '#8A8278',
+      filledColor: '#D97757',
+      borderColor: '#2E2A26',
+      warningColor: '#5EC5D1',
+    },
+  },
+];
+
+const SEED_VERSION = 'v20-reply-handler-v1';
 
 interface SavedGraphicsState {
   graphics: SavedGraphic[];
@@ -1055,7 +1157,7 @@ interface SavedGraphicsState {
 export const useSavedGraphicsStore = create<SavedGraphicsState>()(
   persist(
     (set, get) => ({
-      graphics: [...SEED_INFOGRAPHICS, ...SEED_LINKEDIN_POSTS, ...CAROUSEL_PRESETS],
+      graphics: [...SEED_INFOGRAPHICS, ...SEED_LINKEDIN_POSTS, ...CAROUSEL_PRESETS, ...SEED_PROMPT_CARDS],
       _seedVersion: SEED_VERSION,
 
       save: (name, type, data, formatId) => {
@@ -1092,7 +1194,7 @@ export const useSavedGraphicsStore = create<SavedGraphicsState>()(
         if (state._seedVersion !== SEED_VERSION) {
           const userGraphics = state.graphics.filter((g: any) => !g.id.startsWith('preset-'));
           useSavedGraphicsStore.setState({
-            graphics: [...SEED_INFOGRAPHICS, ...SEED_LINKEDIN_POSTS, ...CAROUSEL_PRESETS, ...userGraphics],
+            graphics: [...SEED_INFOGRAPHICS, ...SEED_LINKEDIN_POSTS, ...CAROUSEL_PRESETS, ...SEED_PROMPT_CARDS, ...userGraphics],
             _seedVersion: SEED_VERSION,
           });
         }
