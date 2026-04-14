@@ -19,9 +19,7 @@ import { useEditorStore } from '../../stores/editorStore';
 import { useSavedPresentationsStore } from '../../stores/savedPresentationsStore';
 import { FORMAT_PRESETS, getFormat } from '../../utils/formats';
 import { exportSlideAsImage, exportAllSlidesAsZip } from '../../utils/exportImage';
-import { exportVectorPDF } from '../../utils/exportPdfVector';
-import { toPng } from 'html-to-image';
-import { jsPDF } from 'jspdf';
+import { exportElementsAsRasterPdf } from '../../utils/exportRasterPdf';
 
 export function EditorToolbar() {
   const title = usePresentationStore((s) => s.presentation.title);
@@ -97,36 +95,19 @@ export function EditorToolbar() {
     input.click();
   };
 
-  const handleExportVectorPDF = () => exportVectorPDF(slides, format, safeFilename);
-
   const handleExportPDF = async () => {
     const container = document.getElementById('slide-export-container');
     if (container) container.style.display = 'block';
-
-    const isLandscape = format.width >= format.height;
-    const pdf = new jsPDF({
-      orientation: isLandscape ? 'landscape' : 'portrait',
-      unit: 'px',
-      format: [format.width, format.height],
-    });
-
-    for (let i = 0; i < slides.length; i++) {
-      const slideEl = document.getElementById(`slide-export-${i}`);
-      if (!slideEl) continue;
-
-      const dataUrl = await toPng(slideEl, {
-        width: format.width,
-        height: format.height,
-        pixelRatio: 1.5,
-        style: { transform: 'none', transformOrigin: '0 0' },
-      });
-
-      if (i > 0) pdf.addPage([format.width, format.height], isLandscape ? 'landscape' : 'portrait');
-      pdf.addImage(dataUrl, 'PNG', 0, 0, format.width, format.height);
+    try {
+      const els: HTMLElement[] = [];
+      for (let i = 0; i < slides.length; i++) {
+        const el = document.getElementById(`slide-export-${i}`);
+        if (el) els.push(el);
+      }
+      await exportElementsAsRasterPdf(els, format, safeFilename);
+    } finally {
+      if (container) container.style.display = 'none';
     }
-
-    if (container) container.style.display = 'none';
-    pdf.save(`${safeFilename}.pdf`);
   };
 
   return (
@@ -195,7 +176,6 @@ export function EditorToolbar() {
         {/* Export Dropdown */}
         <ExportDropdown
           onExportPDF={handleExportPDF}
-          onExportVectorPDF={handleExportVectorPDF}
           onExportCurrentPNG={() => {
             if (currentSlideIndex >= 0) exportSlideAsImage(currentSlideIndex, format, `${safeFilename}-slide-${currentSlideIndex + 1}`, 'png');
           }}
@@ -267,7 +247,6 @@ function FormatDropdown({ currentFormatId, onSelect }: { currentFormatId: string
 
 function ExportDropdown({
   onExportPDF,
-  onExportVectorPDF,
   onExportCurrentPNG,
   onExportCurrentJPG,
   onExportAllPNG,
@@ -275,7 +254,6 @@ function ExportDropdown({
   hasSelectedSlide,
 }: {
   onExportPDF: () => void;
-  onExportVectorPDF: () => void;
   onExportCurrentPNG: () => void;
   onExportCurrentJPG: () => void;
   onExportAllPNG: () => void;
@@ -295,8 +273,7 @@ function ExportDropdown({
   }, [open]);
 
   const items = [
-    { label: 'PDF (Pixel)', onClick: onExportPDF },
-    { label: 'PDF (Vektor)', onClick: onExportVectorPDF },
+    { label: 'PDF', onClick: onExportPDF },
     { label: 'Current Slide as PNG', onClick: onExportCurrentPNG, disabled: !hasSelectedSlide },
     { label: 'Current Slide as JPG', onClick: onExportCurrentJPG, disabled: !hasSelectedSlide },
     { label: 'All Slides as PNG (ZIP)', onClick: onExportAllPNG },

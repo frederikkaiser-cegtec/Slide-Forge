@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef, createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { X, Search, Check, Loader } from 'lucide-react';
+import { X, Search, Check, Loader, Trash2 } from 'lucide-react';
 import { LIBRARY_ASSETS, ASSET_CATEGORIES, type AssetCategory, type LibraryAsset } from '../../data/library';
 import { SHAPES, SHAPE_CATEGORIES, type ShapeCategory } from '../../data/shapes';
+import { getSavedSvgs, deleteSavedSvg, type SavedSvg } from '../../utils/svgStore';
 
-type Tab = 'icons' | 'illustrations' | 'shapes' | 'svgrepo';
+type Tab = 'saved' | 'icons' | 'illustrations' | 'shapes' | 'svgrepo';
 
 // ── unDraw ────────────────────────────────────────────────────
 const UNDRAW_PRIMARY = '#6C63FF';
@@ -112,8 +113,14 @@ function Card({
 
 // ── Main Modal ────────────────────────────────────────────────
 export function AssetLibraryModal({ onClose, onInsert }: { onClose: () => void; onInsert?: (svg: string) => void }) {
-  const [tab, setTab] = useState<Tab>('icons');
+  const [tab, setTab] = useState<Tab>('saved');
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [savedSvgs, setSavedSvgs] = useState<SavedSvg[]>([]);
+
+  // Reload saved SVGs whenever the saved tab is shown
+  useEffect(() => {
+    if (tab === 'saved') setSavedSvgs(getSavedSvgs());
+  }, [tab]);
 
   // Icons state
   const [iconCategory, setIconCategory] = useState<AssetCategory | 'all'>('all');
@@ -244,9 +251,9 @@ export function AssetLibraryModal({ onClose, onInsert }: { onClose: () => void; 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 16px', borderBottom: '1px solid rgba(255,255,255,0.06)', gap: 8 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
             <span style={{ fontSize: 13, fontWeight: 700, color: '#f0f0f5', marginRight: 4 }}>Assets</span>
-            {(['icons', 'illustrations', 'shapes', 'svgrepo'] as Tab[]).map((t) => (
+            {(['saved', 'icons', 'illustrations', 'shapes', 'svgrepo'] as Tab[]).map((t) => (
               <button key={t} style={tabBtn(tab === t)} onClick={() => setTab(t)}>
-                {t === 'icons' ? `Icons (${LIBRARY_ASSETS.length})` : t === 'illustrations' ? 'Illustrationen' : t === 'shapes' ? `Shapes (${SHAPES.length})` : 'SVGRepo'}
+                {t === 'saved' ? `Gespeichert${savedSvgs.length > 0 ? ` (${savedSvgs.length})` : ''}` : t === 'icons' ? `Icons (${LIBRARY_ASSETS.length})` : t === 'illustrations' ? 'Illustrationen' : t === 'shapes' ? `Shapes (${SHAPES.length})` : 'SVGRepo'}
               </button>
             ))}
           </div>
@@ -332,6 +339,47 @@ export function AssetLibraryModal({ onClose, onInsert }: { onClose: () => void; 
 
         {/* Grid content */}
         <div style={{ flex: 1, overflowY: 'auto', padding: '12px 16px' }}>
+
+          {/* Saved SVGs */}
+          {tab === 'saved' && (
+            savedSvgs.length === 0
+              ? <div style={{ textAlign: 'center', padding: '40px 0', color: 'rgba(255,255,255,0.2)', fontSize: 13 }}>
+                  Noch nichts gespeichert.<br />
+                  <span style={{ fontSize: 11, opacity: 0.6 }}>Charts werden beim Einfügen automatisch gespeichert.</span>
+                </div>
+              : <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 10 }}>
+                  {savedSvgs.map((entry) => (
+                    <div key={entry.id} style={{ position: 'relative', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 10, overflow: 'hidden' }}>
+                      <button
+                        onClick={() => { handleCopy(entry.id, entry.svg); }}
+                        title={`${entry.name} — klicken zum Einfügen`}
+                        style={{ width: '100%', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+                      >
+                        <div style={{ background: '#0f1117', padding: 6 }}>
+                          <img
+                            src={`data:image/svg+xml;charset=utf-8,${encodeURIComponent(entry.svg)}`}
+                            alt={entry.name}
+                            style={{ width: '100%', height: 80, objectFit: 'contain', display: 'block' }}
+                          />
+                        </div>
+                        <div style={{ padding: '5px 8px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                          <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.45)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1 }}>{entry.name}</span>
+                        </div>
+                      </button>
+                      <button
+                        onClick={(e) => { e.stopPropagation(); deleteSavedSvg(entry.id); setSavedSvgs(getSavedSvgs()); }}
+                        title="Löschen"
+                        style={{ position: 'absolute', top: 4, right: 4, background: 'rgba(0,0,0,0.5)', border: 'none', borderRadius: 5, padding: 3, cursor: 'pointer', color: 'rgba(255,255,255,0.4)', display: 'flex', alignItems: 'center' }}
+                        onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.color = '#f87171'; }}
+                        onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.color = 'rgba(255,255,255,0.4)'; }}
+                      >
+                        <Trash2 size={10} />
+                      </button>
+                      {copiedId === entry.id && <div style={{ position: 'absolute', top: 4, left: 4, color: '#818cf8' }}><Check size={10} /></div>}
+                    </div>
+                  ))}
+                </div>
+          )}
 
           {/* Icons */}
           {tab === 'icons' && (

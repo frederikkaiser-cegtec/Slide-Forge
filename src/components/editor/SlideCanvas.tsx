@@ -8,6 +8,112 @@ import { getFormat } from '../../utils/formats';
 import type { SlideElement } from '../../types';
 import { FONTS } from '../../utils/cegtecTheme';
 
+// ── Resize / Move handles overlay ─────────────────────────────────────────
+
+type HandleId = 'nw' | 'n' | 'ne' | 'e' | 'se' | 's' | 'sw' | 'w' | 'move';
+
+function ResizeHandles({
+  element,
+  canvasWidth,
+  canvasHeight,
+  baseWidth,
+  baseHeight,
+  onUpdate,
+}: {
+  element: SlideElement;
+  canvasWidth: number;
+  canvasHeight: number;
+  baseWidth: number;
+  baseHeight: number;
+  onUpdate: (updates: Partial<SlideElement>) => void;
+}) {
+  const dragRef = useRef<{
+    handle: HandleId;
+    startX: number;
+    startY: number;
+    origX: number;
+    origY: number;
+    origW: number;
+    origH: number;
+  } | null>(null);
+
+  const scaleX = canvasWidth / baseWidth;
+  const scaleY = canvasHeight / baseHeight;
+  const left = (element.x / 100) * baseWidth * scaleX;
+  const top = (element.y / 100) * baseHeight * scaleY;
+  const width = (element.width / 100) * baseWidth * scaleX;
+  const height = (element.height / 100) * baseHeight * scaleY;
+
+  const startDrag = useCallback((e: React.MouseEvent, handle: HandleId) => {
+    e.preventDefault();
+    e.stopPropagation();
+    dragRef.current = {
+      handle,
+      startX: e.clientX,
+      startY: e.clientY,
+      origX: element.x,
+      origY: element.y,
+      origW: element.width,
+      origH: element.height,
+    };
+
+    const onMove = (ev: MouseEvent) => {
+      if (!dragRef.current) return;
+      const { handle: h, startX, startY, origX, origY, origW, origH } = dragRef.current;
+      // Convert pixel delta to % of slide
+      const dx = ((ev.clientX - startX) / canvasWidth) * 100;
+      const dy = ((ev.clientY - startY) / canvasHeight) * 100;
+      let x = origX, y = origY, w = origW, hh = origH;
+      if (h === 'move') { x = origX + dx; y = origY + dy; }
+      else {
+        if (h.includes('e')) w = Math.max(3, origW + dx);
+        if (h.includes('s')) hh = Math.max(3, origH + dy);
+        if (h.includes('w')) { x = origX + dx; w = Math.max(3, origW - dx); }
+        if (h.includes('n')) { y = origY + dy; hh = Math.max(3, origH - dy); }
+      }
+      onUpdate({ x, y, width: w, height: hh });
+    };
+
+    const onUp = () => {
+      dragRef.current = null;
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseup', onUp);
+    };
+
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+  }, [element, canvasWidth, canvasHeight, onUpdate]);
+
+  const handles: Array<{ id: HandleId; lx: number; ly: number; cursor: string }> = [
+    { id: 'nw', lx: left,           ly: top,            cursor: 'nw-resize' },
+    { id: 'n',  lx: left + width/2, ly: top,            cursor: 'n-resize'  },
+    { id: 'ne', lx: left + width,   ly: top,            cursor: 'ne-resize' },
+    { id: 'e',  lx: left + width,   ly: top + height/2, cursor: 'e-resize'  },
+    { id: 'se', lx: left + width,   ly: top + height,   cursor: 'se-resize' },
+    { id: 's',  lx: left + width/2, ly: top + height,   cursor: 's-resize'  },
+    { id: 'sw', lx: left,           ly: top + height,   cursor: 'sw-resize' },
+    { id: 'w',  lx: left,           ly: top + height/2, cursor: 'w-resize'  },
+  ];
+
+  return (
+    <>
+      {/* Outline */}
+      <div style={{ position: 'absolute', left, top, width, height, border: '2px solid #3b82f6', pointerEvents: 'none', zIndex: 10 }} />
+      {/* Move zone */}
+      <div style={{ position: 'absolute', left, top, width, height, cursor: 'move', zIndex: 11 }}
+        onMouseDown={(e) => startDrag(e, 'move')} />
+      {/* Resize handles */}
+      {handles.map((h) => (
+        <div key={h.id}
+          style={{ position: 'absolute', left: h.lx - 5, top: h.ly - 5, width: 10, height: 10,
+            background: 'white', border: '2px solid #3b82f6', borderRadius: 2,
+            cursor: h.cursor, zIndex: 12 }}
+          onMouseDown={(e) => startDrag(e, h.id)} />
+      ))}
+    </>
+  );
+}
+
 export function SlideCanvas() {
   const slides = usePresentationStore((s) => s.presentation.slides);
   const formatId = usePresentationStore((s) => s.presentation.formatId);
@@ -27,6 +133,7 @@ export function SlideCanvas() {
   const currentSlide = slides.find((s) => s.id === selectedSlideId);
   const format = getFormat(formatId ?? '16:9');
   const aspect = format.width / format.height;
+  const selectedElement = currentSlide?.elements.find((e) => e.id === selectedElementId);
 
   const updateSize = useCallback(() => {
     if (!containerRef.current) return;
@@ -98,7 +205,7 @@ export function SlideCanvas() {
 
       <div className="relative" style={{ width: canvasSize.width, height: canvasSize.height }}>
         {/* Main canvas */}
-        <div className="rounded-lg overflow-hidden shadow-2xl ring-1 ring-border">
+        <div className="rounded-lg overflow-hidden shadow-2xl ring-1 ring-border" style={{ position: 'relative', zIndex: 1 }}>
           {editingElementId ? (
             <EditableSlideView
               slide={currentSlide}
@@ -138,6 +245,18 @@ export function SlideCanvas() {
             />
           )}
         </div>
+
+        {/* Resize/move handles for selected element */}
+        {selectedElement && !editingElementId && !selectedElement.locked && (
+          <ResizeHandles
+            element={selectedElement}
+            canvasWidth={canvasSize.width}
+            canvasHeight={canvasSize.height}
+            baseWidth={format.width}
+            baseHeight={format.height}
+            onUpdate={(updates) => handleElementUpdate(selectedElement.id, updates)}
+          />
+        )}
       </div>
     </div>
   );

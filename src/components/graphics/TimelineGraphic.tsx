@@ -20,15 +20,15 @@ export interface TimelineData {
 }
 
 export const defaultTimelineData: TimelineData = {
-  topLabel: 'IMPLEMENTATION ROADMAP',
-  headline: 'In 4 Schritten zum\ndatengetriebenen Vertrieb',
+  topLabel: 'COLD EMAIL ARCHITEKTUR',
+  headline: '4 E-Mails.\nSteigende Abstände.\nBis zu 10% Reply Rate.',
   steps: [
-    { title: 'Daten-Audit', description: 'Bestehende Quellen analysieren und Qualität bewerten', duration: 'Woche 1-2' },
-    { title: 'Enrichment Setup', description: 'Datenanreicherung und Scoring-Modelle konfigurieren', duration: 'Woche 3-4' },
-    { title: 'Outreach Launch', description: 'Personalisierte Multichannel-Kampagnen starten', duration: 'Woche 5-6' },
-    { title: 'Optimierung', description: 'A/B-Tests, Feedback-Loops und Pipeline-Skalierung', duration: 'Fortlaufend' },
+    { title: 'Problem + Quick Win', description: 'Konkretes Problem benennen, sofortigen Nutzwert liefern. Kein Meeting-Pitch.', duration: 'Tag 1' },
+    { title: 'Social Proof + Risk Reversal', description: 'Kundenbeispiel mit Zahlen. Zeigen, was der Empfänger NICHT tun muss.', duration: 'Tag 4' },
+    { title: 'Multiple-Choice Einwand', description: 'Checkboxen statt Frage nach Termin. Niedrige Hürde, erzwingt Antwort.', duration: 'Tag 9' },
+    { title: 'Akte schließen (Breakup)', description: 'Kein Follow-Up, sondern Verabschiedung. Stärkstes Argument, eine Ressource.', duration: 'Tag 16' },
   ],
-  bottomLine: 'cegtec.net — Vom Audit zur Pipeline in 6 Wochen',
+  bottomLine: 'cegtec.net  ·  Struktur, Rhythmus, Disziplin.',
   ...CEGTEC_LIGHT_DEFAULTS,
 };
 

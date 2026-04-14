@@ -21,6 +21,7 @@ export interface ChartConfig {
     padding: number;
     xAxisLabel: string;
     yAxisLabel: string;
+    logScale?: boolean;
   };
   width: number;
   height: number;
@@ -116,15 +117,26 @@ export function generateBarHSvg(config: ChartConfig): string {
 
   const allV = series.flatMap((s) => s.values).filter(isFinite);
   const xMax = niceMax(Math.max(...allV, 1));
+  const logScale = style.logScale ?? false;
   const nTicks = 5;
+
+  // Bar width: log scale compresses huge ranges so small values stay visible
+  const toBarW = (v: number) => {
+    if (v <= 0) return 0;
+    if (logScale) return (Math.log(v + 1) / Math.log(xMax + 1)) * plotW;
+    return Math.max(0, (v / xMax) * plotW);
+  };
 
   let out = '';
 
-  for (let i = 0; i <= nTicks; i++) {
-    const v = (xMax / nTicks) * i;
-    const x = ml + (v / xMax) * plotW;
-    if (showGrid) out += `<line x1="${f1(x)}" y1="${mt}" x2="${f1(x)}" y2="${f1(mt + plotH)}" stroke="${gridColor}" stroke-width="1" opacity="0.35"/>`;
-    out += `<text x="${f1(x)}" y="${f1(mt + plotH + fs + 5)}" text-anchor="middle" fill="${textColor}" font-family="${fontFamily}" font-size="${fs}" opacity="0.7">${fmt(v)}</text>`;
+  // Linear axis ticks only make sense without log scale
+  if (!logScale) {
+    for (let i = 0; i <= nTicks; i++) {
+      const v = (xMax / nTicks) * i;
+      const x = ml + (v / xMax) * plotW;
+      if (showGrid) out += `<line x1="${f1(x)}" y1="${mt}" x2="${f1(x)}" y2="${f1(mt + plotH)}" stroke="${gridColor}" stroke-width="1" opacity="0.35"/>`;
+      out += `<text x="${f1(x)}" y="${f1(mt + plotH + fs + 5)}" text-anchor="middle" fill="${textColor}" font-family="${fontFamily}" font-size="${fs}" opacity="0.7">${fmt(v)}</text>`;
+    }
   }
 
   const gH = plotH / nG;
@@ -137,7 +149,7 @@ export function generateBarHSvg(config: ChartConfig): string {
     out += `<text x="${f1(ml - 8)}" y="${f1(gy + gH / 2 + fs * 0.35)}" text-anchor="end" fill="${textColor}" font-family="${fontFamily}" font-size="${fs}" opacity="0.7">${xLabels[gi] ?? ''}</text>`;
     for (let si = 0; si < nS; si++) {
       const v = series[si].values[gi] ?? 0;
-      const bw = Math.max(0, (v / xMax) * plotW);
+      const bw = toBarW(v);
       const by = gy + innerPad + si * (bH + gap);
       const rx = Math.min(style.barRadius, bH / 2, bw > 0 ? bw / 2 : 0);
       out += `<rect x="${ml}" y="${f1(by)}" width="${f1(bw)}" height="${f1(bH)}" fill="${series[si].color}" rx="${rx}"/>`;

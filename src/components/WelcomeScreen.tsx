@@ -1,14 +1,18 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useLayoutEffect, useRef } from 'react';
+import { getDefinition } from '../registry';
+import { getFormat } from '../utils/formats';
 import {
   Palette, GitBranch, Presentation, ArrowUpRight,
   Search, Image, BarChart3, Trophy, Boxes, LayoutDashboard,
   GraduationCap, Database, DatabaseZap, ScanSearch,
   Mail, Radio, Layers, Bot, MessageSquareText,
-  GitCompare, Clock, Filter,
+  GitCompare, Clock, Filter, FileCode, Quote,
+  GalleryHorizontal, BarChart2,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { BlurFade } from './ui/blur-fade';
 import { DotPattern } from './ui/dot-pattern';
+import { GraphicPreview } from './ui/GraphicPreview';
 import { cn } from '@/lib/utils';
 import { useEditorStore } from '../stores/editorStore';
 import { LOGO_URL } from '../utils/assets';
@@ -32,6 +36,8 @@ const TEMPLATES = [
   { id: 'comparison', label: 'Vergleich', icon: GitCompare, category: 'other', desc: 'Vorher/Nachher Vergleich' },
   { id: 'timeline', label: 'Timeline', icon: Clock, category: 'other', desc: 'Roadmap & Zeitplan' },
   { id: 'funnel', label: 'Funnel', icon: Filter, category: 'other', desc: 'Sales Funnel Visualisierung' },
+  { id: 'prompt-card', label: 'Prompt Card', icon: FileCode, category: 'other', desc: 'Copy-Paste Prompt Save-Magnet' },
+  { id: 'quote-card', label: 'Quote Card', icon: Quote, category: 'other', desc: 'Zitat + Foto Ad-Visual' },
 ];
 
 const CATEGORIES = [
@@ -47,9 +53,25 @@ const MODES = [
     id: 'graphic' as const,
     icon: Palette,
     title: 'Grafiken',
-    desc: '17 Vorlagen im CegTec Design',
+    desc: '18 Vorlagen im CegTec Design',
     gradient: 'from-indigo-500 to-violet-500',
     bg: 'bg-indigo-500/8',
+  },
+  {
+    id: 'carousel' as const,
+    icon: GalleryHorizontal,
+    title: 'Carousel',
+    desc: 'Multi-Slide PDF für LinkedIn',
+    gradient: 'from-pink-500 to-rose-500',
+    bg: 'bg-pink-500/8',
+  },
+  {
+    id: 'charts' as const,
+    icon: BarChart2,
+    title: 'Charts',
+    desc: 'Datenvisualisierung mit Recharts',
+    gradient: 'from-sky-500 to-blue-500',
+    bg: 'bg-sky-500/8',
   },
   {
     id: 'diagram' as const,
@@ -68,6 +90,52 @@ const MODES = [
     bg: 'bg-amber-500/8',
   },
 ];
+
+// ── PreviewBox ───────────────────────────────────────────────────
+// Fits GraphicPreview into its parent box, preserving the graphic's native
+// aspect ratio (letterboxed inside the card's 4:3 frame).
+function PreviewBox({ graphicType }: { graphicType: string }) {
+  const boxRef = useRef<HTMLDivElement>(null);
+  const [size, setSize] = useState({ w: 0, h: 0 });
+
+  useLayoutEffect(() => {
+    const el = boxRef.current;
+    if (!el) return;
+    const measure = () => {
+      const r = el.getBoundingClientRect();
+      setSize({ w: r.width, h: r.height });
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  const def = useMemo(() => {
+    try { return getDefinition(graphicType); } catch { return null; }
+  }, [graphicType]);
+
+  if (!def) {
+    return <div ref={boxRef} className="absolute inset-0" />;
+  }
+
+  const format = getFormat(def.defaultFormat);
+  // Fit contained: max width/height respecting the graphic's native aspect.
+  const scaleByW = size.w / format.width;
+  const scaleByH = size.h / format.height;
+  const fitScale = Math.min(scaleByW, scaleByH) * 0.92; // small inner padding
+  const displayW = Math.max(0, Math.round(format.width * fitScale));
+
+  return (
+    <div ref={boxRef} className="absolute inset-0 flex items-center justify-center">
+      {size.w > 0 && displayW > 0 && (
+        <div className="rounded-md overflow-hidden shadow-sm ring-1 ring-black/[0.04]">
+          <GraphicPreview graphicType={graphicType} width={displayW} />
+        </div>
+      )}
+    </div>
+  );
+}
 
 // ── Greeting ─────────────────────────────────────────────────────
 function getGreeting() {
@@ -142,7 +210,7 @@ export function WelcomeScreen() {
 
         {/* ── Mode Cards ─────────────────────────────────── */}
         <BlurFade delay={0.24} inView>
-          <div className="grid grid-cols-3 gap-3 mb-14">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mb-14">
             {MODES.map(({ id, icon: Icon, title, desc, gradient, bg }) => (
               <button
                 key={id}
@@ -224,29 +292,28 @@ export function WelcomeScreen() {
                   onClick={() => handleTemplateClick(template.id)}
                   className="group w-full text-left rounded-xl border border-border/50 bg-surface shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md hover:border-border cursor-pointer"
                 >
-                  {/* Preview area */}
-                  <div className="aspect-[4/3] w-full bg-gradient-to-br from-muted/40 to-bg/60 flex flex-col items-center justify-center gap-2 relative overflow-hidden">
-                    {/* Decorative grid */}
-                    <div className="absolute inset-0 opacity-[0.03]" style={{
-                      backgroundImage: 'linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)',
-                      backgroundSize: '20px 20px',
-                    }} />
+                  {/* Preview area — live render of the actual graphic */}
+                  <div className="aspect-[4/3] w-full bg-gradient-to-br from-muted/30 to-bg/80 relative overflow-hidden flex items-center justify-center">
+                    <PreviewBox graphicType={template.id} />
 
-                    {/* Accent glow */}
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-16 bg-primary/5 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    {/* Hover tint */}
+                    <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/[0.04] transition-colors duration-300 pointer-events-none" />
 
-                    <div className="relative z-10 w-10 h-10 rounded-xl bg-surface/60 border border-border/30 flex items-center justify-center group-hover:border-primary/20 group-hover:bg-primary/5 transition-all duration-300">
-                      <Icon size={18} className="text-text-muted/40 group-hover:text-primary/70 transition-colors duration-300" />
-                    </div>
-                    <span className="relative z-10 text-[10px] font-medium text-text-muted/30 uppercase tracking-wider group-hover:text-text-muted/50 transition-colors">
+                    {/* Category chip — top left */}
+                    <span className="absolute top-2 left-2 z-10 text-[9px] font-semibold text-text-muted/50 uppercase tracking-wider bg-surface/80 backdrop-blur-sm px-1.5 py-0.5 rounded">
                       {template.category === 'case-studies' ? 'Case Study' : template.category === 'pipeline' ? 'Pipeline' : template.category === 'outreach' ? 'Outreach' : 'Tool'}
+                    </span>
+
+                    {/* Icon chip — top right */}
+                    <span className="absolute top-2 right-2 z-10 w-5 h-5 rounded bg-surface/80 backdrop-blur-sm flex items-center justify-center">
+                      <Icon size={11} className="text-text-muted/50" />
                     </span>
                   </div>
 
                   {/* Label */}
-                  <div className="px-3 py-3">
+                  <div className="px-3 py-2.5 border-t border-border/30">
                     <p className="text-[13px] font-medium text-text/80 group-hover:text-text transition-colors">{template.label}</p>
-                    <p className="text-[11px] text-text-muted/35 mt-0.5">{template.desc}</p>
+                    <p className="text-[11px] text-text-muted/40 mt-0.5 truncate">{template.desc}</p>
                   </div>
                 </motion.button>
               </BlurFade>

@@ -19,6 +19,7 @@ import { LayerPanel } from './components/graphics/LayerPanel';
 import { CarouselMode } from './components/carousel/CarouselMode';
 import { ChartBuilder } from './components/charts/ChartBuilder';
 import { type Layer, createSvgLayer, createTextLayer } from './types/layers';
+import { shouldLoadBridge, initBridge } from './bridge';
 
 // ── State via useReducer ────────────────────────────────────────
 type GraphicState = Record<string, unknown>;
@@ -46,7 +47,7 @@ const GRAPHIC_CATEGORIES = [
   { label: 'Case Studies', ids: ['case-study', 'roi', 'kpi-banner', 'infographic'] },
   { label: 'Daten-Pipeline', ids: ['raw-data', 'enriched-data', 'qualified-data'] },
   { label: 'Outreach', ids: ['personalized-outreach', 'multichannel-outreach', 'outbound-stack', 'outreach-pipeline'] },
-  { label: 'Weitere', ids: ['revenue-systems', 'academy', 'agent-friendly', 'linkedin-post', 'comparison', 'timeline', 'funnel'] },
+  { label: 'Weitere', ids: ['revenue-systems', 'academy', 'agent-friendly', 'linkedin-post', 'comparison', 'timeline', 'funnel', 'prompt-card', 'quote-card'] },
 ];
 
 function GraphicTypeSelector({ graphicType, onSwitch }: { graphicType: string; onSwitch: (id: string) => void }) {
@@ -99,6 +100,17 @@ function App() {
   const format = FORMAT_PRESETS.find((f) => f.id === formatId) ?? FORMAT_PRESETS[0];
   const def = getDefinition(graphicType);
 
+  // Bridge for server-side rendering (only when ?mcp=1)
+  useEffect(() => {
+    if (!shouldLoadBridge()) return;
+    initBridge();
+    window.__SF_DISPATCH__ = dispatch;
+    window.__SF_SET_GRAPHIC_TYPE__ = (type: string) => handleSwitchType(type);
+    window.__SF_SET_FORMAT__ = (fid: string) => setFormatId(fid);
+    // In MCP mode, skip welcome screen and go straight to graphic mode
+    setMode('graphic');
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   const addLayer = useCallback((layer: Layer) => {
     setLayers((ls) => [...ls, layer]);
     setSelectedLayerId(layer.id);
@@ -140,6 +152,20 @@ function App() {
     window.addEventListener('sf:insert-svg', handler);
     return () => window.removeEventListener('sf:insert-svg', handler);
   }, [addLayer, setMode]);
+
+  // Delete selected layer with keyboard
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (!selectedLayerId) return;
+      if (e.key !== 'Delete' && e.key !== 'Backspace') return;
+      const tag = (e.target as HTMLElement)?.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || (e.target as HTMLElement)?.isContentEditable) return;
+      e.preventDefault();
+      deleteLayer(selectedLayerId);
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [selectedLayerId, deleteLayer]);
 
   // ── Save ────────────────────────────────────────────────────
   const handleSaveGraphic = useCallback(() => {
@@ -366,6 +392,7 @@ function App() {
       {/* Preview */}
       <div className="flex-1 flex items-center justify-center bg-bg p-8 overflow-auto">
         <div
+          id="sf-graphic-root"
           ref={graphicRef}
           style={{
             width: format.width,

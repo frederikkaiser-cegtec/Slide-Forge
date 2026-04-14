@@ -1,6 +1,7 @@
 import { useState, useMemo, useCallback } from 'react';
 import { BarChart2, TrendingUp, Activity, PieChart, Plus, X, Copy, ArrowRight, AlignLeft } from 'lucide-react';
 import { type ChartConfig, type ChartSeries, generateSvg } from './chartUtils';
+import { saveSvg } from '../../utils/svgStore';
 
 const PALETTE = ['#6366f1', '#22d3ee', '#f59e0b', '#10b981', '#f43f5e', '#8b5cf6', '#14b8a6'];
 
@@ -17,9 +18,21 @@ const DEFAULT_STYLE: ChartConfig['style'] = {
   padding: 10,
   xAxisLabel: '',
   yAxisLabel: '',
+  logScale: false,
 };
 
-const PRESETS: Array<{ label: string; config: Omit<ChartConfig, 'style' | 'width' | 'height'> }> = [
+const PRESETS: Array<{ label: string; config: Omit<ChartConfig, 'style' | 'width' | 'height'>; style?: Partial<ChartConfig['style']>; width?: number; height?: number }> = [
+  {
+    label: 'Funnel',
+    config: {
+      type: 'bar-h',
+      xLabels: ['Kontaktiert', 'Geantwortet', 'Qual. Replies', 'Meetings'],
+      series: [{ name: 'Leads', values: [500, 75, 9, 5], color: '#6366f1' }],
+    },
+    style: { backgroundColor: 'transparent', textColor: '#e2e8f0', gridColor: '#334155', showValues: true, showLegend: false, barRadius: 6, xAxisLabel: 'Leads (Pilot: 500 Kontakte)', yAxisLabel: '', logScale: true },
+    width: 700,
+    height: 320,
+  },
   {
     label: 'Reply Rate',
     config: {
@@ -199,10 +212,16 @@ export function ChartBuilder() {
     setCsvText('');
   }, [csvText, config.series, patch]);
 
+  const [savedFlash, setSavedFlash] = useState(false);
+
   const handleInsert = useCallback(() => {
     if (!svgString) return;
+    const typeLabel = config.type === 'bar' ? 'Balken' : config.type === 'bar-h' ? 'Balken H' : config.type === 'line' ? 'Linie' : config.type === 'area' ? 'Area' : 'Pie';
+    saveSvg(svgString, `${typeLabel}-Chart`);
+    setSavedFlash(true);
+    setTimeout(() => setSavedFlash(false), 1800);
     window.dispatchEvent(new CustomEvent('sf:insert-svg', { detail: svgString }));
-  }, [svgString]);
+  }, [svgString, config.type]);
 
   const handleCopy = useCallback(() => {
     if (svgString) navigator.clipboard.writeText(svgString);
@@ -223,7 +242,10 @@ export function ChartBuilder() {
               {PRESETS.map((pr) => (
                 <button
                   key={pr.label}
-                  onClick={() => patch({ ...pr.config })}
+                  onClick={() => {
+                    patch({ ...pr.config, ...(pr.width ? { width: pr.width } : {}), ...(pr.height ? { height: pr.height } : {}) });
+                    if (pr.style) patchStyle(pr.style);
+                  }}
                   className="px-2.5 py-1 rounded-md text-[11px] font-medium bg-muted/60 text-text-muted hover:text-text hover:bg-muted transition-colors"
                 >
                   {pr.label}
@@ -500,6 +522,9 @@ export function ChartBuilder() {
               <Toggle label="Grid" value={config.style.showGrid} onChange={(v) => patchStyle({ showGrid: v })} />
               <Toggle label="Legende" value={config.style.showLegend} onChange={(v) => patchStyle({ showLegend: v })} />
               <Toggle label="Werte anzeigen" value={config.style.showValues} onChange={(v) => patchStyle({ showValues: v })} />
+              {config.type === 'bar-h' && (
+                <Toggle label="Log Scale" value={config.style.logScale ?? false} onChange={(v) => patchStyle({ logScale: v })} />
+              )}
             </div>
           </div>
 
@@ -574,7 +599,8 @@ export function ChartBuilder() {
             disabled={!svgString}
             className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-primary hover:bg-primary-hover text-white text-sm rounded-lg font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
           >
-            <ArrowRight size={14} /> Als SVG einfügen
+            <ArrowRight size={14} />
+            {savedFlash ? '✓ Gespeichert & eingefügt' : 'Als SVG einfügen'}
           </button>
           <button
             onClick={handleCopy}

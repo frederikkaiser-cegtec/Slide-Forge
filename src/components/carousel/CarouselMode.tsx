@@ -1,16 +1,17 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { toPng } from 'html-to-image';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { toPng, toJpeg } from 'html-to-image';
 import JSZip from 'jszip';
-import jsPDF from 'jspdf';
-import { Plus, Trash2, ChevronLeft, ChevronRight, Download, Archive, ChevronDown, ChevronUp, Layers, Copy, FileText, Save, FolderOpen, X } from 'lucide-react';
+import { Plus, Trash2, ChevronLeft, ChevronRight, Download, Archive, ChevronDown, ChevronUp, Layers, Copy, FileText, Save, FolderOpen, X, ZoomIn, ZoomOut, Maximize2 } from 'lucide-react';
 import { useCarouselStore } from '../../stores/carouselStore';
-import { useSavedGraphicsStore } from '../../stores/savedGraphicsStore';
+import { exportElementsAsRasterPdf } from '../../utils/exportRasterPdf';
+import { useSavedGraphicsStore, CAROUSEL_PRESETS } from '../../stores/savedGraphicsStore';
 import { GRAPHIC_REGISTRY, getDefinition } from '../../registry';
 import { FORMAT_PRESETS, getFormat } from '../../utils/formats';
 import { useEditorStore } from '../../stores/editorStore';
 import { AssetLibraryModal } from '../graphics/AssetLibraryModal';
 import { LayerCanvas, normalizeSvgSize } from '../graphics/LayerCanvas';
 import { LayerPanel } from '../graphics/LayerPanel';
+import { GraphicPreview } from '../ui/GraphicPreview';
 import { type Layer, type TextLayer, createSvgLayer, createTextLayer } from '../../types/layers';
 import { defaultOutreachPipelineData } from '../graphics/OutreachPipelineGraphic';
 
@@ -109,16 +110,30 @@ function Thumbnail({ graphicType, formatId, data, layers, active, index, onClick
 function SetupScreen() {
   const { create } = useCarouselStore();
   const { graphics, remove } = useSavedGraphicsStore();
-  const savedCarousels = graphics.filter((g) => g.type === 'carousel');
+  // User-saved carousels (exclude presets — those are always hardcoded)
+  const userCarousels = graphics.filter((g) => g.type === 'carousel' && !g.id.startsWith('preset-'));
+  const [showCreateForm, setShowCreateForm] = useState(false);
 
   const handlePipelineSplit = () => {
     const base = structuredClone(defaultOutreachPipelineData);
-    const slides = base.phases.map((_, pi) => ({
+    const coverSlide = {
+      id: crypto.randomUUID(),
+      data: { ...structuredClone(base), isCover: true },
+      layers: [] as Layer[],
+    };
+    const phaseSlides = base.phases.map((_, pi) => ({
       id: crypto.randomUUID(),
       data: { ...structuredClone(base), activePhaseIndex: pi },
       layers: [] as Layer[],
     }));
+    const slides = [coverSlide, ...phaseSlides];
     useCarouselStore.setState({ carousel: { graphicType: 'outreach-pipeline', formatId: '4:5', slides }, activeSlideId: slides[0].id });
+  };
+
+  const loadCarousel = (g: (typeof userCarousels)[0]) => {
+    const c = g.data as { graphicType: string; formatId: string; slides: any[] };
+    const slides = c.slides.map((sl: any) => ({ ...sl, id: crypto.randomUUID() }));
+    useCarouselStore.setState({ carousel: { graphicType: c.graphicType, formatId: c.formatId, slides }, activeSlideId: slides[0].id });
   };
 
   const [graphicType, setGraphicType] = useState('outreach-pipeline');
@@ -127,84 +142,143 @@ function SetupScreen() {
   const types = GRAPHIC_REGISTRY.filter((d) => !['kpi-banner'].includes(d.id));
 
   return (
-    <div className="flex-1 flex items-center justify-center bg-bg">
-      <div className="bg-surface border border-border/60 rounded-2xl p-8 w-[420px] space-y-5 shadow-xl">
-        <div>
-          <h2 className="text-lg font-semibold text-text" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Carousel erstellen</h2>
-          <p className="text-sm text-text-muted mt-1">Mehrere Slides desselben Templates bearbeiten &amp; exportieren</p>
-        </div>
-        <div className="space-y-3">
-          <div>
-            <label className="text-[11px] text-text-muted/60 uppercase tracking-wider font-medium block mb-1.5">Grafik-Typ</label>
-            <select value={graphicType} onChange={(e) => setGraphicType(e.target.value)}
-              className="w-full bg-muted/40 border border-border/50 rounded-lg px-3 py-2 text-sm text-text outline-none focus:border-primary/40">
-              {types.map((d) => <option key={d.id} value={d.id}>{d.label}</option>)}
-            </select>
-          </div>
-          <div>
-            <label className="text-[11px] text-text-muted/60 uppercase tracking-wider font-medium block mb-1.5">Format</label>
-            <select value={formatId} onChange={(e) => setFormatId(e.target.value)}
-              className="w-full bg-muted/40 border border-border/50 rounded-lg px-3 py-2 text-sm text-text outline-none focus:border-primary/40">
-              {FORMAT_PRESETS.map((f) => <option key={f.id} value={f.id}>{f.label}</option>)}
-            </select>
-          </div>
-          <div>
-            <label className="text-[11px] text-text-muted/60 uppercase tracking-wider font-medium block mb-1.5">Anzahl Slides: {count}</label>
-            <input type="range" min={1} max={12} value={count} onChange={(e) => setCount(+e.target.value)} className="w-full accent-primary" />
-            <div className="flex justify-between text-[10px] text-text-muted/40 mt-0.5"><span>1</span><span>12</span></div>
-          </div>
-        </div>
-        <div className="border border-border/60 rounded-xl p-4 bg-muted/20">
-          <div className="flex items-center gap-2 mb-2">
-            <Layers size={14} className="text-primary" />
-            <span className="text-sm font-semibold text-text" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Pipeline aufteilen</span>
-          </div>
-          <p className="text-xs text-text-muted mb-3">Erstellt automatisch 5 Slides — je eine pro Phase</p>
-          <button onClick={handlePipelineSplit}
-            className="w-full py-2 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20 rounded-lg font-medium text-sm transition-colors">
-            Pipeline → 5 Slides
-          </button>
-        </div>
-        <div className="relative flex items-center gap-2">
-          <div className="flex-1 h-px bg-border/40" />
-          <span className="text-[10px] text-text-muted/40 uppercase tracking-wider">oder manuell</span>
-          <div className="flex-1 h-px bg-border/40" />
-        </div>
-        <button onClick={() => create(graphicType, formatId, count)}
-          className="w-full py-2.5 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium text-sm transition-colors">
-          {count} Slides erstellen
-        </button>
+    <div className="flex-1 flex items-center justify-center bg-bg p-8">
+      <div className="w-full max-w-2xl space-y-4">
 
-        {/* Saved templates */}
-        {savedCarousels.length > 0 && (
-          <div className="pt-2 border-t border-border/40 space-y-2">
-            <div className="flex items-center gap-1.5">
-              <FolderOpen size={12} className="text-text-muted/50" />
-              <span className="text-[11px] text-text-muted/60 uppercase tracking-wider font-medium">Gespeicherte Vorlagen</span>
+        {/* Header */}
+        <div className="mb-6">
+          <h2 className="text-xl font-semibold text-text" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Carousel</h2>
+          <p className="text-sm text-text-muted mt-1">Mehrere Slides exportieren als PDF oder ZIP</p>
+        </div>
+
+        {/* CegTec Presets — always visible, hardcoded */}
+        <div className="space-y-2">
+          <div className="flex items-center gap-1.5 mb-3">
+            <Layers size={13} className="text-primary" />
+            <span className="text-[12px] text-text font-semibold uppercase tracking-wider" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>CegTec Vorlagen</span>
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            {CAROUSEL_PRESETS.map((g) => {
+              const c = g.data as { graphicType: string; formatId: string; slides: { data: unknown }[] };
+              const firstSlideData = c.slides?.[0]?.data;
+              return (
+                <button key={g.id} onClick={() => loadCarousel(g)}
+                  className="w-full text-left bg-surface border border-border/60 hover:border-primary/50 rounded-xl overflow-hidden transition-all hover:shadow-md hover:shadow-primary/5 group">
+                  {/* Preview */}
+                  <div className="relative bg-gradient-to-br from-muted/30 to-bg/80 aspect-[4/3] flex items-center justify-center overflow-hidden">
+                    <div className="rounded-md overflow-hidden shadow-sm ring-1 ring-black/[0.04]">
+                      <GraphicPreview graphicType={c.graphicType} formatId={c.formatId} data={firstSlideData} width={140} />
+                    </div>
+                    {/* Slide-count badge */}
+                    <span className="absolute bottom-2 right-2 z-10 text-[10px] font-semibold text-text bg-surface/90 backdrop-blur-sm px-2 py-0.5 rounded-md shadow-sm flex items-center gap-1">
+                      <Layers size={10} className="text-primary" />
+                      {c.slides?.length ?? 0}
+                    </span>
+                  </div>
+                  {/* Label */}
+                  <div className="p-3 border-t border-border/30">
+                    <div className="text-[13px] font-semibold text-text truncate" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{g.name}</div>
+                    <div className="text-[11px] text-text-muted mt-0.5">{c.slides?.length ?? '?'} Slides · {g.formatId}</div>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* User-saved carousels */}
+        {userCarousels.length > 0 && (
+          <div className="space-y-2 pt-2">
+            <div className="flex items-center gap-1.5 mb-2">
+              <FolderOpen size={13} className="text-text-muted/60" />
+              <span className="text-[11px] text-text-muted font-semibold uppercase tracking-wider">Gespeichert</span>
             </div>
-            <div className="space-y-1.5 max-h-48 overflow-y-auto">
-              {savedCarousels.map((g) => (
-                <div key={g.id} className="flex items-center gap-2 group">
-                  <button
-                    onClick={() => {
-                      const c = g.data as { graphicType: string; formatId: string; slides: any[] };
-                      const slides = c.slides.map((sl: any) => ({ ...sl, id: crypto.randomUUID() }));
-                      useCarouselStore.setState({
-                        carousel: { graphicType: c.graphicType, formatId: c.formatId, slides },
-                        activeSlideId: slides[0].id,
-                      });
-                    }}
-                    className="flex-1 text-left px-3 py-2 rounded-lg bg-muted/40 hover:bg-muted/70 border border-border/40 hover:border-primary/30 transition-colors"
-                  >
-                    <div className="text-[12px] font-medium text-text truncate">{g.name}</div>
-                    <div className="text-[10px] text-text-muted/50 mt-0.5">{(g.data as any)?.slides?.length ?? '?'} Slides · {g.formatId}</div>
-                  </button>
-                  <button onClick={() => remove(g.id)}
-                    className="opacity-0 group-hover:opacity-100 p-1 text-text-muted/40 hover:text-red-400 transition-all">
-                    <X size={12} />
-                  </button>
+            <div className="grid grid-cols-2 gap-3">
+              {userCarousels.map((g) => {
+                const c = g.data as { graphicType: string; formatId: string; slides: { data: unknown }[] };
+                const firstSlideData = c.slides?.[0]?.data;
+                return (
+                  <div key={g.id} className="relative group">
+                    <button onClick={() => loadCarousel(g)}
+                      className="w-full text-left bg-surface border border-border/60 hover:border-primary/50 rounded-xl overflow-hidden transition-all hover:shadow-md hover:shadow-primary/5">
+                      <div className="relative bg-gradient-to-br from-muted/30 to-bg/80 aspect-[4/3] flex items-center justify-center overflow-hidden">
+                        <div className="rounded-md overflow-hidden shadow-sm ring-1 ring-black/[0.04]">
+                          <GraphicPreview graphicType={c.graphicType} formatId={c.formatId} data={firstSlideData} width={140} />
+                        </div>
+                        <span className="absolute bottom-2 right-2 z-10 text-[10px] font-semibold text-text bg-surface/90 backdrop-blur-sm px-2 py-0.5 rounded-md shadow-sm flex items-center gap-1">
+                          <Layers size={10} className="text-primary" />
+                          {c.slides?.length ?? 0}
+                        </span>
+                      </div>
+                      <div className="p-3 border-t border-border/30">
+                        <div className="text-[13px] font-semibold text-text truncate">{g.name}</div>
+                        <div className="text-[11px] text-text-muted mt-0.5">{c.slides?.length ?? '?'} Slides · {g.formatId}</div>
+                      </div>
+                    </button>
+                    <button onClick={() => remove(g.id)}
+                      className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 p-1 rounded bg-surface/90 backdrop-blur-sm text-text-muted/60 hover:text-red-400 hover:bg-red-400 hover:bg-opacity-100 transition-all z-10">
+                      <X size={11} />
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* Divider + toggle */}
+        <div className="relative flex items-center gap-3 pt-2">
+          <div className="flex-1 h-px bg-border/40" />
+          <button
+            onClick={() => setShowCreateForm((o) => !o)}
+            className="flex items-center gap-1.5 text-[11px] text-text-muted/60 hover:text-text uppercase tracking-wider transition-colors whitespace-nowrap"
+          >
+            {showCreateForm ? <ChevronUp size={11} /> : <Plus size={11} />}
+            Neu erstellen
+          </button>
+          <div className="flex-1 h-px bg-border/40" />
+        </div>
+
+        {/* Create form — collapsible */}
+        {showCreateForm && (
+          <div className="bg-surface border border-border/60 rounded-2xl p-6 space-y-4 shadow-sm">
+            <div className="space-y-3">
+              <div>
+                <label className="text-[11px] text-text-muted/60 uppercase tracking-wider font-medium block mb-1.5">Grafik-Typ</label>
+                <select value={graphicType} onChange={(e) => setGraphicType(e.target.value)}
+                  className="w-full bg-muted/40 border border-border/50 rounded-lg px-3 py-2 text-sm text-text outline-none focus:border-primary/40">
+                  {types.map((d) => <option key={d.id} value={d.id}>{d.label}</option>)}
+                </select>
+              </div>
+              <div>
+                <label className="text-[11px] text-text-muted/60 uppercase tracking-wider font-medium block mb-1.5">Format</label>
+                <select value={formatId} onChange={(e) => setFormatId(e.target.value)}
+                  className="w-full bg-muted/40 border border-border/50 rounded-lg px-3 py-2 text-sm text-text outline-none focus:border-primary/40">
+                  {FORMAT_PRESETS.map((f) => <option key={f.id} value={f.id}>{f.label}</option>)}
+                </select>
+              </div>
+              <div>
+                <label className="text-[11px] text-text-muted/60 uppercase tracking-wider font-medium block mb-1.5">Anzahl Slides: {count}</label>
+                <input type="range" min={1} max={12} value={count} onChange={(e) => setCount(+e.target.value)} className="w-full accent-primary" />
+                <div className="flex justify-between text-[10px] text-text-muted/40 mt-0.5"><span>1</span><span>12</span></div>
+              </div>
+            </div>
+            <div className="flex gap-3 pt-1">
+              <div className="border border-border/60 rounded-xl p-3 bg-muted/20 flex-1">
+                <div className="flex items-center gap-2 mb-1.5">
+                  <Layers size={13} className="text-primary" />
+                  <span className="text-xs font-semibold text-text" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Pipeline aufteilen</span>
                 </div>
-              ))}
+                <p className="text-[11px] text-text-muted mb-2">Automatisch 6 Slides (Cover + 5 Phasen)</p>
+                <button onClick={handlePipelineSplit}
+                  className="w-full py-1.5 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20 rounded-lg font-medium text-xs transition-colors">
+                  Pipeline → 6 Slides
+                </button>
+              </div>
+              <button onClick={() => create(graphicType, formatId, count)}
+                className="flex-1 py-2 bg-primary hover:bg-primary-hover text-white rounded-xl font-medium text-sm transition-colors">
+                {count} Slides erstellen
+              </button>
             </div>
           </div>
         )}
@@ -221,7 +295,11 @@ function Editor() {
   const [globalOpen, setGlobalOpen] = useState(false);
   const [showAssetLibrary, setShowAssetLibrary] = useState(false);
   const [selectedLayerId, setSelectedLayerId] = useState<string | null>(null);
+  // zoomOverride: null = auto-fit, number = user-chosen multiplier of fit
+  const [zoomOverride, setZoomOverride] = useState<number | null>(null);
+  const [fitScale, setFitScale] = useState(0.5);
   const previewRef = useRef<HTMLDivElement>(null);
+  const canvasAreaRef = useRef<HTMLDivElement>(null);
   const exportRefs = useRef<Map<string, HTMLDivElement>>(new Map());
 
   if (!carousel) return null;
@@ -233,11 +311,31 @@ function Editor() {
   const activeSlide = carousel.slides.find((s) => s.id === activeSlideId) ?? carousel.slides[0];
   const activeLayers = activeSlide.layers;
 
-  const previewScale = Math.min(
-    (window.innerWidth - 340) / format.width,
-    (window.innerHeight - 180) / format.height,
-    1,
-  );
+  // Measure canvas area and compute auto-fit scale whenever it resizes.
+  // This replaces the old one-shot window-size calculation which didn't
+  // react to resizes and used a wrong origin (center vs top-left) that
+  // caused the slide to crop off-screen above the viewport.
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useLayoutEffect(() => {
+    const el = canvasAreaRef.current;
+    if (!el) return;
+    const measure = () => {
+      const r = el.getBoundingClientRect();
+      const padding = 48; // p-8 on both sides worth of breathing room
+      const s = Math.min(
+        (r.width - padding) / format.width,
+        (r.height - padding) / format.height,
+        1,
+      );
+      if (s > 0) setFitScale(s);
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [format.width, format.height]);
+
+  const previewScale = zoomOverride ?? fitScale;
 
   // Layer callbacks for active slide
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -275,17 +373,16 @@ function Editor() {
     setExporting(true);
     const prevSel = selectedLayerId;
     setSelectedLayerId(null);
+    // Wait two animation frames for the deselection to flush to the DOM
+    // before capturing, so selection outlines don't appear in the export.
     await new Promise<void>((r) => requestAnimationFrame(() => requestAnimationFrame(() => r())));
     try {
-      const pdf = new jsPDF({ orientation: 'portrait', unit: 'px', format: [format.width, format.height], hotfixes: ['px_scaling'] });
-      for (let i = 0; i < carousel.slides.length; i++) {
-        const el = exportRefs.current.get(carousel.slides[i].id);
-        if (!el) continue;
-        const dataUrl = await toPng(el, { width: format.width, height: format.height, pixelRatio: 2 });
-        if (i > 0) pdf.addPage([format.width, format.height], 'portrait');
-        pdf.addImage(dataUrl, 'PNG', 0, 0, format.width, format.height);
+      const els: HTMLElement[] = [];
+      for (const slide of carousel.slides) {
+        const el = exportRefs.current.get(slide.id);
+        if (el) els.push(el);
       }
-      pdf.save(`carousel-${carousel.graphicType}.pdf`);
+      await exportElementsAsRasterPdf(els, format, `carousel-${carousel.graphicType}`);
     } finally {
       setSelectedLayerId(prevSel);
       setExporting(false);
@@ -459,21 +556,82 @@ function Editor() {
         </div>
 
         {/* Active preview */}
-        <div className="flex-1 flex items-center justify-center overflow-auto p-8">
-          <div ref={previewRef} style={{
-            width: format.width, height: format.height,
-            transform: `scale(${previewScale})`, transformOrigin: 'center center',
-            position: 'relative',
-          }}>
-            <GraphicComponent data={activeSlide.data as any} width={format.width} height={format.height} />
-            <LayerCanvas
-              layers={activeLayers}
-              selectedId={selectedLayerId}
-              onSelect={setSelectedLayerId}
-              onUpdate={updateLayer}
-              previewRef={previewRef}
-              formatWidth={format.width}
-            />
+        <div className="flex-1 relative overflow-hidden">
+        <div ref={canvasAreaRef} className="absolute inset-0 overflow-auto p-6">
+          {/* Inner flex container ensures the scaled slide centers when
+              the canvas is larger than the slide, and scrolls cleanly
+              (no clipping) when the slide is larger than the canvas. */}
+          <div className="min-w-full min-h-full flex items-center justify-center">
+            {/* Wrapper box with POST-scale dimensions — this is what fixes
+                the "carousel cropped at the top" bug. A raw CSS transform
+                doesn't affect layout, so the unscaled 1080×1350 box was
+                centered by flex before scaling, pushing part of it above
+                the viewport. Here the wrapper reports the scaled size to
+                the layout engine and the inner box scales from top-left. */}
+            <div
+              style={{
+                width: format.width * previewScale,
+                height: format.height * previewScale,
+                flexShrink: 0,
+              }}
+            >
+              <div
+                ref={previewRef}
+                style={{
+                  width: format.width,
+                  height: format.height,
+                  transform: `scale(${previewScale})`,
+                  transformOrigin: '0 0',
+                  position: 'relative',
+                }}
+              >
+                <GraphicComponent data={activeSlide.data as any} width={format.width} height={format.height} />
+                <LayerCanvas
+                  layers={activeLayers}
+                  selectedId={selectedLayerId}
+                  onSelect={setSelectedLayerId}
+                  onUpdate={updateLayer}
+                  previewRef={previewRef}
+                  formatWidth={format.width}
+                />
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+          {/* Zoom controls — floating bottom-right, outside scroll container
+              so they stay visible no matter how far the user has scrolled. */}
+          <div className="absolute bottom-4 right-4 flex items-center gap-1 bg-surface border border-border/60 rounded-lg shadow-md px-1 py-1 z-20">
+            <button
+              onClick={() => setZoomOverride(Math.max(0.1, previewScale - 0.1))}
+              className="p-1.5 rounded text-text-muted hover:text-text hover:bg-muted/40 transition-colors"
+              title="Kleiner"
+            >
+              <ZoomOut size={13} />
+            </button>
+            <button
+              onClick={() => setZoomOverride(null)}
+              className="px-2 py-1 text-[11px] font-mono text-text-muted hover:text-text tabular-nums min-w-[48px] text-center rounded hover:bg-muted/40 transition-colors"
+              title="Auf Fenster einpassen"
+            >
+              {Math.round(previewScale * 100)}%
+            </button>
+            <button
+              onClick={() => setZoomOverride(Math.min(2, previewScale + 0.1))}
+              className="p-1.5 rounded text-text-muted hover:text-text hover:bg-muted/40 transition-colors"
+              title="Größer"
+            >
+              <ZoomIn size={13} />
+            </button>
+            <div className="w-px h-4 bg-border/60 mx-0.5" />
+            <button
+              onClick={() => setZoomOverride(null)}
+              className="p-1.5 rounded text-text-muted hover:text-text hover:bg-muted/40 transition-colors"
+              title="Auf Fenster einpassen"
+            >
+              <Maximize2 size={13} />
+            </button>
           </div>
         </div>
       </div>

@@ -1,0 +1,203 @@
+{
+  "id": "outbound-stack-v2",
+  "title": "Der 150€ Outbound Stack",
+  "slides": [
+    {
+      "id": "s01-cover",
+      "background": "#F2EDE8",
+      "elements": [
+        { "id": "s01-rule", "type": "shape", "x": 8, "y": 5, "width": 84, "height": 0.2, "rotation": 0, "content": "", "style": { "backgroundColor": "#1A1A2E" } },
+        { "id": "s01-meta", "type": "text", "x": 8, "y": 7, "width": 50, "height": 3, "rotation": 0, "content": "<p>CegTec Academy · Playbook No. 01</p>", "style": { "fontSize": 14, "fontWeight": 400, "color": "#8A7A6A", "textAlign": "left" } },
+        { "id": "s01-head", "type": "text", "x": 8, "y": 16, "width": 84, "height": 40, "rotation": 0, "content": "<h1>Der komplette Outbound Stack für unter 150€</h1>", "style": { "fontSize": 72, "fontWeight": 800, "color": "#1A1A2E", "textAlign": "left" } },
+        { "id": "s01-accent", "type": "shape", "x": 8, "y": 58, "width": 12, "height": 0.5, "rotation": 0, "content": "", "style": { "backgroundColor": "#B8564F" } },
+        { "id": "s01-sub", "type": "text", "x": 8, "y": 62, "width": 70, "height": 12, "rotation": 0, "content": "<p>Ohne Clay. Ohne Sales Navigator.<br/><br/>DACH-optimiert. Schritt für Schritt.</p>", "style": { "fontSize": 28, "fontWeight": 400, "color": "#5A4A3A", "textAlign": "left" } },
+        { "id": "s01-tools", "type": "text", "x": 8, "y": 78, "width": 84, "height": 5, "rotation": 0, "content": "<p>Research Agent → FullEnrich → Instantly → Claude Code</p>", "style": { "fontSize": 20, "fontWeight": 600, "color": "#B8564F", "textAlign": "left" } },
+        { "id": "s01-rule2", "type": "shape", "x": 8, "y": 86, "width": 84, "height": 0.12, "rotation": 0, "content": "", "style": { "backgroundColor": "#C8B8A8" } },
+        { "id": "s01-logo", "type": "image", "x": 8, "y": 89, "width": 18, "height": 5, "rotation": 0, "content": "/cegtec-logo.png", "style": { "objectFit": "contain" } },
+        { "id": "s01-swipe", "type": "text", "x": 55, "y": 89, "width": 37, "height": 5, "rotation": 0, "content": "<p>7 Slides →</p>", "style": { "fontSize": 18, "fontWeight": 600, "color": "#B8564F", "textAlign": "right" } }
+      ]
+    },
+    {
+      "id": "s02-problem",
+      "background": "#F2EDE8",
+      "elements": [
+        { "id": "s02-rule", "type": "shape", "x": 8, "y": 5, "width": 84, "height": 0.2, "rotation": 0, "content": "", "style": { "backgroundColor": "#1A1A2E" } },
+        { "id": "s02-section", "type": "text", "x": 8, "y": 7, "width": 50, "height": 3, "rotation": 0, "content": "<p>Das Problem</p>", "style": { "fontSize": 14, "fontWeight": 400, "color": "#8A7A6A", "textAlign": "left" } },
+        { "id": "s02-pg", "type": "text", "x": 80, "y": 7, "width": 12, "height": 3, "rotation": 0, "content": "<p>2 / 7</p>", "style": { "fontSize": 14, "fontWeight": 400, "color": "#8A7A6A", "textAlign": "right" } },
+        { "id": "s02-head", "type": "text", "x": 8, "y": 16, "width": 84, "height": 28, "rotation": 0, "content": "<h1>Die üblichen Tools sind für den US-Markt gebaut.</h1>", "style": { "fontSize": 64, "fontWeight": 800, "color": "#1A1A2E", "textAlign": "left" } },
+        { "id": "s02-accent", "type": "shape", "x": 8, "y": 46, "width": 12, "height": 0.5, "rotation": 0, "content": "", "style": { "backgroundColor": "#B8564F" } },
+        { "id": "s02-body", "type": "text", "x": 8, "y": 50, "width": 78, "height": 22, "rotation": 0, "content": "<p>Clay startet bei $185/Mo.<br/><br/>Apollo liefert im DACH-Raum kaum E-Mails.<br/><br/>Sales Navigator: $99 für eine Suche.<br/><br/>ZoomInfo? $15.000/Jahr.</p>", "style": { "fontSize": 28, "fontWeight": 400, "color": "#5A4A3A", "textAlign": "left" } },
+        { "id": "s02-punch", "type": "text", "x": 8, "y": 75, "width": 84, "height": 10, "rotation": 0, "content": "<p>Enterprise-Preise für Tools, die deinen Markt nicht verstehen.</p>", "style": { "fontSize": 28, "fontWeight": 700, "color": "#B8564F", "textAlign": "left" } },
+        { "id": "s02-rule2", "type": "shape", "x": 8, "y": 88, "width": 84, "height": 0.12, "rotation": 0, "content": "", "style": { "backgroundColor": "#C8B8A8" } },
+        { "id": "s02-logo", "type": "image", "x": 8, "y": 91, "width": 14, "height": 4, "rotation": 0, "content": "/cegtec-logo.png", "style": { "objectFit": "contain" } },
+        { "id": "s02-next", "type": "text", "x": 65, "y": 91, "width": 27, "height": 4, "rotation": 0, "content": "<p>Die Lösung →</p>", "style": { "fontSize": 18, "fontWeight": 600, "color": "#B8564F", "textAlign": "right" } }
+      ]
+    },
+    {
+      "id": "s03-stack",
+      "background": "#F2EDE8",
+      "elements": [
+        { "id": "s03-rule", "type": "shape", "x": 8, "y": 5, "width": 84, "height": 0.2, "rotation": 0, "content": "", "style": { "backgroundColor": "#1A1A2E" } },
+        { "id": "s03-section", "type": "text", "x": 8, "y": 7, "width": 50, "height": 3, "rotation": 0, "content": "<p>Der Stack</p>", "style": { "fontSize": 14, "fontWeight": 400, "color": "#8A7A6A", "textAlign": "left" } },
+        { "id": "s03-pg", "type": "text", "x": 80, "y": 7, "width": 12, "height": 3, "rotation": 0, "content": "<p>3 / 7</p>", "style": { "fontSize": 14, "fontWeight": 400, "color": "#8A7A6A", "textAlign": "right" } },
+        { "id": "s03-head", "type": "text", "x": 8, "y": 14, "width": 84, "height": 12, "rotation": 0, "content": "<h1>4 Tools. 1 Workflow.</h1>", "style": { "fontSize": 56, "fontWeight": 800, "color": "#1A1A2E", "textAlign": "left" } },
+
+        { "id": "s03-node1-circle", "type": "shape", "x": 8, "y": 30, "width": 6, "height": 4.5, "rotation": 0, "content": "", "style": { "backgroundColor": "#B8564F", "borderRadius": 999 } },
+        { "id": "s03-node1-num", "type": "text", "x": 8, "y": 30, "width": 6, "height": 4.5, "rotation": 0, "content": "<p>01</p>", "style": { "fontSize": 14, "fontWeight": 800, "color": "#F2EDE8", "textAlign": "center" } },
+        { "id": "s03-node1-name", "type": "text", "x": 17, "y": 29.5, "width": 45, "height": 4, "rotation": 0, "content": "<p><strong>Research Agent</strong></p>", "style": { "fontSize": 26, "fontWeight": 700, "color": "#1A1A2E", "textAlign": "left" } },
+        { "id": "s03-node1-desc", "type": "text", "x": 17, "y": 34, "width": 45, "height": 4, "rotation": 0, "content": "<p>Live-Research, 20+ Quellen, DACH</p>", "style": { "fontSize": 18, "fontWeight": 400, "color": "#8A7A6A", "textAlign": "left" } },
+        { "id": "s03-node1-badge", "type": "shape", "x": 73, "y": 30, "width": 18, "height": 4.5, "rotation": 0, "content": "", "style": { "backgroundColor": "#1A1A2E", "borderRadius": 100 } },
+        { "id": "s03-node1-price", "type": "text", "x": 73, "y": 30, "width": 18, "height": 4.5, "rotation": 0, "content": "<p>€49/Mo</p>", "style": { "fontSize": 16, "fontWeight": 700, "color": "#F2EDE8", "textAlign": "center" } },
+
+        { "id": "s03-line1", "type": "shape", "x": 10.8, "y": 35, "width": 0.3, "height": 3, "rotation": 0, "content": "", "style": { "backgroundColor": "#C8B8A8" } },
+
+        { "id": "s03-node2-circle", "type": "shape", "x": 8, "y": 39, "width": 6, "height": 4.5, "rotation": 0, "content": "", "style": { "backgroundColor": "#B8564F", "borderRadius": 999 } },
+        { "id": "s03-node2-num", "type": "text", "x": 8, "y": 39, "width": 6, "height": 4.5, "rotation": 0, "content": "<p>02</p>", "style": { "fontSize": 14, "fontWeight": 800, "color": "#F2EDE8", "textAlign": "center" } },
+        { "id": "s03-node2-name", "type": "text", "x": 17, "y": 38.5, "width": 45, "height": 4, "rotation": 0, "content": "<p><strong>FullEnrich</strong></p>", "style": { "fontSize": 26, "fontWeight": 700, "color": "#1A1A2E", "textAlign": "left" } },
+        { "id": "s03-node2-desc", "type": "text", "x": 17, "y": 43, "width": 45, "height": 4, "rotation": 0, "content": "<p>Waterfall-Enrichment, 60–75%</p>", "style": { "fontSize": 18, "fontWeight": 400, "color": "#8A7A6A", "textAlign": "left" } },
+        { "id": "s03-node2-badge", "type": "shape", "x": 73, "y": 39, "width": 18, "height": 4.5, "rotation": 0, "content": "", "style": { "backgroundColor": "#1A1A2E", "borderRadius": 100 } },
+        { "id": "s03-node2-price", "type": "text", "x": 73, "y": 39, "width": 18, "height": 4.5, "rotation": 0, "content": "<p>$29/Mo</p>", "style": { "fontSize": 16, "fontWeight": 700, "color": "#F2EDE8", "textAlign": "center" } },
+
+        { "id": "s03-line2", "type": "shape", "x": 10.8, "y": 44, "width": 0.3, "height": 3, "rotation": 0, "content": "", "style": { "backgroundColor": "#C8B8A8" } },
+
+        { "id": "s03-node3-circle", "type": "shape", "x": 8, "y": 48, "width": 6, "height": 4.5, "rotation": 0, "content": "", "style": { "backgroundColor": "#B8564F", "borderRadius": 999 } },
+        { "id": "s03-node3-num", "type": "text", "x": 8, "y": 48, "width": 6, "height": 4.5, "rotation": 0, "content": "<p>03</p>", "style": { "fontSize": 14, "fontWeight": 800, "color": "#F2EDE8", "textAlign": "center" } },
+        { "id": "s03-node3-name", "type": "text", "x": 17, "y": 47.5, "width": 45, "height": 4, "rotation": 0, "content": "<p><strong>Instantly</strong></p>", "style": { "fontSize": 26, "fontWeight": 700, "color": "#1A1A2E", "textAlign": "left" } },
+        { "id": "s03-node3-desc", "type": "text", "x": 17, "y": 52, "width": 45, "height": 4, "rotation": 0, "content": "<p>Sequenzen, Warmup, Tracking</p>", "style": { "fontSize": 18, "fontWeight": 400, "color": "#8A7A6A", "textAlign": "left" } },
+        { "id": "s03-node3-badge", "type": "shape", "x": 73, "y": 48, "width": 18, "height": 4.5, "rotation": 0, "content": "", "style": { "backgroundColor": "#1A1A2E", "borderRadius": 100 } },
+        { "id": "s03-node3-price", "type": "text", "x": 73, "y": 48, "width": 18, "height": 4.5, "rotation": 0, "content": "<p>$37/Mo</p>", "style": { "fontSize": 16, "fontWeight": 700, "color": "#F2EDE8", "textAlign": "center" } },
+
+        { "id": "s03-line3", "type": "shape", "x": 10.8, "y": 53, "width": 0.3, "height": 3, "rotation": 0, "content": "", "style": { "backgroundColor": "#C8B8A8" } },
+
+        { "id": "s03-node4-circle", "type": "shape", "x": 8, "y": 57, "width": 6, "height": 4.5, "rotation": 0, "content": "", "style": { "backgroundColor": "#B8564F", "borderRadius": 999 } },
+        { "id": "s03-node4-num", "type": "text", "x": 8, "y": 57, "width": 6, "height": 4.5, "rotation": 0, "content": "<p>04</p>", "style": { "fontSize": 14, "fontWeight": 800, "color": "#F2EDE8", "textAlign": "center" } },
+        { "id": "s03-node4-name", "type": "text", "x": 17, "y": 56.5, "width": 45, "height": 4, "rotation": 0, "content": "<p><strong>Claude Code</strong></p>", "style": { "fontSize": 26, "fontWeight": 700, "color": "#1A1A2E", "textAlign": "left" } },
+        { "id": "s03-node4-desc", "type": "text", "x": 17, "y": 61, "width": 45, "height": 4, "rotation": 0, "content": "<p>Ein Prompt steuert alles</p>", "style": { "fontSize": 18, "fontWeight": 400, "color": "#8A7A6A", "textAlign": "left" } },
+        { "id": "s03-node4-badge", "type": "shape", "x": 73, "y": 57, "width": 18, "height": 4.5, "rotation": 0, "content": "", "style": { "backgroundColor": "#1A1A2E", "borderRadius": 100 } },
+        { "id": "s03-node4-price", "type": "text", "x": 73, "y": 57, "width": 18, "height": 4.5, "rotation": 0, "content": "<p>~$35/Mo</p>", "style": { "fontSize": 16, "fontWeight": 700, "color": "#F2EDE8", "textAlign": "center" } },
+
+        { "id": "s03-total-bar", "type": "shape", "x": 8, "y": 69, "width": 84, "height": 8, "rotation": 0, "content": "", "style": { "backgroundColor": "#1A1A2E", "borderRadius": 8 } },
+        { "id": "s03-total-label", "type": "text", "x": 12, "y": 69.5, "width": 30, "height": 3, "rotation": 0, "content": "<p>GESAMT</p>", "style": { "fontSize": 11, "fontWeight": 600, "color": "#8A7A6A", "textAlign": "left" } },
+        { "id": "s03-total-val", "type": "text", "x": 12, "y": 72, "width": 40, "height": 5, "rotation": 0, "content": "<p>~150€/Monat</p>", "style": { "fontSize": 32, "fontWeight": 800, "color": "#F2EDE8", "textAlign": "left" } },
+        { "id": "s03-total-vs", "type": "text", "x": 55, "y": 72, "width": 35, "height": 5, "rotation": 0, "content": "<p>vs. Clay ~490€</p>", "style": { "fontSize": 20, "fontWeight": 400, "color": "#8A7A6A", "textAlign": "right" } },
+
+        { "id": "s03-rule2", "type": "shape", "x": 8, "y": 86, "width": 84, "height": 0.12, "rotation": 0, "content": "", "style": { "backgroundColor": "#C8B8A8" } },
+        { "id": "s03-logo", "type": "image", "x": 8, "y": 89, "width": 14, "height": 4, "rotation": 0, "content": "/cegtec-logo.png", "style": { "objectFit": "contain" } },
+        { "id": "s03-next", "type": "text", "x": 60, "y": 89, "width": 32, "height": 4, "rotation": 0, "content": "<p>Ergebnisse →</p>", "style": { "fontSize": 18, "fontWeight": 600, "color": "#B8564F", "textAlign": "right" } }
+      ]
+    },
+    {
+      "id": "s04-funnel",
+      "background": "#F2EDE8",
+      "elements": [
+        { "id": "s04-rule", "type": "shape", "x": 8, "y": 5, "width": 84, "height": 0.2, "rotation": 0, "content": "", "style": { "backgroundColor": "#1A1A2E" } },
+        { "id": "s04-section", "type": "text", "x": 8, "y": 7, "width": 50, "height": 3, "rotation": 0, "content": "<p>Erwartbare Ergebnisse</p>", "style": { "fontSize": 14, "fontWeight": 400, "color": "#8A7A6A", "textAlign": "left" } },
+        { "id": "s04-pg", "type": "text", "x": 80, "y": 7, "width": 12, "height": 3, "rotation": 0, "content": "<p>4 / 7</p>", "style": { "fontSize": 14, "fontWeight": 400, "color": "#8A7A6A", "textAlign": "right" } },
+        { "id": "s04-head", "type": "text", "x": 8, "y": 14, "width": 84, "height": 12, "rotation": 0, "content": "<h1>Von der Liste zum Meeting.</h1>", "style": { "fontSize": 56, "fontWeight": 800, "color": "#1A1A2E", "textAlign": "left" } },
+        { "id": "s04-accent", "type": "shape", "x": 8, "y": 28, "width": 12, "height": 0.5, "rotation": 0, "content": "", "style": { "backgroundColor": "#B8564F" } },
+        { "id": "s04-bar1bg", "type": "shape", "x": 8, "y": 33, "width": 84, "height": 5.5, "rotation": 0, "content": "", "style": { "backgroundColor": "#1A1A2E", "borderRadius": 4 } },
+        { "id": "s04-bar1", "type": "text", "x": 10, "y": 33.5, "width": 42, "height": 4.5, "rotation": 0, "content": "<p>500–1.000 Leads gefunden</p>", "style": { "fontSize": 20, "fontWeight": 600, "color": "#F2EDE8", "textAlign": "left" } },
+        { "id": "s04-bar1v", "type": "text", "x": 68, "y": 33.5, "width": 22, "height": 4.5, "rotation": 0, "content": "<p>100%</p>", "style": { "fontSize": 20, "fontWeight": 700, "color": "#F2EDE8", "textAlign": "right" } },
+        { "id": "s04-bar2bg", "type": "shape", "x": 8, "y": 41, "width": 63, "height": 5.5, "rotation": 0, "content": "", "style": { "backgroundColor": "#3A3525", "borderRadius": 4 } },
+        { "id": "s04-bar2", "type": "text", "x": 10, "y": 41.5, "width": 42, "height": 4.5, "rotation": 0, "content": "<p>E-Mail verifiziert</p>", "style": { "fontSize": 20, "fontWeight": 600, "color": "#F2EDE8", "textAlign": "left" } },
+        { "id": "s04-bar2v", "type": "text", "x": 48, "y": 41.5, "width": 22, "height": 4.5, "rotation": 0, "content": "<p>60–75%</p>", "style": { "fontSize": 20, "fontWeight": 700, "color": "#F2EDE8", "textAlign": "right" } },
+        { "id": "s04-bar3bg", "type": "shape", "x": 8, "y": 49, "width": 35, "height": 5.5, "rotation": 0, "content": "", "style": { "backgroundColor": "#5A4A3A", "borderRadius": 4 } },
+        { "id": "s04-bar3", "type": "text", "x": 10, "y": 49.5, "width": 20, "height": 4.5, "rotation": 0, "content": "<p>Reply</p>", "style": { "fontSize": 20, "fontWeight": 600, "color": "#F2EDE8", "textAlign": "left" } },
+        { "id": "s04-bar3v", "type": "text", "x": 27, "y": 49.5, "width": 14, "height": 4.5, "rotation": 0, "content": "<p>3–8%</p>", "style": { "fontSize": 20, "fontWeight": 700, "color": "#F2EDE8", "textAlign": "right" } },
+        { "id": "s04-bar4bg", "type": "shape", "x": 8, "y": 57, "width": 20, "height": 5.5, "rotation": 0, "content": "", "style": { "backgroundColor": "#B8564F", "borderRadius": 4 } },
+        { "id": "s04-bar4", "type": "text", "x": 10, "y": 57.5, "width": 16, "height": 4.5, "rotation": 0, "content": "<p>5–15 Meetings</p>", "style": { "fontSize": 18, "fontWeight": 700, "color": "#F2EDE8", "textAlign": "left" } },
+        { "id": "s04-sep", "type": "shape", "x": 8, "y": 66, "width": 84, "height": 0.08, "rotation": 0, "content": "", "style": { "backgroundColor": "#C8B8A8" } },
+        { "id": "s04-time-label", "type": "text", "x": 8, "y": 69, "width": 40, "height": 4, "rotation": 0, "content": "<p>SETUP-ZEIT</p>", "style": { "fontSize": 14, "fontWeight": 600, "color": "#8A7A6A", "textAlign": "left" } },
+        { "id": "s04-time-val", "type": "text", "x": 8, "y": 73, "width": 40, "height": 7, "rotation": 0, "content": "<p>30 Min</p>", "style": { "fontSize": 44, "fontWeight": 800, "color": "#1A1A2E", "textAlign": "left" } },
+        { "id": "s04-time-sub", "type": "text", "x": 8, "y": 80, "width": 40, "height": 4, "rotation": 0, "content": "<p>pro Kampagne (nach Setup)</p>", "style": { "fontSize": 16, "fontWeight": 400, "color": "#8A7A6A", "textAlign": "left" } },
+        { "id": "s04-first-label", "type": "text", "x": 52, "y": 69, "width": 40, "height": 4, "rotation": 0, "content": "<p>ERSTE REPLIES</p>", "style": { "fontSize": 14, "fontWeight": 600, "color": "#8A7A6A", "textAlign": "left" } },
+        { "id": "s04-first-val", "type": "text", "x": 52, "y": 73, "width": 40, "height": 7, "rotation": 0, "content": "<p>3–4 Wo</p>", "style": { "fontSize": 44, "fontWeight": 800, "color": "#1A1A2E", "textAlign": "left" } },
+        { "id": "s04-first-sub", "type": "text", "x": 52, "y": 80, "width": 40, "height": 4, "rotation": 0, "content": "<p>inkl. Warmup-Phase</p>", "style": { "fontSize": 16, "fontWeight": 400, "color": "#8A7A6A", "textAlign": "left" } },
+        { "id": "s04-rule2", "type": "shape", "x": 8, "y": 88, "width": 84, "height": 0.12, "rotation": 0, "content": "", "style": { "backgroundColor": "#C8B8A8" } },
+        { "id": "s04-logo", "type": "image", "x": 8, "y": 91, "width": 14, "height": 4, "rotation": 0, "content": "/cegtec-logo.png", "style": { "objectFit": "contain" } },
+        { "id": "s04-next", "type": "text", "x": 60, "y": 91, "width": 32, "height": 4, "rotation": 0, "content": "<p>Vergleich →</p>", "style": { "fontSize": 18, "fontWeight": 600, "color": "#B8564F", "textAlign": "right" } }
+      ]
+    },
+    {
+      "id": "s05-compare",
+      "background": "#F2EDE8",
+      "elements": [
+        { "id": "s05-rule", "type": "shape", "x": 8, "y": 5, "width": 84, "height": 0.2, "rotation": 0, "content": "", "style": { "backgroundColor": "#1A1A2E" } },
+        { "id": "s05-section", "type": "text", "x": 8, "y": 7, "width": 50, "height": 3, "rotation": 0, "content": "<p>Fairer Vergleich</p>", "style": { "fontSize": 14, "fontWeight": 400, "color": "#8A7A6A", "textAlign": "left" } },
+        { "id": "s05-pg", "type": "text", "x": 80, "y": 7, "width": 12, "height": 3, "rotation": 0, "content": "<p>5 / 7</p>", "style": { "fontSize": 14, "fontWeight": 400, "color": "#8A7A6A", "textAlign": "right" } },
+        { "id": "s05-head", "type": "text", "x": 8, "y": 14, "width": 84, "height": 12, "rotation": 0, "content": "<h1>30% günstiger. Tiefere Daten.</h1>", "style": { "fontSize": 56, "fontWeight": 800, "color": "#1A1A2E", "textAlign": "left" } },
+        { "id": "s05-accent", "type": "shape", "x": 8, "y": 28, "width": 12, "height": 0.5, "rotation": 0, "content": "", "style": { "backgroundColor": "#B8564F" } },
+        { "id": "s05-th-left", "type": "text", "x": 8, "y": 33, "width": 35, "height": 4, "rotation": 0, "content": "<p>UNSER STACK</p>", "style": { "fontSize": 14, "fontWeight": 600, "color": "#B8564F", "textAlign": "left" } },
+        { "id": "s05-th-right", "type": "text", "x": 55, "y": 33, "width": 37, "height": 4, "rotation": 0, "content": "<p>CLAY + INSTANTLY</p>", "style": { "fontSize": 14, "fontWeight": 600, "color": "#8A7A6A", "textAlign": "left" } },
+        { "id": "s05-row1sep", "type": "shape", "x": 8, "y": 37.5, "width": 84, "height": 0.08, "rotation": 0, "content": "", "style": { "backgroundColor": "#C8B8A8" } },
+        { "id": "s05-r1l-label", "type": "text", "x": 8, "y": 39, "width": 35, "height": 3, "rotation": 0, "content": "<p>Kosten/Monat</p>", "style": { "fontSize": 16, "fontWeight": 400, "color": "#8A7A6A", "textAlign": "left" } },
+        { "id": "s05-r1l", "type": "text", "x": 8, "y": 42, "width": 35, "height": 5, "rotation": 0, "content": "<p>~140€</p>", "style": { "fontSize": 32, "fontWeight": 800, "color": "#1A1A2E", "textAlign": "left" } },
+        { "id": "s05-r1r", "type": "text", "x": 55, "y": 42, "width": 37, "height": 5, "rotation": 0, "content": "<p>~490€</p>", "style": { "fontSize": 32, "fontWeight": 800, "color": "#C8B8A8", "textAlign": "left" } },
+        { "id": "s05-row2sep", "type": "shape", "x": 8, "y": 49, "width": 84, "height": 0.08, "rotation": 0, "content": "", "style": { "backgroundColor": "#C8B8A8" } },
+        { "id": "s05-r2l-label", "type": "text", "x": 8, "y": 51, "width": 35, "height": 3, "rotation": 0, "content": "<p>Research-Tiefe</p>", "style": { "fontSize": 16, "fontWeight": 400, "color": "#8A7A6A", "textAlign": "left" } },
+        { "id": "s05-r2l", "type": "text", "x": 8, "y": 54, "width": 35, "height": 5, "rotation": 0, "content": "<p>Live-Web, 20+ Quellen</p>", "style": { "fontSize": 22, "fontWeight": 600, "color": "#1A1A2E", "textAlign": "left" } },
+        { "id": "s05-r2r", "type": "text", "x": 55, "y": 54, "width": 37, "height": 5, "rotation": 0, "content": "<p>Vorindexierte DBs</p>", "style": { "fontSize": 22, "fontWeight": 600, "color": "#C8B8A8", "textAlign": "left" } },
+        { "id": "s05-row3sep", "type": "shape", "x": 8, "y": 61, "width": 84, "height": 0.08, "rotation": 0, "content": "", "style": { "backgroundColor": "#C8B8A8" } },
+        { "id": "s05-r3l-label", "type": "text", "x": 8, "y": 63, "width": 35, "height": 3, "rotation": 0, "content": "<p>DACH-Enrichment</p>", "style": { "fontSize": 16, "fontWeight": 400, "color": "#8A7A6A", "textAlign": "left" } },
+        { "id": "s05-r3l", "type": "text", "x": 8, "y": 66, "width": 35, "height": 5, "rotation": 0, "content": "<p>60–75%</p>", "style": { "fontSize": 32, "fontWeight": 800, "color": "#1A1A2E", "textAlign": "left" } },
+        { "id": "s05-r3r", "type": "text", "x": 55, "y": 66, "width": 37, "height": 5, "rotation": 0, "content": "<p>40–60%</p>", "style": { "fontSize": 32, "fontWeight": 800, "color": "#C8B8A8", "textAlign": "left" } },
+        { "id": "s05-row4sep", "type": "shape", "x": 8, "y": 73, "width": 84, "height": 0.08, "rotation": 0, "content": "", "style": { "backgroundColor": "#C8B8A8" } },
+        { "id": "s05-r4l-label", "type": "text", "x": 8, "y": 75, "width": 35, "height": 3, "rotation": 0, "content": "<p>Setup pro Kampagne</p>", "style": { "fontSize": 16, "fontWeight": 400, "color": "#8A7A6A", "textAlign": "left" } },
+        { "id": "s05-r4l", "type": "text", "x": 8, "y": 78, "width": 35, "height": 5, "rotation": 0, "content": "<p>30–60 Min</p>", "style": { "fontSize": 26, "fontWeight": 700, "color": "#1A1A2E", "textAlign": "left" } },
+        { "id": "s05-r4r", "type": "text", "x": 55, "y": 78, "width": 37, "height": 5, "rotation": 0, "content": "<p>2–4 Wochen</p>", "style": { "fontSize": 26, "fontWeight": 700, "color": "#C8B8A8", "textAlign": "left" } },
+        { "id": "s05-rule2", "type": "shape", "x": 8, "y": 88, "width": 84, "height": 0.12, "rotation": 0, "content": "", "style": { "backgroundColor": "#C8B8A8" } },
+        { "id": "s05-logo", "type": "image", "x": 8, "y": 91, "width": 14, "height": 4, "rotation": 0, "content": "/cegtec-logo.png", "style": { "objectFit": "contain" } },
+        { "id": "s05-next", "type": "text", "x": 60, "y": 91, "width": 32, "height": 4, "rotation": 0, "content": "<p>Legal →</p>", "style": { "fontSize": 18, "fontWeight": 600, "color": "#B8564F", "textAlign": "right" } }
+      ]
+    },
+    {
+      "id": "s06-legal",
+      "background": "#F2EDE8",
+      "elements": [
+        { "id": "s06-rule", "type": "shape", "x": 8, "y": 5, "width": 84, "height": 0.2, "rotation": 0, "content": "", "style": { "backgroundColor": "#1A1A2E" } },
+        { "id": "s06-section", "type": "text", "x": 8, "y": 7, "width": 50, "height": 3, "rotation": 0, "content": "<p>DSGVO-konform</p>", "style": { "fontSize": 14, "fontWeight": 400, "color": "#8A7A6A", "textAlign": "left" } },
+        { "id": "s06-pg", "type": "text", "x": 80, "y": 7, "width": 12, "height": 3, "rotation": 0, "content": "<p>6 / 7</p>", "style": { "fontSize": 14, "fontWeight": 400, "color": "#8A7A6A", "textAlign": "right" } },
+        { "id": "s06-head", "type": "text", "x": 8, "y": 14, "width": 84, "height": 18, "rotation": 0, "content": "<h1>Ja, Cold Outreach ist in Deutschland legal.</h1>", "style": { "fontSize": 56, "fontWeight": 800, "color": "#1A1A2E", "textAlign": "left" } },
+        { "id": "s06-accent", "type": "shape", "x": 8, "y": 34, "width": 12, "height": 0.5, "rotation": 0, "content": "", "style": { "backgroundColor": "#B8564F" } },
+        { "id": "s06-r1", "type": "text", "x": 8, "y": 38, "width": 84, "height": 5, "rotation": 0, "content": "<p><strong>1</strong>  Nur geschäftliche E-Mails</p>", "style": { "fontSize": 24, "fontWeight": 400, "color": "#5A4A3A", "textAlign": "left" } },
+        { "id": "s06-r2", "type": "text", "x": 8, "y": 44, "width": 84, "height": 5, "rotation": 0, "content": "<p><strong>2</strong>  Angebot muss zur Rolle passen</p>", "style": { "fontSize": 24, "fontWeight": 400, "color": "#5A4A3A", "textAlign": "left" } },
+        { "id": "s06-r3", "type": "text", "x": 8, "y": 50, "width": 84, "height": 5, "rotation": 0, "content": "<p><strong>3</strong>  Opt-Out in jeder E-Mail</p>", "style": { "fontSize": 24, "fontWeight": 400, "color": "#5A4A3A", "textAlign": "left" } },
+        { "id": "s06-r4", "type": "text", "x": 8, "y": 56, "width": 84, "height": 5, "rotation": 0, "content": "<p><strong>4</strong>  Impressum nach § 5 TMG</p>", "style": { "fontSize": 24, "fontWeight": 400, "color": "#5A4A3A", "textAlign": "left" } },
+        { "id": "s06-r5", "type": "text", "x": 8, "y": 62, "width": 84, "height": 5, "rotation": 0, "content": "<p><strong>5</strong>  Max. 3–4 E-Mails pro Kontakt</p>", "style": { "fontSize": 24, "fontWeight": 400, "color": "#5A4A3A", "textAlign": "left" } },
+        { "id": "s06-r6", "type": "text", "x": 8, "y": 68, "width": 84, "height": 5, "rotation": 0, "content": "<p><strong>6</strong>  Herkunft dokumentieren</p>", "style": { "fontSize": 24, "fontWeight": 400, "color": "#5A4A3A", "textAlign": "left" } },
+        { "id": "s06-r7", "type": "text", "x": 8, "y": 74, "width": 84, "height": 5, "rotation": 0, "content": "<p><strong>7</strong>  Auskunft innerhalb 30 Tagen</p>", "style": { "fontSize": 24, "fontWeight": 400, "color": "#5A4A3A", "textAlign": "left" } },
+        { "id": "s06-disclaimer", "type": "text", "x": 8, "y": 82, "width": 84, "height": 4, "rotation": 0, "content": "<p>Keine Rechtsberatung. Für verbindliche Einschätzung → Anwalt.</p>", "style": { "fontSize": 14, "fontWeight": 400, "color": "#C8B8A8", "textAlign": "left" } },
+        { "id": "s06-rule2", "type": "shape", "x": 8, "y": 88, "width": 84, "height": 0.12, "rotation": 0, "content": "", "style": { "backgroundColor": "#C8B8A8" } },
+        { "id": "s06-logo", "type": "image", "x": 8, "y": 91, "width": 14, "height": 4, "rotation": 0, "content": "/cegtec-logo.png", "style": { "objectFit": "contain" } },
+        { "id": "s06-next", "type": "text", "x": 55, "y": 91, "width": 37, "height": 4, "rotation": 0, "content": "<p>Nächster Schritt →</p>", "style": { "fontSize": 18, "fontWeight": 600, "color": "#B8564F", "textAlign": "right" } }
+      ]
+    },
+    {
+      "id": "s07-cta",
+      "background": "#F2EDE8",
+      "elements": [
+        { "id": "s07-rule", "type": "shape", "x": 8, "y": 5, "width": 84, "height": 0.2, "rotation": 0, "content": "", "style": { "backgroundColor": "#1A1A2E" } },
+        { "id": "s07-section", "type": "text", "x": 8, "y": 7, "width": 50, "height": 3, "rotation": 0, "content": "<p>Deine zwei Optionen</p>", "style": { "fontSize": 14, "fontWeight": 400, "color": "#8A7A6A", "textAlign": "left" } },
+        { "id": "s07-pg", "type": "text", "x": 80, "y": 7, "width": 12, "height": 3, "rotation": 0, "content": "<p>7 / 7</p>", "style": { "fontSize": 14, "fontWeight": 400, "color": "#8A7A6A", "textAlign": "right" } },
+        { "id": "s07-head", "type": "text", "x": 8, "y": 14, "width": 84, "height": 18, "rotation": 0, "content": "<h1>Du hast jetzt den Stack.</h1>", "style": { "fontSize": 60, "fontWeight": 800, "color": "#1A1A2E", "textAlign": "left" } },
+        { "id": "s07-accent", "type": "shape", "x": 8, "y": 34, "width": 12, "height": 0.5, "rotation": 0, "content": "", "style": { "backgroundColor": "#B8564F" } },
+        { "id": "s07-a-label", "type": "text", "x": 8, "y": 39, "width": 38, "height": 4, "rotation": 0, "content": "<p>OPTION A</p>", "style": { "fontSize": 14, "fontWeight": 600, "color": "#B8564F", "textAlign": "left" } },
+        { "id": "s07-a-head", "type": "text", "x": 8, "y": 43, "width": 38, "height": 6, "rotation": 0, "content": "<p>Selbst machen</p>", "style": { "fontSize": 30, "fontWeight": 800, "color": "#1A1A2E", "textAlign": "left" } },
+        { "id": "s07-a-body", "type": "text", "x": 8, "y": 50, "width": 38, "height": 12, "rotation": 0, "content": "<p>Du kennst den Stack.<br/><br/>Du hast die Anleitung.<br/>Leg los.</p>", "style": { "fontSize": 20, "fontWeight": 400, "color": "#5A4A3A", "textAlign": "left" } },
+        { "id": "s07-divider", "type": "shape", "x": 49, "y": 39, "width": 0.15, "height": 30, "rotation": 0, "content": "", "style": { "backgroundColor": "#C8B8A8" } },
+        { "id": "s07-b-label", "type": "text", "x": 54, "y": 39, "width": 38, "height": 4, "rotation": 0, "content": "<p>OPTION B</p>", "style": { "fontSize": 14, "fontWeight": 600, "color": "#B8564F", "textAlign": "left" } },
+        { "id": "s07-b-head", "type": "text", "x": 54, "y": 43, "width": 38, "height": 6, "rotation": 0, "content": "<p>Machen lassen</p>", "style": { "fontSize": 30, "fontWeight": 800, "color": "#1A1A2E", "textAlign": "left" } },
+        { "id": "s07-b-body", "type": "text", "x": 54, "y": 50, "width": 38, "height": 12, "rotation": 0, "content": "<p>Wir übernehmen alles.<br/><br/>Playbook, Leads, Kampagnen. Ab Woche 4 live.</p>", "style": { "fontSize": 20, "fontWeight": 400, "color": "#5A4A3A", "textAlign": "left" } },
+        { "id": "s07-sep", "type": "shape", "x": 8, "y": 69, "width": 84, "height": 0.2, "rotation": 0, "content": "", "style": { "backgroundColor": "#1A1A2E" } },
+        { "id": "s07-pricing", "type": "text", "x": 8, "y": 72, "width": 84, "height": 14, "rotation": 0, "content": "<p>Setup: 3.900€ einmalig<br/><br/>Retainer: ab 2.000€/Mo · monatlich kündbar<br/><br/>Garantie: 50% zurück bei &lt;5 Replies im ersten Monat</p>", "style": { "fontSize": 22, "fontWeight": 400, "color": "#5A4A3A", "textAlign": "left" } },
+        { "id": "s07-rule2", "type": "shape", "x": 8, "y": 89, "width": 84, "height": 0.2, "rotation": 0, "content": "", "style": { "backgroundColor": "#1A1A2E" } },
+        { "id": "s07-logo", "type": "image", "x": 8, "y": 92, "width": 18, "height": 5, "rotation": 0, "content": "/cegtec-logo.png", "style": { "objectFit": "contain" } },
+        { "id": "s07-url", "type": "text", "x": 50, "y": 93, "width": 42, "height": 4, "rotation": 0, "content": "<p><strong>cegtec.net/academy</strong></p>", "style": { "fontSize": 20, "fontWeight": 600, "color": "#B8564F", "textAlign": "right" } }
+      ]
+    }
+  ],
+  "themeId": "clean",
+  "formatId": "4:5",
+  "createdAt": 1712592000000,
+  "updatedAt": 1712592000000
+}
