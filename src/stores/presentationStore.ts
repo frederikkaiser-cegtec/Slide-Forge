@@ -7,11 +7,15 @@ import { getFormat } from '../utils/formats';
 import outboundStackData from '../data/outbound-stack.json';
 import aiLesbarData from '../data/ai-lesbar-anleitung.json';
 import kanamData from '../data/kanam-finanzbranche.json';
+import b2bTechData from '../data/b2b-tech.json';
+import pvSolarData from '../data/pv-solar.json';
 
 export const PRESENTATION_PRESETS = [
   { id: 'outbound-stack', label: 'Outbound Stack', data: outboundStackData },
   { id: 'ai-lesbar', label: 'AI-Lesbar Anleitung', data: aiLesbarData },
   { id: 'kanam-finanzbranche', label: 'Kanam — Finanzbranche', data: kanamData },
+  { id: 'b2b-tech', label: 'B2B Tech', data: b2bTechData },
+  { id: 'pv-solar', label: 'PV / Solar', data: pvSolarData },
 ] as const;
 
 interface PresentationState {

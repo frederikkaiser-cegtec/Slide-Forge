@@ -1,0 +1,3424 @@
+{
+  "id": "b2b-tech-v1",
+  "title": "CegTec — Qualifizierte Termine für B2B Tech",
+  "formatId": "16:9",
+  "slides": [
+    {
+      "id": "s01-cover",
+      "background": "#F2EDE8",
+      "elements": [
+        {
+          "id": "s01-icon",
+          "type": "image",
+          "x": 50,
+          "y": 8,
+          "width": 48,
+          "height": 84,
+          "rotation": 0,
+          "content": "/cegtec-icon.svg",
+          "style": {
+            "objectFit": "contain"
+          }
+        },
+        {
+          "id": "s01-logo",
+          "type": "image",
+          "x": 6,
+          "y": 6,
+          "width": 11,
+          "height": 6,
+          "rotation": 0,
+          "content": "/cegtec-logo.png",
+          "style": {
+            "objectFit": "contain"
+          }
+        },
+        {
+          "id": "s01-for",
+          "type": "text",
+          "x": 72,
+          "y": 7,
+          "width": 22,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>Für B2B Tech-Unternehmen</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#8A7A6A",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s01-head",
+          "type": "text",
+          "x": 6,
+          "y": 40,
+          "width": 70,
+          "height": 24,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>Qualifizierte Termine<br/>für B2B Tech.</strong></p>",
+          "style": {
+            "fontSize": 78,
+            "fontWeight": 800,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s01-sub",
+          "type": "text",
+          "x": 6,
+          "y": 72,
+          "width": 48,
+          "height": 10,
+          "rotation": 0,
+          "content": "<p>Entscheider in SaaS, IT und Software. Multi-Channel, DACH-weit, DSGVO-konform.</p>",
+          "style": {
+            "fontSize": 26,
+            "fontWeight": 400,
+            "color": "#5A4A3A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s01-line",
+          "type": "shape",
+          "x": 6,
+          "y": 90,
+          "width": 88,
+          "height": 0.1,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#C8B8A8"
+          }
+        },
+        {
+          "id": "s01-date",
+          "type": "text",
+          "x": 6,
+          "y": 92,
+          "width": 20,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>April 2026</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#8A7A6A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s01-managed",
+          "type": "text",
+          "x": 60,
+          "y": 92,
+          "width": 34,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>Managed Outreach, DACH</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#8A7A6A",
+            "textAlign": "right"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s02-about",
+      "background": "#F2EDE8",
+      "elements": [
+        {
+          "id": "s02a-logo",
+          "type": "image",
+          "x": 6,
+          "y": 6,
+          "width": 11,
+          "height": 6,
+          "rotation": 0,
+          "content": "/cegtec-logo.png",
+          "style": {
+            "objectFit": "contain"
+          }
+        },
+        {
+          "id": "s02a-pg",
+          "type": "text",
+          "x": 78,
+          "y": 7,
+          "width": 16,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>2 / 11</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#8A7A6A",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s02a-head",
+          "type": "text",
+          "x": 6,
+          "y": 15,
+          "width": 84,
+          "height": 16,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>Agenturen verkaufen Stunden.<br/>Wir verkaufen Systeme.</strong></p>",
+          "style": {
+            "fontSize": 48,
+            "fontWeight": 800,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02a-body",
+          "type": "text",
+          "x": 6,
+          "y": 33,
+          "width": 80,
+          "height": 6,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">Wir bauen Ihre Outreach-Infrastruktur auf. Einmal aufgesetzt, l&auml;uft sie automatisiert, messbar und in Ihrem Besitz.</p>",
+          "style": {
+            "fontSize": 22,
+            "fontWeight": 400,
+            "color": "#5A4A3A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02a-accent",
+          "type": "shape",
+          "x": 6,
+          "y": 43,
+          "width": 6,
+          "height": 0.3,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#B8564F"
+          }
+        },
+        {
+          "id": "s02a-c1num",
+          "type": "text",
+          "x": 6,
+          "y": 50,
+          "width": 12,
+          "height": 8,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>01</strong></p>",
+          "style": {
+            "fontSize": 44,
+            "fontWeight": 700,
+            "color": "#B8564F",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02a-c1title",
+          "type": "text",
+          "x": 6,
+          "y": 60,
+          "width": 26,
+          "height": 8,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>Offizieller Partner</strong></p>",
+          "style": {
+            "fontSize": 26,
+            "fontWeight": 700,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02a-c1body",
+          "type": "text",
+          "x": 6,
+          "y": 70,
+          "width": 26,
+          "height": 18,
+          "rotation": 0,
+          "content": "<p>von HeyReach, Instantly und HubSpot. Bew&auml;hrte Integrationen, keine Experimente.</p>",
+          "style": {
+            "fontSize": 20,
+            "fontWeight": 400,
+            "color": "#5A4A3A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02a-c2num",
+          "type": "text",
+          "x": 36,
+          "y": 50,
+          "width": 12,
+          "height": 8,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>02</strong></p>",
+          "style": {
+            "fontSize": 44,
+            "fontWeight": 700,
+            "color": "#B8564F",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02a-c2title",
+          "type": "text",
+          "x": 36,
+          "y": 60,
+          "width": 26,
+          "height": 8,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>Eigene KI-Entwicklung</strong></p>",
+          "style": {
+            "fontSize": 26,
+            "fontWeight": 700,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02a-c2body",
+          "type": "text",
+          "x": 36,
+          "y": 70,
+          "width": 26,
+          "height": 18,
+          "rotation": 0,
+          "content": "<p>Inhouse-Team in Hamburg baut Custom Agents, die Standardtools nicht liefern k&ouml;nnen.</p>",
+          "style": {
+            "fontSize": 20,
+            "fontWeight": 400,
+            "color": "#5A4A3A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02a-c3num",
+          "type": "text",
+          "x": 66,
+          "y": 50,
+          "width": 12,
+          "height": 8,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>03</strong></p>",
+          "style": {
+            "fontSize": 44,
+            "fontWeight": 700,
+            "color": "#B8564F",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02a-c3title",
+          "type": "text",
+          "x": 66,
+          "y": 60,
+          "width": 26,
+          "height": 8,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>DACH-Fokus</strong></p>",
+          "style": {
+            "fontSize": 26,
+            "fontWeight": 700,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02a-c3body",
+          "type": "text",
+          "x": 66,
+          "y": 70,
+          "width": 26,
+          "height": 18,
+          "rotation": 0,
+          "content": "<p>Deutscher Markt, deutsche Ansprache. Datenschutz als Standard, nicht als Pflicht.</p>",
+          "style": {
+            "fontSize": 20,
+            "fontWeight": 400,
+            "color": "#5A4A3A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02a-line",
+          "type": "shape",
+          "x": 6,
+          "y": 90,
+          "width": 88,
+          "height": 0.1,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#C8B8A8"
+          }
+        },
+        {
+          "id": "s02a-foot",
+          "type": "text",
+          "x": 6,
+          "y": 92,
+          "width": 40,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>CegTec, Profil</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#8A7A6A",
+            "textAlign": "left"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s02b-process",
+      "background": "#F2EDE8",
+      "elements": [
+        {
+          "id": "s02b-logo",
+          "type": "image",
+          "x": 6,
+          "y": 6,
+          "width": 11,
+          "height": 6,
+          "rotation": 0,
+          "content": "/cegtec-logo.png",
+          "style": {
+            "objectFit": "contain"
+          }
+        },
+        {
+          "id": "s02b-pg",
+          "type": "text",
+          "x": 85,
+          "y": 7,
+          "width": 9,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>3 / 11</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#8A7A6A",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s02b-label",
+          "type": "text",
+          "x": 6,
+          "y": 14,
+          "width": 40,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0;letter-spacing:0.12em\"><strong>PROZESS</strong></p>",
+          "style": {
+            "fontSize": 14,
+            "fontWeight": 600,
+            "color": "#B8564F",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02b-head",
+          "type": "text",
+          "x": 6,
+          "y": 17,
+          "width": 80,
+          "height": 10,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>5 Phasen. Ein System.</strong></p>",
+          "style": {
+            "fontSize": 54,
+            "fontWeight": 800,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02b-body",
+          "type": "text",
+          "x": 6,
+          "y": 28,
+          "width": 80,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">Von der ersten ICP-Definition bis zum qualifizierten Termin im Kalender.</p>",
+          "style": {
+            "fontSize": 22,
+            "fontWeight": 400,
+            "color": "#5A4A3A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02b-accent",
+          "type": "shape",
+          "x": 6,
+          "y": 34,
+          "width": 6,
+          "height": 0.3,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#B8564F"
+          }
+        },
+        {
+          "id": "s02b-p1num",
+          "type": "text",
+          "x": 6,
+          "y": 40,
+          "width": 8,
+          "height": 6,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>01</strong></p>",
+          "style": {
+            "fontSize": 34,
+            "fontWeight": 700,
+            "color": "#B8564F",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02b-p1name",
+          "type": "text",
+          "x": 15,
+          "y": 40,
+          "width": 22,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>Foundation</strong></p>",
+          "style": {
+            "fontSize": 22,
+            "fontWeight": 700,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02b-p1desc",
+          "type": "text",
+          "x": 40,
+          "y": 40,
+          "width": 54,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">ICP, Personas und Messaging gemeinsam definiert.</p>",
+          "style": {
+            "fontSize": 20,
+            "fontWeight": 400,
+            "color": "#5A4A3A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02b-p1line",
+          "type": "shape",
+          "x": 6,
+          "y": 47,
+          "width": 88,
+          "height": 0.06,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#C8B8A8"
+          }
+        },
+        {
+          "id": "s02b-p2num",
+          "type": "text",
+          "x": 6,
+          "y": 50,
+          "width": 8,
+          "height": 6,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>02</strong></p>",
+          "style": {
+            "fontSize": 34,
+            "fontWeight": 700,
+            "color": "#B8564F",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02b-p2name",
+          "type": "text",
+          "x": 15,
+          "y": 50,
+          "width": 22,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>Infrastruktur</strong></p>",
+          "style": {
+            "fontSize": 22,
+            "fontWeight": 700,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02b-p2desc",
+          "type": "text",
+          "x": 40,
+          "y": 50,
+          "width": 54,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">Domains, DNS und Mailbox-Warmup. Zustellbarkeit ab Tag&nbsp;1.</p>",
+          "style": {
+            "fontSize": 20,
+            "fontWeight": 400,
+            "color": "#5A4A3A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02b-p2line",
+          "type": "shape",
+          "x": 6,
+          "y": 57,
+          "width": 88,
+          "height": 0.06,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#C8B8A8"
+          }
+        },
+        {
+          "id": "s02b-p3num",
+          "type": "text",
+          "x": 6,
+          "y": 60,
+          "width": 8,
+          "height": 6,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>03</strong></p>",
+          "style": {
+            "fontSize": 34,
+            "fontWeight": 700,
+            "color": "#B8564F",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02b-p3name",
+          "type": "text",
+          "x": 15,
+          "y": 60,
+          "width": 22,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>Intelligence</strong></p>",
+          "style": {
+            "fontSize": 22,
+            "fontWeight": 700,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02b-p3desc",
+          "type": "text",
+          "x": 40,
+          "y": 60,
+          "width": 54,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">Enrichment, AI-Personalisierung und manuelle QA pro Lead.</p>",
+          "style": {
+            "fontSize": 20,
+            "fontWeight": 400,
+            "color": "#5A4A3A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02b-p3line",
+          "type": "shape",
+          "x": 6,
+          "y": 67,
+          "width": 88,
+          "height": 0.06,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#C8B8A8"
+          }
+        },
+        {
+          "id": "s02b-p4num",
+          "type": "text",
+          "x": 6,
+          "y": 70,
+          "width": 8,
+          "height": 6,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>04</strong></p>",
+          "style": {
+            "fontSize": 34,
+            "fontWeight": 700,
+            "color": "#B8564F",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02b-p4name",
+          "type": "text",
+          "x": 15,
+          "y": 70,
+          "width": 22,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>Execution</strong></p>",
+          "style": {
+            "fontSize": 22,
+            "fontWeight": 700,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02b-p4desc",
+          "type": "text",
+          "x": 40,
+          "y": 70,
+          "width": 54,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">Multichannel-Sequenzen live. E-Mail und LinkedIn koordiniert.</p>",
+          "style": {
+            "fontSize": 20,
+            "fontWeight": 400,
+            "color": "#5A4A3A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02b-p4line",
+          "type": "shape",
+          "x": 6,
+          "y": 77,
+          "width": 88,
+          "height": 0.06,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#C8B8A8"
+          }
+        },
+        {
+          "id": "s02b-p5num",
+          "type": "text",
+          "x": 6,
+          "y": 80,
+          "width": 8,
+          "height": 6,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>05</strong></p>",
+          "style": {
+            "fontSize": 34,
+            "fontWeight": 700,
+            "color": "#B8564F",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02b-p5name",
+          "type": "text",
+          "x": 15,
+          "y": 80,
+          "width": 22,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>Handoff</strong></p>",
+          "style": {
+            "fontSize": 22,
+            "fontWeight": 700,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02b-p5desc",
+          "type": "text",
+          "x": 40,
+          "y": 80,
+          "width": 54,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">Monitoring, CRM-Sync und qualifizierte Termine im Kalender.</p>",
+          "style": {
+            "fontSize": 20,
+            "fontWeight": 400,
+            "color": "#5A4A3A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02b-line",
+          "type": "shape",
+          "x": 6,
+          "y": 90,
+          "width": 88,
+          "height": 0.1,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#C8B8A8"
+          }
+        },
+        {
+          "id": "s02b-foot",
+          "type": "text",
+          "x": 6,
+          "y": 92,
+          "width": 40,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>CegTec, Prozess</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#8A7A6A",
+            "textAlign": "left"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s02-playbook",
+      "background": "#F2EDE8",
+      "elements": [
+        {
+          "id": "s02-logo",
+          "type": "image",
+          "x": 6,
+          "y": 6,
+          "width": 11,
+          "height": 6,
+          "rotation": 0,
+          "content": "/cegtec-logo.png",
+          "style": {
+            "objectFit": "contain"
+          }
+        },
+        {
+          "id": "s02-img",
+          "type": "image",
+          "x": 50,
+          "y": 14,
+          "width": 42.91975308641975,
+          "height": 72,
+          "rotation": 0,
+          "content": "/assets/b2b-tech/playbook-overview.png",
+          "style": {
+            "objectFit": "contain",
+            "borderRadius": 25
+          }
+        },
+        {
+          "id": "s02-pg",
+          "type": "text",
+          "x": 85,
+          "y": 7,
+          "width": 9,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>4 / 11</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#8A7A6A",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s02-head",
+          "type": "text",
+          "x": 6,
+          "y": 16,
+          "width": 42,
+          "height": 12,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>Ihre Strategie, gemeinsam definiert.</strong></p>",
+          "style": {
+            "fontSize": 52,
+            "fontWeight": 800,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02-accent",
+          "type": "shape",
+          "x": 6,
+          "y": 30,
+          "width": 6,
+          "height": 0.4,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#2563EB"
+          }
+        },
+        {
+          "id": "s02-body",
+          "type": "text",
+          "x": 6,
+          "y": 34,
+          "width": 40,
+          "height": 12,
+          "rotation": 0,
+          "content": "<p>Offer, ICP, Personas, Messaging, Kanäle: alles in einem System. Gemeinsam definiert, jederzeit anpassbar.</p>",
+          "style": {
+            "fontSize": 28,
+            "fontWeight": 400,
+            "color": "#5A4A3A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02-hitl",
+          "type": "text",
+          "x": 6,
+          "y": 48,
+          "width": 40,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p><strong>Human in the Loop. Sie behalten die Kontrolle.</strong></p>",
+          "style": {
+            "fontSize": 26,
+            "fontWeight": 700,
+            "color": "#2563EB",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s02-line",
+          "type": "shape",
+          "x": 6,
+          "y": 90,
+          "width": 88,
+          "height": 0.1,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#C8B8A8"
+          }
+        },
+        {
+          "id": "s02-foot",
+          "type": "text",
+          "x": 6,
+          "y": 92,
+          "width": 40,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>CegTec, Playbook</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#8A7A6A",
+            "textAlign": "left"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s03-icp",
+      "background": "#F2EDE8",
+      "elements": [
+        {
+          "id": "s03-logo",
+          "type": "image",
+          "x": 6,
+          "y": 6,
+          "width": 11,
+          "height": 6,
+          "rotation": 0,
+          "content": "/cegtec-logo.png",
+          "style": {
+            "objectFit": "contain"
+          }
+        },
+        {
+          "id": "s03-img",
+          "type": "image",
+          "x": 50,
+          "y": 14,
+          "width": 44,
+          "height": 72,
+          "rotation": 0,
+          "content": "/assets/b2b-tech/icp-detail.png",
+          "style": {
+            "objectFit": "contain",
+            "borderRadius": 25
+          }
+        },
+        {
+          "id": "s03-pg",
+          "type": "text",
+          "x": 85,
+          "y": 7,
+          "width": 9,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>5 / 11</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#8A7A6A",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s03-head",
+          "type": "text",
+          "x": 6,
+          "y": 16,
+          "width": 42,
+          "height": 12,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>Wen wir ansprechen und warum.</strong></p>",
+          "style": {
+            "fontSize": 52,
+            "fontWeight": 800,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s03-accent",
+          "type": "shape",
+          "x": 6,
+          "y": 30,
+          "width": 6,
+          "height": 0.4,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#2563EB"
+          }
+        },
+        {
+          "id": "s03-body",
+          "type": "text",
+          "x": 6,
+          "y": 34,
+          "width": 40,
+          "height": 12,
+          "rotation": 0,
+          "content": "<p>Pro Zielgruppe definieren wir live spezifische Internet-Quellen — Software-Marktplätze, G2/Capterra, Branchenverbände, LinkedIn-Insights. Keine generische Datenbank, sondern konsolidierte Recherche dort, wo Ihre Zielgruppe wirklich sichtbar ist.</p>",
+          "style": {
+            "fontSize": 20,
+            "fontWeight": 400,
+            "color": "#5A4A3A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s03-hitl",
+          "type": "text",
+          "x": 6,
+          "y": 48,
+          "width": 40,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p><strong>Human in the Loop. Kriterien gemeinsam definiert.</strong></p>",
+          "style": {
+            "fontSize": 26,
+            "fontWeight": 700,
+            "color": "#2563EB",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s03-line",
+          "type": "shape",
+          "x": 6,
+          "y": 90,
+          "width": 88,
+          "height": 0.1,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#C8B8A8"
+          }
+        },
+        {
+          "id": "s03-foot",
+          "type": "text",
+          "x": 6,
+          "y": 92,
+          "width": 40,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>CegTec, Zielgruppe & Qualifikation</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#8A7A6A",
+            "textAlign": "left"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s04-lead",
+      "background": "#F2EDE8",
+      "elements": [
+        {
+          "id": "s04-logo",
+          "type": "image",
+          "x": 6,
+          "y": 6,
+          "width": 11,
+          "height": 6,
+          "rotation": 0,
+          "content": "/cegtec-logo.png",
+          "style": {
+            "objectFit": "contain"
+          }
+        },
+        {
+          "id": "s04-img",
+          "type": "image",
+          "x": 79.64609053497942,
+          "y": 15,
+          "width": 14.03292181069959,
+          "height": 65,
+          "rotation": 0,
+          "content": "/assets/b2b-tech/lead-detail.png",
+          "style": {
+            "objectFit": "contain",
+            "borderRadius": 25
+          }
+        },
+        {
+          "id": "s04-bg",
+          "type": "image",
+          "x": 52,
+          "y": 25.49405306495883,
+          "width": 25,
+          "height": 41.92680695333944,
+          "rotation": 0,
+          "content": "/assets/b2b-tech/lead-liste.png",
+          "style": {
+            "objectFit": "contain",
+            "borderRadius": 25,
+            "opacity": 1
+          }
+        },
+        {
+          "id": "s04-pg",
+          "type": "text",
+          "x": 85,
+          "y": 7,
+          "width": 9,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>6 / 11</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#8A7A6A",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s04-head",
+          "type": "text",
+          "x": 6,
+          "y": 16,
+          "width": 40,
+          "height": 12,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>Jeder Lead, individuell geprüft.</strong></p>",
+          "style": {
+            "fontSize": 52,
+            "fontWeight": 800,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s04-accent",
+          "type": "shape",
+          "x": 6,
+          "y": 30,
+          "width": 6,
+          "height": 0.4,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#2563EB"
+          }
+        },
+        {
+          "id": "s04-body",
+          "type": "text",
+          "x": 6,
+          "y": 34,
+          "width": 38,
+          "height": 18,
+          "rotation": 0,
+          "content": "<p>ICP-Score, Buying Signals, Pain Points und Solution Fit. Automatisch recherchiert, manuell geprüft.</p>",
+          "style": {
+            "fontSize": 28,
+            "fontWeight": 400,
+            "color": "#5A4A3A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s04-hitl",
+          "type": "text",
+          "x": 6,
+          "y": 55,
+          "width": 38,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p><strong>Human in the Loop. Kein Lead ohne Review.</strong></p>",
+          "style": {
+            "fontSize": 26,
+            "fontWeight": 700,
+            "color": "#2563EB",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s04-demo",
+          "type": "text",
+          "x": 6,
+          "y": 62,
+          "width": 38,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p style=\"margin:0;letter-spacing:0.1em\"><strong>DEMO-BEISPIEL, KEIN AKTUELLER KUNDE</strong></p>",
+          "style": {
+            "fontSize": 13,
+            "fontWeight": 600,
+            "color": "#8A7A6A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s04-line",
+          "type": "shape",
+          "x": 6,
+          "y": 90,
+          "width": 88,
+          "height": 0.1,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#C8B8A8"
+          }
+        },
+        {
+          "id": "s04-foot",
+          "type": "text",
+          "x": 6,
+          "y": 92,
+          "width": 40,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>CegTec, Lead Intelligence</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#8A7A6A",
+            "textAlign": "left"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s05-emails",
+      "background": "#F2EDE8",
+      "elements": [
+        {
+          "id": "s05-logo",
+          "type": "image",
+          "x": 6,
+          "y": 6,
+          "width": 11,
+          "height": 6,
+          "rotation": 0,
+          "content": "/cegtec-logo.png",
+          "style": {
+            "objectFit": "contain"
+          }
+        },
+        {
+          "id": "s05-img",
+          "type": "image",
+          "x": 58.01851851851852,
+          "y": 5,
+          "width": 18.98148148148148,
+          "height": 82,
+          "rotation": 0,
+          "content": "/assets/b2b-tech/ai-emails.png",
+          "style": {
+            "objectFit": "contain",
+            "borderRadius": 25
+          }
+        },
+        {
+          "id": "s05-pg",
+          "type": "text",
+          "x": 85,
+          "y": 7,
+          "width": 9,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>8 / 11</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#8A7A6A",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s05-head",
+          "type": "text",
+          "x": 6,
+          "y": 16,
+          "width": 40,
+          "height": 12,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>Die Ansprache: hochpersonalisiert.</strong></p>",
+          "style": {
+            "fontSize": 52,
+            "fontWeight": 800,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s05-accent",
+          "type": "shape",
+          "x": 6,
+          "y": 30,
+          "width": 6,
+          "height": 0.4,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#2563EB"
+          }
+        },
+        {
+          "id": "s05-body",
+          "type": "text",
+          "x": 6,
+          "y": 34,
+          "width": 38,
+          "height": 18,
+          "rotation": 0,
+          "content": "<p>AI-generierte Emails mit Bezug auf Firmenprofil, Tech-Stack, Funding-Runden und konkrete Produkt-Launches. Kein Template.</p>",
+          "style": {
+            "fontSize": 28,
+            "fontWeight": 400,
+            "color": "#5A4A3A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s05-hitl",
+          "type": "text",
+          "x": 6,
+          "y": 55,
+          "width": 38,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p><strong>AI schreibt. Sie entscheiden.</strong></p>",
+          "style": {
+            "fontSize": 26,
+            "fontWeight": 700,
+            "color": "#2563EB",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s05-line",
+          "type": "shape",
+          "x": 6,
+          "y": 90,
+          "width": 88,
+          "height": 0.1,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#C8B8A8"
+          }
+        },
+        {
+          "id": "s05-foot",
+          "type": "text",
+          "x": 6,
+          "y": 92,
+          "width": 40,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>CegTec, Personalisierte Ansprache</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#8A7A6A",
+            "textAlign": "left"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s06-dashboard",
+      "background": "#F2EDE8",
+      "elements": [
+        {
+          "id": "s06-logo",
+          "type": "image",
+          "x": 6,
+          "y": 6,
+          "width": 11,
+          "height": 6,
+          "rotation": 0,
+          "content": "/cegtec-logo.png",
+          "style": {
+            "objectFit": "contain"
+          }
+        },
+        {
+          "id": "s06-pg",
+          "type": "text",
+          "x": 85,
+          "y": 7,
+          "width": 9,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>9 / 11</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#8A7A6A",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s06-label",
+          "type": "text",
+          "x": 6,
+          "y": 14,
+          "width": 30,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0;letter-spacing:0.12em\"><strong>LIVE DATEN</strong></p>",
+          "style": {
+            "fontSize": 14,
+            "fontWeight": 600,
+            "color": "#B8564F",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s06-head",
+          "type": "text",
+          "x": 6,
+          "y": 17,
+          "width": 80,
+          "height": 10,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>Echte Ergebnisse. T&auml;glich aktualisiert.</strong></p>",
+          "style": {
+            "fontSize": 54,
+            "fontWeight": 800,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s06-sub",
+          "type": "text",
+          "x": 6,
+          "y": 28,
+          "width": 80,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>Top 5 Kampagnen aus unseren Integrationen Instantly und HeyReach, anonymisiert.</p>",
+          "style": {
+            "fontSize": 22,
+            "fontWeight": 400,
+            "color": "#5A4A3A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s06-accent",
+          "type": "shape",
+          "x": 6,
+          "y": 34,
+          "width": 6,
+          "height": 0.3,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#B8564F"
+          }
+        },
+        {
+          "id": "s06-k1val",
+          "type": "text",
+          "x": 6,
+          "y": 38,
+          "width": 22,
+          "height": 8,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>13.372</strong></p>",
+          "style": {
+            "fontSize": 52,
+            "fontWeight": 800,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s06-k1lbl",
+          "type": "text",
+          "x": 6,
+          "y": 48,
+          "width": 22,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0;letter-spacing:0.08em\"><strong>KONTAKTIERT</strong></p>",
+          "style": {
+            "fontSize": 13,
+            "fontWeight": 600,
+            "color": "#8A7A6A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s06-k1sub",
+          "type": "text",
+          "x": 6,
+          "y": 51,
+          "width": 22,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">Top 5 Kampagnen</p>",
+          "style": {
+            "fontSize": 14,
+            "fontWeight": 400,
+            "color": "#8A7A6A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s06-div1",
+          "type": "shape",
+          "x": 28,
+          "y": 39,
+          "width": 0.08,
+          "height": 13,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#C8B8A8"
+          }
+        },
+        {
+          "id": "s06-k2val",
+          "type": "text",
+          "x": 30,
+          "y": 38,
+          "width": 22,
+          "height": 8,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>9,5%</strong></p>",
+          "style": {
+            "fontSize": 52,
+            "fontWeight": 800,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s06-k2lbl",
+          "type": "text",
+          "x": 30,
+          "y": 48,
+          "width": 22,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0;letter-spacing:0.08em\"><strong>REPLY RATE</strong></p>",
+          "style": {
+            "fontSize": 13,
+            "fontWeight": 600,
+            "color": "#8A7A6A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s06-k2sub",
+          "type": "text",
+          "x": 30,
+          "y": 51,
+          "width": 22,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">&Oslash; Top 5 Kampagnen</p>",
+          "style": {
+            "fontSize": 14,
+            "fontWeight": 400,
+            "color": "#8A7A6A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s06-div2",
+          "type": "shape",
+          "x": 52,
+          "y": 39,
+          "width": 0.08,
+          "height": 13,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#C8B8A8"
+          }
+        },
+        {
+          "id": "s06-k3val",
+          "type": "text",
+          "x": 54,
+          "y": 38,
+          "width": 22,
+          "height": 8,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>235</strong></p>",
+          "style": {
+            "fontSize": 52,
+            "fontWeight": 800,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s06-k3lbl",
+          "type": "text",
+          "x": 54,
+          "y": 48,
+          "width": 22,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0;letter-spacing:0.08em\"><strong>ANTWORTEN</strong></p>",
+          "style": {
+            "fontSize": 13,
+            "fontWeight": 600,
+            "color": "#8A7A6A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s06-k3sub",
+          "type": "text",
+          "x": 54,
+          "y": 51,
+          "width": 22,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">aus Top 5 Kampagnen</p>",
+          "style": {
+            "fontSize": 14,
+            "fontWeight": 400,
+            "color": "#8A7A6A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s06-div3",
+          "type": "shape",
+          "x": 76,
+          "y": 39,
+          "width": 0.08,
+          "height": 13,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#C8B8A8"
+          }
+        },
+        {
+          "id": "s06-k4val",
+          "type": "text",
+          "x": 78,
+          "y": 38,
+          "width": 18,
+          "height": 8,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>5</strong></p>",
+          "style": {
+            "fontSize": 52,
+            "fontWeight": 800,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s06-k4lbl",
+          "type": "text",
+          "x": 78,
+          "y": 48,
+          "width": 18,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0;letter-spacing:0.08em\"><strong>KAMPAGNEN</strong></p>",
+          "style": {
+            "fontSize": 13,
+            "fontWeight": 600,
+            "color": "#8A7A6A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s06-k4sub",
+          "type": "text",
+          "x": 78,
+          "y": 51,
+          "width": 18,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">3 Email, 2 LinkedIn</p>",
+          "style": {
+            "fontSize": 14,
+            "fontWeight": 400,
+            "color": "#8A7A6A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s06-kpiline",
+          "type": "shape",
+          "x": 6,
+          "y": 57,
+          "width": 88,
+          "height": 0.08,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#C8B8A8"
+          }
+        },
+        {
+          "id": "s06-tbltitle",
+          "type": "text",
+          "x": 6,
+          "y": 60,
+          "width": 50,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>Top Kampagnen</strong> &middot; sortiert nach Reply Rate</p>",
+          "style": {
+            "fontSize": 18,
+            "fontWeight": 500,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s06-th1",
+          "type": "text",
+          "x": 6,
+          "y": 65,
+          "width": 22,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0;letter-spacing:0.08em\"><strong>KAMPAGNE</strong></p>",
+          "style": {
+            "fontSize": 11,
+            "fontWeight": 600,
+            "color": "#8A7A6A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s06-th2",
+          "type": "text",
+          "x": 30,
+          "y": 65,
+          "width": 14,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0;letter-spacing:0.08em\"><strong>CHANNEL</strong></p>",
+          "style": {
+            "fontSize": 11,
+            "fontWeight": 600,
+            "color": "#8A7A6A",
+            "textAlign": "center"
+          }
+        },
+        {
+          "id": "s06-th3",
+          "type": "text",
+          "x": 46,
+          "y": 65,
+          "width": 14,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0;letter-spacing:0.08em\"><strong>KONTAKTIERT</strong></p>",
+          "style": {
+            "fontSize": 11,
+            "fontWeight": 600,
+            "color": "#8A7A6A",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s06-th4",
+          "type": "text",
+          "x": 62,
+          "y": 65,
+          "width": 14,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0;letter-spacing:0.08em\"><strong>ANTWORTEN</strong></p>",
+          "style": {
+            "fontSize": 11,
+            "fontWeight": 600,
+            "color": "#8A7A6A",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s06-th5",
+          "type": "text",
+          "x": 78,
+          "y": 65,
+          "width": 16,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0;letter-spacing:0.08em\"><strong>REPLY RATE</strong></p>",
+          "style": {
+            "fontSize": 11,
+            "fontWeight": 600,
+            "color": "#8A7A6A",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s06-thline",
+          "type": "shape",
+          "x": 6,
+          "y": 68,
+          "width": 88,
+          "height": 0.08,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#C8B8A8"
+          }
+        },
+        {
+          "id": "s06-r1c1",
+          "type": "text",
+          "x": 6,
+          "y": 70,
+          "width": 22,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">Campaign LI-2601</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 400,
+            "color": "#1A1A2E",
+            "textAlign": "left",
+            "filter": "blur(4px)"
+          }
+        },
+        {
+          "id": "s06-r1c2",
+          "type": "text",
+          "x": 30,
+          "y": 70,
+          "width": 14,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">LinkedIn</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#0a66c2",
+            "textAlign": "center"
+          }
+        },
+        {
+          "id": "s06-r1c3",
+          "type": "text",
+          "x": 46,
+          "y": 70,
+          "width": 14,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">47</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#1A1A2E",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s06-r1c4",
+          "type": "text",
+          "x": 62,
+          "y": 70,
+          "width": 14,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">4</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#1A1A2E",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s06-r1c5",
+          "type": "text",
+          "x": 78,
+          "y": 70,
+          "width": 16,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>23,5%</strong></p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 700,
+            "color": "#B8564F",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s06-r2c1",
+          "type": "text",
+          "x": 6,
+          "y": 73.5,
+          "width": 22,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">Campaign LI-2602</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 400,
+            "color": "#1A1A2E",
+            "textAlign": "left",
+            "filter": "blur(4px)"
+          }
+        },
+        {
+          "id": "s06-r2c2",
+          "type": "text",
+          "x": 30,
+          "y": 73.5,
+          "width": 14,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">LinkedIn</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#0a66c2",
+            "textAlign": "center"
+          }
+        },
+        {
+          "id": "s06-r2c3",
+          "type": "text",
+          "x": 46,
+          "y": 73.5,
+          "width": 14,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">231</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#1A1A2E",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s06-r2c4",
+          "type": "text",
+          "x": 62,
+          "y": 73.5,
+          "width": 14,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">7</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#1A1A2E",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s06-r2c5",
+          "type": "text",
+          "x": 78,
+          "y": 73.5,
+          "width": 16,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>17,1%</strong></p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 700,
+            "color": "#B8564F",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s06-r3c1",
+          "type": "text",
+          "x": 6,
+          "y": 77,
+          "width": 22,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">Campaign EM-2601</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 400,
+            "color": "#1A1A2E",
+            "textAlign": "left",
+            "filter": "blur(4px)"
+          }
+        },
+        {
+          "id": "s06-r3c2",
+          "type": "text",
+          "x": 30,
+          "y": 77,
+          "width": 14,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">Email</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#4f46e5",
+            "textAlign": "center"
+          }
+        },
+        {
+          "id": "s06-r3c3",
+          "type": "text",
+          "x": 46,
+          "y": 77,
+          "width": 14,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">401</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#1A1A2E",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s06-r3c4",
+          "type": "text",
+          "x": 62,
+          "y": 77,
+          "width": 14,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">15</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#1A1A2E",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s06-r3c5",
+          "type": "text",
+          "x": 78,
+          "y": 77,
+          "width": 16,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>3,7%</strong></p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 700,
+            "color": "#B8564F",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s06-r4c1",
+          "type": "text",
+          "x": 6,
+          "y": 80.5,
+          "width": 22,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">Campaign EM-2602</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 400,
+            "color": "#1A1A2E",
+            "textAlign": "left",
+            "filter": "blur(4px)"
+          }
+        },
+        {
+          "id": "s06-r4c2",
+          "type": "text",
+          "x": 30,
+          "y": 80.5,
+          "width": 14,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">Email</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#4f46e5",
+            "textAlign": "center"
+          }
+        },
+        {
+          "id": "s06-r4c3",
+          "type": "text",
+          "x": 46,
+          "y": 80.5,
+          "width": 14,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">5.167</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#1A1A2E",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s06-r4c4",
+          "type": "text",
+          "x": 62,
+          "y": 80.5,
+          "width": 14,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">89</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#1A1A2E",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s06-r4c5",
+          "type": "text",
+          "x": 78,
+          "y": 80.5,
+          "width": 16,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>1,7%</strong></p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 700,
+            "color": "#B8564F",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s06-r5c1",
+          "type": "text",
+          "x": 6,
+          "y": 84,
+          "width": 22,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">Campaign EM-2603</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 400,
+            "color": "#1A1A2E",
+            "textAlign": "left",
+            "filter": "blur(4px)"
+          }
+        },
+        {
+          "id": "s06-r5c2",
+          "type": "text",
+          "x": 30,
+          "y": 84,
+          "width": 14,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">Email</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#4f46e5",
+            "textAlign": "center"
+          }
+        },
+        {
+          "id": "s06-r5c3",
+          "type": "text",
+          "x": 46,
+          "y": 84,
+          "width": 14,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">7.526</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#1A1A2E",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s06-r5c4",
+          "type": "text",
+          "x": 62,
+          "y": 84,
+          "width": 14,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">120</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#1A1A2E",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s06-r5c5",
+          "type": "text",
+          "x": 78,
+          "y": 84,
+          "width": 16,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>1,6%</strong></p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 700,
+            "color": "#B8564F",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s06-line",
+          "type": "shape",
+          "x": 6,
+          "y": 90,
+          "width": 88,
+          "height": 0.1,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#C8B8A8"
+          }
+        },
+        {
+          "id": "s06-foot",
+          "type": "text",
+          "x": 6,
+          "y": 92,
+          "width": 40,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>CegTec, Live Dashboard</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#8A7A6A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s06-punch",
+          "type": "text",
+          "x": 45,
+          "y": 92,
+          "width": 49,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>Stand: April 2026, Daten via Instantly und HeyReach</p>",
+          "style": {
+            "fontSize": 14,
+            "fontWeight": 400,
+            "color": "#8A7A6A",
+            "textAlign": "right"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s07-casestudy",
+      "background": "#F2EDE8",
+      "elements": [
+        {
+          "id": "s07-logo",
+          "type": "image",
+          "x": 6,
+          "y": 6,
+          "width": 11,
+          "height": 6,
+          "rotation": 0,
+          "content": "/cegtec-logo.png",
+          "style": {
+            "objectFit": "contain"
+          }
+        },
+        {
+          "id": "s07-pg",
+          "type": "text",
+          "x": 85,
+          "y": 7,
+          "width": 9,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>7 / 11</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#8A7A6A",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s07-label",
+          "type": "text",
+          "x": 6,
+          "y": 14,
+          "width": 30,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0;letter-spacing:0.12em\"><strong>CASE STUDY</strong></p>",
+          "style": {
+            "fontSize": 14,
+            "fontWeight": 600,
+            "color": "#B8564F",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s07-head",
+          "type": "text",
+          "x": 6,
+          "y": 17,
+          "width": 80,
+          "height": 10,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>ProSeller AG.</strong></p>",
+          "style": {
+            "fontSize": 54,
+            "fontWeight": 800,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s07-sub",
+          "type": "text",
+          "x": 6,
+          "y": 28,
+          "width": 42,
+          "height": 10,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">41 SQLs bei 28,7% Reply Rate. 2.777 Entscheider in DACH über 12 parallele Kampagnen erreicht.</p>",
+          "style": {
+            "fontSize": 20,
+            "fontWeight": 400,
+            "color": "#5A4A3A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s07-accent",
+          "type": "shape",
+          "x": 6,
+          "y": 44,
+          "width": 6,
+          "height": 0.3,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#B8564F"
+          }
+        },
+        {
+          "id": "s07-clogo",
+          "type": "image",
+          "x": 6,
+          "y": 50,
+          "width": 22,
+          "height": 12,
+          "rotation": 0,
+          "content": "/assets/client-proseller.png",
+          "style": {
+            "objectFit": "contain"
+          }
+        },
+        {
+          "id": "s07-clabel",
+          "type": "text",
+          "x": 6,
+          "y": 65,
+          "width": 42,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p style=\"margin:0;letter-spacing:0.08em\"><strong>KUNDE</strong></p>",
+          "style": {
+            "fontSize": 12,
+            "fontWeight": 600,
+            "color": "#8A7A6A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s07-cdesc",
+          "type": "text",
+          "x": 6,
+          "y": 69,
+          "width": 42,
+          "height": 15,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">B2B-SaaS-Anbieter (Concerto Buy Pro) für Reseller, Distributoren und Hersteller. 6 Monate Multi-Channel-Outreach über LinkedIn und E-Mail, DACH-weit.</p>",
+          "style": {
+            "fontSize": 15,
+            "fontWeight": 400,
+            "color": "#5A4A3A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s07-c1bg",
+          "type": "shape",
+          "x": 52,
+          "y": 41,
+          "width": 20,
+          "height": 22,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#ebe6e0",
+            "borderRadius": 8
+          }
+        },
+        {
+          "id": "s07-c1label",
+          "type": "text",
+          "x": 54,
+          "y": 44,
+          "width": 16,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0;letter-spacing:0.08em\"><strong>KONTAKTIERT</strong></p>",
+          "style": {
+            "fontSize": 11,
+            "fontWeight": 600,
+            "color": "#8A7A6A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s07-c1num",
+          "type": "text",
+          "x": 54,
+          "y": 49,
+          "width": 16,
+          "height": 6,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>2.777</strong></p>",
+          "style": {
+            "fontSize": 32,
+            "fontWeight": 700,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s07-c1sub",
+          "type": "text",
+          "x": 54,
+          "y": 56,
+          "width": 16,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">Leads, 96% delivered</p>",
+          "style": {
+            "fontSize": 13,
+            "fontWeight": 400,
+            "color": "#5A4A3A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s07-c2bg",
+          "type": "shape",
+          "x": 74,
+          "y": 41,
+          "width": 20,
+          "height": 22,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#ebe6e0",
+            "borderRadius": 8
+          }
+        },
+        {
+          "id": "s07-c2label",
+          "type": "text",
+          "x": 76,
+          "y": 44,
+          "width": 16,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0;letter-spacing:0.08em\"><strong>ACCEPTANCE</strong></p>",
+          "style": {
+            "fontSize": 11,
+            "fontWeight": 600,
+            "color": "#8A7A6A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s07-c2num",
+          "type": "text",
+          "x": 76,
+          "y": 49,
+          "width": 16,
+          "height": 6,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>29,5%</strong></p>",
+          "style": {
+            "fontSize": 32,
+            "fontWeight": 700,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s07-c2sub",
+          "type": "text",
+          "x": 76,
+          "y": 56,
+          "width": 16,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">786 Verbindungen</p>",
+          "style": {
+            "fontSize": 13,
+            "fontWeight": 400,
+            "color": "#5A4A3A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s07-c3bg",
+          "type": "shape",
+          "x": 52,
+          "y": 64,
+          "width": 20,
+          "height": 22,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#ebe6e0",
+            "borderRadius": 8
+          }
+        },
+        {
+          "id": "s07-c3label",
+          "type": "text",
+          "x": 54,
+          "y": 67,
+          "width": 16,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0;letter-spacing:0.08em\"><strong>REPLY RATE</strong></p>",
+          "style": {
+            "fontSize": 11,
+            "fontWeight": 600,
+            "color": "#8A7A6A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s07-c3num",
+          "type": "text",
+          "x": 54,
+          "y": 72,
+          "width": 16,
+          "height": 6,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>28,7%</strong></p>",
+          "style": {
+            "fontSize": 32,
+            "fontWeight": 700,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s07-c3sub",
+          "type": "text",
+          "x": 54,
+          "y": 79,
+          "width": 16,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">263 Antworten</p>",
+          "style": {
+            "fontSize": 13,
+            "fontWeight": 400,
+            "color": "#5A4A3A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s07-c4bg",
+          "type": "shape",
+          "x": 74,
+          "y": 64,
+          "width": 20,
+          "height": 22,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#ebe6e0",
+            "borderRadius": 8
+          }
+        },
+        {
+          "id": "s07-c4label",
+          "type": "text",
+          "x": 76,
+          "y": 67,
+          "width": 16,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0;letter-spacing:0.08em\"><strong>SQLS</strong></p>",
+          "style": {
+            "fontSize": 11,
+            "fontWeight": 600,
+            "color": "#8A7A6A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s07-c4num",
+          "type": "text",
+          "x": 76,
+          "y": 72,
+          "width": 16,
+          "height": 6,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>41</strong></p>",
+          "style": {
+            "fontSize": 32,
+            "fontWeight": 700,
+            "color": "#B8564F",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s07-c4sub",
+          "type": "text",
+          "x": 76,
+          "y": 79,
+          "width": 16,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">Qualifizierte Leads</p>",
+          "style": {
+            "fontSize": 13,
+            "fontWeight": 400,
+            "color": "#5A4A3A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s07-punch",
+          "type": "text",
+          "x": 6,
+          "y": 87,
+          "width": 88,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">Drei Segmente. Vier Personas. Ein System.</p>",
+          "style": {
+            "fontSize": 18,
+            "fontWeight": 500,
+            "color": "#1A1A2E",
+            "textAlign": "center"
+          }
+        },
+        {
+          "id": "s07-line",
+          "type": "shape",
+          "x": 6,
+          "y": 90,
+          "width": 88,
+          "height": 0.1,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#C8B8A8"
+          }
+        },
+        {
+          "id": "s07-foot",
+          "type": "text",
+          "x": 6,
+          "y": 92,
+          "width": 40,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>CegTec, Case Study</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#8A7A6A",
+            "textAlign": "left"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s08-roi",
+      "background": "#F2EDE8",
+      "elements": [
+        {
+          "id": "s08r-logo",
+          "type": "image",
+          "x": 6,
+          "y": 6,
+          "width": 11,
+          "height": 6,
+          "rotation": 0,
+          "content": "/cegtec-logo.png",
+          "style": {
+            "objectFit": "contain"
+          }
+        },
+        {
+          "id": "s08r-pg",
+          "type": "text",
+          "x": 85,
+          "y": 7,
+          "width": 9,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>10 / 11</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#8A7A6A",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s08r-label",
+          "type": "text",
+          "x": 6,
+          "y": 14,
+          "width": 30,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0;letter-spacing:0.12em\"><strong>BUSINESS CASE</strong></p>",
+          "style": {
+            "fontSize": 14,
+            "fontWeight": 600,
+            "color": "#B8564F",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s08r-head",
+          "type": "text",
+          "x": 6,
+          "y": 17,
+          "width": 80,
+          "height": 10,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>Transparente Investition.<br/>Messbare Pipeline.</strong></p>",
+          "style": {
+            "fontSize": 48,
+            "fontWeight": 800,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s08r-accent",
+          "type": "shape",
+          "x": 6,
+          "y": 36,
+          "width": 6,
+          "height": 0.3,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#B8564F"
+          }
+        },
+        {
+          "id": "s08r-cAbg",
+          "type": "shape",
+          "x": 6,
+          "y": 41,
+          "width": 42,
+          "height": 44,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#ebe6e0",
+            "borderRadius": 8
+          }
+        },
+        {
+          "id": "s08r-cAtitle",
+          "type": "text",
+          "x": 9,
+          "y": 44,
+          "width": 36,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p style=\"margin:0;letter-spacing:0.08em\"><strong>INVESTITION</strong></p>",
+          "style": {
+            "fontSize": 13,
+            "fontWeight": 600,
+            "color": "#8A7A6A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s08r-cA1",
+          "type": "text",
+          "x": 9,
+          "y": 50,
+          "width": 36,
+          "height": 6,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>3.900 &euro;</strong> Pilot-Setup</p>",
+          "style": {
+            "fontSize": 28,
+            "fontWeight": 700,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s08r-cA1sub",
+          "type": "text",
+          "x": 9,
+          "y": 56,
+          "width": 36,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">Einmalig. ICP-Research, Infrastruktur, 500 Leads, Sequenzen live in 2 Wochen.</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 400,
+            "color": "#5A4A3A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s08r-cAsep",
+          "type": "shape",
+          "x": 9,
+          "y": 66,
+          "width": 36,
+          "height": 0.06,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#C8B8A8"
+          }
+        },
+        {
+          "id": "s08r-cA2",
+          "type": "text",
+          "x": 9,
+          "y": 68,
+          "width": 36,
+          "height": 6,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>2.500 &euro;</strong> pro Monat</p>",
+          "style": {
+            "fontSize": 28,
+            "fontWeight": 700,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s08r-cA2sub",
+          "type": "text",
+          "x": 9,
+          "y": 74,
+          "width": 36,
+          "height": 8,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">Retainer ab Monat 2. 1.000 Leads pro Monat, AI Reply Handling, monatlich k&uuml;ndbar.</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 400,
+            "color": "#5A4A3A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s08r-cBbg",
+          "type": "shape",
+          "x": 52,
+          "y": 41,
+          "width": 42,
+          "height": 44,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#ebe6e0",
+            "borderRadius": 8
+          }
+        },
+        {
+          "id": "s08r-cBtitle",
+          "type": "text",
+          "x": 55,
+          "y": 44,
+          "width": 36,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p style=\"margin:0;letter-spacing:0.08em\"><strong>ERGEBNIS</strong></p>",
+          "style": {
+            "fontSize": 13,
+            "fontWeight": 600,
+            "color": "#8A7A6A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s08r-cB1",
+          "type": "text",
+          "x": 55,
+          "y": 50,
+          "width": 36,
+          "height": 6,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>2&ndash;4 Neukunden</strong></p>",
+          "style": {
+            "fontSize": 28,
+            "fontWeight": 700,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s08r-cB1sub",
+          "type": "text",
+          "x": 55,
+          "y": 56,
+          "width": 36,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">pro 1.000 kontaktierten Leads. CegTec-Benchmark &uuml;ber 30+ Kampagnen.</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 400,
+            "color": "#5A4A3A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s08r-cBsep",
+          "type": "shape",
+          "x": 55,
+          "y": 66,
+          "width": 36,
+          "height": 0.06,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#C8B8A8"
+          }
+        },
+        {
+          "id": "s08r-cB2",
+          "type": "text",
+          "x": 55,
+          "y": 68,
+          "width": 36,
+          "height": 6,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>5 Replies garantiert</strong></p>",
+          "style": {
+            "fontSize": 28,
+            "fontWeight": 700,
+            "color": "#B8564F",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s08r-cB2sub",
+          "type": "text",
+          "x": 55,
+          "y": 74,
+          "width": 36,
+          "height": 8,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">Im Pilot. Weniger Replies &rarr; Geld zur&uuml;ck. Kein Risiko f&uuml;r Ihr Haus.</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 400,
+            "color": "#5A4A3A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s08r-punch",
+          "type": "text",
+          "x": 6,
+          "y": 87,
+          "width": 88,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">Ein einziger Enterprise-Deal refinanziert die Investition mehrfach.</p>",
+          "style": {
+            "fontSize": 18,
+            "fontWeight": 500,
+            "color": "#1A1A2E",
+            "textAlign": "center"
+          }
+        },
+        {
+          "id": "s08r-line",
+          "type": "shape",
+          "x": 6,
+          "y": 90,
+          "width": 88,
+          "height": 0.1,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#C8B8A8"
+          }
+        },
+        {
+          "id": "s08r-foot",
+          "type": "text",
+          "x": 6,
+          "y": 92,
+          "width": 40,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>CegTec, ROI</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#8A7A6A",
+            "textAlign": "left"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s09-contact",
+      "background": "#F2EDE8",
+      "elements": [
+        {
+          "id": "s09-logo",
+          "type": "image",
+          "x": 6,
+          "y": 6,
+          "width": 11,
+          "height": 6,
+          "rotation": 0,
+          "content": "/cegtec-logo.png",
+          "style": {
+            "objectFit": "contain"
+          }
+        },
+        {
+          "id": "s09-pg",
+          "type": "text",
+          "x": 85,
+          "y": 7,
+          "width": 9,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>11 / 11</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#8A7A6A",
+            "textAlign": "right"
+          }
+        },
+        {
+          "id": "s09-label",
+          "type": "text",
+          "x": 6,
+          "y": 18,
+          "width": 40,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0;letter-spacing:0.12em\"><strong>KONTAKT</strong></p>",
+          "style": {
+            "fontSize": 14,
+            "fontWeight": 600,
+            "color": "#B8564F",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s09-head",
+          "type": "text",
+          "x": 6,
+          "y": 22,
+          "width": 80,
+          "height": 14,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>Vielen Dank.</strong></p>",
+          "style": {
+            "fontSize": 72,
+            "fontWeight": 800,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s09-sub",
+          "type": "text",
+          "x": 6,
+          "y": 40,
+          "width": 70,
+          "height": 6,
+          "rotation": 0,
+          "content": "<p>F&uuml;r R&uuml;ckfragen und die n&auml;chsten Schritte stehe ich pers&ouml;nlich zur Verf&uuml;gung.</p>",
+          "style": {
+            "fontSize": 24,
+            "fontWeight": 400,
+            "color": "#5A4A3A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s09-accent",
+          "type": "shape",
+          "x": 6,
+          "y": 54,
+          "width": 6,
+          "height": 0.3,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#B8564F"
+          }
+        },
+        {
+          "id": "s09-name",
+          "type": "text",
+          "x": 6,
+          "y": 60,
+          "width": 60,
+          "height": 8,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>Luca Ceglie</strong></p>",
+          "style": {
+            "fontSize": 42,
+            "fontWeight": 700,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s09-role",
+          "type": "text",
+          "x": 6,
+          "y": 70,
+          "width": 60,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">Gesch&auml;ftsf&uuml;hrer, CegTec GmbH</p>",
+          "style": {
+            "fontSize": 22,
+            "fontWeight": 400,
+            "color": "#5A4A3A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s09-email",
+          "type": "text",
+          "x": 6,
+          "y": 75,
+          "width": 44,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">luca.ceglie@cegtec.net</p>",
+          "style": {
+            "fontSize": 26,
+            "fontWeight": 600,
+            "color": "#B8564F",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s09-booking",
+          "type": "text",
+          "x": 6,
+          "y": 81,
+          "width": 44,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">Termin direkt buchen: https://cal.com/luca-ceglie/30min?overlayCalendar=true</p>",
+          "style": {
+            "fontSize": 18,
+            "fontWeight": 500,
+            "color": "#5A4A3A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s09-offerbg",
+          "type": "shape",
+          "x": 52,
+          "y": 18,
+          "width": 42,
+          "height": 66,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#ebe6e0",
+            "borderRadius": 10
+          }
+        },
+        {
+          "id": "s09-offerlabel",
+          "type": "text",
+          "x": 55,
+          "y": 22,
+          "width": 36,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0;letter-spacing:0.12em\"><strong>IHR EINSTIEG</strong></p>",
+          "style": {
+            "fontSize": 14,
+            "fontWeight": 600,
+            "color": "#B8564F",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s09-offerprice",
+          "type": "text",
+          "x": 55,
+          "y": 27,
+          "width": 36,
+          "height": 10,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>3.900 &euro;</strong></p>",
+          "style": {
+            "fontSize": 64,
+            "fontWeight": 800,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s09-offersub",
+          "type": "text",
+          "x": 55,
+          "y": 40,
+          "width": 36,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">Pilot-Setup, einmalig. Erste Kampagne live in 2 Wochen.</p>",
+          "style": {
+            "fontSize": 18,
+            "fontWeight": 400,
+            "color": "#5A4A3A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s09-offersep",
+          "type": "shape",
+          "x": 55,
+          "y": 48,
+          "width": 36,
+          "height": 0.06,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#C8B8A8"
+          }
+        },
+        {
+          "id": "s09-offerb1",
+          "type": "text",
+          "x": 55,
+          "y": 52,
+          "width": 36,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">ICP-Research und Playbook-Erstellung</p>",
+          "style": {
+            "fontSize": 18,
+            "fontWeight": 400,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s09-offerb2",
+          "type": "text",
+          "x": 55,
+          "y": 57,
+          "width": 36,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">500 qualifizierte und angereicherte Leads</p>",
+          "style": {
+            "fontSize": 18,
+            "fontWeight": 400,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s09-offerb3",
+          "type": "text",
+          "x": 55,
+          "y": 62,
+          "width": 36,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">Dedizierte Infrastruktur und Sequenzen</p>",
+          "style": {
+            "fontSize": 18,
+            "fontWeight": 400,
+            "color": "#1A1A2E",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s09-offerb4",
+          "type": "text",
+          "x": 55,
+          "y": 67,
+          "width": 36,
+          "height": 3,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\"><strong>5 Replies garantiert</strong> oder Geld zur&uuml;ck</p>",
+          "style": {
+            "fontSize": 18,
+            "fontWeight": 600,
+            "color": "#B8564F",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s09-offernote",
+          "type": "text",
+          "x": 55,
+          "y": 76,
+          "width": 36,
+          "height": 5,
+          "rotation": 0,
+          "content": "<p style=\"margin:0\">Anschlie&szlig;end Retainer ab 2.500 &euro;/Monat. Monatlich k&uuml;ndbar, kein Retainer-Zwang.</p>",
+          "style": {
+            "fontSize": 15,
+            "fontWeight": 400,
+            "color": "#5A4A3A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s09-line",
+          "type": "shape",
+          "x": 6,
+          "y": 90,
+          "width": 88,
+          "height": 0.1,
+          "rotation": 0,
+          "content": "",
+          "style": {
+            "backgroundColor": "#C8B8A8"
+          }
+        },
+        {
+          "id": "s09-foot",
+          "type": "text",
+          "x": 6,
+          "y": 92,
+          "width": 30,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>CegTec, Kontakt</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#8A7A6A",
+            "textAlign": "left"
+          }
+        },
+        {
+          "id": "s09-meta",
+          "type": "text",
+          "x": 60,
+          "y": 92,
+          "width": 34,
+          "height": 4,
+          "rotation": 0,
+          "content": "<p>F&uuml;r Kanam Grund Group</p>",
+          "style": {
+            "fontSize": 16,
+            "fontWeight": 500,
+            "color": "#8A7A6A",
+            "textAlign": "right"
+          }
+        }
+      ]
+    }
+  ],
+  "themeId": "cegtec",
+  "createdAt": 1776180157488,
+  "updatedAt": 1776180157488
+}
