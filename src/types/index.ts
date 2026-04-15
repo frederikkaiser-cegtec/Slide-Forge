@@ -19,6 +19,7 @@ export interface ElementStyle {
   backgroundColor?: string;
   borderRadius?: number;
   opacity?: number;
+  scale?: number;
   objectFit?: 'cover' | 'contain' | 'fill';
   filter?: string;
 }

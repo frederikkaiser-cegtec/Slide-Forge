@@ -8,6 +8,12 @@ import { getFormat } from '../../utils/formats';
 import type { SlideElement } from '../../types';
 import { FONTS } from '../../utils/cegtecTheme';
 
+const BASE = import.meta.env.BASE_URL || '/';
+function resolveAsset(src: string): string {
+  if (!src || src.startsWith('http') || src.startsWith('data:') || src.startsWith(BASE)) return src;
+  return src.startsWith('/') ? `${BASE}${src.slice(1)}` : `${BASE}${src}`;
+}
+
 // ── Resize / Move handles overlay ─────────────────────────────────────────
 
 type HandleId = 'nw' | 'n' | 'ne' | 'e' | 'se' | 's' | 'sw' | 'w' | 'move';
@@ -19,6 +25,7 @@ function ResizeHandles({
   baseWidth,
   baseHeight,
   onUpdate,
+  onDoubleClick,
 }: {
   element: SlideElement;
   canvasWidth: number;
@@ -26,6 +33,7 @@ function ResizeHandles({
   baseWidth: number;
   baseHeight: number;
   onUpdate: (updates: Partial<SlideElement>) => void;
+  onDoubleClick?: () => void;
 }) {
   const dragRef = useRef<{
     handle: HandleId;
@@ -101,7 +109,8 @@ function ResizeHandles({
       <div style={{ position: 'absolute', left, top, width, height, border: '2px solid #3b82f6', pointerEvents: 'none', zIndex: 10 }} />
       {/* Move zone */}
       <div style={{ position: 'absolute', left, top, width, height, cursor: 'move', zIndex: 11 }}
-        onMouseDown={(e) => startDrag(e, 'move')} />
+        onMouseDown={(e) => startDrag(e, 'move')}
+        onDoubleClick={(e) => { e.stopPropagation(); onDoubleClick?.(); }} />
       {/* Resize handles */}
       {handles.map((h) => (
         <div key={h.id}
@@ -255,6 +264,9 @@ export function SlideCanvas() {
             baseWidth={format.width}
             baseHeight={format.height}
             onUpdate={(updates) => handleElementUpdate(selectedElement.id, updates)}
+            onDoubleClick={() => {
+              if (selectedElement.type === 'text') setEditingElement(selectedElement.id);
+            }}
           />
         )}
       </div>
@@ -322,6 +334,8 @@ function EditableSlideView({
                 color: style.color || '#ffffff',
                 textAlign: style.textAlign || 'left',
                 lineHeight: 1.3,
+                overflow: 'hidden',
+                wordBreak: 'break-word',
                 zIndex: 10,
               }}
               onClick={(e) => e.stopPropagation()}
@@ -369,14 +383,16 @@ function EditableSlideView({
         }
 
         if (element.type === 'image') {
+          const imgRadius = style.borderRadius ? style.borderRadius * scaleX : 0;
+          const imgScale = style.scale != null ? style.scale / 100 : 1;
           return (
             <div
               key={element.id}
-              style={{ position: 'absolute', left, top, width: w, height: h, cursor: 'pointer' }}
+              style={{ position: 'absolute', left, top, width: w, height: h, cursor: 'pointer', borderRadius: imgRadius, overflow: 'hidden', transform: imgScale !== 1 ? `scale(${imgScale})` : undefined, transformOrigin: 'center center' }}
               onClick={(e) => { e.stopPropagation(); onElementClick(element.id); }}
             >
-              <img src={element.content} alt="" style={{ width: '100%', height: '100%', objectFit: style.objectFit || 'cover', filter: style.filter || undefined }} draggable={false} />
-              {isSelected && <div className="absolute inset-0 border-2 border-blue-500 pointer-events-none" />}
+              <img src={resolveAsset(element.content)} alt="" style={{ width: '100%', height: '100%', objectFit: style.objectFit || 'cover', filter: style.filter || undefined }} draggable={false} />
+              {isSelected && <div className="absolute inset-0 border-2 border-blue-500 pointer-events-none" style={{ borderRadius: imgRadius }} />}
             </div>
           );
         }
@@ -392,6 +408,7 @@ function EditableSlideView({
               lineHeight: 1.3, overflow: 'hidden', wordBreak: 'break-word',
               transform: rotation ? `rotate(${rotation}deg)` : undefined,
               cursor: 'pointer',
+              filter: style.filter || undefined,
             }}
             onClick={(e) => { e.stopPropagation(); onElementClick(element.id); }}
             onDoubleClick={(e) => { e.stopPropagation(); onElementDoubleClick(element.id); }}

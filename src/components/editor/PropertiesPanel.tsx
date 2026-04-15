@@ -24,14 +24,12 @@ export function PropertiesPanel() {
 
   const handleUpdate = (updates: Partial<SlideElement>) => {
     if (selectedSlideId && selectedElementId) {
-      pushUndo();
       updateElement(selectedSlideId, selectedElementId, updates);
     }
   };
 
   const handleStyleUpdate = (styleUpdates: Partial<ElementStyle>) => {
     if (selectedSlideId && selectedElementId && element) {
-      pushUndo();
       updateElement(selectedSlideId, selectedElementId, {
         style: { ...element.style, ...styleUpdates },
       });
@@ -237,6 +235,13 @@ export function PropertiesPanel() {
                     value={element.style.borderRadius || 0}
                     onChange={(v) => handleStyleUpdate({ borderRadius: v })}
                   />
+                  {element.type === 'image' && (
+                    <PropInput
+                      label="Scale %"
+                      value={element.style.scale ?? 100}
+                      onChange={(v) => handleStyleUpdate({ scale: v })}
+                    />
+                  )}
                   <PropInput
                     label="Opacity"
                     value={(element.style.opacity ?? 1) * 100}

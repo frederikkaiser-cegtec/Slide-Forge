@@ -6,10 +6,12 @@ import { getTheme } from '../themes';
 import { getFormat } from '../utils/formats';
 import outboundStackData from '../data/outbound-stack.json';
 import aiLesbarData from '../data/ai-lesbar-anleitung.json';
+import kanamData from '../data/kanam-finanzbranche.json';
 
 export const PRESENTATION_PRESETS = [
   { id: 'outbound-stack', label: 'Outbound Stack', data: outboundStackData },
   { id: 'ai-lesbar', label: 'AI-Lesbar Anleitung', data: aiLesbarData },
+  { id: 'kanam-finanzbranche', label: 'Kanam — Finanzbranche', data: kanamData },
 ] as const;
 
 interface PresentationState {
@@ -45,6 +47,8 @@ function createDefaultPresentation(): Presentation {
     updatedAt: Date.now(),
   };
 }
+
+let _lastUndoPush = 0;
 
 // Force-clear ALL old localStorage keys so the new default always loads
 ['slide-forge-v5', 'slide-forge-v6', 'sf-editorial-2026', 'sf-pres-v2'].forEach(k => {
@@ -173,6 +177,11 @@ export const usePresentationStore = create<PresentationState>()(
       },
 
       updateElement: (slideId, elementId, updates) => {
+        const now = Date.now();
+        if (now - _lastUndoPush > 300) {
+          get().pushUndo();
+          _lastUndoPush = now;
+        }
         set((s) => ({
           presentation: {
             ...s.presentation,
@@ -251,11 +260,50 @@ export const usePresentationStore = create<PresentationState>()(
         const preset = PRESENTATION_PRESETS.find(p => p.id === presetId);
         if (!preset) return;
         get().pushUndo();
+
+        const currentPres = get().presentation;
+        const newPresData = preset.data as any;
+        const isSamePreset = currentPres.id === newPresData.id;
+
+        let mergedSlides = newPresData.slides;
+
+        if (isSamePreset) {
+          // Preserve user's manual image adjustments (position, size, style)
+          // when reloading the same preset. Image CONTENT comes from preset (so
+          // updated screenshots flow through), but x/y/w/h/style stay as user set.
+          const currentImageMap = new Map<string, SlideElement>();
+          for (const slide of currentPres.slides) {
+            for (const el of slide.elements) {
+              if (el.type === 'image') {
+                currentImageMap.set(`${slide.id}:${el.id}`, el);
+              }
+            }
+          }
+
+          mergedSlides = newPresData.slides.map((slide: any) => ({
+            ...slide,
+            elements: slide.elements.map((el: any) => {
+              if (el.type !== 'image') return el;
+              const currentEl = currentImageMap.get(`${slide.id}:${el.id}`);
+              if (!currentEl) return el;
+              return {
+                ...el,
+                x: currentEl.x,
+                y: currentEl.y,
+                width: currentEl.width,
+                height: currentEl.height,
+                style: { ...el.style, ...currentEl.style },
+              };
+            }),
+          }));
+        }
+
         set({
           presentation: {
-            ...(preset.data as unknown as Presentation),
+            ...newPresData,
+            slides: mergedSlides,
             themeId: 'cegtec',
-            formatId: '4:5',
+            formatId: newPresData.formatId || '4:5',
             createdAt: Date.now(),
             updatedAt: Date.now(),
           },

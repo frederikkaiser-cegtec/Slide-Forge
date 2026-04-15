@@ -159,6 +159,8 @@ function RenderElement({
           backgroundRepeat: 'no-repeat',
           borderRadius: style.borderRadius ? style.borderRadius * scaleX : 0,
           filter: style.filter || undefined,
+          transform: style.scale != null && style.scale !== 100 ? `scale(${style.scale / 100})` : undefined,
+          transformOrigin: 'center center',
         }}
         onClick={(e) => {
           if (!interactive) return;
@@ -203,6 +205,7 @@ function RenderElement({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
+        filter: style.filter || undefined,
       }}
       onClick={(e) => {
         if (!interactive) return;
